@@ -47,14 +47,10 @@ enum rotation {
 	U2,
 	Mh,
 	Mv,
-	MhRU,
-	MhRUi,
-	MhLU,
-	MhLUi,
-	MvRU,
-	MvRUi,
-	MvLU,
-	MvLUi,
+	MhR,
+	MhL,
+	MvR,
+	MvL
 };
 
 bool checkIfSolved(unsigned long long cubeState)
