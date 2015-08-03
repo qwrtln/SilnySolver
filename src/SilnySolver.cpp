@@ -7,9 +7,18 @@
 //============================================================================
 
 #include <iostream>
+#include <cstdio>
 using namespace std;
 
-int main() {
-	cout << "To jest Silny Solver." << endl; // prints To jest Silny Solver.
+const unsigned long long solvedCube = 0xa72e053977f1e1;
+
+int main()
+{
+	cout << "To jest Silny Solver." << endl;
+	cout << "A tak wyglada ulozona kostka:" << endl;
+	cout << "Hex: ";
+	printf("%llx\n",solvedCube);
+	cout << "Dec: ";
+	printf("%llu\n",solvedCube);
 	return 0;
 }
