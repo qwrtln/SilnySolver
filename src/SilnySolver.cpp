@@ -10,7 +10,57 @@
 #include <cstdio>
 using namespace std;
 
-const unsigned long long solvedCube = 0xa72e053977f1e1;
+//============================================================================
+// Poprawnie ułożona kostka
+// CP[0] = 000
+// CP[1] = 001
+// ...
+// CP[6] = 110
+//
+// EP[0] = 000
+// EP[1] = 001
+// ...
+// EP[7] = 111
+//
+// cp[0-3] = 1
+//
+// cp[3] = 1
+// cp[4-6] = 0
+//
+// ep[1-3] = 1
+// ep[4-7] = 0
+//
+// C = 0
+//
+// Razem: 61 bitów
+//============================================================================
+const unsigned long long solvedCube = 0xa72e053977f1e0;
+
+// Legalne ruchy
+enum rotation {
+	R,
+	Ri,
+	B,
+	Bi,
+	U,
+	Ui,
+	U2,
+	Mh,
+	Mv,
+	MhRU,
+	MhRUi,
+	MhLU,
+	MhLUi,
+	MvRU,
+	MvRUi,
+	MvLU,
+	MvLUi,
+};
+
+bool checkIfSolved(unsigned long long cubeState)
+{
+	return (cubeState == solvedCube);
+}
 
 int main()
 {
