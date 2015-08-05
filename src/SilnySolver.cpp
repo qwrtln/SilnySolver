@@ -12,45 +12,26 @@ using namespace std;
 
 //============================================================================
 // Poprawnie ułożona kostka
-// CP[0] = 000
-// CP[1] = 001
-// ...
-// CP[6] = 110
-//
-// EP[0] = 000
-// EP[1] = 001
-// ...
-// EP[7] = 111
-//
-// cp[0-3] = 1
-//
-// cp[3] = 1
-// cp[4-6] = 0
-//
-// ep[1-3] = 1
-// ep[4-7] = 0
-//
-// C = 0
-//
+// C, CP0, cp0, ..., CP6, cp6, EP0, ep0, ..., EP7, ep7
+// traktowanie C jako true, cp jako false i ep jako true, pozostałe
+// to wartości w systemie binarnym, zapisywane na trzech bitach
 // Razem: 61 bitów
 //============================================================================
-const unsigned long long solvedCube = 0xa72e053977f1e0;
+const unsigned long long solvedCube = 0x102468ac13579bd;
 
 // Legalne ruchy
 enum rotation {
-	R,
-	Ri,
-	B,
-	Bi,
-	U,
-	Ui,
-	U2,
-	Mh,
-	Mv,
-	MhR,
-	MhL,
-	MvR,
-	MvL
+	L,		// Left
+	F,		// Front
+	U,		// Up
+	Ui,		// Up inverted
+	U2, 	// U^2
+	Mv,		// Middle vertical
+	Mh, 	// Middle horizontal
+	MhRr,	// Middle horizontal Right rotation
+	MhLr,	// ...
+	MvFr,	// Middle vertical Front rotation
+	MvBr	// ...
 };
 
 bool checkIfSolved(unsigned long long cubeState)
