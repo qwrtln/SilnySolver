@@ -19,6 +19,23 @@ public:
 	bool checkIfSolved(unsigned long long cubeState);
 	void setCubeState(unsigned long long cubeState);
 	unsigned long long getCubeState();
+
+	void setCentre(bool);
+
+	// valid moves
+	void L();
+	void F();
+	void U();
+	void Ui();
+	void U2();
+	void Mv();
+	void Mh();
+	void MhRr();
+	void MhLr();
+	void MvFr();
+	void MvBr();
+
+	void move(unsigned int move);
 };
 
 #endif /* CRAZYCUBE_H_ */

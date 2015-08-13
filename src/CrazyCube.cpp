@@ -32,3 +32,59 @@ unsigned long long CrazyCube::getCubeState()
 {
 	return this-> cubeState;
 }
+
+void CrazyCube::setCentre(bool ok)
+{
+	unsigned long long centre = ok << 63;
+	this->cubeState |= centre;
+}
+
+void CrazyCube::L()
+{
+
+}
+void CrazyCube::F()
+{
+
+}
+void CrazyCube::U()
+{
+
+}
+void CrazyCube::Ui()
+{
+
+}
+void CrazyCube::U2()
+{
+
+}
+void CrazyCube::Mv()
+{
+
+}
+void CrazyCube::Mh()
+{
+
+}
+void CrazyCube::MhRr()
+{
+
+}
+void CrazyCube::MhLr()
+{
+
+}
+void CrazyCube::MvFr()
+{
+
+}
+void CrazyCube::MvBr()
+{
+
+}
+
+void move(unsigned int move)
+{
+
+}
