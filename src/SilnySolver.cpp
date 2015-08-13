@@ -12,15 +12,6 @@
 #include <cstdio>
 using namespace std;
 
-//============================================================================
-// Poprawnie ułożona kostka
-// C, CP0, cp0, ..., CP6, cp6, EP0, ep0, ..., EP7, ep7
-// traktowanie C jako true, cp jako false i ep jako true, pozostałe
-// to wartości w systemie binarnym, zapisywane na trzech bitach
-// Razem: 61 bitów
-//============================================================================
-
-
 int main()
 {
 	CrazyCube_test tester;

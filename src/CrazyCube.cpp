@@ -52,6 +52,7 @@ void CrazyCube::setEdges(edgeNames edges[NUM_OF_EDGES])
 		this-> cubeState |= (unsigned long long)(edges[i]) << ((bitsToFirstEdge) - (4*i));
 	}
 }
+
 void CrazyCube::setCorners(cornerNames corners[NUM_OF_CORNERS])
 {
 	unsigned short int bitsToFirstCorner = 56;

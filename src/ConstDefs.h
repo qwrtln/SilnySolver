@@ -8,8 +8,14 @@
 #ifndef CONSTDEFS_H_
 #define CONSTDEFS_H_
 
+//============================================================================
+// Poprawnie ułożona kostka
+// C, CP0, cp0, ..., CP6, cp6, EP0, ep0, ..., EP7, ep7
+// traktowanie C jako true, cp jako false i ep jako true, pozostałe
+// to wartości w systemie binarnym, zapisywane na trzech bitach
+// Razem: 61 bitów
+//============================================================================
 const unsigned long long solvedCube = 0x102469BD02469BDF;
-
 
 // Legalne ruchy
 enum rotation {
