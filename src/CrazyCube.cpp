@@ -35,8 +35,23 @@ unsigned long long CrazyCube::getCubeState()
 
 void CrazyCube::setCentre(bool ok)
 {
-	unsigned long long centre = ok << 63;
+	unsigned long long centre = static_cast<unsigned long long>(ok) << 63;
 	this->cubeState |= centre;
+}
+
+void setEdges(edgeNames edges[NUM_OF_EDGES])
+{
+	for(unsigned short i = 0; i < NUM_OF_EDGES; i++)
+	{
+
+	}
+}
+void setCorners(cornerNames corners[NUM_OF_CORNERS])
+{
+	for(unsigned short i = 0; i < NUM_OF_CORNERS; i++)
+	{
+
+	}
 }
 
 void CrazyCube::L()

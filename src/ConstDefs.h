@@ -62,4 +62,7 @@ enum edgeNames {
 	wgw = 0xF
 };
 
+#define NUM_OF_EDGES 8
+#define NUM_OF_CORNERS 7
+
 #endif /* CONSTDEFS_H_ */

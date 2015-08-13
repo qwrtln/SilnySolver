@@ -21,6 +21,8 @@ public:
 	unsigned long long getCubeState();
 
 	void setCentre(bool);
+	void setEdges(edgeNames edges[NUM_OF_EDGES]);
+	void setCorners(cornerNames corners[NUM_OF_CORNERS]);
 
 	// valid moves
 	void L();
