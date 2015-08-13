@@ -8,6 +8,7 @@
 #ifndef CRAZYCUBE_H_
 #define CRAZYCUBE_H_
 #include "ConstDefs.h"
+
 class CrazyCube
 {
 private:

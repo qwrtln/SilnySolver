@@ -7,6 +7,7 @@
 //============================================================================
 
 #include "CrazyCube.h"
+#include "CrazyCube_test.h"
 #include <iostream>
 #include <cstdio>
 using namespace std;
@@ -20,28 +21,19 @@ using namespace std;
 //============================================================================
 
 
-
-
 int main()
 {
+	CrazyCube_test tester;
+
 	CrazyCube kosteczka;
 	cout << "To jest Silny Solver." << endl;
 	cout << "A tak wyglada ulozona kostka:" << endl;
 	cout << "Hex: ";
-	printf("%llx\n",::solvedCube);
+	printf("%llx\n",solvedCube);
 	cout << "Dec: ";
-	printf("%llu\n",::solvedCube);
+	printf("%llu\n",solvedCube);
 
-	kosteczka.setCubeState(0x102468ac13579bdf);
-
-	//unsigned long long klockiNp[7] = {1,3,5,7,9,0xb,0xd};
-	//unsigned long long klockiP[7] = {0,2,4,6,8,0xa,0xc};
-	unsigned short klockiRandom[7] = {3,7,2,0xf,4,0xb,0xa};
-	cout << "Kosteczka: " << endl;
-	cout << "Hex: ";
-	printf("%llx\n",kosteczka.getCubeState());
-	cout << "Hex: ";
-	printf("%llx\n",::solvedCube);
+	tester.CrazyCubeTests();
 
 	return 0;
 }

@@ -35,22 +35,33 @@ unsigned long long CrazyCube::getCubeState()
 
 void CrazyCube::setCentre(bool ok)
 {
-	unsigned long long centre = static_cast<unsigned long long>(ok) << 63;
+	unsigned long long centre = static_cast<unsigned long long>(ok) << CENTRE_POS;
 	this->cubeState |= centre;
 }
 
-void setEdges(edgeNames edges[NUM_OF_EDGES])
+void CrazyCube::setEdges(edgeNames edges[NUM_OF_EDGES])
 {
+	unsigned short int bitsToFirstEdge = 52;
+	unsigned long long fourOnes = 0xF;
+	unsigned long long mask;
+
 	for(unsigned short i = 0; i < NUM_OF_EDGES; i++)
 	{
-
+		mask = ~(fourOnes << ( (bitsToFirstEdge) - (4*i)) );
+		this-> cubeState &= mask;
+		this-> cubeState |= (unsigned long long)(edges[i]) << ((bitsToFirstEdge) - (4*i));
 	}
 }
-void setCorners(cornerNames corners[NUM_OF_CORNERS])
+void CrazyCube::setCorners(cornerNames corners[NUM_OF_CORNERS])
 {
+	unsigned short int bitsToFirstCorner = 56;
+	unsigned long long fourOnes = 0xF;
+	unsigned long long mask;
 	for(unsigned short i = 0; i < NUM_OF_CORNERS; i++)
 	{
-
+		mask = ~(fourOnes << ( (bitsToFirstCorner) - (4*i)) );						// Tworzenie maski bitowej na zadanej pozycji
+		this-> cubeState &= mask;																	// Zerowanie tej pozycji na kości
+		this-> cubeState |= (unsigned long long)(corners[i]) << ((bitsToFirstCorner) - (4*i));	// Ustawianie pozycji z klocka
 	}
 }
 

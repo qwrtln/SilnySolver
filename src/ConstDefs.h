@@ -55,7 +55,7 @@ enum edgeNames {
 	wry = 0x8,	// white red (inner yellow)
 	wrw = 0x9,	// white red (inner white)
 	wby = 0xA,	// etc
-	wbr = 0xB,
+	wbw = 0xB,
 	woy = 0xC,
 	wow = 0xD,
 	wgy = 0xE,
@@ -64,5 +64,6 @@ enum edgeNames {
 
 #define NUM_OF_EDGES 8
 #define NUM_OF_CORNERS 7
+#define CENTRE_POS 60
 
 #endif /* CONSTDEFS_H_ */
