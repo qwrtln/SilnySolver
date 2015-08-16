@@ -20,9 +20,9 @@ int main()
 	cout << "To jest Silny Solver." << endl;
 	cout << "A tak wyglada ulozona kostka:" << endl;
 	cout << "Hex: ";
-	printf("%llx\n",solvedCube);
+	printf("%llx\n",tester.solvedCube);
 	cout << "Dec: ";
-	printf("%llu\n",solvedCube);
+	printf("%llu\n",tester.solvedCube);
 
 	tester.CrazyCubeTests();
 

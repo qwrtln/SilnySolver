@@ -9,7 +9,7 @@
 #include "CrazyCube.h"
 using namespace std;
 
-class CrazyCube_test
+class CrazyCube_test: public CrazyCubeAbstract
 {
 private:
 	CrazyCube cube;

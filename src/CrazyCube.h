@@ -9,7 +9,7 @@
 #define CRAZYCUBE_H_
 #include "ConstDefs.h"
 
-class CrazyCube
+class CrazyCube: public CrazyCubeAbstract
 {
 private:
 	unsigned long long cubeState;

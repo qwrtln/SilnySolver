@@ -20,7 +20,7 @@ CrazyCube::~CrazyCube()
 
 bool CrazyCube::checkIfSolved(unsigned long long cubeState)
 {
-	return (cubeState == ::solvedCube);
+	return (cubeState == solvedCube);
 }
 
 void CrazyCube::setCubeState(unsigned long long cubeState)
