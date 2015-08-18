@@ -102,6 +102,7 @@ enum textColors
 	testExecuter.RunAllTests(withTime)
 
 
+// Przykladowe makra. Mozna dopisac inne jak zajdzie taka potrzeba :)
 #define ASSERT_EQ(actual, expected)\
 if(!(actual == expected))\
 {\
