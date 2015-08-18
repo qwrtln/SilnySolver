@@ -6,8 +6,6 @@
 // Description : Most probably Crazy 3x3x2
 //============================================================================
 
-//#include "CrazyCube.h"
-//#include "CrazyCube_test.h"
 #include "ConstDefs.h"
 #include "TestExecuter.h"
 #include <iostream>
@@ -21,7 +19,7 @@ using namespace std;
 *	W main() wystarczy wywołać makro RUN_ALL_TESTS() i wszystkie się ładnie odpalają.
 */
 
-int main()
+int main(int argc, char* argv[])
 {
 	RUN_ALL_TESTS(1);
 

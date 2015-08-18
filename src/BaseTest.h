@@ -8,7 +8,7 @@
 using namespace std;
 #include "ConstDefs.h"
 
-class BaseTest
+class BaseTest: public CrazyCubeAbstract
 {
 public:
 	BaseTest(string testCase, string testName);

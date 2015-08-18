@@ -69,18 +69,19 @@ public:
 		wgy = 0xE,
 		wgw = 0xF
 	};
+	enum textColors
+	{
+		Black = 30,
+		Red = 31,
+		Green = 32,
+		Yellow = 33,
+		Blue = 34,
+		Magenta = 35,
+		Cyan = 36,
+		White = 37
+	};
 };
-enum textColors
-{
-	Black = 30,
-	Red = 31,
-	Green = 32,
-	Yellow = 33,
-	Blue = 34,
-	Magenta = 35,
-	Cyan = 36,
-	White = 37
-};
+
 #define NUM_OF_EDGES 8
 #define NUM_OF_CORNERS 7
 #define CENTRE_POS 60
