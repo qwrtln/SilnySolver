@@ -6,8 +6,8 @@
 // Description : Most probably Crazy 3x3x2
 //============================================================================
 
-#include "CrazyCube.h"
-#include "CrazyCube_test.h"
+//#include "CrazyCube.h"
+//#include "CrazyCube_test.h"
 #include <iostream>
 #include <cstdio>
 using namespace std;
@@ -24,7 +24,9 @@ int main()
 	cout << "Dec: ";
 	printf("%llu\n",tester.solvedCube);
 
-	tester.CrazyCubeTests();
+
+	RUN_ALL_TESTS();
+	//tester.CrazyCubeTests();
 
 	return 0;
 }
