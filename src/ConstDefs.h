@@ -7,7 +7,6 @@
 
 #ifndef CONSTDEFS_H_
 #define CONSTDEFS_H_
-
 class CrazyCubeAbstract
 {
 public:
@@ -76,9 +75,69 @@ public:
 		wgy = 0xE,
 		wgw = 0xF
 	};
+	enum textColors
+	{
+		Black = 30,
+		Red = 31,
+		Green = 32,
+		Yellow = 33,
+		Blue = 34,
+		Magenta = 35,
+		Cyan = 36,
+		White = 37
+	};
 };
 
 #define NUM_OF_EDGES 8
 #define NUM_OF_CORNERS 7
+
+// Test macros
+
+#define TEST(TestClass, TestName)\
+	class TestClass##_##TestName: public TestClass\
+	{\
+	public:\
+		TestClass##_##TestName():TestClass(#TestClass,#TestName){testExecuter.AddTest(this);}\
+	void TestCode();\
+	};\
+		TestClass##_##TestName T_##TestClass##_##TestName;\
+	void TestClass##_##TestName::TestCode()
+
+// Macro executing all testcases
+#define RUN_ALL_TESTS(withTime)\
+	testExecuter.RunAllTests(withTime)
+
+
+// Przykladowe makra. Mozna dopisac inne jak zajdzie taka potrzeba :)
+#define ASSERT_EQ(actual, expected)\
+if(!(actual == expected))\
+{\
+	result = 0;\
+	cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
+	cout << "Value of:  " << #actual << "\n";\
+	cout << "Actual:    " << actual << "\n";\
+	cout << "Assertion: " << "= " << "\n";\
+	cout << "Expected:  " << expected << "\n";\
+}\
+else\
+{\
+	result = result && 1;\
+}
+
+#define ASSERT_NE(actual, expected)\
+if(!(actual != expected))\
+{\
+	result = 0;\
+	cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
+	cout << "Value of:  " << #actual << "\n";\
+	cout << "Actual:    " << actual << "\n";\
+	cout << "Assertion: " << "!= " << "\n";\
+	cout << "Expected:  " << expected << "\n";\
+}\
+else\
+{\
+	result = result && 1;\
+}
+
 
 #endif /* CONSTDEFS_H_ */

@@ -62,6 +62,7 @@ void CrazyCube::setCorners(cornerNames corners[NUM_OF_CORNERS])
 	{
 		pieceMask = ~(pieceSize << ( (bitsToFirstCorner) - (4*i)) );						// Tworzenie maski bitowej na zadanej pozycji
 		this-> cubeState &= pieceMask;																	// Zerowanie tej pozycji na kości
+
 		this-> cubeState |= (unsigned long long)(corners[i]) << ((bitsToFirstCorner) - (4*i));	// Ustawianie pozycji z klocka
 	}
 }
