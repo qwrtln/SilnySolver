@@ -17,13 +17,15 @@ private:
 public:
 	CrazyCube();
 	virtual ~CrazyCube();
-	bool checkIfSolved(unsigned long long cubeState);
+	bool checkIfSolved();
 	void setCubeState(unsigned long long cubeState);
 	unsigned long long getCubeState();
 
 	void setCentre(bool);
 	void setEdges(edgeNames edges[NUM_OF_EDGES]);
 	void setCorners(cornerNames corners[NUM_OF_CORNERS]);
+
+	void setWholeCube(bool, edgeNames edges[NUM_OF_EDGES], cornerNames corners[NUM_OF_CORNERS]);
 
 	// valid moves
 	void L();

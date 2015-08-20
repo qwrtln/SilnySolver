@@ -10,7 +10,6 @@
 CrazyCube::CrazyCube()
 {
 	// TODO Auto-generated constructor stub
-
 }
 
 CrazyCube::~CrazyCube()
@@ -18,7 +17,7 @@ CrazyCube::~CrazyCube()
 	// TODO Auto-generated destructor stub
 }
 
-bool CrazyCube::checkIfSolved(unsigned long long cubeState)
+bool CrazyCube::checkIfSolved()
 {
 	return (cubeState == solvedCube);
 }
@@ -41,30 +40,35 @@ void CrazyCube::setCentre(bool ok)
 
 void CrazyCube::setEdges(edgeNames edges[NUM_OF_EDGES])
 {
-	unsigned short int bitsToFirstEdge = 52;
 	unsigned long long pieceSize = 0xF;
 	unsigned long long pieceMask;
 
 	for(unsigned short i = 0; i < NUM_OF_EDGES; i++)
 	{
-		pieceMask = ~(pieceSize << ( (bitsToFirstEdge) - (4*i)) );
+		pieceMask = ~(pieceSize << this->EdgePieces[i]);
 		this-> cubeState &= pieceMask;
-		this-> cubeState |= (unsigned long long)(edges[i]) << ((bitsToFirstEdge) - (4*i));
+		this-> cubeState |= (unsigned long long)(edges[i]) << this->EdgePieces[i];
 	}
 }
 
 void CrazyCube::setCorners(cornerNames corners[NUM_OF_CORNERS])
 {
-	unsigned short int bitsToFirstCorner = 56;
 	unsigned long long pieceSize = 0xF;
 	unsigned long long pieceMask;
+
 	for(unsigned short i = 0; i < NUM_OF_CORNERS; i++)
 	{
-		pieceMask = ~(pieceSize << ( (bitsToFirstCorner) - (4*i)) );						// Tworzenie maski bitowej na zadanej pozycji
+		pieceMask = ~(pieceSize << this->CornerPieces[i]);						// Tworzenie maski bitowej na zadanej pozycji
 		this-> cubeState &= pieceMask;																	// Zerowanie tej pozycji na kości
-
-		this-> cubeState |= (unsigned long long)(corners[i]) << ((bitsToFirstCorner) - (4*i));	// Ustawianie pozycji z klocka
+		this-> cubeState |= (unsigned long long)(corners[i]) << this->CornerPieces[i];	// Ustawianie pozycji z klocka
 	}
+}
+
+void CrazyCube::setWholeCube(bool centreOK, edgeNames edges[NUM_OF_EDGES], cornerNames corners[NUM_OF_CORNERS])
+{
+	setCentre(centreOK);
+	setEdges(edges);
+	setCorners(corners);
 }
 
 void CrazyCube::L()

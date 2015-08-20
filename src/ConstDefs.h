@@ -20,9 +20,9 @@ public:
 	const static unsigned long long solvedCube = 0x102469BD02469BDF;
 
 	// Pozycje ulozonych bitow
-	unsigned short int CornerPieces[7] = {56, 52, 48, 44, 40, 36, 32};
-	unsigned short int EdgePieces[8] = {56, 52, 48, 44, 40, 36, 32, 28};
-	unsigned short int centrePosition = 60;
+	const unsigned short int CornerPieces[7] = {56, 52, 48, 44, 40, 36, 32};
+	const unsigned short int EdgePieces[8] = {28, 24, 20, 16, 12, 8, 4, 0};
+	const unsigned short int centrePosition = 60;
 
 
 	// Legalne ruchy
