@@ -75,6 +75,7 @@ public:
 		wgy = 0xE,
 		wgw = 0xF
 	};
+
 	enum textColors
 	{
 		Black = 30,

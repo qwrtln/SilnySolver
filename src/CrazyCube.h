@@ -40,7 +40,7 @@ public:
 	void MvFr();
 	void MvBr();
 
-	void move(unsigned int move);
+	void move(rotation);
 };
 
 #endif /* CRAZYCUBE_H_ */
