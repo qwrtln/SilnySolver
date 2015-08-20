@@ -84,6 +84,6 @@ TEST(CrazyCubeTest, L)
 	edgeNames edges[NUM_OF_EDGES] = {yry, wbw, yoy, ygy, wrw, yby, wow, wgw};
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, wobw, wbrw, yogy, wrgw, yboy, yrby};
 	cube.setWholeCube(true,edges,corners);
-
-
+	cube.L();
+	ASSERT_EQ(cube.checkIfSolved(), 1)
 }

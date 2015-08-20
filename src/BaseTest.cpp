@@ -1,4 +1,5 @@
 #include "BaseTest.h"
+
 BaseTest::BaseTest(string testCase, string testName)
 :testCase(testCase),testName(testName),result(1),testExecuted(0)
 {

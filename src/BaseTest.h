@@ -26,5 +26,17 @@ protected:
 	//HANDLE  hConsole;
 	void SetTextColor(unsigned short int color);
 	void SetDefaultTextColor();
+	// Nazwy kolorow
+	enum textColors
+	{
+		Black = 30,
+		Red = 31,
+		Green = 32,
+		Yellow = 33,
+		Blue = 34,
+		Magenta = 35,
+		Cyan = 36,
+		White = 37
+	};
 };
 #endif

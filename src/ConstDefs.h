@@ -10,20 +10,11 @@
 class CrazyCubeAbstract
 {
 public:
-//============================================================================
-// Poprawnie ułożona kostka
-// C, CP0, cp0, ..., CP6, cp6, EP0, ep0, ..., EP7, ep7
-// traktowanie C jako true, cp jako false i ep jako true, pozostałe
-// to wartości w systemie binarnym, zapisywane na trzech bitach
-// Razem: 61 bitów
-//============================================================================
-	const static unsigned long long solvedCube = 0x102469BD02469BDF;
+	const static unsigned long long solvedCube;
 
-	// Pozycje ulozonych bitow
-	const unsigned short int CornerPieces[7] = {56, 52, 48, 44, 40, 36, 32};
-	const unsigned short int EdgePieces[8] = {28, 24, 20, 16, 12, 8, 4, 0};
-	const unsigned short int centrePosition = 60;
-
+	const static unsigned short int CornerPieces[7];
+	const static unsigned short int EdgePieces[8];
+	const static unsigned short int centrePosition;
 
 	// Legalne ruchy
 	enum rotation {
@@ -40,6 +31,7 @@ public:
 		MvBr	// ...
 	};
 
+	// Nazwy rogow
 	enum cornerNames {
 		ygry = 0x0,	// yellow green red (inner yellow)
 		ygrw = 0x1,	// yellow green red (inner white)
@@ -57,6 +49,7 @@ public:
 		wobw = 0xD
 	};
 
+	// Nazwy krawedzi
 	enum edgeNames {
 		yry = 0x0,	// yellow red (inner yellow)
 		yrw = 0x1,	// yellow red (inner white)
@@ -74,18 +67,6 @@ public:
 		wow = 0xD,
 		wgy = 0xE,
 		wgw = 0xF
-	};
-
-	enum textColors
-	{
-		Black = 30,
-		Red = 31,
-		Green = 32,
-		Yellow = 33,
-		Blue = 34,
-		Magenta = 35,
-		Cyan = 36,
-		White = 37
 	};
 };
 
@@ -107,7 +88,6 @@ public:
 // Macro executing all testcases
 #define RUN_ALL_TESTS(withTime)\
 	testExecuter.RunAllTests(withTime)
-
 
 // Przykladowe makra. Mozna dopisac inne jak zajdzie taka potrzeba :)
 #define ASSERT_EQ(actual, expected)\
