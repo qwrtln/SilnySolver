@@ -20,10 +20,16 @@ public:
 //============================================================================
 	const static unsigned long long solvedCube = 0x102469BD02469BDF;
 
+	// Pozycje ulozonych bitow
+	unsigned short int CornerPieces[7] = {56, 52, 48, 44, 40, 36, 32};
+	unsigned short int EdgePieces[8] = {56, 52, 48, 44, 40, 36, 32, 28};
+	unsigned short int centrePosition = 60;
+
+
 	// Legalne ruchy
 	enum rotation {
 		L,		// Left
-		F,		// Front
+		F,		// Frontmask
 		U,		// Up
 		Ui,		// Up inverted
 		U2, 	// U^2
@@ -74,6 +80,5 @@ public:
 
 #define NUM_OF_EDGES 8
 #define NUM_OF_CORNERS 7
-#define CENTRE_POS 60
 
 #endif /* CONSTDEFS_H_ */
