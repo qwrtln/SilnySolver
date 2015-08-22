@@ -6,6 +6,7 @@
  */
 
 #include "CrazyCube.h"
+#include <iostream>
 
 CrazyCube::CrazyCube()
 {
@@ -79,6 +80,9 @@ void CrazyCube::L()
 // CP[2]cp2 <-> CP[5]cp5
 // EP[1]ep1 <-> EP[5]ep1
 //============================================================================
+	swapCorners(1,6);
+	swapCorners(2,5);
+	swapEdges(1,5);
 }
 void CrazyCube::F()
 {
@@ -183,12 +187,49 @@ void CrazyCube::move(rotation move)
 
 }
 
-void CrazyCube::swapPieces(unsigned short int pieceOne, unsigned short int pieceTwo)
+void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex)
 {
+	// Set bit masks for pieces
+	unsigned long long edgeOneMask = (unsigned long long)0xf << EdgePieces[edgeOneIndex];
+	unsigned long long edgeTwoMask = (unsigned long long)0xf << EdgePieces[edgeTwoIndex];
 
+	// Remember pieces
+	unsigned long long edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
+	unsigned long long edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
+
+	// Clear spots of swapping pieces
+	cubeState &= ~(edgeOneMask | edgeTwoMask);
+
+	// Set right positions after the swap
+	edgeOne <<= EdgePieces[edgeTwoIndex]; // Reversed order!!
+	edgeTwo <<= EdgePieces[edgeOneIndex]; // Don't change or I'll find you, hunt you down and tickle you to death
+
+	// Put them in the cube
+	cubeState |= (edgeOne | edgeTwo);
 }
 
-void CrazyCube::cyclePieces(unsigned short int pieceOne, unsigned short int pieceTwo, unsigned short int pieceThree, unsigned short int pieceFour)
+void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex)
+{
+	unsigned long long cornerOneMask = (unsigned long long)0xf << CornerPieces[cornerOneIndex];
+	unsigned long long cornerTwoMask = (unsigned long long)0xf << CornerPieces[cornerTwoIndex];
+
+	// Remember pieces
+	unsigned long long cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
+	unsigned long long cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
+
+	// Clear spots of swapping pieces
+	cubeState &= ~(cornerOneMask | cornerTwoMask);
+
+	// Set right positions after the swap
+	cornerOne <<= CornerPieces[cornerTwoIndex];
+	cornerTwo <<= CornerPieces[cornerOneIndex];
+
+	// Put them in the cube
+	cubeState |= (cornerOne | cornerTwo);
+}
+
+void CrazyCube::cycleCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex,
+		unsigned short int cornerThreeIndex, unsigned short int cornerFourIndex)
 {
 
 }

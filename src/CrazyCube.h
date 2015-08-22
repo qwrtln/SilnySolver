@@ -42,8 +42,9 @@ public:
 
 	void move(rotation);
 
-	void swapPieces(unsigned short int, unsigned short int);
-	void cyclePieces(unsigned short int, unsigned short int, unsigned short int, unsigned short int);
+	void swapEdges(unsigned short int, unsigned short int);
+	void swapCorners(unsigned short int, unsigned short int);
+	void cycleCorners(unsigned short int, unsigned short int, unsigned short int, unsigned short int);
 	void toggleCentre();
 };
 
