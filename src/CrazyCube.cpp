@@ -80,9 +80,9 @@ void CrazyCube::L()
 // CP[2]cp2 <-> CP[5]cp5
 // EP[1]ep1 <-> EP[5]ep1
 //============================================================================
-	swapCorners(1,6);
-	swapCorners(2,5);
-	swapEdges(1,5);
+	swapCorners(1,6,true);
+	swapCorners(2,5,true);
+	swapEdges(1,5,true);
 }
 void CrazyCube::F()
 {
@@ -92,9 +92,9 @@ void CrazyCube::F()
 // CP[1]cp1 <-> CP[4]cp4
 // EP[0]ep0 <-> EP[4]ep4
 //============================================================================
-	swapCorners(0,5);
-	swapCorners(1,4);
-	swapEdges(0,4);
+	swapCorners(0,5,true);
+	swapCorners(1,4,true);
+	swapEdges(0,4,true);
 }
 void CrazyCube::U()
 {
@@ -142,8 +142,8 @@ void CrazyCube::Mv()
 // EP[2]ep2 <-> EP[4]ep4
 // ~C
 //============================================================================
-	swapEdges(0,6);
-	swapEdges(2,4);
+	swapEdges(0,6,true);
+	swapEdges(2,4,true);
 	toggleCentre();
 }
 void CrazyCube::Mh()
@@ -154,8 +154,8 @@ void CrazyCube::Mh()
 // EP[3]ep3 <-> EP[5]ep5
 // ~C
 //============================================================================
-	swapEdges(1,7);
-	swapEdges(3,5);
+	swapEdges(1,7,true);
+	swapEdges(3,5,true);
 	toggleCentre();
 }
 void CrazyCube::MhRr()
@@ -204,11 +204,15 @@ void CrazyCube::move(rotation move)
 
 }
 
-void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex)
+void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex,  bool withInnerPieces)
 {
+	unsigned long long initialMask = withInnerPieces ? 0xF : 0xE;
+	// OxF: three bits for piece plus one for inner piece
+	// 0xE: just three bits for piece
+
 	// Set bit masks for pieces
-	unsigned long long edgeOneMask = (unsigned long long)0xf << EdgePieces[edgeOneIndex];
-	unsigned long long edgeTwoMask = (unsigned long long)0xf << EdgePieces[edgeTwoIndex];
+	unsigned long long edgeOneMask = initialMask << EdgePieces[edgeOneIndex];
+	unsigned long long edgeTwoMask = initialMask << EdgePieces[edgeTwoIndex];
 
 	// Remember pieces
 	unsigned long long edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
@@ -225,10 +229,14 @@ void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int ed
 	cubeState |= (edgeOne | edgeTwo);
 }
 
-void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex)
+void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex, bool withInnerPieces)
 {
-	unsigned long long cornerOneMask = (unsigned long long)0xf << CornerPieces[cornerOneIndex];
-	unsigned long long cornerTwoMask = (unsigned long long)0xf << CornerPieces[cornerTwoIndex];
+	unsigned long long initialMask = withInnerPieces ? 0xF : 0xE;
+	// OxF: three bits for piece plus one for inner piece
+	// 0xE: just three bits for piece
+
+	unsigned long long cornerOneMask = initialMask << CornerPieces[cornerOneIndex];
+	unsigned long long cornerTwoMask = initialMask << CornerPieces[cornerTwoIndex];
 
 	// Remember pieces
 	unsigned long long cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
