@@ -21,6 +21,7 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+	//cout << hex;
 	RUN_ALL_TESTS(1);
 
 	return 0;

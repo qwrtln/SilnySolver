@@ -41,6 +41,10 @@ public:
 	void MvBr();
 
 	void move(rotation);
+
+	void swapPieces(unsigned short int, unsigned short int);
+	void cyclePieces(unsigned short int, unsigned short int, unsigned short int, unsigned short int);
+	void toggleCentre();
 };
 
 #endif /* CRAZYCUBE_H_ */

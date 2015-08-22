@@ -35,7 +35,8 @@ CrazyCube CrazyCubeTest::cube;
 TEST(CrazyCubeTest, setCentreTest)
 {
 	cube.setCentre(true);
-	ASSERT_EQ(cube.getCubeState(), (unsigned long long)1 << cube.centrePosition);
+	ASSERT_EQ( (cube.getCubeState() & (static_cast<unsigned long long>(true) << cube.centrePosition)),
+			static_cast<unsigned long long>(true) << cube.centrePosition )
 }
 
 TEST(CrazyCubeTest, setCornersTest)
@@ -45,7 +46,6 @@ TEST(CrazyCubeTest, setCornersTest)
 	cout << hex;
 	ASSERT_EQ((solvedCube & cube.getCubeState()), cube.getCubeState() )
 	cout << dec;
-
 }
 
 TEST(CrazyCubeTest, setEdgesTest)
@@ -53,7 +53,7 @@ TEST(CrazyCubeTest, setEdgesTest)
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	cube.setEdges(edges);
 	cout << hex;
-	ASSERT_EQ((solvedCube & cube.getCubeState()), cube.getCubeState());
+	ASSERT_EQ((solvedCube & cube.getCubeState()), cube.getCubeState())
 	cout << dec;
 }
 
@@ -65,9 +65,9 @@ TEST(CrazyCubeTest, setCubeTest)
 
 TEST(CrazyCubeTest, setNEGATIVEcubeTest)
 {
-	edgeNames edges[NUM_OF_EDGES] = {wgw, yry, yby, yoy, ygy, wrw, wbw, wow};
+	edgeNames edges[NUM_OF_EDGES] = {wgw, yry, yby, yoy, ygy, wrw, wbw, wow}; // Wrong sequence
 	cube.setEdges(edges);
-	ASSERT_NE(cube.checkIfSolved(), 1);
+	ASSERT_NE(cube.checkIfSolved(), 1)
 }
 
 TEST(CrazyCubeTest, setWholeCubeTest)
@@ -78,6 +78,11 @@ TEST(CrazyCubeTest, setWholeCubeTest)
 	cube.setWholeCube(true,edges,corners);
 	ASSERT_EQ(cube.checkIfSolved(), 1)
 }
+/*
+TEST(CrazyCubeTest, toggleCentreTest)
+{
+
+}*/
 
 TEST(CrazyCubeTest, L)
 {

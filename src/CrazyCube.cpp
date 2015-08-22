@@ -9,7 +9,7 @@
 
 CrazyCube::CrazyCube()
 {
-	// TODO Auto-generated constructor stub
+	cubeState = solvedCube;
 }
 
 CrazyCube::~CrazyCube()
@@ -181,4 +181,19 @@ void CrazyCube::MvBr()
 void CrazyCube::move(rotation move)
 {
 
+}
+
+void CrazyCube::swapPieces(unsigned short int pieceOne, unsigned short int pieceTwo)
+{
+
+}
+
+void CrazyCube::cyclePieces(unsigned short int pieceOne, unsigned short int pieceTwo, unsigned short int pieceThree, unsigned short int pieceFour)
+{
+
+}
+
+void CrazyCube::toggleCentre()
+{
+	this->cubeState ^= static_cast<unsigned long long>(true) << centrePosition;
 }
