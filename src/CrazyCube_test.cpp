@@ -78,11 +78,6 @@ TEST(CrazyCubeTest, setWholeCubeTest)
 	cube.setWholeCube(true,edges,corners);
 	ASSERT_EQ(cube.checkIfSolved(), 1)
 }
-/*
-TEST(CrazyCubeTest, toggleCentreTest)
-{
-
-}*/
 
 TEST(CrazyCubeTest, L)
 {
@@ -91,5 +86,21 @@ TEST(CrazyCubeTest, L)
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.L();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, U) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.U();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, U2) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.U2();
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }

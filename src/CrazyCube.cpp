@@ -92,6 +92,9 @@ void CrazyCube::F()
 // CP[1]cp1 <-> CP[4]cp4
 // EP[0]ep0 <-> EP[4]ep4
 //============================================================================
+	swapCorners(0,5);
+	swapCorners(1,4);
+	swapEdges(0,4);
 }
 void CrazyCube::U()
 {
@@ -100,6 +103,8 @@ void CrazyCube::U()
 // CP[0] -> CP[1] -> CP[2] -> CP[3] -> CP[0]
 // EP[0] -> EP[1] -> EP[2] -> EP[3] -> EP[0]
 //============================================================================
+	cycleCorners(0,1,2,3);
+	cycleEdges(0,1,2,3);
 }
 void CrazyCube::Ui()
 {
@@ -108,6 +113,8 @@ void CrazyCube::Ui()
 // CP[3] -> CP[2] -> CP[1] -> CP[0] -> CP[3]
 // EP[3] -> EP[2] -> EP[1] -> EP[0] -> EP[3]
 //============================================================================
+	cycleCorners(3,2,1,0);
+	cycleEdges(3,2,1,0);
 }
 void CrazyCube::U2()
 {
@@ -122,24 +129,34 @@ void CrazyCube::U2()
 // EP[2] -> EP[0]
 // EP[3] -> EP[1]
 //============================================================================
+	cycleCorners(0,1,2,3);
+	cycleEdges(0,1,2,3);
+	cycleCorners(0,1,2,3);
+	cycleEdges(0,1,2,3);
 }
 void CrazyCube::Mv()
 {
 //============================================================================
 // Schemat przemieszczania elementow
 // EP[0]ep0 <-> EP[6]ep6
-// EP[2]ep2 -> EP[4]ep4
+// EP[2]ep2 <-> EP[4]ep4
 // ~C
 //============================================================================
+	swapEdges(0,6);
+	swapEdges(2,4);
+	toggleCentre();
 }
 void CrazyCube::Mh()
 {
 //============================================================================
 // Schemat przemieszczania elementow
 // EP[1]ep1 <-> EP[7]ep7
-// EP[3]ep3 -> EP[5]ep5
+// EP[3]ep3 <-> EP[5]ep5
 // ~C
 //============================================================================
+	swapEdges(1,7);
+	swapEdges(3,5);
+	toggleCentre();
 }
 void CrazyCube::MhRr()
 {
@@ -231,10 +248,65 @@ void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short in
 void CrazyCube::cycleCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex,
 		unsigned short int cornerThreeIndex, unsigned short int cornerFourIndex)
 {
+	// Set bit masks
+	unsigned long long cornerOneMask = (unsigned long long)0xe << CornerPieces[cornerOneIndex]; // E because cycle doesn't move inner pieces
+	unsigned long long cornerTwoMask = (unsigned long long)0xe << CornerPieces[cornerTwoIndex];
+	unsigned long long cornerThreeMask = (unsigned long long)0xe << CornerPieces[cornerThreeIndex];
+	unsigned long long cornerFourMask = (unsigned long long)0xe << CornerPieces[cornerFourIndex];
 
+	// Remember the pieces
+	unsigned long long cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
+	unsigned long long cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
+	unsigned long long cornerThree = (getCubeState() & cornerThreeMask) >> CornerPieces[cornerThreeIndex];
+	unsigned long long cornerFour = (getCubeState() & cornerFourMask) >> CornerPieces[cornerFourIndex];
+
+	// Clear current cube status on those positions
+	cubeState &= ~(cornerOneMask | cornerTwoMask | cornerThreeMask | cornerFourMask);
+
+	// Set right positions after the cycle
+	cornerOne <<= CornerPieces[cornerTwoIndex];
+	cornerTwo <<= CornerPieces[cornerThreeIndex];
+	cornerThree <<= CornerPieces[cornerFourIndex];
+	cornerFour <<= CornerPieces[cornerOneIndex];
+
+	// Put everything back where it belongs
+	cubeState |= (cornerOne | cornerTwo | cornerThree | cornerFour);
+}
+
+void CrazyCube::cycleEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex,
+		unsigned short int edgeThreeIndex, unsigned short int edgeFourIndex)
+{
+	// Set bit masks
+	unsigned long long edgeOneMask = (unsigned long long)0xe << EdgePieces[edgeOneIndex]; // E because cycle doesn't move inner pieces
+	unsigned long long edgeTwoMask = (unsigned long long)0xe << EdgePieces[edgeTwoIndex];
+	unsigned long long edgeThreeMask = (unsigned long long)0xe << EdgePieces[edgeThreeIndex];
+	unsigned long long edgeFourMask = (unsigned long long)0xe << EdgePieces[edgeFourIndex];
+
+	// Remember the pieces
+	unsigned long long edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
+	unsigned long long edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
+	unsigned long long edgeThree = (getCubeState() & edgeThreeMask) >> EdgePieces[edgeThreeIndex];
+	unsigned long long edgeFour = (getCubeState() & edgeFourMask) >> EdgePieces[edgeFourIndex];
+
+	// Clear current cube status on those positions
+	cubeState &= ~(edgeOneMask | edgeTwoMask | edgeThreeMask | edgeFourMask);
+
+	// Set right positions after the cycle
+	edgeOne <<= EdgePieces[edgeTwoIndex];
+	edgeTwo <<= EdgePieces[edgeThreeIndex];
+	edgeThree <<= EdgePieces[edgeFourIndex];
+	edgeFour <<= EdgePieces[edgeOneIndex];
+
+	// Put everything back where it belongs
+	cubeState |= (edgeOne | edgeTwo | edgeThree | edgeFour);
 }
 
 void CrazyCube::toggleCentre()
 {
 	this->cubeState ^= static_cast<unsigned long long>(true) << centrePosition;
+}
+
+void CrazyCube::resetCube()
+{
+	cubeState = solvedCube;
 }
