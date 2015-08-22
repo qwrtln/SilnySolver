@@ -167,6 +167,10 @@ void CrazyCube::MhRr()
 // EP[0] <-> EP[2]
 // EP[3]ep3 <-> EP[7]ep7
 //============================================================================
+	swapCorners(0,2,false);
+	swapCorners(1,3,false);
+	swapEdges(0,2,false);
+	swapEdges(3,7,true);
 }
 void CrazyCube::MhLr()
 {
@@ -177,6 +181,10 @@ void CrazyCube::MhLr()
 // EP[0] <-> EP[2]
 // EP[1]ep1 <-> EP[5]ep5
 //============================================================================
+	swapCorners(0,2,false);
+	swapCorners(1,3,false);
+	swapEdges(0,2,false);
+	swapEdges(1,5,true);
 }
 void CrazyCube::MvFr()
 {
@@ -187,6 +195,10 @@ void CrazyCube::MvFr()
 // EP[1] <-> EP[3]
 // EP[0]ep0 <-> EP[4]ep4
 //============================================================================
+	swapCorners(0,2,false);
+	swapCorners(1,3,false);
+	swapEdges(1,3,false);
+	swapEdges(0,4,true);
 }
 void CrazyCube::MvBr()
 {
@@ -197,6 +209,10 @@ void CrazyCube::MvBr()
 // EP[1] <-> EP[3]
 // EP[2]ep2 <-> EP[6]ep6
 //============================================================================
+	swapCorners(0,2,false);
+	swapCorners(1,3,false);
+	swapEdges(1,3,false);
+	swapEdges(2,6,true);
 }
 
 void CrazyCube::move(rotation move)

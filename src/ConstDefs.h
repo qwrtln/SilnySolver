@@ -19,7 +19,7 @@ public:
 	// Legalne ruchy
 	enum rotation {
 		L,		// Left
-		F,		// Frontmask
+		F,		// Front
 		U,		// Up
 		Ui,		// Up inverted
 		U2, 	// U^2

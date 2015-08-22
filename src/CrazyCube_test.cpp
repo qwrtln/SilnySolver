@@ -97,10 +97,74 @@ TEST(CrazyCubeTest, U) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
+TEST(CrazyCubeTest, F) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.F();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, Ui) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.Ui();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
 TEST(CrazyCubeTest, U2) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
 	cubeToCompare.U2();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, Mv) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.Mv();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, Mh) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.Mh();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, MhRr) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.MhRr();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, MhLr) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.MhLr();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, MvFr) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.MvFr();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, MvBr) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.MvBr();
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
