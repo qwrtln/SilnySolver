@@ -32,13 +32,13 @@ protected:
 
 CrazyCube CrazyCubeTest::cube;
 
-TEST(CrazyCubeTest, setCentreTest)
+TEST_F(CrazyCubeTest, setCentreTest)
 {
 	cube.setCentre(true);
 	ASSERT_EQ(cube.getCubeState(), (unsigned long long)1 << cube.centrePosition);
 }
 
-TEST(CrazyCubeTest, setCornersTest)
+TEST_F(CrazyCubeTest, setCornersTest)
 {
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
 	cube.setCorners(corners);
@@ -48,7 +48,7 @@ TEST(CrazyCubeTest, setCornersTest)
 
 }
 
-TEST(CrazyCubeTest, setEdgesTest)
+TEST_F(CrazyCubeTest, setEdgesTest)
 {
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	cube.setEdges(edges);
@@ -57,20 +57,20 @@ TEST(CrazyCubeTest, setEdgesTest)
 	cout << dec;
 }
 
-TEST(CrazyCubeTest, setCubeTest)
+TEST_F(CrazyCubeTest, setCubeTest)
 {
 	ASSERT_EQ(cube.checkIfSolved(), 1);
 	cout << dec;
 }
 
-TEST(CrazyCubeTest, setNEGATIVEcubeTest)
+TEST_F(CrazyCubeTest, setNEGATIVEcubeTest)
 {
 	edgeNames edges[NUM_OF_EDGES] = {wgw, yry, yby, yoy, ygy, wrw, wbw, wow};
 	cube.setEdges(edges);
 	ASSERT_NE(cube.checkIfSolved(), 1);
 }
 
-TEST(CrazyCubeTest, setWholeCubeTest)
+TEST_F(CrazyCubeTest, setWholeCubeTest)
 {
 	cube.setCubeState(0xf);
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
@@ -79,7 +79,7 @@ TEST(CrazyCubeTest, setWholeCubeTest)
 	ASSERT_EQ(cube.checkIfSolved(), 1)
 }
 
-TEST(CrazyCubeTest, L)
+TEST_F(CrazyCubeTest, L)
 {
 	edgeNames edges[NUM_OF_EDGES] = {yry, wbw, yoy, ygy, wrw, yby, wow, wgw};
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, wobw, wbrw, yogy, wrgw, yboy, yrby};
@@ -87,3 +87,4 @@ TEST(CrazyCubeTest, L)
 	cube.L();
 	ASSERT_EQ(cube.checkIfSolved(), 1)
 }
+

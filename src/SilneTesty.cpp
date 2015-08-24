@@ -2,6 +2,7 @@
 #include "TestExecuter.h"
 #include "ConstDefs.h"
 
+
 extern TestExecuter testExecuter;
 class SilneTesty: public BaseTest
 {
@@ -9,25 +10,28 @@ public:
 	SilneTesty(string testCase, string testName)
 		:BaseTest(testCase, testName)
 	{
-		SetUp();
+		
 	}
 protected:
-	void SetUp()
-	{
-
+	virtual void SetUp()
+	{		
+		x = 12;
 	}
-	void TearDown()
+	virtual void TearDown()
 	{
-
+		
 	}
 protected:
+	int x;
 };
 
-TEST(SilneTesty, HelloWorld_Test)
+TEST_F(SilneTesty, HelloWorld_Test)
 {
-	ASSERT_EQ(1, 1);
+	ASSERT_EQ(12, x);
+	ASSERT_EQ_HEX(12, x);
 }
-TEST(SilneTesty, ByeByeWorld_Test)
+TEST_F(SilneTesty, ByeByeWorld_Test)
 {
-	ASSERT_NE(21, 1);
+	ASSERT_NE(11, x);
+	ASSERT_NE_HEX(11, x);
 }

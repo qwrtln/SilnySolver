@@ -18,6 +18,8 @@ public:
 	virtual void Print(bool withTime);
 
 protected:
+ 	virtual void SetUp();
+ 	virtual void TearDown();
 	string testCase;
 	string testName;
 	int result;

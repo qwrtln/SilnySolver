@@ -8,6 +8,15 @@ BaseTest::BaseTest(string testCase, string testName)
 BaseTest::~BaseTest(void)
 {
 }
+
+void BaseTest::SetUp()
+{
+}
+
+void BaseTest::TearDown()
+{
+}
+
 void BaseTest::Run()
 {
 	cout << "[  RUN\t\t] ";

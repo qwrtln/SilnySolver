@@ -75,11 +75,22 @@ public:
 
 // Test macros
 
-#define TEST(TestClass, TestName)\
+#define TEST(TestClass, TestName) 1\
+
+
+#define TEST_F(TestClass, TestName)\
 	class TestClass##_##TestName: public TestClass\
 	{\
 	public:\
-		TestClass##_##TestName():TestClass(#TestClass,#TestName){testExecuter.AddTest(this);}\
+		TestClass##_##TestName():TestClass(#TestClass,#TestName)\
+	{\
+		SetUp();\
+		testExecuter.AddTest(this);\
+	}\
+	virtual ~TestClass##_##TestName()\
+	{\
+		TearDown();\
+	}\
 	void TestCode();\
 	};\
 		TestClass##_##TestName T_##TestClass##_##TestName;\
@@ -90,6 +101,24 @@ public:
 	testExecuter.RunAllTests(withTime)
 
 // Przykladowe makra. Mozna dopisac inne jak zajdzie taka potrzeba :)
+
+#define ASSERT_EQ_HEX(actual, expected)\
+if(!(actual == expected))\
+{\
+	result = 0;\
+	cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
+	cout << hex << showbase;\
+	cout << "Value of:  " << #actual << "\n";\
+	cout << "Actual:    " << actual << "\n";\
+	cout << "Assertion: " << "= " << "\n";\
+	cout << "Expected:  " << expected << "\n";\
+	cout << dec << noshowbase;\
+}\
+else\
+{\
+	result = result && 1;\
+}
+
 #define ASSERT_EQ(actual, expected)\
 if(!(actual == expected))\
 {\
@@ -120,5 +149,21 @@ else\
 	result = result && 1;\
 }
 
+#define ASSERT_NE_HEX(actual, expected)\
+if(!(actual != expected))\
+{\
+	result = 0;\
+	cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
+	cout << hex << showbase;\
+	cout << "Value of:  " << #actual << "\n";\
+	cout << "Actual:    " << actual << "\n";\
+	cout << "Assertion: " << "!= " << "\n";\
+	cout << "Expected:  " << expected << "\n";\
+	cout << dec << noshowbase;\
+}\
+else\
+{\
+	result = result && 1;\
+}
 
 #endif /* CONSTDEFS_H_ */
