@@ -35,7 +35,8 @@ CrazyCube CrazyCubeTest::cube;
 TEST_F(CrazyCubeTest, setCentreTest)
 {
 	cube.setCentre(true);
-	ASSERT_EQ(cube.getCubeState(), (unsigned long long)1 << cube.centrePosition);
+	ASSERT_EQ( (cube.getCubeState() & (static_cast<unsigned long long>(true) << cube.centrePosition)),
+			static_cast<unsigned long long>(true) << cube.centrePosition )
 }
 
 TEST_F(CrazyCubeTest, setCornersTest)
@@ -45,7 +46,6 @@ TEST_F(CrazyCubeTest, setCornersTest)
 	cout << hex;
 	ASSERT_EQ((solvedCube & cube.getCubeState()), cube.getCubeState() )
 	cout << dec;
-
 }
 
 TEST_F(CrazyCubeTest, setEdgesTest)
@@ -53,7 +53,7 @@ TEST_F(CrazyCubeTest, setEdgesTest)
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	cube.setEdges(edges);
 	cout << hex;
-	ASSERT_EQ((solvedCube & cube.getCubeState()), cube.getCubeState());
+	ASSERT_EQ((solvedCube & cube.getCubeState()), cube.getCubeState())
 	cout << dec;
 }
 
@@ -65,9 +65,9 @@ TEST_F(CrazyCubeTest, setCubeTest)
 
 TEST_F(CrazyCubeTest, setNEGATIVEcubeTest)
 {
-	edgeNames edges[NUM_OF_EDGES] = {wgw, yry, yby, yoy, ygy, wrw, wbw, wow};
+	edgeNames edges[NUM_OF_EDGES] = {wgw, yry, yby, yoy, ygy, wrw, wbw, wow}; // Wrong sequence
 	cube.setEdges(edges);
-	ASSERT_NE(cube.checkIfSolved(), 1);
+	ASSERT_NE(cube.checkIfSolved(), 1)
 }
 
 TEST_F(CrazyCubeTest, setWholeCubeTest)
@@ -84,7 +84,88 @@ TEST_F(CrazyCubeTest, L)
 	edgeNames edges[NUM_OF_EDGES] = {yry, wbw, yoy, ygy, wrw, yby, wow, wgw};
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, wobw, wbrw, yogy, wrgw, yboy, yrby};
 	cube.setWholeCube(true,edges,corners);
-	cube.L();
-	ASSERT_EQ(cube.checkIfSolved(), 1)
+	CrazyCube cubeToCompare;
+	cubeToCompare.L();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, U) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.U();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, F) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.F();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, Ui) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.Ui();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, U2) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.U2();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, Mv) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.Mv();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, Mh) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.Mh();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, MhRr) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.MhRr();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, MhLr) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.MhLr();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, MvFr) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.MvFr();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+}
+
+TEST(CrazyCubeTest, MvBr) // Draft!!!
+{
+	cube.resetCube();
+	CrazyCube cubeToCompare;
+	cubeToCompare.MvBr();
+	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 

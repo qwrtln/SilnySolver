@@ -26,6 +26,12 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+<<<<<<< HEAD
+=======
+	//cout << hex;
+	RUN_ALL_TESTS(1);
+>>>>>>> 17333275a08620aeedaceb2f318715024605748c
+
 	RUN_ALL_TESTS(1);
 	return 0;
 }
