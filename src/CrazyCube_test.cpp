@@ -89,7 +89,7 @@ TEST_F(CrazyCubeTest, L)
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, U) // Draft!!!
+TEST_F(CrazyCubeTest, U) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -97,7 +97,7 @@ TEST(CrazyCubeTest, U) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, F) // Draft!!!
+TEST_F(CrazyCubeTest, F) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -105,7 +105,7 @@ TEST(CrazyCubeTest, F) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, Ui) // Draft!!!
+TEST_F(CrazyCubeTest, Ui) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -113,7 +113,7 @@ TEST(CrazyCubeTest, Ui) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, U2) // Draft!!!
+TEST_F(CrazyCubeTest, U2) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -121,7 +121,7 @@ TEST(CrazyCubeTest, U2) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, Mv) // Draft!!!
+TEST_F(CrazyCubeTest, Mv) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -129,7 +129,7 @@ TEST(CrazyCubeTest, Mv) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, Mh) // Draft!!!
+TEST_F(CrazyCubeTest, Mh) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -137,7 +137,7 @@ TEST(CrazyCubeTest, Mh) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, MhRr) // Draft!!!
+TEST_F(CrazyCubeTest, MhRr) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -145,7 +145,7 @@ TEST(CrazyCubeTest, MhRr) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, MhLr) // Draft!!!
+TEST_F(CrazyCubeTest, MhLr) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -153,7 +153,7 @@ TEST(CrazyCubeTest, MhLr) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, MvFr) // Draft!!!
+TEST_F(CrazyCubeTest, MvFr) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
@@ -161,7 +161,7 @@ TEST(CrazyCubeTest, MvFr) // Draft!!!
 	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST(CrazyCubeTest, MvBr) // Draft!!!
+TEST_F(CrazyCubeTest, MvBr) // Draft!!!
 {
 	cube.resetCube();
 	CrazyCube cubeToCompare;
