@@ -11,6 +11,32 @@
 CrazyCube::CrazyCube()
 {
 	cubeState = solvedCube;
+
+	// Moves tab
+	moveTab[0] = &CrazyCube::L;
+	moveTab[1] = &CrazyCube::F;
+	moveTab[2] = &CrazyCube::U;
+	moveTab[3] = &CrazyCube::Ui;
+	moveTab[4] = &CrazyCube::U2;
+	moveTab[5] = &CrazyCube::Mv;
+	moveTab[6] = &CrazyCube::Mh;
+	moveTab[7] = &CrazyCube::MhRr;
+	moveTab[8] = &CrazyCube::MhLr;
+	moveTab[9] = &CrazyCube::MvFr;
+	moveTab[10] = &CrazyCube::MvBr;	
+
+	// Undo moves tab
+	undoMoveTab[0] = &CrazyCube::L;
+	undoMoveTab[1] = &CrazyCube::F;
+	undoMoveTab[2] = &CrazyCube::Ui;	// <-- Here's the change
+	undoMoveTab[3] = &CrazyCube::U;	// And all the changes end here...
+	undoMoveTab[4] = &CrazyCube::U2;
+	undoMoveTab[5] = &CrazyCube::Mv;
+	undoMoveTab[6] = &CrazyCube::Mh;
+	undoMoveTab[7] = &CrazyCube::MhRr;
+	undoMoveTab[8] = &CrazyCube::MhLr;
+	undoMoveTab[9] = &CrazyCube::MvFr;
+	undoMoveTab[10] = &CrazyCube::MvBr;	
 }
 
 CrazyCube::~CrazyCube()

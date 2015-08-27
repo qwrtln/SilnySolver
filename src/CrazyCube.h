@@ -13,6 +13,8 @@ class CrazyCube: public CrazyCubeAbstract
 {
 private:
 	unsigned long long cubeState;
+	void(CrazyCube::*moveTab[NUM_OF_MOVES])();
+	void(CrazyCube::*undoMoveTab[NUM_OF_MOVES])();
 
 public:
 	CrazyCube();
