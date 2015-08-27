@@ -129,10 +129,10 @@ void CrazyCube::U2()
 // EP[2] -> EP[0]
 // EP[3] -> EP[1]
 //============================================================================
-	cycleCorners(0,1,2,3);
-	cycleEdges(0,1,2,3);
-	cycleCorners(0,1,2,3);
-	cycleEdges(0,1,2,3);
+	swapEdges(0, 2, false);
+	swapEdges(1, 3, false);
+	swapCorners(0, 2, false);
+	swapCorners(1, 3, false);
 }
 void CrazyCube::Mv()
 {

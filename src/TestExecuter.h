@@ -8,6 +8,8 @@ public:
 	}
 	void RunAllTests(bool withTime);
 	void AddTest(BaseTest* test);
+	//void AddTest(void (*test)());
 protected:
 	vector<BaseTest*> tests;
+	//vector<void(*)()> functions;
 };

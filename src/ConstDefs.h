@@ -75,7 +75,8 @@ public:
 
 // Test macros
 
-#define TEST(TestClass, TestName) 1\
+#define TEST(TestCase, TestName)\
+void TestCase##_##TestName()
 
 
 #define TEST_F(TestClass, TestName)\

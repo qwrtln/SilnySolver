@@ -14,3 +14,8 @@ void TestExecuter::AddTest(BaseTest* test)
 	//cout << "TestExecuter ["<< this <<"] Add()" << endl;
 	tests.push_back(test);
 }
+/*void TestExecuter::AddTest(void (*test)())
+{
+	functions.push_back(test);
+}
+*/
