@@ -42,7 +42,8 @@ public:
 	void MvFr();
 	void MvBr();
 
-	void move(rotation);
+	void move(unsigned short int);
+	void undoMove(unsigned short int);
 
 	void swapEdges(unsigned short int, unsigned short int, bool);
 	void swapCorners(unsigned short int, unsigned short int, bool);

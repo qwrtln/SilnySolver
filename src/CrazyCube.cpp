@@ -241,9 +241,14 @@ void CrazyCube::MvBr()
 	swapEdges(2,6,true);
 }
 
-void CrazyCube::move(rotation move)
+void CrazyCube::move(unsigned short int move)
 {
+	(*this.*moveTab[move])(); // Wow! So advanced.
+}
 
+void CrazyCube::undoMove(unsigned short int move)
+{
+	(this->*undoMoveTab[move])(); // Two options possible. So readable.
 }
 
 void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex,  bool withInnerPieces)
