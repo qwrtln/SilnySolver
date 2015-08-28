@@ -29,7 +29,7 @@ protected:
 	}
 	void TestMove(unsigned int depth)
 	{
-		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth) << " moves): ";
+		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
 		cout.flush();
 		time_t start = clock();
 		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)depth);
