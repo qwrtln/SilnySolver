@@ -18,12 +18,20 @@ private:
 	unsigned long long initialMask;
 	unsigned long long edgeOneMask;
 	unsigned long long edgeTwoMask;
+	unsigned long long edgeThreeMask;
+	unsigned long long edgeFourMask;
 	unsigned long long edgeOne;
 	unsigned long long edgeTwo;
+	unsigned long long edgeThree;
+	unsigned long long edgeFour;
 	unsigned long long cornerOneMask;
 	unsigned long long cornerTwoMask;
+	unsigned long long cornerThreeMask;
+	unsigned long long cornerFourMask;
 	unsigned long long cornerOne;
 	unsigned long long cornerTwo;
+	unsigned long long cornerThree;
+	unsigned long long cornerFour;
 
 public:
 	CrazyCube();

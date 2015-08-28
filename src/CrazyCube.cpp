@@ -304,16 +304,16 @@ void CrazyCube::cycleCorners(unsigned short int cornerOneIndex, unsigned short i
 		unsigned short int cornerThreeIndex, unsigned short int cornerFourIndex)
 {
 	// Set bit masks
-	unsigned long long cornerOneMask = (unsigned long long)0xe << CornerPieces[cornerOneIndex]; // E because cycle doesn't move inner pieces
-	unsigned long long cornerTwoMask = (unsigned long long)0xe << CornerPieces[cornerTwoIndex];
-	unsigned long long cornerThreeMask = (unsigned long long)0xe << CornerPieces[cornerThreeIndex];
-	unsigned long long cornerFourMask = (unsigned long long)0xe << CornerPieces[cornerFourIndex];
+	cornerOneMask = (unsigned long long)0xe << CornerPieces[cornerOneIndex]; // E because cycle doesn't move inner pieces
+	cornerTwoMask = (unsigned long long)0xe << CornerPieces[cornerTwoIndex];
+	cornerThreeMask = (unsigned long long)0xe << CornerPieces[cornerThreeIndex];
+	cornerFourMask = (unsigned long long)0xe << CornerPieces[cornerFourIndex];
 
 	// Remember the pieces
-	unsigned long long cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
-	unsigned long long cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
-	unsigned long long cornerThree = (getCubeState() & cornerThreeMask) >> CornerPieces[cornerThreeIndex];
-	unsigned long long cornerFour = (getCubeState() & cornerFourMask) >> CornerPieces[cornerFourIndex];
+	cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
+  cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
+	cornerThree = (getCubeState() & cornerThreeMask) >> CornerPieces[cornerThreeIndex];
+	cornerFour = (getCubeState() & cornerFourMask) >> CornerPieces[cornerFourIndex];
 
 	// Clear current cube status on those positions
 	cubeState &= ~(cornerOneMask | cornerTwoMask | cornerThreeMask | cornerFourMask);
@@ -332,16 +332,16 @@ void CrazyCube::cycleEdges(unsigned short int edgeOneIndex, unsigned short int e
 		unsigned short int edgeThreeIndex, unsigned short int edgeFourIndex)
 {
 	// Set bit masks
-	unsigned long long edgeOneMask = (unsigned long long)0xe << EdgePieces[edgeOneIndex]; // E because cycle doesn't move inner pieces
-	unsigned long long edgeTwoMask = (unsigned long long)0xe << EdgePieces[edgeTwoIndex];
-	unsigned long long edgeThreeMask = (unsigned long long)0xe << EdgePieces[edgeThreeIndex];
-	unsigned long long edgeFourMask = (unsigned long long)0xe << EdgePieces[edgeFourIndex];
+	edgeOneMask = (unsigned long long)0xe << EdgePieces[edgeOneIndex]; // E because cycle doesn't move inner pieces
+	edgeTwoMask = (unsigned long long)0xe << EdgePieces[edgeTwoIndex];
+	edgeThreeMask = (unsigned long long)0xe << EdgePieces[edgeThreeIndex];
+	edgeFourMask = (unsigned long long)0xe << EdgePieces[edgeFourIndex];
 
 	// Remember the pieces
-	unsigned long long edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
-	unsigned long long edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
-	unsigned long long edgeThree = (getCubeState() & edgeThreeMask) >> EdgePieces[edgeThreeIndex];
-	unsigned long long edgeFour = (getCubeState() & edgeFourMask) >> EdgePieces[edgeFourIndex];
+	edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
+	edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
+	edgeThree = (getCubeState() & edgeThreeMask) >> EdgePieces[edgeThreeIndex];
+	edgeFour = (getCubeState() & edgeFourMask) >> EdgePieces[edgeFourIndex];
 
 	// Clear current cube status on those positions
 	cubeState &= ~(edgeOneMask | edgeTwoMask | edgeThreeMask | edgeFourMask);
