@@ -7,18 +7,22 @@
 
 #ifndef CONSTDEFS_H_
 #define CONSTDEFS_H_
+#define NUM_OF_EDGES 8
+#define NUM_OF_CORNERS 7
+#define NUM_OF_MOVES 11
+
 class CrazyCubeAbstract
 {
 public:
 	const static unsigned long long solvedCube;
 
-	const static unsigned short int CornerPieces[7];
-	const static unsigned short int EdgePieces[8];
+	const static unsigned short int CornerPieces[NUM_OF_CORNERS];
+	const static unsigned short int EdgePieces[NUM_OF_EDGES];
 	const static unsigned short int centrePosition;
 
-	// Legalne ruchy
+	// Legalne ruchy < 11
 	enum rotation {
-		L,		// Left
+		L,		// Left 0
 		F,		// Front
 		U,		// Up
 		Ui,		// Up inverted
@@ -28,7 +32,7 @@ public:
 		MhRr,	// Middle horizontal Right rotation
 		MhLr,	// ...
 		MvFr,	// Middle vertical Front rotation
-		MvBr	// ...
+		MvBr	// ... 10
 	};
 
 	// Nazwy rogow
@@ -70,12 +74,12 @@ public:
 	};
 };
 
-#define NUM_OF_EDGES 8
-#define NUM_OF_CORNERS 7
+
 
 // Test macros
 
-#define TEST(TestClass, TestName) 1\
+#define TEST(TestCase, TestName)\
+void TestCase##_##TestName()
 
 
 #define TEST_F(TestClass, TestName)\

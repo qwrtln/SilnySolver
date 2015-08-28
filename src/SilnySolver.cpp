@@ -24,8 +24,59 @@ using namespace std;
 *
 */
 
+bool wygralem(int liczba)
+{
+	if (liczba >0 )
+	{
+		cout << "I tak przegrasz" << endl;
+	}
+	else cout << "Doprawdy, cwane, ale nie..." << endl;
+			
+
+	return true;
+}
+
+bool siema(int jaj)
+{
+	cout << "tylu jaj nie masz: " << jaj << endl;
+	return false;
+}
+
+int magicNumber=3;
+
 int main(int argc, char* argv[])
 {
 	RUN_ALL_TESTS(1);
+	
+	int* takiZwykly;
+	int* takichPare[magicNumber];
+
+	bool (*funkcyjnyPojnter[magicNumber])(int cos);
+
+	funkcyjnyPojnter[1] = wygralem;
+	funkcyjnyPojnter[0] = siema;
+	funkcyjnyPojnter[2] = siema;
+
+	for (int i=0; i < magicNumber; ++i)
+	{
+		(*funkcyjnyPojnter[i])(-7);
+	}	
+
 	return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

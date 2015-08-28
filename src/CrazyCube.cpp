@@ -11,6 +11,32 @@
 CrazyCube::CrazyCube()
 {
 	cubeState = solvedCube;
+
+	// Moves tab
+	moveTab[0] = &CrazyCube::L;
+	moveTab[1] = &CrazyCube::F;
+	moveTab[2] = &CrazyCube::U;
+	moveTab[3] = &CrazyCube::Ui;
+	moveTab[4] = &CrazyCube::U2;
+	moveTab[5] = &CrazyCube::Mv;
+	moveTab[6] = &CrazyCube::Mh;
+	moveTab[7] = &CrazyCube::MhRr;
+	moveTab[8] = &CrazyCube::MhLr;
+	moveTab[9] = &CrazyCube::MvFr;
+	moveTab[10] = &CrazyCube::MvBr;	
+
+	// Undo moves tab
+	undoMoveTab[0] = &CrazyCube::L;
+	undoMoveTab[1] = &CrazyCube::F;
+	undoMoveTab[2] = &CrazyCube::Ui;	// <-- Here's the change
+	undoMoveTab[3] = &CrazyCube::U;	// And all the changes end here...
+	undoMoveTab[4] = &CrazyCube::U2;
+	undoMoveTab[5] = &CrazyCube::Mv;
+	undoMoveTab[6] = &CrazyCube::Mh;
+	undoMoveTab[7] = &CrazyCube::MhRr;
+	undoMoveTab[8] = &CrazyCube::MhLr;
+	undoMoveTab[9] = &CrazyCube::MvFr;
+	undoMoveTab[10] = &CrazyCube::MvBr;	
 }
 
 CrazyCube::~CrazyCube()
@@ -129,10 +155,10 @@ void CrazyCube::U2()
 // EP[2] -> EP[0]
 // EP[3] -> EP[1]
 //============================================================================
-	cycleCorners(0,1,2,3);
-	cycleEdges(0,1,2,3);
-	cycleCorners(0,1,2,3);
-	cycleEdges(0,1,2,3);
+	swapEdges(0, 2, false);
+	swapEdges(1, 3, false);
+	swapCorners(0, 2, false);
+	swapCorners(1, 3, false);
 }
 void CrazyCube::Mv()
 {
@@ -215,24 +241,29 @@ void CrazyCube::MvBr()
 	swapEdges(2,6,true);
 }
 
-void CrazyCube::move(rotation move)
+void CrazyCube::move(unsigned short int move)
 {
+	(*this.*moveTab[move])(); // Wow! So advanced.
+}
 
+void CrazyCube::undoMove(unsigned short int move)
+{
+	(this->*undoMoveTab[move])(); // Two options possible. So readable.
 }
 
 void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex,  bool withInnerPieces)
 {
-	unsigned long long initialMask = withInnerPieces ? 0xF : 0xE;
+	initialMask = withInnerPieces ? 0xF : 0xE;
 	// OxF: three bits for piece plus one for inner piece
 	// 0xE: just three bits for piece
 
 	// Set bit masks for pieces
-	unsigned long long edgeOneMask = initialMask << EdgePieces[edgeOneIndex];
-	unsigned long long edgeTwoMask = initialMask << EdgePieces[edgeTwoIndex];
+	edgeOneMask = initialMask << EdgePieces[edgeOneIndex];
+	edgeTwoMask = initialMask << EdgePieces[edgeTwoIndex];
 
 	// Remember pieces
-	unsigned long long edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
-	unsigned long long edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
+	edgeOne = (cubeState & edgeOneMask) >> EdgePieces[edgeOneIndex];
+	edgeTwo = (cubeState & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
 
 	// Clear spots of swapping pieces
 	cubeState &= ~(edgeOneMask | edgeTwoMask);
@@ -247,16 +278,16 @@ void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int ed
 
 void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex, bool withInnerPieces)
 {
-	unsigned long long initialMask = withInnerPieces ? 0xF : 0xE;
+	initialMask = withInnerPieces ? 0xF : 0xE;
 	// OxF: three bits for piece plus one for inner piece
 	// 0xE: just three bits for piece
 
-	unsigned long long cornerOneMask = initialMask << CornerPieces[cornerOneIndex];
-	unsigned long long cornerTwoMask = initialMask << CornerPieces[cornerTwoIndex];
+	cornerOneMask = initialMask << CornerPieces[cornerOneIndex];
+	cornerTwoMask = initialMask << CornerPieces[cornerTwoIndex];
 
 	// Remember pieces
-	unsigned long long cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
-	unsigned long long cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
+	cornerOne = (cubeState & cornerOneMask) >> CornerPieces[cornerOneIndex];
+	cornerTwo = (cubeState & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
 
 	// Clear spots of swapping pieces
 	cubeState &= ~(cornerOneMask | cornerTwoMask);
@@ -273,16 +304,16 @@ void CrazyCube::cycleCorners(unsigned short int cornerOneIndex, unsigned short i
 		unsigned short int cornerThreeIndex, unsigned short int cornerFourIndex)
 {
 	// Set bit masks
-	unsigned long long cornerOneMask = (unsigned long long)0xe << CornerPieces[cornerOneIndex]; // E because cycle doesn't move inner pieces
-	unsigned long long cornerTwoMask = (unsigned long long)0xe << CornerPieces[cornerTwoIndex];
-	unsigned long long cornerThreeMask = (unsigned long long)0xe << CornerPieces[cornerThreeIndex];
-	unsigned long long cornerFourMask = (unsigned long long)0xe << CornerPieces[cornerFourIndex];
+	cornerOneMask = (unsigned long long)0xe << CornerPieces[cornerOneIndex]; // E because cycle doesn't move inner pieces
+	cornerTwoMask = (unsigned long long)0xe << CornerPieces[cornerTwoIndex];
+	cornerThreeMask = (unsigned long long)0xe << CornerPieces[cornerThreeIndex];
+	cornerFourMask = (unsigned long long)0xe << CornerPieces[cornerFourIndex];
 
 	// Remember the pieces
-	unsigned long long cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
-	unsigned long long cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
-	unsigned long long cornerThree = (getCubeState() & cornerThreeMask) >> CornerPieces[cornerThreeIndex];
-	unsigned long long cornerFour = (getCubeState() & cornerFourMask) >> CornerPieces[cornerFourIndex];
+	cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
+  cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
+	cornerThree = (getCubeState() & cornerThreeMask) >> CornerPieces[cornerThreeIndex];
+	cornerFour = (getCubeState() & cornerFourMask) >> CornerPieces[cornerFourIndex];
 
 	// Clear current cube status on those positions
 	cubeState &= ~(cornerOneMask | cornerTwoMask | cornerThreeMask | cornerFourMask);
@@ -301,16 +332,16 @@ void CrazyCube::cycleEdges(unsigned short int edgeOneIndex, unsigned short int e
 		unsigned short int edgeThreeIndex, unsigned short int edgeFourIndex)
 {
 	// Set bit masks
-	unsigned long long edgeOneMask = (unsigned long long)0xe << EdgePieces[edgeOneIndex]; // E because cycle doesn't move inner pieces
-	unsigned long long edgeTwoMask = (unsigned long long)0xe << EdgePieces[edgeTwoIndex];
-	unsigned long long edgeThreeMask = (unsigned long long)0xe << EdgePieces[edgeThreeIndex];
-	unsigned long long edgeFourMask = (unsigned long long)0xe << EdgePieces[edgeFourIndex];
+	edgeOneMask = (unsigned long long)0xe << EdgePieces[edgeOneIndex]; // E because cycle doesn't move inner pieces
+	edgeTwoMask = (unsigned long long)0xe << EdgePieces[edgeTwoIndex];
+	edgeThreeMask = (unsigned long long)0xe << EdgePieces[edgeThreeIndex];
+	edgeFourMask = (unsigned long long)0xe << EdgePieces[edgeFourIndex];
 
 	// Remember the pieces
-	unsigned long long edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
-	unsigned long long edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
-	unsigned long long edgeThree = (getCubeState() & edgeThreeMask) >> EdgePieces[edgeThreeIndex];
-	unsigned long long edgeFour = (getCubeState() & edgeFourMask) >> EdgePieces[edgeFourIndex];
+	edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
+	edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
+	edgeThree = (getCubeState() & edgeThreeMask) >> EdgePieces[edgeThreeIndex];
+	edgeFour = (getCubeState() & edgeFourMask) >> EdgePieces[edgeFourIndex];
 
 	// Clear current cube status on those positions
 	cubeState &= ~(edgeOneMask | edgeTwoMask | edgeThreeMask | edgeFourMask);

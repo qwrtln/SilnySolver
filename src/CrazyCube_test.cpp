@@ -7,6 +7,7 @@
 #include "CrazyCube.h"
 #include "TestExecuter.h"
 #include "ConstDefs.h"
+#include <cmath>
 
 extern TestExecuter testExecuter;
 class CrazyCubeTest: public BaseTest
@@ -26,6 +27,22 @@ protected:
 	{
 
 	}
+	void TestMove(unsigned int depth)
+	{
+		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
+		cout.flush();
+		time_t start = clock();
+		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)depth);
+		unsigned int j = 0;
+		for(unsigned int i = 0; i < max; i++) 
+		{
+			for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
+			{			
+				cube.move(j);
+			}		
+		}
+		cout << ((float)(clock() - start))/CLOCKS_PER_SEC << "s\n";
+	}
 protected:
 	static CrazyCube cube;
 };
@@ -35,7 +52,7 @@ CrazyCube CrazyCubeTest::cube;
 TEST_F(CrazyCubeTest, setCentreTest)
 {
 	cube.setCentre(true);
-	ASSERT_EQ( (cube.getCubeState() & (static_cast<unsigned long long>(true) << cube.centrePosition)),
+	ASSERT_EQ_HEX( (cube.getCubeState() & (static_cast<unsigned long long>(true) << cube.centrePosition)),
 			static_cast<unsigned long long>(true) << cube.centrePosition )
 }
 
@@ -43,23 +60,19 @@ TEST_F(CrazyCubeTest, setCornersTest)
 {
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
 	cube.setCorners(corners);
-	cout << hex;
-	ASSERT_EQ((solvedCube & cube.getCubeState()), cube.getCubeState() )
-	cout << dec;
+	ASSERT_EQ_HEX((solvedCube & cube.getCubeState()), cube.getCubeState() )
 }
 
 TEST_F(CrazyCubeTest, setEdgesTest)
 {
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	cube.setEdges(edges);
-	cout << hex;
-	ASSERT_EQ((solvedCube & cube.getCubeState()), cube.getCubeState())
-	cout << dec;
+	ASSERT_EQ_HEX((solvedCube & cube.getCubeState()), cube.getCubeState())
 }
 
 TEST_F(CrazyCubeTest, setCubeTest)
 {
-	ASSERT_EQ(cube.checkIfSolved(), 1);
+	ASSERT_EQ_HEX(cube.checkIfSolved(), 1);
 	cout << dec;
 }
 
@@ -76,7 +89,7 @@ TEST_F(CrazyCubeTest, setWholeCubeTest)
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
 	cube.setWholeCube(true,edges,corners);
-	ASSERT_EQ(cube.checkIfSolved(), 1)
+	ASSERT_EQ_HEX(cube.checkIfSolved(), 1)
 }
 
 TEST_F(CrazyCubeTest, L)
@@ -86,86 +99,133 @@ TEST_F(CrazyCubeTest, L)
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.L();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, U) // Draft!!!
+TEST_F(CrazyCubeTest, U)
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {ygy, yry, yby, yoy, wrw, wbw, wow, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {yogy, ygry, yrby, yboy, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
+	
 	cubeToCompare.U();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, F) // Draft!!!
+TEST_F(CrazyCubeTest, F)
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {wrw, yby, yoy, ygy, yry, wbw, wow, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {wbrw, wrgw, yboy, yogy, yrby, ygry, wobw};
+	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.F();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, Ui) // Draft!!!
+TEST_F(CrazyCubeTest, Ui) 
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {yby, yoy, ygy, yry, wrw, wbw, wow, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {yrby, yboy, yogy, ygry, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.Ui();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, U2) // Draft!!!
+TEST_F(CrazyCubeTest, U2) 
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {yoy, ygy, yry, yby, wrw, wbw, wow, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.U2();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, Mv) // Draft!!!
+TEST_F(CrazyCubeTest, Mv) 
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {wow, yby, wrw, ygy, yoy, wbw, yry, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
+	cube.toggleCentre();
 	CrazyCube cubeToCompare;
 	cubeToCompare.Mv();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, Mh) // Draft!!!
+TEST_F(CrazyCubeTest, Mh)
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {yry, wgw, yoy, wbw, wrw, ygy, wow, yby};
+	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
+	cube.toggleCentre();
 	CrazyCube cubeToCompare;
 	cubeToCompare.Mh();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, MhRr) // Draft!!!
+TEST_F(CrazyCubeTest, MhRr) 
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {yoy, yby, yry, wgw, wrw, wbw, wow, ygy};
+	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.MhRr();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, MhLr) // Draft!!!
+TEST_F(CrazyCubeTest, MhLr)
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {yoy, wbw, yry, ygy, wrw, yby, wow, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.MhLr();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, MvFr) // Draft!!!
+TEST_F(CrazyCubeTest, MvFr) 
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {wrw, ygy, yoy, yby, yry, wbw, wow, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.MvFr();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, MvBr) // Draft!!!
+TEST_F(CrazyCubeTest, MvBr)
 {
 	cube.resetCube();
+	edgeNames edges[NUM_OF_EDGES] = {yry, ygy, wow, yby, wrw, wbw, yoy, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.MvBr();
-	ASSERT_EQ(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
+TEST_F(CrazyCubeTest, Move_undoMoveTest)
+{
+	cube.resetCube();
+	// placeholder TODO
+}
+
+TEST_F(CrazyCubeTest, PerformanceTest)
+{
+	cube.resetCube(); 
+	for(unsigned short int i = 0; i < 9; i++)
+	{
+		TestMove(i);
+	}
+}

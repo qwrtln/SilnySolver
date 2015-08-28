@@ -13,6 +13,25 @@ class CrazyCube: public CrazyCubeAbstract
 {
 private:
 	unsigned long long cubeState;
+	void(CrazyCube::*moveTab[NUM_OF_MOVES])();
+	void(CrazyCube::*undoMoveTab[NUM_OF_MOVES])();
+	unsigned long long initialMask;
+	unsigned long long edgeOneMask;
+	unsigned long long edgeTwoMask;
+	unsigned long long edgeThreeMask;
+	unsigned long long edgeFourMask;
+	unsigned long long edgeOne;
+	unsigned long long edgeTwo;
+	unsigned long long edgeThree;
+	unsigned long long edgeFour;
+	unsigned long long cornerOneMask;
+	unsigned long long cornerTwoMask;
+	unsigned long long cornerThreeMask;
+	unsigned long long cornerFourMask;
+	unsigned long long cornerOne;
+	unsigned long long cornerTwo;
+	unsigned long long cornerThree;
+	unsigned long long cornerFour;
 
 public:
 	CrazyCube();
@@ -40,7 +59,8 @@ public:
 	void MvFr();
 	void MvBr();
 
-	void move(rotation);
+	void move(unsigned short int);
+	void undoMove(unsigned short int);
 
 	void swapEdges(unsigned short int, unsigned short int, bool);
 	void swapCorners(unsigned short int, unsigned short int, bool);
