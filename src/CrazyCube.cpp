@@ -253,17 +253,17 @@ void CrazyCube::undoMove(unsigned short int move)
 
 void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex,  bool withInnerPieces)
 {
-	unsigned long long initialMask = withInnerPieces ? 0xF : 0xE;
+	initialMask = withInnerPieces ? 0xF : 0xE;
 	// OxF: three bits for piece plus one for inner piece
 	// 0xE: just three bits for piece
 
 	// Set bit masks for pieces
-	unsigned long long edgeOneMask = initialMask << EdgePieces[edgeOneIndex];
-	unsigned long long edgeTwoMask = initialMask << EdgePieces[edgeTwoIndex];
+	edgeOneMask = initialMask << EdgePieces[edgeOneIndex];
+	edgeTwoMask = initialMask << EdgePieces[edgeTwoIndex];
 
 	// Remember pieces
-	unsigned long long edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
-	unsigned long long edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
+	edgeOne = (cubeState & edgeOneMask) >> EdgePieces[edgeOneIndex];
+	edgeTwo = (cubeState & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
 
 	// Clear spots of swapping pieces
 	cubeState &= ~(edgeOneMask | edgeTwoMask);
@@ -278,16 +278,16 @@ void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int ed
 
 void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex, bool withInnerPieces)
 {
-	unsigned long long initialMask = withInnerPieces ? 0xF : 0xE;
+	initialMask = withInnerPieces ? 0xF : 0xE;
 	// OxF: three bits for piece plus one for inner piece
 	// 0xE: just three bits for piece
 
-	unsigned long long cornerOneMask = initialMask << CornerPieces[cornerOneIndex];
-	unsigned long long cornerTwoMask = initialMask << CornerPieces[cornerTwoIndex];
+	cornerOneMask = initialMask << CornerPieces[cornerOneIndex];
+	cornerTwoMask = initialMask << CornerPieces[cornerTwoIndex];
 
 	// Remember pieces
-	unsigned long long cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
-	unsigned long long cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
+	cornerOne = (cubeState & cornerOneMask) >> CornerPieces[cornerOneIndex];
+	cornerTwo = (cubeState & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
 
 	// Clear spots of swapping pieces
 	cubeState &= ~(cornerOneMask | cornerTwoMask);

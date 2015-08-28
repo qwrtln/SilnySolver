@@ -7,6 +7,7 @@
 #include "CrazyCube.h"
 #include "TestExecuter.h"
 #include "ConstDefs.h"
+#include <cmath>
 
 extern TestExecuter testExecuter;
 class CrazyCubeTest: public BaseTest
@@ -25,6 +26,22 @@ protected:
 	void TearDown()
 	{
 
+	}
+	void TestMove(unsigned int depth)
+	{
+		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth) << " moves): ";
+		cout.flush();
+		time_t start = clock();
+		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)depth);
+		unsigned int j = 0;
+		for(unsigned int i = 0; i < max; i++) 
+		{
+			for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
+			{			
+				cube.move(j);
+			}		
+		}
+		cout << ((float)(clock() - start))/CLOCKS_PER_SEC << "s\n";
 	}
 protected:
 	static CrazyCube cube;
@@ -198,3 +215,17 @@ TEST_F(CrazyCubeTest, MvBr)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
+TEST_F(CrazyCubeTest, Move_undoMoveTest)
+{
+	cube.resetCube();
+	// placeholder TODO
+}
+
+TEST_F(CrazyCubeTest, PerformanceTest)
+{
+	cube.resetCube(); 
+	for(unsigned short int i = 0; i < 9; i++)
+	{
+		TestMove(i);
+	}
+}

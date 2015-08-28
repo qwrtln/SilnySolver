@@ -15,6 +15,15 @@ private:
 	unsigned long long cubeState;
 	void(CrazyCube::*moveTab[NUM_OF_MOVES])();
 	void(CrazyCube::*undoMoveTab[NUM_OF_MOVES])();
+	unsigned long long initialMask;
+	unsigned long long edgeOneMask;
+	unsigned long long edgeTwoMask;
+	unsigned long long edgeOne;
+	unsigned long long edgeTwo;
+	unsigned long long cornerOneMask;
+	unsigned long long cornerTwoMask;
+	unsigned long long cornerOne;
+	unsigned long long cornerTwo;
 
 public:
 	CrazyCube();
