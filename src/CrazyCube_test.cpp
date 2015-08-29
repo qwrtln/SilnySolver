@@ -55,7 +55,7 @@ protected:
 		time_t start = clock();
 		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)depth);
 		unsigned int j = 0;
-		for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
+		for(unsigned short int j = 0; j < NUM_OF_MOVES-1; j++)
 		{
 			for(unsigned int i = 0; i < max; i++) 
 			{			
@@ -84,7 +84,7 @@ protected:
 		time(&start);
 		
 		unsigned int j = 0;
-		for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
+		for(unsigned short int j = 0; j < NUM_OF_MOVES-1; j++)
 		{
 			s->move = j;
 			pthread_create(&threads[j], &attr, CrazyCubeTest::doMoves, (void*) s);
