@@ -12,7 +12,7 @@
 
 extern TestExecuter testExecuter;
 
-
+unsigned long long globalnaZmienna = 0;
 
 class CrazyCubeTest: public BaseTest
 {
@@ -45,27 +45,31 @@ protected:
 		for(unsigned int i = 0; i < max; i++) 
 		{			
 				cube.move(mov);
+				++globalnaZmienna;
 		}		
 		pthread_exit(NULL);
 	}
 	void TestMove(unsigned int depth)
 	{
+		globalnaZmienna = 0;
+
 		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
 		cout.flush();
 		time_t start = clock();
 		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)depth);
-		unsigned int j = 0;
-		for(unsigned short int j = 0; j < NUM_OF_MOVES-1; j++)
+		for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
 		{
 			for(unsigned int i = 0; i < max; i++) 
 			{			
 				cube.move(j);
+				++globalnaZmienna;
 			}		
 		}
-		cout << ((float)(clock() - start))/CLOCKS_PER_SEC << "s\n";
+		cout << ((float)(clock() - start))/CLOCKS_PER_SEC << "s\n" << "Counter: " << globalnaZmienna << endl;
 	}
 	void TestMovePthreads(unsigned long int depth)
 	{
+		globalnaZmienna = 0;
 		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
 		cout.flush();
 		doMoveS* s = new doMoveS;
@@ -83,8 +87,7 @@ protected:
 		time_t start;
 		time(&start);
 		
-		unsigned int j = 0;
-		for(unsigned short int j = 0; j < NUM_OF_MOVES-1; j++)
+		for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
 		{
 			s->move = j;
 			pthread_create(&threads[j], &attr, CrazyCubeTest::doMoves, (void*) s);
@@ -96,7 +99,7 @@ protected:
 		}
 		time_t end;
 		time(&end);
-		cout << difftime(end, start) << " s" << endl;
+		cout << difftime(end, start) << " s," << " Counter: " << globalnaZmienna << endl;
 		delete s;
 		pthread_attr_destroy(&attr);
 }
@@ -290,7 +293,7 @@ TEST_F(CrazyCubeTest, PerformanceTest)
 TEST_F(CrazyCubeTest, PerformancePthreadsTest)
 {
 	cube.resetCube(); 
-	for(unsigned short int i = 0; i < 8; i++)
+	for(unsigned short int i = 0; i < 9; i++)
 	{
 		TestMovePthreads(i);
 	}
