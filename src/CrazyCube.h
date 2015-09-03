@@ -12,9 +12,10 @@
 class CrazyCube: public CrazyCubeAbstract
 {
 private:
+	enum {numOfMoves = 11};
 	unsigned long long cubeState;
-	void(CrazyCube::*moveTab[NUM_OF_MOVES])();
-	void(CrazyCube::*undoMoveTab[NUM_OF_MOVES])();
+	void(CrazyCube::*moveTab[numOfMoves])();
+	void(CrazyCube::*undoMoveTab[numOfMoves])();
 	unsigned long long initialMask;
 	unsigned long long edgeOneMask;
 	unsigned long long edgeTwoMask;

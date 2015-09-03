@@ -8,10 +8,20 @@
 #include "TestExecuter.h"
 #include "ConstDefs.h"
 #include <cmath>
+#include <pthread.h>
 
 extern TestExecuter testExecuter;
+
+
+
 class CrazyCubeTest: public BaseTest
 {
+private:
+	struct doMoveS
+	{
+		unsigned int depth;
+		unsigned int move;
+	};
 public:
 	CrazyCubeTest(string testCase, string testName)
 		:BaseTest(testCase, testName)
@@ -27,6 +37,17 @@ protected:
 	{
 
 	}
+	static void* doMoves(void* args)
+	{
+		doMoveS* s = (doMoveS*)args;
+		int mov = s->move;
+		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)s->depth);
+		for(unsigned int i = 0; i < max; i++) 
+		{			
+				cube.move(mov);
+		}		
+		pthread_exit(NULL);
+	}
 	void TestMove(unsigned int depth)
 	{
 		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
@@ -34,15 +55,51 @@ protected:
 		time_t start = clock();
 		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)depth);
 		unsigned int j = 0;
-		for(unsigned int i = 0; i < max; i++) 
+		for(unsigned short int j = 0; j < NUM_OF_MOVES-1; j++)
 		{
-			for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
+			for(unsigned int i = 0; i < max; i++) 
 			{			
 				cube.move(j);
 			}		
 		}
 		cout << ((float)(clock() - start))/CLOCKS_PER_SEC << "s\n";
 	}
+	void TestMovePthreads(unsigned long int depth)
+	{
+		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
+		cout.flush();
+		doMoveS* s = new doMoveS;
+		s->depth = depth;
+		// PTHREADS' STUFF
+		pthread_t threads[NUM_OF_MOVES];
+		pthread_attr_t attr;
+		void* status;
+		int rc;
+		pthread_attr_init(&attr);
+   	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+		// ----------------
+	
+
+		time_t start;
+		time(&start);
+		
+		unsigned int j = 0;
+		for(unsigned short int j = 0; j < NUM_OF_MOVES-1; j++)
+		{
+			s->move = j;
+			pthread_create(&threads[j], &attr, CrazyCubeTest::doMoves, (void*) s);
+
+		}
+		for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
+		{
+			rc = pthread_join(threads[j], &status);
+		}
+		time_t end;
+		time(&end);
+		cout << difftime(end, start) << " s" << endl;
+		delete s;
+		pthread_attr_destroy(&attr);
+}
 protected:
 	static CrazyCube cube;
 };
@@ -227,5 +284,14 @@ TEST_F(CrazyCubeTest, PerformanceTest)
 	for(unsigned short int i = 0; i < 9; i++)
 	{
 		TestMove(i);
+	}
+}
+
+TEST_F(CrazyCubeTest, PerformancePthreadsTest)
+{
+	cube.resetCube(); 
+	for(unsigned short int i = 0; i < 8; i++)
+	{
+		TestMovePthreads(i);
 	}
 }

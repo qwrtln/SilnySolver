@@ -26,7 +26,15 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+	cout << sizeof(void*) << endl;
+	cout << sizeof(unsigned long int) << endl;
 	RUN_ALL_TESTS(1);
+
+	for (int i=0; i < magicNumber; ++i)
+	{
+		(*funkcyjnyPojnter[i])(-7);
+	}	
+	pthread_exit(NULL);
 
 	return 0;
 }
