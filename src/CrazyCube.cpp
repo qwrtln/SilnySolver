@@ -299,12 +299,12 @@ void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short in
 	cubeState |= (cornerOne | cornerTwo);
 }
 
-void CrazyCube::cycleClockwise()
+void CrazyCube::cycleCounterClockwise()
 {
 	cubeState = ( ((cubeState & 0x00EEE0000EEE0000) << 4) | ((cubeState & 0x0E000000E0000000) >> 12) ) | (cubeState & 0x11111FFF1111FFFF);
 }
 
-void CrazyCube::cycleCounterClockwise()
+void CrazyCube::cycleClockwise()
 {
 	cubeState = ( ((cubeState & 0x0EEE0000EEE00000) >> 4) | ((cubeState & 0x0000E000000E0000) << 12) ) | (cubeState & 0x11111FFF1111FFFF);
 }
