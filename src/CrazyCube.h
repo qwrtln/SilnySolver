@@ -13,6 +13,7 @@ class CrazyCube: public CrazyCubeAbstract
 {
 private:
 	unsigned long long cubeState;
+	const unsigned long long threeBitMask;
 	void(CrazyCube::*moveTab[NUM_OF_MOVES])();
 	void(CrazyCube::*undoMoveTab[NUM_OF_MOVES])();
 	unsigned long long initialMask;
@@ -64,8 +65,8 @@ public:
 
 	void swapEdges(unsigned short int, unsigned short int, bool);
 	void swapCorners(unsigned short int, unsigned short int, bool);
-	void cycleCorners(unsigned short int, unsigned short int, unsigned short int, unsigned short int);
-	void cycleEdges(unsigned short int, unsigned short int, unsigned short int, unsigned short int);
+	void cycleClockwise();
+	void cycleCounterClockwise();
 	void toggleCentre();
 
 	void resetCube();

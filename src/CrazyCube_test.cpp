@@ -111,7 +111,7 @@ TEST_F(CrazyCubeTest, U)
 	CrazyCube cubeToCompare;
 	
 	cubeToCompare.U();
-	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
+	ASSERT_EQ_HEX(cubeToCompare.getCubeState(), cube.getCubeState())
 }
 
 TEST_F(CrazyCubeTest, F)
