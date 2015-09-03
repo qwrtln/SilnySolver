@@ -8,7 +8,7 @@
 #include "CrazyCube.h"
 #include <iostream>
 
-CrazyCube::CrazyCube()
+CrazyCube::CrazyCube():threeBitMask(0xE)
 {
 	cubeState = solvedCube;
 
@@ -129,8 +129,7 @@ void CrazyCube::U()
 // CP[0] -> CP[1] -> CP[2] -> CP[3] -> CP[0]
 // EP[0] -> EP[1] -> EP[2] -> EP[3] -> EP[0]
 //============================================================================
-	cycleCorners(0,1,2,3);
-	cycleEdges(0,1,2,3);
+	cycleClockwise();
 }
 void CrazyCube::Ui()
 {
@@ -139,8 +138,8 @@ void CrazyCube::Ui()
 // CP[3] -> CP[2] -> CP[1] -> CP[0] -> CP[3]
 // EP[3] -> EP[2] -> EP[1] -> EP[0] -> EP[3]
 //============================================================================
-	cycleCorners(3,2,1,0);
-	cycleEdges(3,2,1,0);
+	cycleCounterClockwise();
+
 }
 void CrazyCube::U2()
 {
@@ -300,60 +299,14 @@ void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short in
 	cubeState |= (cornerOne | cornerTwo);
 }
 
-void CrazyCube::cycleCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex,
-		unsigned short int cornerThreeIndex, unsigned short int cornerFourIndex)
+void CrazyCube::cycleClockwise()
 {
-	// Set bit masks
-	cornerOneMask = (unsigned long long)0xe << CornerPieces[cornerOneIndex]; // E because cycle doesn't move inner pieces
-	cornerTwoMask = (unsigned long long)0xe << CornerPieces[cornerTwoIndex];
-	cornerThreeMask = (unsigned long long)0xe << CornerPieces[cornerThreeIndex];
-	cornerFourMask = (unsigned long long)0xe << CornerPieces[cornerFourIndex];
-
-	// Remember the pieces
-	cornerOne = (getCubeState() & cornerOneMask) >> CornerPieces[cornerOneIndex];
-  cornerTwo = (getCubeState() & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
-	cornerThree = (getCubeState() & cornerThreeMask) >> CornerPieces[cornerThreeIndex];
-	cornerFour = (getCubeState() & cornerFourMask) >> CornerPieces[cornerFourIndex];
-
-	// Clear current cube status on those positions
-	cubeState &= ~(cornerOneMask | cornerTwoMask | cornerThreeMask | cornerFourMask);
-
-	// Set right positions after the cycle
-	cornerOne <<= CornerPieces[cornerTwoIndex];
-	cornerTwo <<= CornerPieces[cornerThreeIndex];
-	cornerThree <<= CornerPieces[cornerFourIndex];
-	cornerFour <<= CornerPieces[cornerOneIndex];
-
-	// Put everything back where it belongs
-	cubeState |= (cornerOne | cornerTwo | cornerThree | cornerFour);
+	cubeState = ( ((cubeState & 0x00EEE0000EEE0000) << 4) | ((cubeState & 0x0E000000E0000000) >> 12) ) | (cubeState & 0x11111FFF1111FFFF);
 }
 
-void CrazyCube::cycleEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex,
-		unsigned short int edgeThreeIndex, unsigned short int edgeFourIndex)
+void CrazyCube::cycleCounterClockwise()
 {
-	// Set bit masks
-	edgeOneMask = (unsigned long long)0xe << EdgePieces[edgeOneIndex]; // E because cycle doesn't move inner pieces
-	edgeTwoMask = (unsigned long long)0xe << EdgePieces[edgeTwoIndex];
-	edgeThreeMask = (unsigned long long)0xe << EdgePieces[edgeThreeIndex];
-	edgeFourMask = (unsigned long long)0xe << EdgePieces[edgeFourIndex];
-
-	// Remember the pieces
-	edgeOne = (getCubeState() & edgeOneMask) >> EdgePieces[edgeOneIndex];
-	edgeTwo = (getCubeState() & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
-	edgeThree = (getCubeState() & edgeThreeMask) >> EdgePieces[edgeThreeIndex];
-	edgeFour = (getCubeState() & edgeFourMask) >> EdgePieces[edgeFourIndex];
-
-	// Clear current cube status on those positions
-	cubeState &= ~(edgeOneMask | edgeTwoMask | edgeThreeMask | edgeFourMask);
-
-	// Set right positions after the cycle
-	edgeOne <<= EdgePieces[edgeTwoIndex];
-	edgeTwo <<= EdgePieces[edgeThreeIndex];
-	edgeThree <<= EdgePieces[edgeFourIndex];
-	edgeFour <<= EdgePieces[edgeOneIndex];
-
-	// Put everything back where it belongs
-	cubeState |= (edgeOne | edgeTwo | edgeThree | edgeFour);
+	cubeState = ( ((cubeState & 0x0EEE0000EEE00000) >> 4) | ((cubeState & 0x0000E000000E0000) << 12) ) | (cubeState & 0x11111FFF1111FFFF);
 }
 
 void CrazyCube::toggleCentre()
