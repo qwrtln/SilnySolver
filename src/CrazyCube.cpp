@@ -106,9 +106,14 @@ void CrazyCube::L()
 // CP[2]cp2 <-> CP[5]cp5
 // EP[1]ep1 <-> EP[5]ep1
 //============================================================================
-	swapCorners(1,6,true);
-	swapCorners(2,5,true);
-	swapEdges(1,5,true);
+						   //0x..FF..FF.F...F..
+	cubeState = (cubeState & 0xFF00FF00F0FFF0FF) |
+			  ( (cubeState & 0x00F0000000000000) >> 20 ) |
+			  ( (cubeState & 0x000F000000000000) >> 12 ) |
+			  ( (cubeState & 0x000000F000000000) << 12 ) |
+			  ( (cubeState & 0x0000000F00000000) << 20 ) |
+			  ( (cubeState & 0x000000000F000000) >> 16 ) |
+			  ( (cubeState & 0x0000000000000F00) << 16 );
 }
 void CrazyCube::F()
 {
