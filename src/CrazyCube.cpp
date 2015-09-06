@@ -104,7 +104,7 @@ void CrazyCube::L()
 // Schemat przemieszczania elementow
 // CP[1]cp1 <-> CP[6]cp6
 // CP[2]cp2 <-> CP[5]cp5
-// EP[1]ep1 <-> EP[5]ep1
+// EP[1]ep1 <-> EP[5]ep5
 //============================================================================
 						   //0x..FF..FF.F...F..
 	cubeState = (cubeState & 0xFF00FF00F0FFF0FF) |
@@ -123,9 +123,14 @@ void CrazyCube::F()
 // CP[1]cp1 <-> CP[4]cp4
 // EP[0]ep0 <-> EP[4]ep4
 //============================================================================
-	swapCorners(0,5,true);
-	swapCorners(1,4,true);
-	swapEdges(0,4,true);
+						   //0x.FF..FF.F...F...
+	cubeState = (cubeState & 0xF00FF00F0FFF0FFF) |
+			  ( (cubeState & 0x0F00000000000000) >> 20 ) |
+			  ( (cubeState & 0x00F0000000000000) >> 12 ) |
+			  ( (cubeState & 0x00000F0000000000) << 12 ) |
+			  ( (cubeState & 0x000000F000000000) << 20 ) |
+			  ( (cubeState & 0x00000000F0000000) >> 16 ) |
+			  ( (cubeState & 0x000000000000F000) << 16 );
 }
 void CrazyCube::U()
 {
@@ -134,7 +139,7 @@ void CrazyCube::U()
 // CP[0] -> CP[1] -> CP[2] -> CP[3] -> CP[0]
 // EP[0] -> EP[1] -> EP[2] -> EP[3] -> EP[0]
 //============================================================================
-	cycleClockwise();
+	cubeState = ( ((cubeState & 0x0EEE0000EEE00000) >> 4) | ((cubeState & 0x0000E000000E0000) << 12) ) | (cubeState & 0x11111FFF1111FFFF);
 }
 void CrazyCube::Ui()
 {
@@ -143,7 +148,7 @@ void CrazyCube::Ui()
 // CP[3] -> CP[2] -> CP[1] -> CP[0] -> CP[3]
 // EP[3] -> EP[2] -> EP[1] -> EP[0] -> EP[3]
 //============================================================================
-	cycleCounterClockwise();
+	cubeState = ( ((cubeState & 0x00EEE0000EEE0000) << 4) | ((cubeState & 0x0E000000E0000000) >> 12) ) | (cubeState & 0x11111FFF1111FFFF);
 
 }
 void CrazyCube::U2()
@@ -159,6 +164,14 @@ void CrazyCube::U2()
 // EP[2] -> EP[0]
 // EP[3] -> EP[1]
 //============================================================================
+	   	   	   	   	   	   //0x.EEEE...EEEE....
+// TODO	cubeState = (cubeState & 0xF1111FFF1111FFFF) |
+		/*	  ( (cubeState & 0x0F00000000000000) >> 20 ) |
+			  ( (cubeState & 0x00F0000000000000) >> 12 ) |
+			  ( (cubeState & 0x00000F0000000000) << 12 ) |
+			  ( (cubeState & 0x000000F000000000) << 20 ) |
+			  ( (cubeState & 0x00000000F0000000) >> 16 ) |
+			  ( (cubeState & 0x000000000000F000) << 16 );*/
 	swapEdges(0, 2, false);
 	swapEdges(1, 3, false);
 	swapCorners(0, 2, false);
