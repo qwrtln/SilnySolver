@@ -142,6 +142,7 @@ void CrazyCube::U()
 	cubeState = ( ((cubeState & 0x0EEE0000EEE00000) >> 4) |
 				  ((cubeState & 0x0000E000000E0000) << 12) ) |
 				   (cubeState & 0x11111FFF1111FFFF);
+
 }
 void CrazyCube::Ui()
 {
@@ -174,6 +175,7 @@ void CrazyCube::U2()
 			  ( (cubeState & 0x000EE00000000000) << 8 ) |
 			  ( (cubeState & 0x00000000EE000000) >> 8 ) |
 			  ( (cubeState & 0x0000000000EE0000) << 8 );
+
 }
 void CrazyCube::Mv()
 {
