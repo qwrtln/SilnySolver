@@ -139,7 +139,9 @@ void CrazyCube::U()
 // CP[0] -> CP[1] -> CP[2] -> CP[3] -> CP[0]
 // EP[0] -> EP[1] -> EP[2] -> EP[3] -> EP[0]
 //============================================================================
-	cubeState = ( ((cubeState & 0x0EEE0000EEE00000) >> 4) | ((cubeState & 0x0000E000000E0000) << 12) ) | (cubeState & 0x11111FFF1111FFFF);
+	cubeState = ( ((cubeState & 0x0EEE0000EEE00000) >> 4) |
+				  ((cubeState & 0x0000E000000E0000) << 12) ) |
+				   (cubeState & 0x11111FFF1111FFFF);
 }
 void CrazyCube::Ui()
 {
@@ -148,7 +150,9 @@ void CrazyCube::Ui()
 // CP[3] -> CP[2] -> CP[1] -> CP[0] -> CP[3]
 // EP[3] -> EP[2] -> EP[1] -> EP[0] -> EP[3]
 //============================================================================
-	cubeState = ( ((cubeState & 0x00EEE0000EEE0000) << 4) | ((cubeState & 0x0E000000E0000000) >> 12) ) | (cubeState & 0x11111FFF1111FFFF);
+	cubeState = ( ((cubeState & 0x00EEE0000EEE0000) << 4) |
+			 	  ((cubeState & 0x0E000000E0000000) >> 12) ) |
+			 	   (cubeState & 0x11111FFF1111FFFF);
 
 }
 void CrazyCube::U2()
@@ -165,17 +169,11 @@ void CrazyCube::U2()
 // EP[3] -> EP[1]
 //============================================================================
 	   	   	   	   	   	   //0x.EEEE...EEEE....
-// TODO	cubeState = (cubeState & 0xF1111FFF1111FFFF) |
-		/*	  ( (cubeState & 0x0F00000000000000) >> 20 ) |
-			  ( (cubeState & 0x00F0000000000000) >> 12 ) |
-			  ( (cubeState & 0x00000F0000000000) << 12 ) |
-			  ( (cubeState & 0x000000F000000000) << 20 ) |
-			  ( (cubeState & 0x00000000F0000000) >> 16 ) |
-			  ( (cubeState & 0x000000000000F000) << 16 );*/
-	swapEdges(0, 2, false);
-	swapEdges(1, 3, false);
-	swapCorners(0, 2, false);
-	swapCorners(1, 3, false);
+	cubeState = (cubeState & 0xF1111FFF1111FFFF) |
+			  ( (cubeState & 0x0EE0000000000000) >> 8 ) |
+			  ( (cubeState & 0x000EE00000000000) << 8 ) |
+			  ( (cubeState & 0x00000000EE000000) >> 8 ) |
+			  ( (cubeState & 0x0000000000EE0000) << 8 );
 }
 void CrazyCube::Mv()
 {
@@ -185,9 +183,14 @@ void CrazyCube::Mv()
 // EP[2]ep2 <-> EP[4]ep4
 // ~C
 //============================================================================
-	swapEdges(0,6,true);
-	swapEdges(2,4,true);
-	toggleCentre();
+	   	   	   	   	   	    //0x1.......F.F.F.F.
+	cubeState = ((cubeState & 0xFFFFFFFF0F0F0F0F) |
+			   ( (cubeState & 0x00000000F0000000) >> 24 ) |
+			   ( (cubeState & 0x0000000000F00000) >> 8 ) |
+			   ( (cubeState & 0x000000000000F000) << 8 ) |
+			   ( (cubeState & 0x00000000000000F0) << 24 )) ^
+			  	 (  	  	  0x1000000000000000)          ;
+
 }
 void CrazyCube::Mh()
 {
@@ -197,9 +200,13 @@ void CrazyCube::Mh()
 // EP[3]ep3 <-> EP[5]ep5
 // ~C
 //============================================================================
-	swapEdges(1,7,true);
-	swapEdges(3,5,true);
-	toggleCentre();
+							//0x1........F.F.F.F
+	cubeState = ((cubeState & 0xFFFFFFFFF0F0F0F0) |
+			   ( (cubeState & 0x000000000F000000) >> 24 ) |
+			   ( (cubeState & 0x00000000000F0000) >> 8 ) |
+			   ( (cubeState & 0x0000000000000F00) << 8 ) |
+			   ( (cubeState & 0x000000000000000F) << 24 )) ^
+			   (  	  	  	  0x1000000000000000)          ;
 }
 void CrazyCube::MhRr()
 {
