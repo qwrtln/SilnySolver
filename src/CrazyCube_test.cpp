@@ -27,11 +27,18 @@ protected:
 	{
 
 	}
-	void TestMove(unsigned int depth)
+	void TestMove(unsigned int depth, bool showTime = true)
 	{
-		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
-		cout.flush();
-		time_t start = clock();
+		if(showTime)
+		{
+			cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
+			cout.flush();
+		}
+		time_t start;
+		if(showTime)
+		{
+			start = clock();
+		}
 		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)depth);
 		unsigned int j = 0;
 		for(unsigned int i = 0; i < max; i++) 
@@ -41,7 +48,21 @@ protected:
 				cube.move(j);
 			}		
 		}
-		cout << ((float)(clock() - start))/CLOCKS_PER_SEC << "s\n";
+		if(showTime)
+		{
+			cout << ((float)(clock() - start))/CLOCKS_PER_SEC << "s\n";
+		}
+	}
+	void TestMoveAverage(unsigned int depth, unsigned int averageOf)
+	{
+		cout << "Test of depth " << depth << "(" << (unsigned int)pow((double)NUM_OF_MOVES, (double)depth + 1) << " moves): ";
+		cout.flush();
+		time_t start = clock();		
+		for(unsigned short int i = 1; i <= averageOf; i++)
+		{
+			TestMove(depth, false);
+		}
+		cout << (((float)(clock() - start)) / (double)averageOf)/CLOCKS_PER_SEC << "s (avg of " << averageOf << " trials) \n";
 	}
 protected:
 	static CrazyCube cube;
@@ -221,11 +242,21 @@ TEST_F(CrazyCubeTest, Move_undoMoveTest)
 	// placeholder TODO
 }
 
+/*
 TEST_F(CrazyCubeTest, PerformanceTest)
 {
 	cube.resetCube(); 
 	for(unsigned short int i = 0; i < 9; i++)
 	{
 		TestMove(i);
+	}
+}
+*/
+TEST_F(CrazyCubeTest, PerformanceAvgTest)
+{
+	cube.resetCube(); 
+	for(unsigned short int i = 0; i < 9; i++)
+	{
+		TestMoveAverage(i, 5);
 	}
 }
