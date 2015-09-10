@@ -10,6 +10,14 @@ CrazyCubeSolver:: CrazyCubeSolver():
 				currentPath(0),
 				iDepth(0)
 {
+	// TODO - to jest przyklad z piramidki. Domyslnie ustawiamy wszystkie mozliwe ruchy na dozwolone
+	/*		
+	for(int i = 0; i < NUMBER_OF_MOVES * NUMBER_OF_FACES; i++)
+	{
+		enabledMoves.push_back(true);
+	}
+	*/
+	solutions.clear();
 }
 CrazyCubeSolver:: ~CrazyCubeSolver()
 {
@@ -64,6 +72,13 @@ vector<vector<unsigned short int> > CrazyCubeSolver:: GetSolutions()
 }
 void CrazyCubeSolver:: Solve()
 {
+	SetUp();
+	for(iDepth = minDepth; iDepth <= maxDepth; iDepth++)
+	{
+		currentPath = new unsigned short int[iDepth];
+		SolveIteration(iDepth, -1);
+		delete[] currentPath;
+	}
 }
 void CrazyCubeSolver:: SetCrazyCube(CrazyCube* crazyCube)
 {
@@ -73,21 +88,35 @@ CrazyCube* CrazyCubeSolver:: GetCrazyCube()
 {
 	return this->crazyCube;
 }
-void CrazyCubeSolver:: SetParameters(CrazyCubeSolverParametersD parameters)
+void CrazyCubeSolver:: SetParameters(CrazyCubeSolverParametersD& parameters)
 {
-	// przepakowac parametry ze struktury do atrybutow
+	this->maxDepth = parameters.maxDepth;
+	this->minDepth = parameters.minDepth;
+	this->enabledMoves = parameters.enabledMoves;
+	this->numberOfSolutions = parameters.numberOfSolutions;
+	this->solvedMask = parameters.solvedMask;
 }
 CrazyCubeSolverParametersD CrazyCubeSolver:: GetParameters()
 {
-	// przepakowac parametry z atrybutow do struktury i zwrocic ja
+	CrazyCubeSolverParametersD parameters;
+	parameters.maxDepth = this->maxDepth;
+	parameters.minDepth = this->minDepth;
+	parameters.enabledMoves = this->enabledMoves;
+	parameters.numberOfSolutions = this->numberOfSolutions;
+	parameters.solvedMask = this->solvedMask;
+	return parameters;
 }
 void CrazyCubeSolver:: SetUp()
 {
+	solutions.clear();
+	solutionsFound = 0;
 }
 void CrazyCubeSolver:: CleanUp()
 {
+	// TODO
 }
 bool CrazyCubeSolver:: SolveIteration(unsigned short int depth, unsigned short int prevMove)
 {
+	// TODO
 	return 0;
 }
