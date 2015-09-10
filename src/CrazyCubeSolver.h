@@ -26,7 +26,7 @@ public:
 	void Solve();
 	void SetCrazyCube(CrazyCube* crazyCube);
 	CrazyCube* GetCrazyCube();
-	void SetParameters(CrazyCubeSolverParametersD parameters);
+	void SetParameters(CrazyCubeSolverParametersD& parameters);
 	CrazyCubeSolverParametersD GetParameters();
 
 protected:
