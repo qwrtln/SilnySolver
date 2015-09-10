@@ -113,9 +113,9 @@ if(!(actual == expected))\
 	cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
 	cout << hex << showbase;\
 	cout << "Value of:  " << #actual << "\n";\
-	cout << "Actual:    " << actual << "\n";\
+	cout << "Expected:\t" << actual << "\n";\
 	cout << "Assertion: " << "= " << "\n";\
-	cout << "Expected:  " << expected << "\n";\
+	cout << "Actual:\t\t" << expected << "\n";\
 	cout << dec << noshowbase;\
 }\
 else\
