@@ -233,7 +233,7 @@ void CrazyCube::MhLr()
 // EP[1]ep1 <-> EP[5]ep5
 //============================================================================
 							//0x.EEEE...EFE..F..
-	cubeState = ((cubeState & 0xF1111FFF1F10FFF0) |
+	cubeState = ((cubeState & 0xF1111FFF1F1FF0FF) |
 			   ( (cubeState & 0x0EE00000E0000000) >> 8 ) |
 			   ( (cubeState & 0x000EE00000E00000) << 8 ) |
 			   ( (cubeState & 0x000000000F000000) >> 16 ) |
@@ -249,7 +249,7 @@ void CrazyCube::MvFr()
 // EP[0]ep0 <-> EP[4]ep4
 //============================================================================
 							//0x.EEEE...FE.EF...
-	cubeState = ((cubeState & 0xF1111FFF1F10FFF0) |
+	cubeState = ((cubeState & 0xF1111FFF01F10FFF) |
 			   ( (cubeState & 0x0EE000000E000000) >> 8 ) |
 			   ( (cubeState & 0x000EE000000E0000) << 8 ) |
 			   ( (cubeState & 0x00000000F0000000) >> 16 ) |
@@ -265,7 +265,7 @@ void CrazyCube::MvBr()
 // EP[2]ep2 <-> EP[6]ep6
 //============================================================================
 							//0x.EEEE....EFE..F.
-	cubeState = ((cubeState & 0xF1111FFF1F10FFF0) |
+	cubeState = ((cubeState & 0xF1111FFFF101FF0F) |
 			   ( (cubeState & 0x0EE000000E000000) >> 8 ) |
 			   ( (cubeState & 0x000EE000000E0000) << 8 ) |
 			   ( (cubeState & 0x0000000000F00000) >> 16 ) |
