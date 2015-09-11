@@ -8,7 +8,7 @@
 #include "CrazyCube.h"
 #include <iostream>
 
-CrazyCube::CrazyCube():threeBitMask(0xE)
+CrazyCube::CrazyCube()
 {
 	cubeState = solvedCube;
 
@@ -280,65 +280,6 @@ void CrazyCube::move(unsigned short int move)
 void CrazyCube::undoMove(unsigned short int move)
 {
 	(this->*undoMoveTab[move])(); // Two options possible. So readable.
-}
-
-void CrazyCube::swapEdges(unsigned short int edgeOneIndex, unsigned short int edgeTwoIndex,  bool withInnerPieces)
-{
-	initialMask = withInnerPieces ? 0xF : 0xE;
-	// OxF: three bits for piece plus one for inner piece
-	// 0xE: just three bits for piece
-
-	// Set bit masks for pieces
-	edgeOneMask = initialMask << EdgePieces[edgeOneIndex];
-	edgeTwoMask = initialMask << EdgePieces[edgeTwoIndex];
-
-	// Remember pieces
-	edgeOne = (cubeState & edgeOneMask) >> EdgePieces[edgeOneIndex];
-	edgeTwo = (cubeState & edgeTwoMask) >> EdgePieces[edgeTwoIndex];
-
-	// Clear spots of swapping pieces
-	cubeState &= ~(edgeOneMask | edgeTwoMask);
-
-	// Set right positions after the swap
-	edgeOne <<= EdgePieces[edgeTwoIndex]; // Reversed order!!
-	edgeTwo <<= EdgePieces[edgeOneIndex]; // Don't change or I'll find you, hunt you down and tickle you to death
-
-	// Put them in the cube
-	cubeState |= (edgeOne | edgeTwo);
-}
-
-void CrazyCube::swapCorners(unsigned short int cornerOneIndex, unsigned short int cornerTwoIndex, bool withInnerPieces)
-{
-	initialMask = withInnerPieces ? 0xF : 0xE;
-	// OxF: three bits for piece plus one for inner piece
-	// 0xE: just three bits for piece
-
-	cornerOneMask = initialMask << CornerPieces[cornerOneIndex];
-	cornerTwoMask = initialMask << CornerPieces[cornerTwoIndex];
-
-	// Remember pieces
-	cornerOne = (cubeState & cornerOneMask) >> CornerPieces[cornerOneIndex];
-	cornerTwo = (cubeState & cornerTwoMask) >> CornerPieces[cornerTwoIndex];
-
-	// Clear spots of swapping pieces
-	cubeState &= ~(cornerOneMask | cornerTwoMask);
-
-	// Set right positions after the swap
-	cornerOne <<= CornerPieces[cornerTwoIndex];
-	cornerTwo <<= CornerPieces[cornerOneIndex];
-
-	// Put them in the cube
-	cubeState |= (cornerOne | cornerTwo);
-}
-
-void CrazyCube::cycleCounterClockwise()
-{
-	cubeState = ( ((cubeState & 0x00EEE0000EEE0000) << 4) | ((cubeState & 0x0E000000E0000000) >> 12) ) | (cubeState & 0x11111FFF1111FFFF);
-}
-
-void CrazyCube::cycleClockwise()
-{
-	cubeState = ( ((cubeState & 0x0EEE0000EEE00000) >> 4) | ((cubeState & 0x0000E000000E0000) << 12) ) | (cubeState & 0x11111FFF1111FFFF);
 }
 
 void CrazyCube::toggleCentre()
