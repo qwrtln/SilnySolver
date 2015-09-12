@@ -15,6 +15,9 @@ class CrazyCubeAbstract
 {
 public:
 	const static unsigned long long solvedCube;
+	const static unsigned long long solvedInnerCircle;
+	const static unsigned long long solvedEdges;
+	const static unsigned long long solvedCorners;
 
 	const static unsigned short int CornerPieces[NUM_OF_CORNERS];
 	const static unsigned short int EdgePieces[NUM_OF_EDGES];

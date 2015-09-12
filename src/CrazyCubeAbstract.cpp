@@ -14,6 +14,9 @@
 // Razem: 61 bitów
 //============================================================================
 const unsigned long long CrazyCubeAbstract::solvedCube = 0x102469BD02469BDF;
+const unsigned long long CrazyCubeAbstract::solvedInnerCircle = 0x1000011100001111;
+const unsigned long long CrazyCubeAbstract::solvedEdges = 0x2469BDF;
+const unsigned long long CrazyCubeAbstract::solvedCorners = 0x2469BD00000000;
 
 // Pozycje bitow danych elementow
 const unsigned short int CrazyCubeAbstract::CornerPieces[7] = {56, 52, 48, 44, 40, 36, 32};
