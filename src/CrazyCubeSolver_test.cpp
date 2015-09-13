@@ -27,9 +27,42 @@ protected:
 	{
 
 	}
+protected:
+	static CrazyCubeSolver solver;
 };
 
-TEST_F(CrazyCubeSolverTest, dupa)
+CrazyCubeSolver CrazyCubeSolverTest:: solver;
+
+TEST_F(CrazyCubeSolverTest, SetSolvedMaskTest)
 {
-	ASSERT_EQ(2, 2);
+	unsigned long long int solvedMask = 0xBABC1A6665A7A4FA;
+	solver.setSolvedMask(solvedMask);
+	ASSERT_EQ(solver.getSolvedMask(), solvedMask);
+}
+
+TEST_F(CrazyCubeSolverTest, SetMinDepthTest)
+{
+	unsigned short int minDepth = 123;
+	solver.setMinDepth(minDepth);
+	ASSERT_EQ(solver.getMinDepth(), minDepth);
+}
+
+TEST_F(CrazyCubeSolverTest, SetMaxDepthTest)
+{
+	unsigned short int maxDepth = 1223;
+	solver.setMaxDepth(maxDepth);
+	ASSERT_EQ(solver.getMaxDepth(), maxDepth);
+}
+
+TEST_F(CrazyCubeSolverTest, SetEnabledMovesTest)
+{
+	vector<bool> enabledMoves;
+	for(unsigned short int i = 0; i < 11; i++)
+	{
+		enabledMoves.push_back(i&1);
+	}
+	solver.setEnabledMoves(enabledMoves);
+	enabledMoves.pop_back();
+	enabledMoves.push_back(1);
+	ASSERT_EQ_STL_CONTAINER(solver.getEnabledMoves(), enabledMoves);
 }

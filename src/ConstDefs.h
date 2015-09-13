@@ -109,6 +109,39 @@ void TestCase##_##TestName()
 
 // Przykladowe makra. Mozna dopisac inne jak zajdzie taka potrzeba :)
 
+#define ASSERT_EQ_STL_CONTAINER(actual, expected)\
+if(!(actual.size() == expected.size()))\
+{\
+	result =0;\
+	cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
+	cout << "Size of:" << #actual << "\n";\
+	cout << "Expected:\t" << actual.size() << "\n";\
+	cout << "Assertion: " << "= " << "\n";\
+	cout << "Actual:\t\t" << expected.size() << "\n";\
+}\
+else\
+{\
+	for(unsigned int i = 0; i < actual.size(); i++)\
+	{\
+		if(actual[i] != expected[i])\
+		{\
+			result = 0;\
+			cout << "Index\t|\tActual\t|\tExpected" << endl;\
+			for(unsigned int j = 0; j <=i; j++)\
+			{\
+				cout << j << "\t| \t" << actual[j] << "\t|\t" << expected[j]; \
+				if(j!=i)\
+				{\
+					cout << endl;\
+				}\
+			}\
+			cout << "\t <----" << endl;\
+			break;\
+		}\
+	}\
+}
+
+
 #define ASSERT_EQ_HEX(actual, expected)\
 if(!(actual == expected))\
 {\

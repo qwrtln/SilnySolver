@@ -22,73 +22,73 @@ CrazyCubeSolver:: CrazyCubeSolver():
 CrazyCubeSolver:: ~CrazyCubeSolver()
 {
 }
-void CrazyCubeSolver:: SetSolvedMask(unsigned long long int solvedMask)
+void CrazyCubeSolver:: setSolvedMask(unsigned long long int solvedMask)
 {
 	this->solvedMask = solvedMask;
 }
-unsigned long long int CrazyCubeSolver:: GetSolvedMask()
+unsigned long long int CrazyCubeSolver:: getSolvedMask()
 {
 	return this->solvedMask;
 }
-void CrazyCubeSolver:: SetMinDepth(unsigned short int minDepth)
+void CrazyCubeSolver:: setMinDepth(unsigned short int minDepth)
 {
 	this->minDepth = minDepth;
 }
-unsigned short int CrazyCubeSolver:: GetMinDepth()
+unsigned short int CrazyCubeSolver:: getMinDepth()
 {
 	return this->minDepth;
 }
-void CrazyCubeSolver:: SetMaxDepth(unsigned short int maxDepth)
+void CrazyCubeSolver:: setMaxDepth(unsigned short int maxDepth)
 {
 	this->maxDepth = maxDepth;
 }
-unsigned short int CrazyCubeSolver:: GetMaxDepth()
+unsigned short int CrazyCubeSolver:: getMaxDepth()
 {
 	return this->maxDepth;
 }
-void CrazyCubeSolver:: SetEnabledMoves(vector<bool> enabledMoves)
+void CrazyCubeSolver:: setEnabledMoves(vector<bool> enabledMoves)
 {
 	this->enabledMoves = enabledMoves;
 }
-vector<bool> CrazyCubeSolver:: GetEnabledMoves()
+vector<bool> CrazyCubeSolver:: getEnabledMoves()
 {
 	return this->enabledMoves;
 }
-void CrazyCubeSolver:: SetNumberOfSolutions(unsigned short int numberOfSolutions)
+void CrazyCubeSolver:: setNumberOfSolutions(unsigned short int numberOfSolutions)
 {
 	this->numberOfSolutions = numberOfSolutions;
 }
-unsigned short int CrazyCubeSolver:: GetNumberOfSolutions()
+unsigned short int CrazyCubeSolver:: getNumberOfSolutions()
 {
 	return this->numberOfSolutions;
 }
-void CrazyCubeSolver:: SetSolutions(vector<vector<unsigned short int> > solutions)
+void CrazyCubeSolver:: setSolutions(vector<vector<unsigned short int> > solutions)
 {
 	this->solutions = solutions;
 }
-vector<vector<unsigned short int> > CrazyCubeSolver:: GetSolutions()
+vector<vector<unsigned short int> > CrazyCubeSolver:: getSolutions()
 {
 	return this->solutions;
 }
-void CrazyCubeSolver:: Solve()
+void CrazyCubeSolver:: solve()
 {
-	SetUp();
+	setUp();
 	for(iDepth = minDepth; iDepth <= maxDepth; iDepth++)
 	{
 		currentPath = new unsigned short int[iDepth];
-		SolveIteration(iDepth, -1);
+		solveIteration(iDepth, -1);
 		delete[] currentPath;
 	}
 }
-void CrazyCubeSolver:: SetCrazyCube(CrazyCube* crazyCube)
+void CrazyCubeSolver:: setCrazyCube(CrazyCube* crazyCube)
 {
 	this->crazyCube = crazyCube;
 }
-CrazyCube* CrazyCubeSolver:: GetCrazyCube()
+CrazyCube* CrazyCubeSolver:: getCrazyCube()
 {
 	return this->crazyCube;
 }
-void CrazyCubeSolver:: SetParameters(CrazyCubeSolverParametersD& parameters)
+void CrazyCubeSolver:: setParameters(CrazyCubeSolverParametersD& parameters)
 {
 	this->maxDepth = parameters.maxDepth;
 	this->minDepth = parameters.minDepth;
@@ -96,7 +96,7 @@ void CrazyCubeSolver:: SetParameters(CrazyCubeSolverParametersD& parameters)
 	this->numberOfSolutions = parameters.numberOfSolutions;
 	this->solvedMask = parameters.solvedMask;
 }
-CrazyCubeSolverParametersD CrazyCubeSolver:: GetParameters()
+CrazyCubeSolverParametersD CrazyCubeSolver:: getParameters()
 {
 	CrazyCubeSolverParametersD parameters;
 	parameters.maxDepth = this->maxDepth;
@@ -106,16 +106,16 @@ CrazyCubeSolverParametersD CrazyCubeSolver:: GetParameters()
 	parameters.solvedMask = this->solvedMask;
 	return parameters;
 }
-void CrazyCubeSolver:: SetUp()
+void CrazyCubeSolver:: setUp()
 {
 	solutions.clear();
 	solutionsFound = 0;
 }
-void CrazyCubeSolver:: CleanUp()
+void CrazyCubeSolver:: cleanUp()
 {
 	// TODO
 }
-bool CrazyCubeSolver:: SolveIteration(unsigned short int depth, unsigned short int prevMove)
+bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short int prevMove)
 {
 	// TODO
 	return 0;

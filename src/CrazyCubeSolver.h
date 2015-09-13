@@ -11,28 +11,28 @@ class CrazyCubeSolver
 public:
 	CrazyCubeSolver();
 	~CrazyCubeSolver();
-	void SetSolvedMask(unsigned long long int solvedMask);
-	unsigned long long int GetSolvedMask();
-	void SetMinDepth(unsigned short int minDepth);
-	unsigned short int GetMinDepth();
-	void SetMaxDepth(unsigned short int maxDepth);
-	unsigned short int GetMaxDepth();
-	void SetEnabledMoves(vector<bool> enabledMoves);
-	vector<bool> GetEnabledMoves();
-	void SetNumberOfSolutions(unsigned short int numberOfSolutions);
-	unsigned short int GetNumberOfSolutions();
-	void SetSolutions(vector<vector<unsigned short int> > solutions);	// For testing purpose
-	vector<vector<unsigned short int> > GetSolutions();
-	void Solve();
-	void SetCrazyCube(CrazyCube* crazyCube);
-	CrazyCube* GetCrazyCube();
-	void SetParameters(CrazyCubeSolverParametersD& parameters);
-	CrazyCubeSolverParametersD GetParameters();
+	void setSolvedMask(unsigned long long int solvedMask);
+	unsigned long long int getSolvedMask();
+	void setMinDepth(unsigned short int minDepth);
+	unsigned short int getMinDepth();
+	void setMaxDepth(unsigned short int maxDepth);
+	unsigned short int getMaxDepth();
+	void setEnabledMoves(vector<bool> enabledMoves);
+	vector<bool> getEnabledMoves();
+	void setNumberOfSolutions(unsigned short int numberOfSolutions);
+	unsigned short int getNumberOfSolutions();
+	void setSolutions(vector<vector<unsigned short int> > solutions);	// For testing purpose
+	vector<vector<unsigned short int> > getSolutions();
+	void solve();
+	void setCrazyCube(CrazyCube* crazyCube);
+	CrazyCube* getCrazyCube();
+	void setParameters(CrazyCubeSolverParametersD& parameters);
+	CrazyCubeSolverParametersD getParameters();
 
 protected:
-	void SetUp();
-	void CleanUp();
-	bool SolveIteration(unsigned short int depth, unsigned short int prevMove);
+	void setUp();
+	void cleanUp();
+	bool solveIteration(unsigned short int depth, unsigned short int prevMove);
 
 protected:
 	unsigned short int maxDepth;
