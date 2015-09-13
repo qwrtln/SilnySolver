@@ -269,7 +269,7 @@ TEST_F(CrazyCubeTest, PerformanceAvgTest)
 {
 	cube.resetCube(); 
 	#ifndef PERF_DEPTH
-	for(unsigned short int i = 0; i <= 7; i++)
+	for(unsigned short int i = 0; i <= 6; i++)
 	{
 		TestMoveAverage(i, 5);
 	}

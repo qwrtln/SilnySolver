@@ -126,6 +126,8 @@ else\
 		if(actual[i] != expected[i])\
 		{\
 			result = 0;\
+			cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
+			cout << "Contents of: " << #actual << " differ from contents of " << #expected << "\n\n";\
 			cout << "Index\t|\tActual\t|\tExpected" << endl;\
 			for(unsigned int j = 0; j <=i; j++)\
 			{\

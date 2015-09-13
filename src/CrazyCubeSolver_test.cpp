@@ -62,7 +62,51 @@ TEST_F(CrazyCubeSolverTest, SetEnabledMovesTest)
 		enabledMoves.push_back(i&1);
 	}
 	solver.setEnabledMoves(enabledMoves);
-	enabledMoves.pop_back();
-	enabledMoves.push_back(1);
 	ASSERT_EQ_STL_CONTAINER(solver.getEnabledMoves(), enabledMoves);
+}
+
+TEST_F(CrazyCubeSolverTest, SetNumberOfSolutionsTest)
+{
+	unsigned short int numOfSol = 666;
+	solver.setNumberOfSolutions(numOfSol);
+	ASSERT_EQ(solver.getNumberOfSolutions(), numOfSol);
+}
+
+TEST_F(CrazyCubeSolverTest, SetSolutionsTest)
+{
+	vector<vector<unsigned short int> > testSolutions;
+	vector<unsigned short int> sol1;
+	vector<unsigned short int> sol2;
+	sol1.push_back(1);
+	sol1.push_back(2);
+	sol1.push_back(3);
+	sol2.push_back(4);
+	sol2.push_back(2);
+	sol2.push_back(1);
+	sol2.push_back(3);
+	testSolutions.push_back(sol1);
+	testSolutions.push_back(sol2);
+	solver.setSolutions(testSolutions);
+	vector<vector<unsigned short int> > testSolutions2 = solver.getSolutions();
+	for(unsigned int i = 0; i < testSolutions.size(); i++)
+	{
+		sol1 = testSolutions[i];
+		sol2 = testSolutions2[i];
+		ASSERT_EQ_STL_CONTAINER(sol2, sol1);
+	}	
+}
+
+TEST_F(CrazyCubeSolverTest, SetCrazyCubeTest)
+{
+	CrazyCube* cube1 = new CrazyCube;
+	CrazyCube* cube2 = NULL;
+	solver.setCrazyCube(cube1);
+	cube2 = solver.getCrazyCube();
+	ASSERT_EQ(cube1, cube2);
+	delete cube1;
+}
+
+TEST_F(CrazyCubeSolverTest, SetParametersTest)
+{
+
 }
