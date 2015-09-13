@@ -24,6 +24,7 @@ public:
 	bool checkInnerCircle();
 	bool checkEdges();
 	bool checkCorners();
+	bool checkIfSolved(unsigned long long int solvedMask);
 	void setCubeState(unsigned long long cubeState);
 	unsigned long long getCubeState();
 
