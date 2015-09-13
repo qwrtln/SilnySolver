@@ -40,7 +40,7 @@ protected:
 			start = clock();
 		}
 		unsigned int max = (unsigned int)pow((double)NUM_OF_MOVES, (double)depth);
-		unsigned int j = 0;
+
 		for(unsigned int i = 0; i < max; i++) 
 		{
 			for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
@@ -79,16 +79,29 @@ TEST_F(CrazyCubeTest, setCentreTest)
 
 TEST_F(CrazyCubeTest, setCornersTest)
 {
+	CrazyCube genericCube(1);
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
-	cube.setCorners(corners);
-	ASSERT_EQ_HEX((solvedCube & cube.getCubeState()), cube.getCubeState() )
+	genericCube.setCorners(corners);
+	ASSERT_EQ((genericCube.checkCorners()), true )
 }
 
 TEST_F(CrazyCubeTest, setEdgesTest)
 {
+	CrazyCube genericCube(1);
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
-	cube.setEdges(edges);
-	ASSERT_EQ_HEX((solvedCube & cube.getCubeState()), cube.getCubeState())
+	genericCube.setEdges(edges);
+	ASSERT_EQ((genericCube.checkEdges()), true )
+}
+
+TEST_F(CrazyCubeTest, innerCircleTest)
+{
+	CrazyCube genericCube(1);
+	genericCube.setCentre(true);
+	edgeNames edges[NUM_OF_EDGES] = {yry, yry, yry, yry, yrw, yrw, yrw, yrw};
+	genericCube.setEdges(edges);
+	cornerNames corners[NUM_OF_CORNERS] = {ygry, ygry, ygry, ygry, ygrw, ygrw, ygrw};
+	genericCube.setCorners(corners);
+	ASSERT_EQ((genericCube.checkInnerCircle()), true )
 }
 
 TEST_F(CrazyCubeTest, setCubeTest)

@@ -39,6 +39,18 @@ CrazyCube::CrazyCube()
 	undoMoveTab[10] = &CrazyCube::MvBr;	
 }
 
+CrazyCube::CrazyCube(int genericCube)
+{
+	if (genericCube)
+	{
+		cubeState = 0;
+	}
+	else
+	{
+		CrazyCube();
+	}
+}
+
 CrazyCube::~CrazyCube()
 {
 	// TODO Auto-generated destructor stub
@@ -47,6 +59,21 @@ CrazyCube::~CrazyCube()
 bool CrazyCube::checkIfSolved()
 {
 	return (cubeState == solvedCube);
+}
+
+bool CrazyCube::checkInnerCircle()
+{
+	return ( (cubeState & solvedInnerCircle) == solvedInnerCircle);
+}
+
+bool CrazyCube::checkEdges()
+{
+	return ( (cubeState & solvedEdges) == solvedEdges);
+}
+
+bool CrazyCube::checkCorners()
+{
+	return ( (cubeState & solvedCorners) == solvedCorners);
 }
 
 void CrazyCube::setCubeState(unsigned long long cubeState)

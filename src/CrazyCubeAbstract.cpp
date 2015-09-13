@@ -8,15 +8,18 @@
 
 //============================================================================
 // Poprawnie ułożona kostka
-// C, CP0, cp0, ..., CP6, cp6, EP0, ep0, ..., EP7, ep7
-// traktowanie C jako true, cp jako false i ep jako true, pozostałe
-// to wartości w systemie binarnym, zapisywane na trzech bitach
-// Razem: 61 bitów
+// Szczegolowe objasnienia w dokumentacji. Kolejne bity:
+// C, CP0, cp0, CP1, cp1, ..., CP6, cp6, EP0, ep0, EP1, ep1, ..., EP7, ep7
+// Gdzie:
+// C, cp, ep - zajmują po jednym bicie (true or false)
+// CP, EP - zajmują po trzy bity; wartości od 0 do 7 (kostka ma 8 krawędzi i 8 rogów)
 //============================================================================
 const unsigned long long CrazyCubeAbstract::solvedCube = 0x102469BD02469BDF;
+
+// Maski bitowe na poszczególne etapy ułożenia:
 const unsigned long long CrazyCubeAbstract::solvedInnerCircle = 0x1000011100001111;
-const unsigned long long CrazyCubeAbstract::solvedEdges = 0x2469BDF;
-const unsigned long long CrazyCubeAbstract::solvedCorners = 0x2469BD00000000;
+const unsigned long long CrazyCubeAbstract::solvedEdges = 0x2468ACE;
+const unsigned long long CrazyCubeAbstract::solvedCorners = 0x2468AC00000000;
 
 // Pozycje bitow danych elementow
 const unsigned short int CrazyCubeAbstract::CornerPieces[7] = {56, 52, 48, 44, 40, 36, 32};

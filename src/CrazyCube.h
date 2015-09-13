@@ -18,8 +18,12 @@ private:
 
 public:
 	CrazyCube();
+	CrazyCube(int);
 	virtual ~CrazyCube();
 	bool checkIfSolved();
+	bool checkInnerCircle();
+	bool checkEdges();
+	bool checkCorners();
 	void setCubeState(unsigned long long cubeState);
 	unsigned long long getCubeState();
 
