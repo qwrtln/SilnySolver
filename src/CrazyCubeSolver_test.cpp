@@ -108,5 +108,23 @@ TEST_F(CrazyCubeSolverTest, SetCrazyCubeTest)
 
 TEST_F(CrazyCubeSolverTest, SetParametersTest)
 {
-
+	//void setParameters(CrazyCubeSolverParametersD& parameters);
+	CrazyCubeSolverParametersD params, actual;	
+	params.maxDepth = 5;
+	params.minDepth = 2;
+	vector<bool> enabledMoves;
+	for(unsigned short int i = 0; i <= NUM_OF_MOVES; i++)
+	{
+		enabledMoves.push_back(1);
+	}
+	params.enabledMoves = enabledMoves;
+	params.numberOfSolutions = 123;
+	params.solvedMask = 0xBEDFEDFEDFCCDFED;
+	solver.setParameters(params);
+	actual = solver.getParameters();
+	ASSERT_EQ(actual.maxDepth, params.maxDepth);
+	ASSERT_EQ(actual.minDepth, params.minDepth);
+	ASSERT_EQ_STL_CONTAINER(actual.enabledMoves, params.enabledMoves);
+	ASSERT_EQ(actual.numberOfSolutions, params.numberOfSolutions);
+	ASSERT_EQ(actual.solvedMask, params.solvedMask);
 }
