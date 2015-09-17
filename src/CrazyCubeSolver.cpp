@@ -117,6 +117,35 @@ void CrazyCubeSolver:: cleanup()
 }
 bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short int prevMove)
 {
-	// TODO
-	return 0;
+	if (solutionsFound == numberOfSolutions)
+	{
+		return false;
+	}
+
+	if ( (depth == 0) && crazyCube->checkIfSolved(solvedMask))
+	{
+		return true;
+	}
+	else if ( (depth > 0) && crazyCube->checkIfSolved(solvedMask))
+	{
+		for (int move = L; move < NUM_OF_MOVES; ++move)
+		{
+			if (prevMove == move)
+			{
+				continue;
+			}
+
+			crazyCube->move(move);
+			currentPath[iDepth - depth] = move;
+			if (solveIteration(depth - 1,move))
+			{
+				++solutionsFound;
+				vector<unsigned short int>solubleVector(currentPath,currentPath + iDepth);
+				solutions.push_back(solubleVector);
+			}
+			crazyCube->undoMove(move);
+		}
+	}
+
+	return false;
 }
