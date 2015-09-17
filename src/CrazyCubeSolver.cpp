@@ -72,7 +72,7 @@ vector<vector<unsigned short int> > CrazyCubeSolver:: getSolutions()
 }
 void CrazyCubeSolver:: solve()
 {
-	setUp();
+	setup();
 	for(iDepth = minDepth; iDepth <= maxDepth; iDepth++)
 	{
 		currentPath = new unsigned short int[iDepth];
@@ -106,12 +106,12 @@ CrazyCubeSolverParametersD CrazyCubeSolver:: getParameters()
 	parameters.solvedMask = this->solvedMask;
 	return parameters;
 }
-void CrazyCubeSolver:: setUp()
+void CrazyCubeSolver:: setup()
 {
 	solutions.clear();
 	solutionsFound = 0;
 }
-void CrazyCubeSolver:: cleanUp()
+void CrazyCubeSolver:: cleanup()
 {
 	// TODO
 }
