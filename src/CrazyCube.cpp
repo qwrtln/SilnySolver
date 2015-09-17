@@ -75,9 +75,10 @@ bool CrazyCube::checkCorners()
 {
 	return ( (cubeState & solvedCorners) == solvedCorners);
 }
+
 bool CrazyCube::checkIfSolved(unsigned long long int solvedMask)
 {
-	return (cubeState & solvedMask == solvedCube & solvedMask);
+	return ( (cubeState & solvedMask) == (solvedCube & solvedMask) );
 }
 
 void CrazyCube::setCubeState(unsigned long long cubeState)
