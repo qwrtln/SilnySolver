@@ -27,6 +27,7 @@ protected:
 
 TEST_F(SilneTesty, HelloWorld_Test)
 {
+	ASSERT_EQ(11, 11);
 	ASSERT_EQ(12, x);
 	ASSERT_EQ_HEX(12, x);
 }
