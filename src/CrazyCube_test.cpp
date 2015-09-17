@@ -310,5 +310,20 @@ TEST_F(CrazyCubeTest, PerformanceAvgTest)
 
 TEST_F(CrazyCubeTest, checkIfSolvedMasksTest)
 {
+	CrazyCube genericCube(1);
+	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
+	genericCube.setEdges(edges);
+	ASSERT_EQ(genericCube.checkIfSolved(solvedEdges), true );
+
+	genericCube.resetCube();
+	genericCube.setCentre(true);
+	ASSERT_EQ(genericCube.checkIfSolved(solvedCentre), true );
+
+	genericCube.resetCube();
+	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+	genericCube.setCorners(corners);
+	ASSERT_EQ(genericCube.checkIfSolved(solvedCorners), true );
+
 	cube.resetCube();
+
 }
