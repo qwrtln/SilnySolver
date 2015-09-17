@@ -128,3 +128,39 @@ TEST_F(CrazyCubeSolverTest, SetParametersTest)
 	ASSERT_EQ(actual.numberOfSolutions, params.numberOfSolutions);
 	ASSERT_EQ(actual.solvedMask, params.solvedMask);
 }
+
+TEST_F(CrazyCubeSolverTest, CrazyCubeSolveTest)
+{
+	CrazyCube kosteczka;
+	solver.setCrazyCube(&kosteczka);
+
+	kosteczka.move(MvBr);
+	kosteczka.move(L);
+	kosteczka.move(F);
+	kosteczka.move(MhRr);
+	kosteczka.move(Mv);
+
+	solver.setMinDepth(4);
+	solver.setMaxDepth(6);
+	solver.setNumberOfSolutions(2);
+	solver.setSolvedMask(solvedCube);
+	solver.solve();
+
+	vector<vector<unsigned short int> > rozwiazania;
+	rozwiazania = solver.getSolutions();
+
+	if (rozwiazania.size() == 0)
+	{
+		cout << "Nie umiem tego rozwiazac. Sory." << endl;
+	}
+
+	for (int i = 0; i < rozwiazania.size(); ++i)
+	{
+		for (int j = 0; j < rozwiazania[i].size(); ++j)
+		{
+			cout << rozwiazania[i][j] << " ";
+		}
+		cout << endl;
+	}
+
+}

@@ -126,7 +126,7 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 	{
 		return true;
 	}
-	else if ( (depth > 0) && crazyCube->checkIfSolved(solvedMask))
+	else if ( depth > 0)
 	{
 		for (int move = L; move < NUM_OF_MOVES; ++move)
 		{
