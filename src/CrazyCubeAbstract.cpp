@@ -18,8 +18,12 @@ const unsigned long long CrazyCubeAbstract::solvedCube = 0x102469BD02469BDF;
 
 // Maski bitowe na poszczególne etapy ułożenia:
 const unsigned long long CrazyCubeAbstract::solvedInnerCircle = 0x1000011100001111;
+const unsigned long long CrazyCubeAbstract::solvedCentre = 0x1000000000000000;
 const unsigned long long CrazyCubeAbstract::solvedEdges = 0x2468ACE;
+const unsigned long long CrazyCubeAbstract::solvedInnerEdges = 0x1111;
 const unsigned long long CrazyCubeAbstract::solvedCorners = 0x2468AC00000000;
+const unsigned long long CrazyCubeAbstract::solvedInnerCorners = 0x11100000000;
+
 
 // Pozycje bitow danych elementow
 const unsigned short int CrazyCubeAbstract::CornerPieces[7] = {56, 52, 48, 44, 40, 36, 32};
