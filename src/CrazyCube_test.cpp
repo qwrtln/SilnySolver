@@ -249,10 +249,37 @@ TEST_F(CrazyCubeTest, MvBr)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
+TEST_F(CrazyCubeTest, Move_undoMoveTest_onebyone)
+{
+	cube.resetCube();
+	for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
+	{
+		cube.move(j);
+		//cout << "cube.move    (" << j << ")\t" << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
+		//cout << endl;
+		cube.undoMove(j);
+		//cout << "cube.undoMove(" << j << ")\t" << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
+		ASSERT_EQ(cube.checkIfSolved(), true);
+	}
+
+	ASSERT_EQ(cube.checkIfSolved(), true);
+}
+
+
 TEST_F(CrazyCubeTest, Move_undoMoveTest)
 {
 	cube.resetCube();
-	// placeholder TODO
+	for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
+	{
+		cube.move(j);
+	}
+	for(short int j = NUM_OF_MOVES - 1; j >= 0; --j)
+	{
+		//cout << j << endl;
+		cube.undoMove(j);
+	}
+	//cout << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
+	ASSERT_EQ(cube.checkIfSolved(), true);
 }
 
 /*

@@ -74,7 +74,7 @@ bool CrazyCube::checkEdges()
 bool CrazyCube::checkCorners()
 {
 	return ( (cubeState & solvedCorners) == solvedCorners);
-
+}
 bool CrazyCube::checkIfSolved(unsigned long long int solvedMask)
 {
 	return (cubeState & solvedMask == solvedCube & solvedMask);
@@ -264,7 +264,7 @@ void CrazyCube::MhLr()
 // EP[1]ep1 <-> EP[5]ep5
 //============================================================================
 							//0x.EEEE...EFE..F..
-	cubeState = ((cubeState & 0xF1111FFF1F1FF0FF) |
+	cubeState = ((cubeState & 0xF1111FFF101FF0FF) |
 			   ( (cubeState & 0x0EE00000E0000000) >> 8 ) |
 			   ( (cubeState & 0x000EE00000E00000) << 8 ) |
 			   ( (cubeState & 0x000000000F000000) >> 16 ) |
