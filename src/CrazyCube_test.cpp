@@ -307,3 +307,8 @@ TEST_F(CrazyCubeTest, PerformanceAvgTest)
 	}
 	#endif
 }
+
+TEST_F(CrazyCubeTest, checkIfSolvedMasksTest)
+{
+	cube.resetCube();
+}
