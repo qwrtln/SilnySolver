@@ -117,33 +117,39 @@ void CrazyCubeSolver:: cleanup()
 }
 bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short int prevMove)
 {
+	// Check if you already have as many solutions as you wish
 	if (solutionsFound == numberOfSolutions)
 	{
+		// If so, quit
 		return false;
 	}
 
+	// Check if you've reached final depth and if the cube is solved
 	if ( (depth == 0) && crazyCube->checkIfSolved(solvedMask))
 	{
 		return true;
 	}
-	else if ( depth > 0)
+	// Otherwise, keep searching but discontinue, if the cube is already solved
+	else if ( depth > 0 && !crazyCube->checkIfSolved(solvedMask))
 	{
+		// Iterate through each move
 		for (int move = L; move < NUM_OF_MOVES; ++move)
 		{
+			// Ruling out repetitions
 			if (prevMove == move)
 			{
 				continue;
 			}
 
-			crazyCube->move(move);
-			currentPath[iDepth - depth] = move;
-			if (solveIteration(depth - 1,move))
+			crazyCube->move(move);					// Move
+			currentPath[iDepth - depth] = move;		// Remember the move
+			if (solveIteration(depth - 1,move))		// If there's a solution in current branch
 			{
 				++solutionsFound;
-				vector<unsigned short int>solubleVector(currentPath,currentPath + iDepth);
-				solutions.push_back(solubleVector);
+				vector<unsigned short int>solubleVector(currentPath,currentPath + iDepth);		// Create a vector with this solution
+				solutions.push_back(solubleVector);												// Place it (the vector) in the vector of solutions
 			}
-			crazyCube->undoMove(move);
+			crazyCube->undoMove(move);		// Undo the move in order to return to the previous position and check another route
 		}
 	}
 
