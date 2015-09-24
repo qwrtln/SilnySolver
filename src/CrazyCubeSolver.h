@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 
-class CrazyCubeSolver
+class CrazyCubeSolver: public CrazyCubeAbstract
 {
 public:
 	CrazyCubeSolver();
@@ -34,7 +34,6 @@ protected:
 	void cleanup();
 	bool solveIteration(unsigned short int depth, unsigned short int prevMove);
 
-protected:
 	unsigned short int maxDepth;
 	unsigned short int minDepth;
 	vector<bool> enabledMoves;
