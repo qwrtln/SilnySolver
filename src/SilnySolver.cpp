@@ -7,14 +7,26 @@
 //============================================================================
 
 #include "ConstDefs.h"
+#include "TestExecuter.h"
 #include <iostream>
 #include <cstdio>
+extern TestExecuter testExecuter;
 using namespace std;
 
+/**
+*	Testy teraz piszemy tak, że tworzymy dla każdej klasy osobny plik .cpp na przykladzie pliku SilneTesty.cpp
+*	Makro TEST tworzy i rejestruje testcase, nie trzeba go już ręcznie nigdzie dodawać.
+*	W main() wystarczy wywołać makro RUN_ALL_TESTS() i wszystkie się ładnie odpalają.
+*
+* TEST() - ZWYKLY TEST
+* TEST_F() - TEST, W KTORYM MOZNA USTAWIC KONFIGURACJE TAKA, ZE WSZYSTKIE TESTCASE Z NIEJ KORZYSTAJA
+*
+*
+*/
 
 int main(int argc, char* argv[])
 {
-	cout << "Run successful. Solver is happy!" << endl;
+	RUN_ALL_TESTS(1);
 
 	return 0;
 }
