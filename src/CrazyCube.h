@@ -9,6 +9,9 @@
 #define CRAZYCUBE_H_
 #include "ConstDefs.h"
 
+/**
+ *  3x3x2 Crazy Cube representation
+ */
 class CrazyCube: public CrazyCubeAbstract
 {
 private:
