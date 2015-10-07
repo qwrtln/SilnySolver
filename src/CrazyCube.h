@@ -134,15 +134,24 @@ public:
 	void MvBr();
 
     /**
-     * CrazyCube
+     * CrazyCube move implementation using move index
      *
-     * @param cubeState state to which our cube is about to be set
+     * @param m index of move to be done
      */
-	void move(unsigned short int);
-	void undoMove(unsigned short int);
-
+	void move(unsigned short int m);
+		/**
+     * Inversion of a provided move
+     *
+     * @param m index of move to be undone
+     */
+	void undoMove(unsigned short int m);
+		/**
+     * Toggles the cube centre orientation
+     */
 	void toggleCentre();
-
+		/**
+     * Cube is solved again with no effort :)
+     */
 	void resetCube();
 };
 
