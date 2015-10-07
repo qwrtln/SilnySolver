@@ -120,13 +120,14 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 	// Check if you already have as many solutions as you wish
 	if (solutionsFound == numberOfSolutions)
 	{
-		// If so, quit
+		// If so, quit - this will terminate further iterations of the branch
 		return false;
 	}
 
 	// Check if you've reached final depth and if the cube is solved
 	if ( (depth == 0) && crazyCube->checkIfSolved(solvedMask))
 	{
+		// If so, there's no point in going any deeper
 		return true;
 	}
 	// Otherwise, keep searching but discontinue, if the cube is already solved
@@ -135,23 +136,36 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 		// Iterate through each move
 		for (int move = L; move < NUM_OF_MOVES; ++move)
 		{
-			// Ruling out repetitions
+			// This rules out repetitions
 			if (prevMove == move)
 			{
 				continue;
 			}
 
-			crazyCube->move(move);					// Move
-			currentPath[iDepth - depth] = move;		// Remember the move
-			if (solveIteration(depth - 1,move))		// If there's a solution in current branch
+			// Do the move
+			crazyCube->move(move);
+
+			// Remember it in the array
+			currentPath[iDepth - depth] = move;
+
+			// Step into the snippet, if your branch has a solution
+			if (solveIteration(depth - 1,move))
 			{
 				++solutionsFound;
-				vector<unsigned short int>solubleVector(currentPath,currentPath + iDepth);		// Create a vector with this solution
-				solutions.push_back(solubleVector);												// Place it (the vector) in the vector of solutions
+
+				// Create a vector with our solutions
+				// iDepth - current depth of the iteration in "solve" method
+				vector<unsigned short int>solubleVector(currentPath,currentPath + iDepth);
+
+				// Place found solution in the vector
+				solutions.push_back(solubleVector);
 			}
-			crazyCube->undoMove(move);		// Undo the move in order to return to the previous position and check another route
+
+			// Move done? Go back in order to check every possibility of this depth
+			crazyCube->undoMove(move);
 		}
 	}
 
+	// Nothing found here, go deeper or terminate
 	return false;
 }
