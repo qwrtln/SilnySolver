@@ -8,6 +8,7 @@
 
 #include "ConstDefs.h"
 #include "TestExecuter.h"
+#include "TestMacros.h"
 #include <iostream>
 #include <cstdio>
 extern TestExecuter testExecuter;

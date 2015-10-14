@@ -7,6 +7,7 @@
 #include "CrazyCubeSolver.h"
 #include "TestExecuter.h"
 #include "ConstDefs.h"
+#include "TestMacros.h"
 #include <cmath>
 
 extern TestExecuter testExecuter;
