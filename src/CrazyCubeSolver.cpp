@@ -166,6 +166,6 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 		}
 	}
 
-	// Nothing found here, go deeper or terminate
+	// Nothing found here, go deeper (or terminate if it's the last iteration)
 	return false;
 }
