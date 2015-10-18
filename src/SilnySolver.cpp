@@ -6,28 +6,51 @@
 // Description : Most probably Crazy 3x3x2
 //============================================================================
 
-#include "ConstDefs.h"
-#include "TestExecuter.h"
-#include "TestMacros.h"
+#include "CrazyCubeAbstract.h"
+#include "CrazyCube.h"
+#include "CrazyCubeSolver.h"
 #include <iostream>
 #include <cstdio>
-extern TestExecuter testExecuter;
-using namespace std;
 
-/**
-*	Testy teraz piszemy tak, że tworzymy dla każdej klasy osobny plik .cpp na przykladzie pliku SilneTesty.cpp
-*	Makro TEST tworzy i rejestruje testcase, nie trzeba go już ręcznie nigdzie dodawać.
-*	W main() wystarczy wywołać makro RUN_ALL_TESTS() i wszystkie się ładnie odpalają.
-*
-* TEST() - ZWYKLY TEST
-* TEST_F() - TEST, W KTORYM MOZNA USTAWIC KONFIGURACJE TAKA, ZE WSZYSTKIE TESTCASE Z NIEJ KORZYSTAJA
-*
-*
-*/
 
 int main(int argc, char* argv[])
 {
-	RUN_ALL_TESTS(1);
+    using namespace std;
+
+	CrazyCube kosteczka;
+    CrazyCubeSolver solver;
+
+	solver.setCrazyCube(&kosteczka);
+
+	kosteczka.move(10);
+	kosteczka.move(0);
+	kosteczka.move(1);
+	kosteczka.move(7);
+	kosteczka.move(5);
+
+	solver.setMinDepth(4);
+	solver.setMaxDepth(6);
+	solver.setNumberOfSolutions(2);
+	solver.setSolvedMask(kosteczka.solvedCube);
+	solver.solve();
+
+	vector<vector<unsigned short int> > rozwiazania;
+	rozwiazania = solver.getSolutions();
+
+	if (rozwiazania.size() == 0)
+	{
+		cout << "Nie umiem tego rozwiazac. Sory." << endl;
+	}
+
+	for (int i = 0; i < rozwiazania.size(); ++i)
+	{
+		for (int j = 0; j < rozwiazania[i].size(); ++j)
+		{
+			cout << rozwiazania[i][j] << " ";
+		}
+		cout << endl;
+	}
+    cout << "Excellent! Now my cube is complete." << endl;
 
 	return 0;
 }
