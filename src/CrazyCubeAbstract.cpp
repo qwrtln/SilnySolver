@@ -4,7 +4,7 @@
  *  Created on: Aug 20, 2015
  *      Author: qwrtln
  */
-#include "ConstDefs.h"
+#include "CrazyCubeAbstract.h"
 
 //============================================================================
 // Poprawnie ułożona kostka

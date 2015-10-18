@@ -4,10 +4,10 @@
  *  Created on: Aug 13, 2015
  *      Author: qwrtln
  */
-
+  
 #ifndef CRAZYCUBE_H_
 #define CRAZYCUBE_H_
-#include "ConstDefs.h"
+#include "CrazyCubeAbstract.h"
 
 /**
  *  3x3x2 CrazyCube representation.

@@ -1,5 +1,5 @@
 /*
- * ConstDefs.h
+ * CrazyCubeAbstract.h
  *
  *  Created on: Aug 13, 2015
  *      Author: qwrtln
