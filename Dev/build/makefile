@@ -1,0 +1,40 @@
+# This is the makefile for SilnySolver - DEV part
+# Kraków, 21.10.2015
+#
+# Set paths
+SRC = ../src/
+INC = ../inc/
+
+# Set compiler parametres
+FLAGS = -Wall -O3
+CXX = g++ $(FLAGS) -I $(INC)
+
+# Set inclusion files (if exist)
+-include SilnySolver.d CrazyCubeSolver.d CrazyCube.d CrazyCubeAbstract.d
+
+# This is how output application will be named
+all: SilnySolver
+
+# List all dependencies to build
+SilnySolver: SilnySolver.o CrazyCubeSolver.o CrazyCube.o CrazyCubeAbstract.o
+	$(CXX) SilnySolver.o CrazyCubeSolver.o CrazyCube.o CrazyCubeAbstract.o -o SilnySolver
+
+SilnySolver.o: $(SRC)SilnySolver.cpp
+	$(CXX) -MM $(SRC)SilnySolver.cpp | tee SilnySolver.d
+	$(CXX) -c $(SRC)SilnySolver.cpp
+
+CrazyCubeSolver.o: $(SRC)CrazyCubeSolver.cpp $(INC)CrazyCubeSolver.h
+	$(CXX) -MM $(SRC)CrazyCubeSolver.cpp | tee CrazyCubeSolver.d
+	$(CXX) -c $(SRC)CrazyCubeSolver.cpp
+
+CrazyCube.o: $(SRC)CrazyCube.cpp $(INC)CrazyCube.h
+	$(CXX) -MM $(SRC)CrazyCube.cpp | tee CrazyCube.d
+	$(CXX) -c $(SRC)CrazyCube.cpp
+
+CrazyCubeAbstract.o: $(SRC)CrazyCubeAbstract.cpp $(INC)CrazyCubeAbstract.h
+	$(CXX) -MM $(SRC)CrazyCubeAbstract.cpp | tee CrazyCubeAbstract.d
+	$(CXX) -c $(SRC)CrazyCubeAbstract.cpp
+
+clean:
+	rm *.o *.d SilnySolver
+
