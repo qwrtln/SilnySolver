@@ -1,5 +1,5 @@
 /*
- * CrazyCubeAbstract.h
+ * ConstDefs.h
  *
  *  Created on: Aug 13, 2015
  *      Author: qwrtln
@@ -27,7 +27,7 @@ public:
 	const static unsigned short int centrePosition;
 
 	// Legalne ruchy < 11
-    enum rotation {
+	enum rotation {
 		L,		// Left 0
 		F,		// Front
 		U,		// Up
