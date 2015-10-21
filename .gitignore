@@ -1,0 +1,13 @@
+.~lock.332_crazy.docx#
+
+Dev/*.cpp~
+Dev/*.h~
+Dev/build/*.o
+Dev/build/*.d
+Dev/build/SilnySolver
+
+Test/*.cpp~
+Test/*.h~
+Test/build/*.o
+Test/build/*.d
+Test/build/Tests
