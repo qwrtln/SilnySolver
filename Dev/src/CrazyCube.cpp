@@ -56,7 +56,7 @@ CrazyCube::~CrazyCube()
 	// TODO Auto-generated destructor stub
 }
 
-bool CrazyCube::checkIfSolved()
+bool CrazyCube::isSolved()
 {
 	return (cubeState == solvedCube);
 }
@@ -76,7 +76,7 @@ bool CrazyCube::checkCorners()
 	return ( (cubeState & solvedCorners) == solvedCorners);
 }
 
-bool CrazyCube::checkIfSolved(unsigned long long int solvedMask)
+bool CrazyCube::isSolved(unsigned long long int solvedMask)
 {
 	return ( (cubeState & solvedMask) == (solvedCube & solvedMask) );
 }

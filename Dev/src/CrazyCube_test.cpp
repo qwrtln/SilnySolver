@@ -107,7 +107,7 @@ TEST_F(CrazyCubeTest, innerCircleTest)
 
 TEST_F(CrazyCubeTest, setCubeTest)
 {
-	ASSERT_EQ_HEX(cube.checkIfSolved(), 1);
+    ASSERT_EQ_HEX(cube.isSolved(), 1);
 	cout << dec;
 }
 
@@ -115,7 +115,7 @@ TEST_F(CrazyCubeTest, setNEGATIVEcubeTest)
 {
 	edgeNames edges[NUM_OF_EDGES] = {wgw, yry, yby, yoy, ygy, wrw, wbw, wow}; // Wrong sequence
 	cube.setEdges(edges);
-	ASSERT_NE(cube.checkIfSolved(), 1)
+    ASSERT_NE(cube.isSolved(), 1)
 }
 
 TEST_F(CrazyCubeTest, setWholeCubeTest)
@@ -124,7 +124,7 @@ TEST_F(CrazyCubeTest, setWholeCubeTest)
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
 	cube.setWholeCube(true,edges,corners);
-	ASSERT_EQ_HEX(cube.checkIfSolved(), 1)
+    ASSERT_EQ_HEX(cube.isSolved(), 1)
 }
 
 TEST_F(CrazyCubeTest, L)
@@ -260,10 +260,10 @@ TEST_F(CrazyCubeTest, Move_undoMoveTest_onebyone)
 		//cout << endl;
 		cube.undoMove(j);
 		//cout << "cube.undoMove(" << j << ")\t" << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
-		ASSERT_EQ(cube.checkIfSolved(), true);
+        ASSERT_EQ(cube.isSolved(), true);
 	}
 
-	ASSERT_EQ(cube.checkIfSolved(), true);
+    ASSERT_EQ(cube.isSolved(), true);
 }
 
 
@@ -280,7 +280,7 @@ TEST_F(CrazyCubeTest, Move_undoMoveTest)
 		cube.undoMove(j);
 	}
 	//cout << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
-	ASSERT_EQ(cube.checkIfSolved(), true);
+    ASSERT_EQ(cube.isSolved(), true);
 }
 
 /*
