@@ -4,10 +4,10 @@
  *  Created on: Aug 13, 2015
  *      Author: qwrtln
  */
-
+  
 #ifndef CRAZYCUBE_H_
 #define CRAZYCUBE_H_
-#include "ConstDefs.h"
+#include "CrazyCubeAbstract.h"
 
 /**
  *  3x3x2 CrazyCube representation.
@@ -43,7 +43,7 @@ public:
      *
      * @return true if cube is solved. False if it is not.
      */
-	bool isSolved();
+	bool checkIfSolved();
 
     /**
      * Checks if CrazyCube's inner circle is solved.
@@ -72,7 +72,7 @@ public:
      * @param solvedMask parts of CrazyCube expected to be solved
      * @return true if indeed our CrazyCube is solved. False if it is unfortunately not.
      */
-	bool isSolved(unsigned long long int solvedMask);
+	bool checkIfSolved(unsigned long long int solvedMask);
 
     /**
      * Sets CrazyCube state
