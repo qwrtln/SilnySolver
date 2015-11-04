@@ -21,7 +21,6 @@ all: $(OBJFILES) production_code
 
 %.o: $(SRC)%.cpp
 	$(CXX) -c $< $(INC) -o $@
-	#$(CXX) -MM $< $(INC) > $(@:.o=.d)
 	
 %.d: $(SRC)%.cpp
 	$(CXX) -MM $< $(INC) > $@
@@ -31,7 +30,7 @@ prod_code:
 	$(MAKE) -C ../../Dev/build/
 
 
-# Clean the shit out
+# Clean the shit out and run %.d rule in case %.d files are not present anymore because of previous invocation, and delete them again. Because it is funny.
 .PHONY: clean
 clean:
 	rm -rf *.o run all *.d

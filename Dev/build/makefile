@@ -21,7 +21,6 @@ all: $(OBJFILES)
 
 %.o: $(SRC)%.cpp
 	$(CXX) -c $< $(INC) -o $@
-	#$(CXX) -MM $< $(INC) > $(@:.o=.d)
 	
 %.d: $(SRC)%.cpp
 	$(CXX) -MM $< $(INC) > $@
