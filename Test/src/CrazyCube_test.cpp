@@ -106,7 +106,7 @@ TEST_F(CrazyCubeTest, innerCircleTest)
 
 TEST_F(CrazyCubeTest, setCubeTest)
 {
-	ASSERT_EQ_HEX(cube.checkIfSolved(), 1);
+	ASSERT_EQ_HEX(cube.isSolved(), 1);
 	cout << dec;
 }
 
@@ -114,7 +114,7 @@ TEST_F(CrazyCubeTest, setNEGATIVEcubeTest)
 {
 	edgeNames edges[NUM_OF_EDGES] = {wgw, yry, yby, yoy, ygy, wrw, wbw, wow}; // Wrong sequence
 	cube.setEdges(edges);
-	ASSERT_NE(cube.checkIfSolved(), 1)
+	ASSERT_NE(cube.isSolved(), 1)
 }
 
 TEST_F(CrazyCubeTest, setWholeCubeTest)
@@ -123,7 +123,7 @@ TEST_F(CrazyCubeTest, setWholeCubeTest)
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
 	cube.setWholeCube(true,edges,corners);
-	ASSERT_EQ_HEX(cube.checkIfSolved(), 1)
+	ASSERT_EQ_HEX(cube.isSolved(), 1)
 }
 
 TEST_F(CrazyCubeTest, L)
@@ -259,10 +259,10 @@ TEST_F(CrazyCubeTest, Move_undoMoveTest_onebyone)
 		//cout << endl;
 		cube.undoMove(j);
 		//cout << "cube.undoMove(" << j << ")\t" << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
-		ASSERT_EQ(cube.checkIfSolved(), true);
+		ASSERT_EQ(cube.isSolved(), true);
 	}
 
-	ASSERT_EQ(cube.checkIfSolved(), true);
+	ASSERT_EQ(cube.isSolved(), true);
 }
 
 
@@ -279,7 +279,7 @@ TEST_F(CrazyCubeTest, Move_undoMoveTest)
 		cube.undoMove(j);
 	}
 	//cout << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
-	ASSERT_EQ(cube.checkIfSolved(), true);
+	ASSERT_EQ(cube.isSolved(), true);
 }
 
 /*
@@ -308,34 +308,34 @@ TEST_F(CrazyCubeTest, PerformanceAvgTest)
 	#endif
 }
 
-TEST_F(CrazyCubeTest, checkIfSolvedMasksTest)
+TEST_F(CrazyCubeTest, isSolvedMasksTest)
 {
 	CrazyCube genericCube(1);
 
 	// ------------------- outer
 	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	genericCube.setEdges(edges);
-	ASSERT_EQ(genericCube.checkIfSolved(solvedEdges), true );
+	ASSERT_EQ(genericCube.isSolved(solvedEdges), true );
 
 	genericCube.resetCube();
 	genericCube.setCentre(true);
-	ASSERT_EQ(genericCube.checkIfSolved(solvedCentre), true );
+	ASSERT_EQ(genericCube.isSolved(solvedCentre), true );
 
 	genericCube.resetCube();
 	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
 	genericCube.setCorners(corners);
-	ASSERT_EQ(genericCube.checkIfSolved(solvedCorners), true );
+	ASSERT_EQ(genericCube.isSolved(solvedCorners), true );
 
 	// ------------------- inner
 	genericCube.resetCube();
 	edgeNames edges2[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
 	genericCube.setEdges(edges2);
-	ASSERT_EQ(genericCube.checkIfSolved(solvedInnerEdges), true );
+	ASSERT_EQ(genericCube.isSolved(solvedInnerEdges), true );
 
 	genericCube.resetCube();
 	cornerNames corners2[NUM_OF_CORNERS] = {yrby, ygry, yboy, yogy, wrgw, wbrw, wobw};
 	genericCube.setCorners(corners2);
-	ASSERT_EQ(genericCube.checkIfSolved(solvedInnerCorners), true );
+	ASSERT_EQ(genericCube.isSolved(solvedInnerCorners), true );
 
 	// ------------------- random masks
 	genericCube.resetCube();
@@ -343,8 +343,8 @@ TEST_F(CrazyCubeTest, checkIfSolvedMasksTest)
 	genericCube.setEdges(edges3);
 	cornerNames corners3[NUM_OF_CORNERS] = {ygrw, yrbw, yogy, yboy, woby, wbry, wrgw};
 	genericCube.setCorners(corners3);
-	ASSERT_NE(genericCube.checkIfSolved(solvedInnerEdges), true );
-	ASSERT_NE(genericCube.checkIfSolved(solvedInnerCorners), true );
+	ASSERT_NE(genericCube.isSolved(solvedInnerEdges), true );
+	ASSERT_NE(genericCube.isSolved(solvedInnerCorners), true );
 
 	cube.resetCube();
 

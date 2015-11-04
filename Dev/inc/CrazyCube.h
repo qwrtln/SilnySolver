@@ -43,7 +43,7 @@ public:
      *
      * @return true if cube is solved. False if it is not.
      */
-	bool checkIfSolved();
+	bool isSolved();
 
     /**
      * Checks if CrazyCube's inner circle is solved.
@@ -72,7 +72,7 @@ public:
      * @param solvedMask parts of CrazyCube expected to be solved
      * @return true if indeed our CrazyCube is solved. False if it is unfortunately not.
      */
-	bool checkIfSolved(unsigned long long int solvedMask);
+	bool isSolved(unsigned long long int solvedMask);
 
     /**
      * Sets CrazyCube state

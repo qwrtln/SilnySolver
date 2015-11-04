@@ -16,7 +16,7 @@ DEPFILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRCFILES)))
 
 
 # Compilation rules
-all: $(OBJFILES) production_code
+all: $(OBJFILES) prod_code
 	$(CXX) $^ -o $@
 
 %.o: $(SRC)%.cpp

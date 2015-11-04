@@ -1,5 +1,6 @@
 #pragma once
 #include "BaseTest.h"
+#include "TestMacros.h"
 class TestExecuter
 {
 public:
