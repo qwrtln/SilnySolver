@@ -1,42 +1,40 @@
-SRC = ../src/
-INC = -I ../inc/ -I ../../Dev/inc
+# Some variables declarations
+# compiler
+CXX = g++
+# path to .h files		
+INC=-I ../inc/ -I ../../Dev/inc/
+# path to .cpp files
+SRC= ../src/
 
-FLAGS = -Wall -O3
-CXX = g++ $(INC)
 
--include SilneTesty.d BaseTest.d BaseTestFrameworkDefinitions.d CrazyCubeSolver_test.d CrazyCube_test.d SilneTesty.d TestExecuter.d
+# variable containing list of all .cpp files in ../src/ folder
+SRCFILES := $(wildcard $(SRC)*.cpp) 
+# variable containing list of all .o files produced during above .cpp files compilation
+OBJFILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRCFILES)))
+# variable containing list of all .d files
+DEPFILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRCFILES)))
 
-all: Tests
 
-Tests: SilneTesty.o BaseTest.o BaseTestFrameworkDefinitions.o CrazyCubeSolver_test.o CrazyCube_test.o SilneTesty.o TestExecuter.o prod_code
-	$(CXX) $(SRC)SilneTesty.o $(SRC)BaseTest.o $(SRC)BaseTestFrameworkDefinitions.o $(SRC)CrazyCubeSolver_test.o $(SRC)CrazyCube_test.o $(SRC)SilneTesty.o $(SRC)TestExecuter.o -o Tests
+# Compilation rules
+all: $(OBJFILES) production_code
+	$(CXX) $^ -o $@
 
-SilneTesty.o: $(SRC)SilneTesty.cpp
-	$(CXX) -MM $(SRC)SilneTesty.cpp | tee SilneTesty.d
-	$(CXX) -c $(SRC)SilneTesty.cpp
+%.o: $(SRC)%.cpp
+	$(CXX) -c $< $(INC) -o $@
+	#$(CXX) -MM $< $(INC) > $(@:.o=.d)
+	
+%.d: $(SRC)%.cpp
+	$(CXX) -MM $< $(INC) > $@
 
-BaseTest.o: $(SRC)BaseTest.cpp
-	$(CXX) -MM $(SRC)BaseTest.cpp | tee BaseTest.d
-	$(CXX) -c $(SRC)BaseTest.cpp
+# Deal with the production code before
+prod_code:
+	$(MAKE) -C ../../Dev/build/
 
-BaseTestFrameworkDefinitions.o: $(SRC)BaseTestFrameworkDefinitions.cpp
-	$(CXX) -MM $(SRC)BaseTestFrameworkDefinitions.cpp | tee BaseTestFrameworkDefinitions.d
-	$(CXX) -c $(SRC)BaseTestFrameworkDefinitions.cpp
 
-CrazyCubeSolver_test.o: $(SRC)CrazyCubeSolver_test.cpp
-	$(CXX) -MM $(SRC)CrazyCubeSolver_test.cpp | tee CrazyCubeSolver_test.d
-	$(CXX) -c $(SRC)CrazyCubeSolver_test.cpp
-
-CrazyCube_test.o: $(SRC)CrazyCube_test.cpp
-	$(CXX) -MM $(SRC)CrazyCube_test.cpp | tee CrazyCube_test.d
-	$(CXX) -c $(SRC)CrazyCube_test.cpp
-
-TestExecuter.o: $(SRC)TestExecuter.cpp
-	$(CXX) -MM $(SRC)TestExecuter.cpp | tee TestExecuter.d
-	$(CXX) -c $(SRC)TestExecuter.cpp
-
-prod_code: 
-	$(MAKE) -C ../../Dev/build
-
+# Clean the shit out
+.PHONY: clean
 clean:
-	rm *.o *.d Tests
+	rm -rf *.o run all *.d
+
+-include $(DEPFILES)
+

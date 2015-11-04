@@ -6,29 +6,30 @@ INC=-I ../inc/
 # path to .cpp files
 SRC= ../src/
 
+
 # variable containing list of all .cpp files in ../src/ folder
 SRCFILES := $(wildcard $(SRC)*.cpp) 
 # variable containing list of all .o files produced during above .cpp files compilation
 OBJFILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRCFILES)))
 # variable containing list of all .d files
-DEPFILES := $(patsubst %.cpp,%.d,$(SRCFILES))
+DEPFILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRCFILES)))
+
 
 # Compilation rules
 all: $(OBJFILES)
 	$(CXX) $^ -o $@
-	
+
 %.o: $(SRC)%.cpp
-	$(CXX) -c $(SRC)$< $(INC) -o $@
+	$(CXX) -c $< $(INC) -o $@
+	#$(CXX) -MM $< $(INC) > $(@:.o=.d)
 	
 %.d: $(SRC)%.cpp
-	$(CXX) -MM $(SRC)$< $(INC) > $@
-
+	$(CXX) -MM $< $(INC) > $@
 
 # Clean the shit out
-.PHONY : clean
-
+.PHONY: clean
 clean:
-	rm -rf *.o run *.d
-
+	rm -rf *.o run all *.d
 
 -include $(DEPFILES)
+

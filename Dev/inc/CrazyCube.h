@@ -10,7 +10,7 @@
 #include "CrazyCubeAbstract.h"
 
 /**
- *  3x3x2 CrazyCube representation.
+ *  3x3x2 CrazyCube representation. Behold.
  */
 class CrazyCube: public CrazyCubeAbstract
 {
