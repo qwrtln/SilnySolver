@@ -4,6 +4,7 @@ Dev/*.cpp~
 Dev/*.h~
 Dev/build/*.o
 Dev/build/*.d
+Dev/build/*.log
 Dev/build/SilnySolver
 
 Test/*.cpp~

@@ -4,4 +4,4 @@ lgd = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(
 
 aliases = !git config --get-regexp 'alias.*' | colrm 1 6 | sed 's/[ ]/ = /'
 
-
+deliver = !bash .deliveryCheck.sh

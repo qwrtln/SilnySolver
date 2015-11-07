@@ -16,11 +16,11 @@ DEPFILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRCFILES)))
 
 
 # Compilation rules
-all: $(OBJFILES)
+SilnySolver: $(OBJFILES)
 	$(CXX) $^ -o $@
 
 %.o: $(SRC)%.cpp
-	$(CXX) -c $< $(INC) -o $@
+	$(CXX) -Wall -c $< $(INC) -o $@
 	
 %.d: $(SRC)%.cpp
 	$(CXX) -MM $< $(INC) > $@
@@ -28,7 +28,7 @@ all: $(OBJFILES)
 # Clean the shit out
 .PHONY: clean
 clean:
-	rm -rf *.o run all *.d
+	rm -rf *.o run SilnySolver *.d
 
 -include $(DEPFILES)
 
