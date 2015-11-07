@@ -2,7 +2,6 @@
 
 REPO="$1"
 BRANCH="$2"
-echo $REPO/$BRANCH
 
 # Some variables to enhance output readability
 RED='\033[1;31m'
