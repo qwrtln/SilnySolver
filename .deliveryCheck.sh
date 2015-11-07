@@ -12,12 +12,25 @@ BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
 
 CAN_DELIVER=false
-CLEAN=false;
+CLEAN=false
+RUN_CHECK=false
 
-# Skip delivery check, if you're on a different branch than 'development'
+# First condition to check - if you're on origin/development branch
 if git status | grep -q 'On branch development'
 then
+    echo "You are now on the development branch."
+    RUN_CHECK=true
+fi
+
+# Second condition - pushing to origin/development from anywhere
+if [ "$REPO" = origin ] && [ "$BRANCH" = development ]
+then
     echo "You are now pushing to the development branch."
+    RUN_CHECK=true
+fi
+
+if [ "$RUN_CHECK" = true ]
+then
     echo -e "Running delivery check...\n"
 
 # Old build.log will only disturb with current check. It should be removed. 
@@ -54,9 +67,9 @@ then
                         case "$choice" in
                             y|Y ) echo "Forcing push..."
                                   CAN_DELIVER=true;;
-                            n|N ) echo "Skipping push." 
+                            n|N ) echo "Aborting push." 
                                   CLEAN=true;;
-                            * ) echo "Invalid input. Skipping push." 
+                            * ) echo "Invalid input. Aborting push." 
                                 CLEAN=true;;
                         esac
                         
