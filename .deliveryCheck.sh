@@ -75,14 +75,14 @@ fi
 
 # After an aborted push due to warnings, project should be cleaned
 # Otherwise, after second attempt, delivery check would show pristine condition
-if [ $CLEAN=true ]
+if [ "$CLEAN" = true ]
 then
     pushd Dev/build > /dev/null 
     make clean > /dev/null 
     popd > /dev/null
 fi
 
-if [ $CAN_DELIVER=true ]
+if [ "$CAN_DELIVER" = true ]
 then
     git push $REPO $BRANCH
 fi
