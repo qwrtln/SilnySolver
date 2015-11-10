@@ -7,6 +7,8 @@ Dev/build/*.d
 Dev/build/*.log
 Dev/build/SilnySolver
 
+Dev/build/SilnySolver.exe
+
 Test/*.cpp~
 Test/*.h~
 Test/build/*.o
