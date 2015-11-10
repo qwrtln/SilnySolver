@@ -13,4 +13,5 @@ Test/*.cpp~
 Test/*.h~
 Test/build/*.o
 Test/build/*.d
+Test/build/*.log
 Test/build/Tests

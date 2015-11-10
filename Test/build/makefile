@@ -2,38 +2,32 @@
 # compiler
 CXX = g++
 # path to .h files		
-INC=-I ../inc/ -I ../../Dev/inc/
+INC =-I ../inc/ -I ../../Dev/inc/
 # path to .cpp files
-SRC= ../src/
+SRC = ../src/
+# paths to dev files
+DEVSRC = ../../Dev/src/
+BUILT = $(subst src,build,$(DEVSRC))
 
+FLAGS = -Wall
 
-# variable containing list of all .cpp files in ../src/ folder
-SRCFILES := $(wildcard $(SRC)*.cpp) 
-# variable containing list of all .o files produced during above .cpp files compilation
-OBJFILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRCFILES)))
-# variable containing list of all .d files
-DEPFILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRCFILES)))
+BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(DEVSRC)C*.cpp)))
+SRC_FILES := $(wildcard $(SRC)*.cpp)
+OBJ_FILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRC_FILES)))
 
+Test: SilneTesty
 
-# Compilation rules
-all: $(OBJFILES) prod_code
-	$(CXX) $^ -o $@
+SilneTesty: prodCode $(OBJ_FILES) heheszki
+	$(CXX) $(FLAGS) $(BUILT_FILES) $(OBJ_FILES) $(INC) -o Test
 
+prodCode: 
+	$(MAKE) -C $(BUILT)
+
+# It's a rule for every single cpp file, this is why we don't use _FILES var
 %.o: $(SRC)%.cpp
-	$(CXX) -c $< $(INC) -o $@
+	$(CXX) $(FLAGS) -c $< $(INC) -o $@
 	
-%.d: $(SRC)%.cpp
-	$(CXX) -MM $< $(INC) > $@
-
-# Deal with the production code before
-prod_code:
-	$(MAKE) -C ../../Dev/build/
-
-
-# Clean the shit out and run %.d rule in case %.d files are not present anymore because of previous invocation, and delete them again. Because it is funny.
-.PHONY: clean
 clean:
-	rm -rf *.o run all *.d
+	rm *.o Test
 
--include $(DEPFILES)
 
