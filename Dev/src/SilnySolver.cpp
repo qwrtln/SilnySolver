@@ -42,9 +42,9 @@ int main(int argc, char* argv[])
 		cout << "Nie umiem tego rozwiazac. Sory." << endl;
 	}
 
-	for (int i = 0; i < rozwiazania.size(); ++i)
+	for (unsigned short int i = 0; i < rozwiazania.size(); ++i)
 	{
-		for (int j = 0; j < rozwiazania[i].size(); ++j)
+		for (unsigned short int j = 0; j < rozwiazania[i].size(); ++j)
 		{
 			cout << rozwiazania[i][j] << " ";
 		}

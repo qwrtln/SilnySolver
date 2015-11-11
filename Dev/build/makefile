@@ -1,32 +1,36 @@
 # Some variables declarations
-# compiler
-CXX = g++ -Wall
-# path to .h files		
-INC=-I ../inc/
-# path to .cpp files
-SRC= ../src/
+# Compiler
+CXX = g++
+# Path to .h files		
+INC = -I ../inc/
+# Path to .cpp files
+SRC = ../src/
 
+# Compiler flags
+FLAGS = -Wall -O3
 
 # variable containing list of all .cpp files in ../src/ folder
-SRCFILES := $(wildcard $(SRC)*.cpp) 
+SRC_FILES := $(wildcard $(SRC)*.cpp) 
 # variable containing list of all .o files produced during above .cpp files compilation
-OBJFILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRCFILES)))
+OBJ_FILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRC_FILES)))
 # variable containing list of all .d files
-DEPFILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRCFILES)))
+DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
 
-$(info $SRCFILES)
 # Compilation rules
-SilnySolver: $(OBJFILES)
-	$(CXX) $^ -o $@
+SilnySolver: build 
+	$(CXX) $(FLAGS) *.o -o $@
+
+# Rule for separating executable from build files
+build: $(OBJ_FILES)
 
 %.o: $(SRC)%.cpp 
-	$(CXX) -c $< $(INC) -o $@
+	$(CXX) $(FLAGS) -c $< $(INC) -o $@
 	$(CXX) -MM $< $(INC) > $(@:.o=.d)
 	
 # Clean the shit out
 .PHONY: clean
 clean:
-	rm -rf *.o run SilnySolver *.d
+	rm -rf *.o *.d SilnySolver 
 
--include $(DEPFILES)
+-include $(DEP_FILES)
 
