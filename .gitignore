@@ -19,3 +19,5 @@ Test/build/*.d
 Test/build/*.log
 Test/build/SilneTesty
 
+.temp
+
