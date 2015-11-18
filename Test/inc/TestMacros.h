@@ -13,7 +13,7 @@ void TestCase##_##TestName()
         TestClass##_##TestName():TestClass(#TestClass,#TestName)\
     {\
         SetUp();\
-        testExecuter.AddTest(this);\
+        TestExecuter::getInstance()->AddTest(this);\
     }\
     virtual ~TestClass##_##TestName()\
     {\
@@ -26,7 +26,7 @@ void TestCase##_##TestName()
 
 // Macro executing all testcases
 #define RUN_ALL_TESTS(withTime)\
-    testExecuter.RunAllTests(withTime)
+    TestExecuter::getInstance()->RunAllTests(withTime)
 
 // Przykladowe makra. Mozna dopisac inne jak zajdzie taka potrzeba :)
 

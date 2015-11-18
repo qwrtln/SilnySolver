@@ -3,7 +3,7 @@
 #include "TestMacros.h"
 #include <iostream>
 #include <cstdio>
-extern TestExecuter testExecuter;
+//extern TestExecuter testExecuter;
 
 int main()
 {

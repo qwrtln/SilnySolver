@@ -9,7 +9,7 @@
 #include "CrazyCubeAbstract.h"
 #include <cmath>
 
-extern TestExecuter testExecuter;
+
 class CrazyCubeSolverTest: public BaseTest
 {
 public:

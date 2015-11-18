@@ -1,4 +1,7 @@
 #include "TestExecuter.h"
+
+TestExecuter* TestExecuter::instance = NULL;
+
 void TestExecuter::RunAllTests(bool withTime = true)
 {
 	//cout << "TestExecuter ["<< this <<"] tests.size(): "<<tests.size();
