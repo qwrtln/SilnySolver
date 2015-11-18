@@ -6,7 +6,7 @@
 #include <vector>
 
 using namespace std;
-#include "ConstDefs.h"
+#include "CrazyCubeAbstract.h"
 
 class BaseTest: public CrazyCubeAbstract
 {
