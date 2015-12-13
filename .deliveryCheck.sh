@@ -12,54 +12,76 @@ NC='\033[0m' # No Color
 BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
 
+# Boolean semaphores for decision making
 CAN_DELIVER=false
 RUN_CHECK=false
+POSSIBLE_SQUASH=true
 
-# First condition to check - if you're on origin/development branch
-if git status | grep -q 'On branch development'
+# Firstly, check if proper number of arguments was given: repo and branch
+if [ "$#" -ne 2 ]
+    then echo -e "Illegal number of parameters. When doing a delivery, you have to type both the name of the repository and the branch you're delivering to. For instance:\n\ngit deliver origin development\n"
+# Secondly, check if the name of repo is correct
+elif [ ! "$1" = "origin" ]
 then
-    echo "You are now on the development branch."
+    echo -e "${RED}$1${NORMAL} doesn't appear to be a repository. Try again."
+# Lastly, make sure the branch exists
+else
+    # Checking current branch
+    BRANCH=$(git status | grep "On branch " | sed {s/"On branch "//})
     RUN_CHECK=true
-fi
 
-# Second condition - pushing to origin/development from anywhere
-if [ "$REPO" == "origin" ] && [ "$BRANCH" == "development" ]
-then
-    echo "You are now pushing to development branch."
-    RUN_CHECK=true
+    # Check if the branch that's being pushed to exists
+    if ! git branch -r | grep -qo $2
+    then
+        echo -e "Branch ${CYAN}$2${NORMAL} doesn't seem to exist on the remote repository. In order to push, it has to be created. Continue? [y/n]"
+        read createBranch 
+        case "$createBranch" in
+            y|Y ) echo "Very well."
+                  POSSIBLE_SQUASH=false
+                  ;;
+            n|N ) echo "Alright, must have been a typo. Try again then."
+                  RUN_CHECK=false
+                  ;;
+            * ) echo "Invalid input. Skipping delivery."
+                RUN_CHECK=false 
+                ;;
+        esac
+    fi
 fi
 
 if [ "$RUN_CHECK" = true ]
 then
-    echo -e "Running delivery check...\n"
-
-    # Check if developer's trying to push more than one commit
-    (( N= $(git log origin/feature/deliveryCheckScript..feature/deliveryCheckScript| grep -c 'commit [0-9a-f]\{40\}') ))
-    if [ $N -gt 1 ]
-    then    
-        echo -e "You are trying to push ${YELLOW}$N commits${NC}. Would you like to ${GREEN}rebase${NC} them instead? [y/n] " 
-        read rebase 
-        case "$rebase" in
-            y|Y ) git stash >/dev/null # Safety check. Rebasing with unstaged changes is impossible.
-                  git rebase -i @~$N
-                  git stash apply >/dev/null
-                  ;;
-            n|N ) echo -e "As you wish. Note that pushing ${RED}more than one${NC} commit makes it harder to revert your change. "
-                  ;;
-            * ) echo "Invalid input. Skipping rebase." 
-                ;;
-        esac
+    echo -e  "Pushing from ${GREEN}local${NC} $BRANCH to ${RED}remote${NC} $2. Running delivery check...\n"
+    
+    if [ "$POSSIBLE_SQUASH" = true ]
+    then
+# Check if developer's trying to push more than one commit
+        (( N= $(git log $1/$2..$2| grep -c 'commit [0-9a-f]\{40\}') ))
+        if [ $N -gt 1 ]
+        then    
+            echo -e "You are trying to push ${YELLOW}$N commits${NC}. Would you like to ${GREEN}rebase${NC} them instead? [y/n] " 
+            read rebase 
+            case "$rebase" in
+                y|Y ) git stash >/dev/null # Safety check. Rebasing with unstaged changes is impossible.
+                      git rebase -i @~$N
+                      git stash apply >/dev/null
+                      ;;
+                n|N ) echo -e "As you wish. Note that pushing ${RED}more than one${NC} commit makes it harder to revert your change. "
+                      ;;
+                * ) echo "Invalid input. Skipping rebase." 
+                    ;;
+            esac
+        fi
     fi
-
-    # Old build.log will only disturb with current check. It should be removed. 
+# Old build.log will only disturb with current check. It should be removed. 
     rm -rf *.log
-    
-    # Put current build files in separate folder - move them back later
+
+# Put current build files in separate folder - move them back later
     mkdir -p .temp .temp/Dev .temp/Test
-    mv Dev/build/*.o Dev/build/*.d SilnySolver .temp/Dev/
-    mv Test/build/*.o Test/build/*.d SilneTesty .temp/Test/
-    
-    # Let's gather some build logs
+    mv Dev/build/*.o Dev/build/*.d SilnySolver .temp/Dev/ 2>/dev/null
+    mv Test/build/*.o Test/build/*.d SilneTesty .temp/Test/ 2>/dev/null
+
+# Let's gather some build logs
     make test 2> build.log  
 
     if [ -s build.log ]
@@ -95,26 +117,21 @@ then
                         
                     fi
             fi
-    else
-        rm -rf build.log .buildErr.log # in this case those files are no longer needed
-        echo -e "\nThe code is ${CYAN}pristine${NC}!"
-        CAN_DELIVER=true
-    fi
-
-    # Clean up after delivery check build
-    make clean > /dev/null
-    # Put previous build files back where they belong 
-    mv .temp/Dev/* Dev/build/
-    mv .temp/Test/* Test/build/
-    rm -rf .temp
-
 else
-    echo "Not on development branch. Doing regular push."
+    rm -rf build.log .buildErr.log 2>/dev/null # in this case those files are no longer needed
+    echo -e "\nThe code is ${CYAN}pristine${NC}!"
     CAN_DELIVER=true
 fi
 
-if [ "$CAN_DELIVER" = true ]
-then
-    git push $REPO $BRANCH
+# Clean up after delivery check build
+    make clean > /dev/null
+# Put previous build files back where they belong 
+    mv .temp/Dev/* Dev/build/ 2>/dev/null
+    mv .temp/Test/* Test/build/ 2>/dev/null
+    rm -rf .temp 2>/dev/null
 fi
 
+if [ "$CAN_DELIVER" = true ]
+    then
+        git push $REPO $BRANCH
+    fi
