@@ -2,12 +2,10 @@
 
 #include <string>
 
-<<<<<<< HEAD
+
 #include <cstring>
 #include <cstdlib>
 
-=======
->>>>>>> 90a858387e6f1a4711e226dfc8cf39ed1e201873
 //#include <fstream>
 
 //using std::ifstream;
@@ -18,11 +16,8 @@ FileReader::FileReader(char* fileName)
 
 file.open(fileName, std::ifstream::in);
 
-<<<<<<< HEAD
-array = NULL;
 
-=======
->>>>>>> 90a858387e6f1a4711e226dfc8cf39ed1e201873
+array = NULL;
 }
 
 void FileReader::readArray(char delimiter) //delimiter = ' '
@@ -30,7 +25,7 @@ void FileReader::readArray(char delimiter) //delimiter = ' '
 
 //tmp
 arraySize = 1;
-<<<<<<< HEAD
+
 //tmp
 
 //TODO   dynamic buffer size
@@ -109,11 +104,7 @@ while(!file.eof())
 	}
 
 }
-=======
 
-array = new int[arraySize];
-//tmp
->>>>>>> 90a858387e6f1a4711e226dfc8cf39ed1e201873
 
 }
 
@@ -133,8 +124,4 @@ FileReader::~FileReader()
 
 file.close();
 
-<<<<<<< HEAD
-
-=======
 }
->>>>>>> 90a858387e6f1a4711e226dfc8cf39ed1e201873
