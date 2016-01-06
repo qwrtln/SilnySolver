@@ -17,7 +17,7 @@ int arraySize;
 
 public:
 
-FileReader(char* fileName);
+FileReader(const char* fileName);
 
 
 void readArray(char delimiter = ' ');
