@@ -11,7 +11,7 @@
 //using std::ifstream;
 
 
-FileReader::FileReader(char* fileName)
+FileReader::FileReader(const char* fileName)
 {
 
 file.open(fileName, std::ifstream::in);
