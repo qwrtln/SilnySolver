@@ -24,6 +24,9 @@ public:
 		SetUp();
 	}
 protected:
+
+
+
 	void SetUp()
 	{
 
@@ -31,7 +34,7 @@ protected:
 
 	testFile.open("./testFileReader.txt");		
 
-	testFile<<"1";
+	testFile<<"10 20";
 
 	testFile.close();
 
@@ -39,6 +42,7 @@ protected:
 	//fileReader = new FileReader("./testFileReader.txt");
 
 	}
+
 	void TearDown()
 	{
 
@@ -47,15 +51,18 @@ protected:
 	//delete	fileReader;
 
 	}
-protected:
-	//static FileReader* fileReader;
+
+
+	static FileReader* fileReader;
+
+
 };
 
-//FileReader FileReaderTest::fileReader;
+FileReader* FileReaderTest::fileReader;
 
-TEST_F(FileReaderTest, openFile)
+TEST_F(FileReaderTest, readNumbersFromFile)
 {
-	
+//	FileReader fileReader("./testFileReader.txt");		
 
 	//ASSERT_EQ(solver.getSolvedMask(), solvedMask);
 }

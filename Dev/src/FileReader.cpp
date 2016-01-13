@@ -11,7 +11,12 @@
 //using std::ifstream;
 
 
-FileReader::FileReader(const char* fileName)
+FileReader::FileReader()
+{
+
+}
+
+FileReader::FileReader(char const* fileName)
 {
 
 file.open(fileName, std::ifstream::in);
@@ -78,7 +83,7 @@ while(!file.eof())
 	
 	//mock
 
-	strcpy(token, "27");
+	//strcpy(token, "27");
 	//	
 
 	array[currentTokenId] = atoi(token);
