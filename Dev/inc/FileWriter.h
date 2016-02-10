@@ -26,10 +26,12 @@ FileWriter(char const* fileName);
 
 //int* getArray();
 
-void writeArray();
+void writeArray(char delimiter = ' ');
 
 //int getArraySize();
 
+
+bool isOpen();
 
 ~FileWriter();
 
