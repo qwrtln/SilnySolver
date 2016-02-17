@@ -13,7 +13,7 @@ void TestCase##_##TestName()
         TestClass##_##TestName():TestClass(#TestClass,#TestName)\
     {\
         SetUp();\
-        TestExecuter::getInstance()->AddTest(this);\
+        TestExecuter::getInstance()->AddTest(this, #TestClass);\
     }\
     virtual ~TestClass##_##TestName()\
     {\
@@ -27,6 +27,14 @@ void TestCase##_##TestName()
 // Macro executing all testcases
 #define RUN_ALL_TESTS(withTime)\
     TestExecuter::getInstance()->RunAllTests(withTime)
+
+//Macro executing CrazyCube testcases
+#define RUN_CRAZYCUBE_TESTS(withTime)\
+  TestExecuter::getInstance()->RunCrazyCubeTests(withTime)
+
+//Macro executing CrazyCubeSolver testcases
+#define RUN_CRAZYCUBE_SOLVER_TESTS(withTime)\
+  TestExecuter::getInstance()->RunCrazyCubeSolverTests(withTime)
 
 // Przykladowe makra. Mozna dopisac inne jak zajdzie taka potrzeba :)
 

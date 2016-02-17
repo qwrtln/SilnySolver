@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseTest.h"
 #include "TestMacros.h"
+#include <map>
 
 class TestExecuter
 {
@@ -12,7 +13,9 @@ public:
 	{
 	}
 	void RunAllTests(bool withTime);
-	void AddTest(BaseTest* test);
+  void RunCrazyCubeSolverTests(bool withTime);
+  void RunCrazyCubeTests(bool withTime);
+	void AddTest(BaseTest* test, std::string name);
 
 	static TestExecuter* getInstance()
 {
@@ -27,7 +30,7 @@ return instance;
 
 	//void AddTest(void (*test)());
 protected:
-	vector<BaseTest*> tests;
+  multimap<string, BaseTest*> testsMap;
 	//vector<void(*)()> functions;
 };
 
