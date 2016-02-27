@@ -12,7 +12,7 @@ class BaseTest: public CrazyCubeAbstract
 {
 public:
 	BaseTest(string testCase, string testName);
-	virtual ~BaseTest(void);
+	virtual ~BaseTest();
 	virtual void TestCode() = 0;
 	virtual void Run();
 	virtual void Print(bool withTime);

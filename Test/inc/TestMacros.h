@@ -28,15 +28,22 @@ void TestCase##_##TestName()
 #define RUN_ALL_TESTS(withTime)\
     TestExecuter::getInstance()->RunAllTests(withTime)
 
-//Macro executing CrazyCube testcases
 #define RUN_CRAZYCUBE_TESTS(withTime)\
   TestExecuter::getInstance()->RunCrazyCubeTests(withTime)
 
-//Macro executing CrazyCubeSolver testcases
 #define RUN_CRAZYCUBE_SOLVER_TESTS(withTime)\
   TestExecuter::getInstance()->RunCrazyCubeSolverTests(withTime)
 
-// Przykladowe makra. Mozna dopisac inne jak zajdzie taka potrzeba :)
+#define RUN_CRAZYCUBEIMPROVED_TESTS(withTime)\
+  TestExecuter::getInstance()->RunCrazyCubeImprovedTests(withTime)
+
+#define RUN_CRAZYCUBMAPPER_TESTS(withTime)\
+  TestExecuter::getInstance()->RunCrazyCubeMapperTests(withTime)
+
+#define RUN_PERFORMANCE_TESTS(withTime)\
+  TestExecuter::getInstance()->RunPerformanceTests(withTime)
+
+// Example macros. New ones can be added.
 
 #define ASSERT_EQ_STL_CONTAINER(actual, expected)\
 if(!(actual.size() == expected.size()))\
@@ -72,6 +79,38 @@ else\
     }\
 }
 
+#include<bitset>
+#define ASSERT_EQ_BIN(actual, expected)\
+if(!(actual == expected))\
+{\
+    result = 0;\
+    cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
+    bitset<8> bAct(actual);\
+    bitset<8> bExp(expected);\
+    cout << "Expected:\t" << bAct << "\n";\
+    cout << "Assertion: " << "= " << "\n";\
+    cout << "Actual:\t\t" << bExp << "\n";\
+}\
+else\
+{\
+    result = result && 1;\
+}
+
+#define ASSERT_NE_BIN(actual, expected)\
+if(!(actual != expected))\
+{\
+    result = 0;\
+    cout << __FILE__ << ":" << __LINE__ << ":" << "FAILURE\n";\
+    bitset<8> bAct(actual);\
+    bitset<8> bExp(expected);\
+    cout << "Expected:\t" << bAct << "\n";\
+    cout << "Assertion: " << "= " << "\n";\
+    cout << "Actual:\t\t" << bExp << "\n";\
+}\
+else\
+{\
+    result = result && 1;\
+}
 
 #define ASSERT_EQ_HEX(actual, expected)\
 if(!(actual == expected))\

@@ -281,32 +281,6 @@ TEST_F(CrazyCubeTest, Move_undoMoveTest)
 	ASSERT_EQ(cube.isSolved(), true);
 }
 
-/*
-TEST_F(CrazyCubeTest, PerformanceTest)
-{
-	cube.resetCube(); 
-	for(unsigned short int i = 0; i < 9; i++)
-	{
-		TestMove(i);
-	}
-}
-*/
-TEST_F(CrazyCubeTest, PerformanceAvgTest)
-{
-	cube.resetCube(); 
-	#ifndef PREF_DEPTH
-	for(unsigned short int i = 0; i <= 6; i++)
-	{
-		TestMoveAverage(i, 5);
-	}
-	#else
-	for(unsigned short int i = 0; i <= PREF_DEPTH; i++)
-	{
-		TestMoveAverage(i, 5);
-	}
-	#endif
-}
-
 TEST_F(CrazyCubeTest, isSolvedMasksTest)
 {
 	CrazyCube genericCube(1);

@@ -5,7 +5,6 @@
 
 class TestExecuter
 {
-
 	static TestExecuter* instance;
 
 public:
@@ -13,25 +12,23 @@ public:
 	{
 	}
 	void RunAllTests(bool withTime);
-  void RunCrazyCubeSolverTests(bool withTime);
-  void RunCrazyCubeTests(bool withTime);
+    void RunCrazyCubeSolverTests(bool withTime);
+    void RunCrazyCubeTests(bool withTime);
+    void RunCrazyCubeImprovedTests(bool withTime);
+    void RunCrazyCubeMapperTests(bool withTime);
+    void RunPerformanceTests(bool withTime);
 	void AddTest(BaseTest* test, std::string name);
 
 	static TestExecuter* getInstance()
-{
-	if(!instance)
-{
-instance = new TestExecuter();
+    {
+        if(!instance)
+        {
+            instance = new TestExecuter();
+        }
+        return instance; 
+    }
 
-}
-return instance; 
-
-}
-
-	//void AddTest(void (*test)());
 protected:
-  multimap<string, BaseTest*> testsMap;
-	//vector<void(*)()> functions;
+    multimap<string, BaseTest*> testsMap;
 };
-
 

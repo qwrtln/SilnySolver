@@ -24,8 +24,8 @@ public:
 	void setSolutions(vector<vector<unsigned short int> > solutions);	// For testing purpose
 	vector<vector<unsigned short int> > getSolutions();
 	void solve();
-	void setCrazyCube(CrazyCube* crazyCube);
-	CrazyCube* getCrazyCube();
+	void setCrazyCube(CrazyCubeBase* crazyCube);
+	CrazyCubeBase* getCrazyCube();
 	void setParameters(CrazyCubeSolverParametersD& parameters);
 	CrazyCubeSolverParametersD getParameters();
 
@@ -39,7 +39,7 @@ protected:
 	vector<bool> enabledMoves;
 	unsigned short int numberOfSolutions;
 	unsigned short int solutionsFound;
-	CrazyCube* crazyCube;
+	CrazyCubeBase* crazyCube;
 	unsigned long long int solvedMask;
 	vector<vector<unsigned short int> > solutions;
 	unsigned short int* currentPath;

@@ -29,3 +29,9 @@ const unsigned long long CrazyCubeAbstract::solvedInnerCorners = 0x11100000000;
 const unsigned short int CrazyCubeAbstract::CornerPieces[7] = {56, 52, 48, 44, 40, 36, 32};
 const unsigned short int CrazyCubeAbstract::EdgePieces[8]  = {28, 24, 20, 16, 12, 8, 4, 0};
 const unsigned short int CrazyCubeAbstract::centrePosition = 60;
+
+// Zahardcodowane wyniki funkcji w celu optymalizacji
+const unsigned short int CrazyCubeAbstract::factorials[NUM_OF_EDGES + 1] = {1, 1, 2, 6, 24, 120, 720, 5040, 40320};
+const unsigned short int CrazyCubeAbstract::pow2toX[NUM_OF_EDGES] = {1, 2, 4, 8, 16, 32, 64, 128};
+
+

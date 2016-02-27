@@ -10,8 +10,6 @@ Dev/build/*.d
 Dev/build/*.log
 Dev/build/SilnySolver
 
-Dev/build/SilnySolver.exe
-
 Test/*.cpp~
 Test/*.h~
 Test/build/*.o
@@ -22,3 +20,5 @@ Test/build/SilneTesty
 .temp
 
 *.exe
+tags
+Dev/build/SilnySolver.exe

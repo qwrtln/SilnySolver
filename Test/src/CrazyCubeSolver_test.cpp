@@ -96,19 +96,8 @@ TEST_F(CrazyCubeSolverTest, SetSolutionsTest)
 	}	
 }
 
-TEST_F(CrazyCubeSolverTest, SetCrazyCubeTest)
-{
-	CrazyCube* cube1 = new CrazyCube;
-	CrazyCube* cube2 = NULL;
-	solver.setCrazyCube(cube1);
-	cube2 = solver.getCrazyCube();
-	ASSERT_EQ(cube1, cube2);
-	delete cube1;
-}
-
 TEST_F(CrazyCubeSolverTest, SetParametersTest)
 {
-	//void setParameters(CrazyCubeSolverParametersD& parameters);
 	CrazyCubeSolverParametersD params, actual;	
 	params.maxDepth = 5;
 	params.minDepth = 2;

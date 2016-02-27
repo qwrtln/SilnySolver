@@ -80,11 +80,11 @@ void CrazyCubeSolver:: solve()
 		delete[] currentPath;
 	}
 }
-void CrazyCubeSolver:: setCrazyCube(CrazyCube* crazyCube)
+void CrazyCubeSolver:: setCrazyCube(CrazyCubeBase* crazyCube)
 {
 	this->crazyCube = crazyCube;
 }
-CrazyCube* CrazyCubeSolver:: getCrazyCube()
+CrazyCubeBase* CrazyCubeSolver:: getCrazyCube()
 {
 	return this->crazyCube;
 }
@@ -125,13 +125,13 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 	}
 
 	// Check if you've reached final depth and if the cube is solved
-	if ( (depth == 0) && crazyCube->isSolved(solvedMask))
+	if ( (depth == 0) && crazyCube->isSolved())
 	{
 		// If so, there's no point in going any deeper
 		return true;
 	}
 	// Otherwise, keep searching but discontinue, if the cube is already solved
-	else if ( depth > 0 && !crazyCube->isSolved(solvedMask))
+	else if ( depth > 0 && !crazyCube->isSolved())
 	{
 		// Iterate through each move
 		for (int move = L; move < NUM_OF_MOVES; ++move)
