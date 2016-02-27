@@ -11,7 +11,7 @@ DEVSRC = ../../Dev/src/
 BUILT = $(subst src,build,$(DEVSRC))
 
 # Compiler flags
-FLAGS = -Wall -O3
+FLAGS = -Wall -O3 
 
 # List of built dev files is generated on .cpp files, not .o files
 # This is due to lack of certainty, whether they are actually built

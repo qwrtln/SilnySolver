@@ -323,3 +323,8 @@ void CrazyCube::resetCube()
 {
 	cubeState = solvedCube;
 }
+
+void CrazyCube::printCubeState()
+{
+    std::cout << std::hex << this->getCubeState() << std::dec << std::endl;
+}

@@ -7,12 +7,12 @@
   
 #ifndef CRAZYCUBE_H_
 #define CRAZYCUBE_H_
-#include "CrazyCubeAbstract.h"
+#include "CrazyCubeBase.h"
 
 /**
  *  3x3x2 CrazyCube representation. Behold.
  */
-class CrazyCube: public CrazyCubeAbstract
+class CrazyCube: public CrazyCubeBase
 {
 private:
 	unsigned long long cubeState;
@@ -153,6 +153,11 @@ public:
      * Cube is solved again with no effort :)
      */
 	void resetCube();
+        /**
+     * Prints cube state using std::cout
+     */
+    void printCubeState();
+
 };
 
 #endif /* CRAZYCUBE_H_ */

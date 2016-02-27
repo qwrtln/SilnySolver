@@ -7,7 +7,7 @@ INC = -I ../inc/
 SRC = ../src/
 
 # Compiler flags
-FLAGS = -Wall -O3
+FLAGS = -Wall -O3 
 
 # variable containing list of all .cpp files in ../src/ folder
 SRC_FILES := $(wildcard $(SRC)*.cpp) 
