@@ -37,6 +37,14 @@ file<<array[i]<<delimiter;
 }
 
 
+void FileWriter::readArray(int* inputArray, int inputSize)
+{
+
+array = inputArray;
+arraySize = inputSize;
+
+}
+
 bool FileWriter::isOpen()
 {
 

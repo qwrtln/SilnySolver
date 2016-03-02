@@ -22,7 +22,7 @@ FileWriter();
 FileWriter(char const* fileName);
 
 
-//void readArray(char delimiter = ' ');
+void readArray(int* inputArray, int inputSize);
 
 //int* getArray();
 
