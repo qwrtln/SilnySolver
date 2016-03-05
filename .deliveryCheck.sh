@@ -83,7 +83,8 @@ then
     mv Test/build/*.o Test/build/*.d SilneTesty .temp/Test/ 2>/dev/null
 
 # Let's gather some build logs
-    make test 2> build.log  
+# This rule builds short tests only for memory leaks finding
+    make memcheck 2> build.log  
 
     if [ -s build.log ]
     then
@@ -129,8 +130,32 @@ then
 
     if [ "$MEMORY_CHECK" = true ]
     then
-        echo -e "\nThis is where Valgrind comes in.\n"
+        # The following is an array for "busy spinner"
+        spin[0]="-"
+        spin[1]="\\"
+        spin[2]="|"
+        spin[3]="/"
 
+        echo -n "Checking for memory leaks ${spin[0]}"
+        valgrind ./SilneTesty CrazyCube --leak-check=full &> .memLeaks &
+        pid=$!
+        # Valgrind takes a long time to run, so we want to see if it hasn't hung up
+        while kill -0 $pid 2>/dev/null
+        do
+            for i in "${spin[@]}"
+            do
+                echo -ne "\b$i"
+                sleep 0.1
+            done
+        done
+
+        echo -e "\n"
+        grep "HEAP SUMMARY" .memLeaks -A2 | cut -c 11-
+        grep "LEAK SUMMARY" .memLeaks -A5 | cut -c 11-
+        grep "ERROR SUMMARY" .memLeaks | cut -c 11-
+        rm .memLeaks
+
+        echo -e "\nLooks fine.\n"
     fi
 
     # Clean up after delivery check build
