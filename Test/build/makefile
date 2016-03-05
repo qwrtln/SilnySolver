@@ -1,6 +1,4 @@
 # Some variables declarations
-# Compiler
-CXX = g++
 # Path to .h files - both Test and Dev	
 INC = -I ../inc/ -I ../../Dev/inc/
 # Path to .cpp files
@@ -9,9 +7,6 @@ SRC = ../src/
 DEVSRC = ../../Dev/src/
 # Path to dev binaries
 BUILT = $(subst src,build,$(DEVSRC))
-
-# Compiler flags
-FLAGS = -Wall -O3 
 
 # List of built dev files is generated on .cpp files, not .o files
 # This is due to lack of certainty, whether they are actually built
@@ -22,6 +17,11 @@ SRC_FILES := $(wildcard $(SRC)*.cpp)
 OBJ_FILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRC_FILES)))
 # List of all data blocks
 DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
+
+# A separate rule for delivery checking purposes 
+MemoryCheck: FLAGS += -D MEMORY_CHECK
+MemoryCheck: productionCode $(OBJ_FILES) 
+	$(CXX) $(FLAGS) $(BUILT_FILES) $(OBJ_FILES) $(INC) -o SilneTesty
 
 SilneTesty: productionCode $(OBJ_FILES) 
 	$(CXX) $(FLAGS) $(BUILT_FILES) $(OBJ_FILES) $(INC) -o $@
