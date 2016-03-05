@@ -130,6 +130,7 @@ then
     if [ "$MEMORY_CHECK" = true ]
     then
         echo -e "\nThis is where Valgrind comes in.\n"
+
     fi
 
     # Clean up after delivery check build
