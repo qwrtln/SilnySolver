@@ -16,6 +16,7 @@ NORMAL=$(tput sgr0)
 CAN_DELIVER=false
 RUN_CHECK=false
 POSSIBLE_SQUASH=true
+MEMORY_CHECK=true
 
 # Firstly, check if proper number of arguments was given: repo and branch
 if [ "$#" -ne 2 ]
@@ -42,9 +43,9 @@ else
             n|N ) echo "Alright, must have been a typo. Try again then."
                   RUN_CHECK=false
                   ;;
-            * ) echo "Invalid input. Skipping delivery."
-                RUN_CHECK=false 
-                ;;
+              * ) echo "Invalid input. Skipping delivery."
+                  RUN_CHECK=false 
+                  ;;
         esac
     fi
 fi
@@ -96,6 +97,7 @@ then
                 grep --color -i error build.log
                 rm -rf .buildErr.log # remove in case of aborting
                 echo -e "\nDelivery check finished with ${RED}compilation errors${NC} listed above. See build.log file for details. Please ${BOLD}correct them${NORMAL} before you continue."
+                MEMORY_CHECK=false
                 else 
                     # Check for warnings only if there are no errors
                     grep -i warning build.log > .buildWar.log
@@ -110,28 +112,35 @@ then
                             y|Y ) echo "Forcing push..."
                                   CAN_DELIVER=true;;
                             n|N ) echo "Aborting push." 
+                                  MEMORY_CHECK=false
                                   ;;
-                            * ) echo "Invalid input. Aborting push." 
-                                ;;
+                              * ) echo "Invalid input. Aborting push." 
+                                  MEMORY_CHECK=false
+                                  ;;
                         esac
                         
                     fi
             fi
-else
-    rm -rf build.log .buildErr.log 2>/dev/null # in this case those files are no longer needed
-    echo -e "\nThe code is ${CYAN}pristine${NC}!"
-    CAN_DELIVER=true
-fi
+    else
+        rm -rf build.log .buildErr.log 2>/dev/null # in this case those files are no longer needed
+        echo -e "\nThe code is ${CYAN}pristine${NC}!"
+        CAN_DELIVER=true
+    fi
 
-# Clean up after delivery check build
-    make clean > /dev/null
-# Put previous build files back where they belong 
-    mv .temp/Dev/* Dev/build/ 2>/dev/null
-    mv .temp/Test/* Test/build/ 2>/dev/null
-    rm -rf .temp 2>/dev/null
+    if [ "$MEMORY_CHECK" = true ]
+    then
+        echo -e "\nThis is where Valgrind comes in.\n"
+    fi
+
+    # Clean up after delivery check build
+        make clean > /dev/null
+    # Put previous build files back where they belong 
+        mv .temp/Dev/* Dev/build/ 2>/dev/null
+        mv .temp/Test/* Test/build/ 2>/dev/null
+        rm -rf .temp 2>/dev/null
 fi
 
 if [ "$CAN_DELIVER" = true ]
-    then
-        git push $REPO $BRANCH
-    fi
+then
+    git push $REPO $BRANCH
+fi
