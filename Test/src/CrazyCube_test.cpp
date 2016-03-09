@@ -113,7 +113,7 @@ TEST_F(CrazyCubeTest, setCentreTest)
 TEST_F(CrazyCubeTest, setCornersTest)
 {
 	CrazyCube genericCube(1);
-	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	genericCube.setCorners(corners);
 	ASSERT_EQ((genericCube.checkCorners()), true )
 }
@@ -121,7 +121,7 @@ TEST_F(CrazyCubeTest, setCornersTest)
 TEST_F(CrazyCubeTest, setEdgesTest)
 {
 	CrazyCube genericCube(1);
-	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
 	genericCube.setEdges(edges);
 	ASSERT_EQ((genericCube.checkEdges()), true )
 }
@@ -130,9 +130,9 @@ TEST_F(CrazyCubeTest, innerCircleTest)
 {
 	CrazyCube genericCube(1);
 	genericCube.setCentre(true);
-	edgeNames edges[NUM_OF_EDGES] = {yry, yry, yry, yry, yrw, yrw, yrw, yrw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YRY, edgeNames::YRY, edgeNames::YRY, edgeNames::YRW, edgeNames::YRW, edgeNames::YRW, edgeNames::YRW};
 	genericCube.setEdges(edges);
-	cornerNames corners[NUM_OF_CORNERS] = {ygry, ygry, ygry, ygry, ygrw, ygrw, ygrw};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YGRY, cornerNames::YGRY, cornerNames::YGRY, cornerNames::YGRW, cornerNames::YGRW, cornerNames::YGRW};
 	genericCube.setCorners(corners);
 	ASSERT_EQ((genericCube.checkInnerCircle()), true )
 }
@@ -145,7 +145,7 @@ TEST_F(CrazyCubeTest, setCubeTest)
 
 TEST_F(CrazyCubeTest, setNEGATIVEcubeTest)
 {
-	edgeNames edges[NUM_OF_EDGES] = {wgw, yry, yby, yoy, ygy, wrw, wbw, wow}; // Wrong sequence
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WGW, edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW}; // Wrong sequence
 	cube.setEdges(edges);
 	ASSERT_NE(cube.isSolved(), 1)
 }
@@ -153,27 +153,27 @@ TEST_F(CrazyCubeTest, setNEGATIVEcubeTest)
 TEST_F(CrazyCubeTest, setWholeCubeTest)
 {
 	cube.setCubeState(0xf);
-	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	ASSERT_EQ_HEX(cube.isSolved(), 1)
 }
 
-TEST_F(CrazyCubeTest, L)
+TEST_F(CrazyCubeTest, rotation::L)
 {
-	edgeNames edges[NUM_OF_EDGES] = {yry, wbw, yoy, ygy, wrw, yby, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {ygry, wobw, wbrw, yogy, wrgw, yboy, yrby};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::WBW, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::YBY, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::WOBW, cornerNames::WBRW, cornerNames::YOGY, cornerNames::WRGW, cornerNames::YBOY, cornerNames::YRBY};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.L();
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, U)
+TEST_F(CrazyCubeTest, rotation::U)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {ygy, yry, yby, yoy, wrw, wbw, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {yogy, ygry, yrby, yboy, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YGY, edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	
@@ -181,44 +181,44 @@ TEST_F(CrazyCubeTest, U)
 	ASSERT_EQ_HEX(cubeToCompare.getCubeState(), cube.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, F)
+TEST_F(CrazyCubeTest, rotation::F)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {wrw, yby, yoy, ygy, yry, wbw, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {wbrw, wrgw, yboy, yogy, yrby, ygry, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WRW, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::WBRW, cornerNames::WRGW, cornerNames::YBOY, cornerNames::YOGY, cornerNames::YRBY, cornerNames::YGRY, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.F();
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, Ui) 
+TEST_F(CrazyCubeTest, rotation::UI) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {yby, yoy, ygy, yry, wrw, wbw, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {yrby, yboy, yogy, ygry, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.Ui();
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, U2) 
+TEST_F(CrazyCubeTest, rotation::U2) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {yoy, ygy, yry, yby, wrw, wbw, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::YBY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.U2();
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, Mv) 
+TEST_F(CrazyCubeTest, rotation::MV) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {wow, yby, wrw, ygy, yoy, wbw, yry, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WOW, edgeNames::YBY, edgeNames::WRW, edgeNames::YGY, edgeNames::YOY, edgeNames::WBW, edgeNames::YRY, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	cube.toggleCentre();
 	CrazyCube cubeToCompare;
@@ -226,11 +226,11 @@ TEST_F(CrazyCubeTest, Mv)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, Mh)
+TEST_F(CrazyCubeTest, rotation::MH)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {yry, wgw, yoy, wbw, wrw, ygy, wow, yby};
-	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::WGW, edgeNames::YOY, edgeNames::WBW, edgeNames::WRW, edgeNames::YGY, edgeNames::WOW, edgeNames::YBY};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	cube.toggleCentre();
 	CrazyCube cubeToCompare;
@@ -238,44 +238,44 @@ TEST_F(CrazyCubeTest, Mh)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, MhRr) 
+TEST_F(CrazyCubeTest, rotation::MHRR) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {yoy, yby, yry, wgw, wrw, wbw, wow, ygy};
-	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::YBY, edgeNames::YRY, edgeNames::WGW, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::YGY};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.MhRr();
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, MhLr)
+TEST_F(CrazyCubeTest, rotation::MHLR)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {yoy, wbw, yry, ygy, wrw, yby, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::WBW, edgeNames::YRY, edgeNames::YGY, edgeNames::WRW, edgeNames::YBY, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.MhLr();
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, MvFr) 
+TEST_F(CrazyCubeTest, rotation::MVFR) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {wrw, ygy, yoy, yby, yry, wbw, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WRW, edgeNames::YGY, edgeNames::YOY, edgeNames::YBY, edgeNames::YRY, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.MvFr();
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, MvBr)
+TEST_F(CrazyCubeTest, rotation::MVBR)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {yry, ygy, wow, yby, wrw, wbw, yoy, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {yboy, yogy, ygry, yrby, wrgw, wbrw, wobw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YGY, edgeNames::WOW, edgeNames::YBY, edgeNames::WRW, edgeNames::WBW, edgeNames::YOY, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
 	cubeToCompare.MvBr();
@@ -320,7 +320,7 @@ TEST_F(CrazyCubeTest, isSolvedMasksTest)
 	CrazyCube genericCube(1);
 
 	// ------------------- outer
-	edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
 	genericCube.setEdges(edges);
 	ASSERT_EQ(genericCube.isSolved(solvedEdges), true );
 
@@ -329,26 +329,26 @@ TEST_F(CrazyCubeTest, isSolvedMasksTest)
 	ASSERT_EQ(genericCube.isSolved(solvedCentre), true );
 
 	genericCube.resetCube();
-	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	genericCube.setCorners(corners);
 	ASSERT_EQ(genericCube.isSolved(solvedCorners), true );
 
 	// ------------------- inner
 	genericCube.resetCube();
-	edgeNames edges2[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
+	edgeNames edges2[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
 	genericCube.setEdges(edges2);
 	ASSERT_EQ(genericCube.isSolved(solvedInnerEdges), true );
 
 	genericCube.resetCube();
-	cornerNames corners2[NUM_OF_CORNERS] = {yrby, ygry, yboy, yogy, wrgw, wbrw, wobw};
+	cornerNames corners2[NUM_OF_CORNERS] = {cornerNames::YRBY, cornerNames::YGRY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	genericCube.setCorners(corners2);
 	ASSERT_EQ(genericCube.isSolved(solvedInnerCorners), true );
 
 	// ------------------- random masks
 	genericCube.resetCube();
-	edgeNames edges3[NUM_OF_EDGES] = {yry, wow, wby, yrw, wgy, ybw, yoy, wgw};
+	edgeNames edges3[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::WOW, edgeNames::WBY, edgeNames::YRW, edgeNames::WGY, edgeNames::YBW, edgeNames::YOY, edgeNames::WGW};
 	genericCube.setEdges(edges3);
-	cornerNames corners3[NUM_OF_CORNERS] = {ygrw, yrbw, yogy, yboy, woby, wbry, wrgw};
+	cornerNames corners3[NUM_OF_CORNERS] = {cornerNames::YGRW, cornerNames::YRBW, cornerNames::YOGY, cornerNames::YBOY, cornerNames::WOBY, cornerNames::WBRY, cornerNames::WRGW};
 	genericCube.setCorners(corners3);
 	ASSERT_NE(genericCube.isSolved(solvedInnerEdges), true );
 	ASSERT_NE(genericCube.isSolved(solvedInnerCorners), true );

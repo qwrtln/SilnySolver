@@ -134,7 +134,7 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 	else if ( depth > 0 && !crazyCube->isSolved())
 	{
 		// Iterate through each move
-		for (int move = L; move < NUM_OF_MOVES; ++move)
+		for (int move = static_cast<int>(rotation::L); move < NUM_OF_MOVES; ++move)
 		{
 			// This rules out repetitions
 			if (prevMove == move)
