@@ -18,7 +18,7 @@ FileWriter::FileWriter(char const* fileName)
 }
 
 
-void FileWriter::writeArray(char delimiter)
+void FileWriter::saveArrayToFile(char delimiter)
 {
 
 if (isOpen())

@@ -26,7 +26,7 @@ void readArray(int* inputArray, int inputSize);
 
 //int* getArray();
 
-void writeArray(char delimiter = ' ');
+void writeArrayToFile(char delimiter = ' ');
 
 //int getArraySize();
 
