@@ -25,7 +25,7 @@ file.open(fileName, std::ifstream::in);
 array = NULL;
 }
 
-void FileReader::readArray(char delimiter) //delimiter = ' '
+void FileReader::readArrayFromFile(char delimiter) //delimiter = ' '
 {
 
 //tmp
@@ -34,8 +34,8 @@ arraySize = 1;
 //tmp
 
 //TODO   dynamic buffer size
-#define TOKEN_BUFFER_SIZE 3
-char token[TOKEN_BUFFER_SIZE];    
+const int TokenBufferSize = 3;
+char token[TokenBufferSize];    
 //
 
 //short tokenLength = 0;
@@ -90,7 +90,7 @@ while(!file.eof())
 
 
 	//reset token
-	for(int i = 0; i<TOKEN_BUFFER_SIZE; i++)
+	for(int i = 0; i<TokenBufferSize; i++)
 	{
 	token[i] = '\0';
 	}	
