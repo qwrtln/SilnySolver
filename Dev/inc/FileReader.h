@@ -22,7 +22,7 @@ FileReader();
 FileReader(char const* fileName);
 
 
-void readArray(char delimiter = ' ');
+void readArrayFromFile(char delimiter = ' ');
 
 int* getArray();
 
