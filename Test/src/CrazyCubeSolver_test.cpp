@@ -179,11 +179,11 @@ TEST_F(CrazyCubeSolverTest, CrazyCubeSolveTest)
 	CrazyCube kosteczka;
 	solver.setCrazyCube(&kosteczka);
 
-	kosteczka.move(MvBr);
-	kosteczka.move(L);
-	kosteczka.move(F);
-	kosteczka.move(MhRr);
-	kosteczka.move(Mv);
+	kosteczka.move(rotation::MVBR);
+	kosteczka.move(rotation::L);
+	kosteczka.move(rotation::F);
+	kosteczka.move(rotation::MHRR);
+	kosteczka.move(rotation::MV);
 
 	solver.setMinDepth(4);
 	solver.setMaxDepth(6);

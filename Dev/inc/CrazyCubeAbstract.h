@@ -35,7 +35,7 @@ public:
 	const static unsigned short int pow2toX[NUM_OF_EDGES];
 
 	// Legalne ruchy < 11
-    enum rotation {
+    enum class rotation {
 		L,		// Left 0
 		F,		// Front
 		U,		// Up
@@ -50,41 +50,41 @@ public:
 	};
 
 	// Nazwy rogow
-	enum cornerNames {
-		ygry = 0x0,	// yellow green red (inner yellow)
-		ygrw = 0x1,	// yellow green red (inner white)
-		yrby = 0x2,	// etc
-		yrbw = 0x3,	//...
-		yboy = 0x4,
-		ybow = 0x5,
-		yogy = 0x6,
-		yogw = 0x7,
-		wrgy = 0x8,	// white red green (inner yellow)
-		wrgw = 0x9,	// white red green (inner white)
-		wbry = 0xA,	// etc
-		wbrw = 0xB,	// ...
-		woby = 0xC,
-		wobw = 0xD
+	enum class cornerNames {
+		YGRY = 0x0,	// yellow green red (inner yellow)
+		YGRW = 0x1,	// yellow green red (inner white)
+		YRBY = 0x2,	// etc
+		YRBW = 0x3,	//...
+		YBOY = 0x4,
+		YBOW = 0x5,
+		YOGY = 0x6,
+		YOGW = 0x7,
+		WRGY = 0x8,	// white red green (inner yellow)
+		WRGW = 0x9,	// white red green (inner white)
+		WBRY = 0xA,	// etc
+		WBRW = 0xB,	// ...
+		WOBY = 0xC,
+		WOBW = 0xD
 	};
 
 	// Nazwy krawedzi
-	enum edgeNames {
-		yry = 0x0,	// yellow red (inner yellow)
-		yrw = 0x1,	// yellow red (inner white)
-		yby = 0x2,	// etc
-		ybw = 0x3,
-		yoy = 0x4,
-		yow = 0x5,
-		ygy = 0x6,
-		ygw = 0x7,
-		wry = 0x8,	// white red (inner yellow)
-		wrw = 0x9,	// white red (inner white)
-		wby = 0xA,	// etc
-		wbw = 0xB,
-		woy = 0xC,
-		wow = 0xD,
-		wgy = 0xE,
-		wgw = 0xF
+	enum class edgeNames {
+		YRY = 0x0,	// yellow red (inner yellow)
+		YRW = 0x1,	// yellow red (inner white) 
+    YBY = 0x2,	// etc
+		YBW = 0x3,
+		YOY = 0x4,
+		YOW = 0x5,
+		YGY = 0x6,
+		YGW = 0x7,
+		WRY = 0x8,	// white red (inner yellow)
+		WRW = 0x9,	// white red (inner white)
+		WBY = 0xA,	// etc
+		WBW = 0xB,
+		WOY = 0xC,
+		WOW = 0xD,
+		WGY = 0xE,
+		WGW = 0xF
 	};
 };
 

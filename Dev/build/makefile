@@ -1,8 +1,13 @@
 # Some variables declarations
+# Compiler
+CXX = g++
 # Path to .h files		
 INC = -I ../inc/
 # Path to .cpp files
 SRC = ../src/
+
+# Compiler flags
+FLAGS = -Wall -O3 -std=c++11
 
 # variable containing list of all .cpp files in ../src/ folder
 SRC_FILES := $(wildcard $(SRC)*.cpp) 
