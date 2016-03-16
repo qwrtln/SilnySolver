@@ -58,7 +58,7 @@ class CrazyCubeMapper: public CrazyCubeAbstract
 
         std::vector<std::vector<int>> generatePieceMap(const int, unsigned long long (CrazyCubeMapper::*convertingToIntFunction)(int), int (CrazyCubeMapper::*convertingToPiecesFunction)(unsigned long long));
 
-        CrazyCube cube;
+		CrazyCube cube;
 
         std::vector<std::vector<int>> generateOuterCornersMap();
         std::vector<std::vector<int>> generateOuterEdgesMap();
