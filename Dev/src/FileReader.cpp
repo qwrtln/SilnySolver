@@ -9,6 +9,8 @@
 //#include <fstream>
 
 //using std::ifstream;
+#include<iostream>
+
 
 
 FileReader::FileReader()
@@ -25,7 +27,53 @@ file.open(fileName, std::ifstream::in);
 array = NULL;
 }
 
+
+
 void FileReader::readArrayFromFile(char delimiter) //delimiter = ' '
+{
+
+int number = 0;
+int index = 0;
+
+
+
+//First get the number of elements
+while(file>>number)
+{
+index++;
+
+
+}
+
+
+
+//with the number of elements known, allocate the array
+arraySize = index;
+array = new int[arraySize];
+
+
+
+//reset the file to the beginning
+index = 0;
+file.clear();
+file.seekg(0, std::ios::beg);
+
+//read the numbers into the array
+while(file >> number)
+{
+
+array[index] = number;
+index++;
+
+}
+
+
+
+}
+
+
+
+void FileReader::readArrayFromFileX(char delimiter) //delimiter = ' '
 {
 
 //tmp
@@ -59,6 +107,7 @@ while(!file.eof() )
 
 
 //allocate the array
+
 array = new int[arraySize];
 
 
@@ -126,7 +175,7 @@ return arraySize;
 
 FileReader::~FileReader()
 {
-
+delete[] array;
 file.close();
 
 }
