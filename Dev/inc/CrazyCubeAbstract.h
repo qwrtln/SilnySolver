@@ -32,7 +32,7 @@ public:
 	const static unsigned short int centrePosition;
 	
 	const static unsigned short int factorials[NUM_OF_EDGES + 1]; // Thus will work like function, eg. factorials[8] = 40320
-	const static unsigned short int pow2toX[NUM_OF_EDGES];
+	const static unsigned short int pow2toX[NUM_OF_EDGES + 1];
 
 	// Legalne ruchy < 11
     enum class rotation {

@@ -24,6 +24,7 @@ CrazyCubeCache:: CrazyCubeCache()
 
 CrazyCubeCache:: ~CrazyCubeCache()
 {
+
 }
 
 void CrazyCubeCache:: cleanup()

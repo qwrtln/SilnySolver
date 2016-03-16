@@ -11,7 +11,7 @@ class CrazyCubeCache: public CrazyCubeAbstract
 {
 	
 private:
-	
+
   CrazyCubeCache();
   std::vector<std::vector<int>> outerCornersMap;
   std::vector<std::vector<int>> innerCornersMap;
