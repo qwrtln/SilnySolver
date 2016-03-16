@@ -29,14 +29,7 @@ public:
 	int** getInnerEdgesMap();
 	int** getCentreMap();
 
-    static CrazyCubeCache* getInstance()
-    {
-        if (!instance)
-        {
-            instance = new CrazyCubeCache();
-        }
-        return instance;
-    }
+    static CrazyCubeCache* getInstance();
 };
 
 #endif /* CRAZYCUBECACHE_H_ */
