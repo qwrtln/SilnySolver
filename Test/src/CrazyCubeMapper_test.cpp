@@ -34,21 +34,6 @@ protected:
 
 CrazyCubeMapper CrazyCubeMapperTest::mapper;
 
-TEST_F(CrazyCubeMapperTest, TestConstants)
-{
-    int constants = 4;
-    int* mapperConstants = mapper.getConstants();
-    int* constantsToCheck = new int[constants];
-    constantsToCheck[0] = 5;
-    constantsToCheck[1] = 40320;
-    constantsToCheck[2] = 5040;
-    constantsToCheck[3] = 1;
-    for (int i = 0; i < constants; ++i)
-    {
-        ASSERT_EQ(constantsToCheck[i],mapperConstants[i]);
-    }
-}
-
 TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceGeneralSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
