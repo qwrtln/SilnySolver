@@ -93,7 +93,7 @@ TEST_F(PerformanceTest, CrazyCubeAvgTest)
 
     passCubeToTester(&cube);
 	#ifndef PREF_DEPTH
-	for(unsigned short int i = 0; i <= 6; i++)
+	for(unsigned short int i = 0; i <= 5; i++)
 	{
 		TestMoveAverage(i, 5);
 	}
@@ -109,7 +109,7 @@ TEST_F(PerformanceTest, CrazyCubeImprovedAvgTest)
 {
 	passCubeToTester(&cubeImproved);
     #ifndef PREF_DEPTH
-	for(unsigned short int i = 0; i <= 6; i++)
+	for(unsigned short int i = 0; i <= 5; i++)
 	{
 		TestMoveAverage(i, 5);
 	}
