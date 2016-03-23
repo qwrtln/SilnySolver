@@ -15,7 +15,10 @@ FLAGS = -Wall -O3
 
 # List of built dev files is generated on .cpp files, not .o files
 # This is due to lack of certainty, whether they are actually built
-BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(DEVSRC)C*.cpp)))
+BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(DEVSRC)*.cpp)))
+BUILT_FILES := $(filter-out ../../Dev/build/SilnySolver.o, $(BUILT_FILES))
+
+
 # List of all source files
 SRC_FILES := $(wildcard $(SRC)*.cpp)
 # List of all binaries
