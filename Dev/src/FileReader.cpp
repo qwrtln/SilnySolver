@@ -16,6 +16,8 @@
 FileReader::FileReader()
 {
 
+array = NULL;
+
 }
 
 FileReader::FileReader(char const* fileName)
@@ -27,7 +29,12 @@ file.open(fileName, std::ifstream::in);
 array = NULL;
 }
 
+void FileReader::open(char const* fileName)
+{
 
+file.open(fileName, std::ifstream::in);
+
+}
 
 void FileReader::readArrayFromFile(char delimiter) //delimiter = ' '
 {

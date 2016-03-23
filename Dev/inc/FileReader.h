@@ -21,7 +21,7 @@ FileReader();
 
 FileReader(char const* fileName);
 
-
+void open(char const* fileName);
 
 void readArrayFromFile(char delimiter = ' ');
 

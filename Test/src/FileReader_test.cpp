@@ -6,7 +6,7 @@
  */
 #include "FileReader.h"
 #include "TestExecuter.h"
-#include "CrazyCubeAbstract.h"
+//#include "CrazyCubeAbstract.h"
 #include <cmath>
 
 #include <fstream>
@@ -41,6 +41,9 @@ protected:
 
 	//fileReader = new FileReader("./testFileReader.txt");
 
+
+	fileReader.open("./testFileReader.txt");
+
 	}
 
 	void TearDown()
@@ -52,19 +55,28 @@ protected:
 
 	}
 
-
-	static FileReader* fileReader;
+protected:
+	static FileReader fileReader;
 
 
 };
 
-FileReader* FileReaderTest::fileReader;
+FileReader FileReaderTest::fileReader;
 
 TEST_F(FileReaderTest, readNumbersFromFile)
 {
-//	FileReader fileReader("./testFileReader.txt");		
+	FileReader fileReader("./testFileReader.txt");		
 
-	//ASSERT_EQ(solver.getSolvedMask(), solvedMask);
+
+
+
+
+	fileReader.readArrayFromFile();
+	
+	fileReader.getArray();
+	int myArraySize = fileReader.getArraySize();
+
+	ASSERT_EQ(myArraySize, 2);
 }
 
 
