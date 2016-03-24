@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     CrazyCubeSolver solver;
 	solver.setCrazyCube(&impCube);
 
-    int movesToDo = 12;
+    const int movesToDo = 12;
     int movesMap[movesToDo] = {impCube.MvBr, impCube.L, impCube.F, impCube.MhRr, impCube.Mv, impCube.Mv, impCube.U2, impCube.MhLr, impCube.Mv, impCube.Ui, impCube.MvFr, impCube.L};//, impCube.MhRr, impCube.MvBr, impCube.F};
 
     for (int i = 0; i < movesToDo; ++i)
