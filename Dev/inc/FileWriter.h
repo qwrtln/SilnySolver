@@ -22,13 +22,11 @@ FileWriter();
 FileWriter(char const* fileName);
 
 
-void readArray(int* inputArray, int inputSize);
+void inputArrayToWrite(int* inputArray, int inputSize);
 
-//int* getArray();
 
-void writeArrayToFile(char delimiter = ' ');
+void saveArrayToFile(char delimiter = ' ');
 
-//int getArraySize();
 
 
 bool isOpen();

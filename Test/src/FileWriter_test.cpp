@@ -1,7 +1,6 @@
 /*
- * CrazyCubeSolver_test.cpp
+ * FileWriter_test.cpp
  *
- *  Created on: Sep 11, 2015
  *      Author: SecT
  */
 
@@ -31,30 +30,83 @@ protected:
 	}
 public:
 	
-	static FileWriter fileWriter;
+//	static FileWriter fileWriter;
 };
 
 //FileWriter FileWriterTest:: fileWriter;
 
 
-TEST_F(FileWriterTest, initTest)
+TEST_F(FileWriterTest, basicWrite)
 {
-//	unsigned short int minDepth = 123;
-//	solver.setMinDepth(minDepth);
-//	ASSERT_EQ(solver.getMinDepth(), minDepth);
 
-//check if text file exists after constructor
+FileWriter fileWriter;
 
-//bool isOpen = true;
+if(fileWriter.isOpen())
+{
+int myArraySize = 3;
 
-//if(!fileWriter)
-//{
-//isOpen = false;
-//}
+int* myArray = new  int[myArraySize];
 
-FileWriterTest::fileWriter.isOpen();
+myArray[0] = 2;
+myArray[1] = 5;
+myArray[2] = 8;
+
+fileWriter.inputArrayToWrite(myArray, myArraySize);
+
+fileWriter.saveArrayToFile();
+
+
+const char* filename = "data.txt";
+std::ifstream inFile(filename);
+
+int n = 0;
+int i =0;
+while(!inFile.eof()) {
+    inFile >> n;
+    ASSERT_EQ(n, myArray[i]);
+    i++;
+}
+
+}
 
 
 }
 
+
+
+TEST_F(FileWriterTest, variableDigits)
+{
+
+FileWriter fileWriter;
+
+if(fileWriter.isOpen())
+{
+int myArraySize = 3;
+
+int* myArray = new  int[myArraySize];
+
+myArray[0] = 46;
+myArray[1] = 500;
+myArray[2] = 8;
+
+fileWriter.inputArrayToWrite(myArray, myArraySize);
+
+fileWriter.saveArrayToFile();
+
+
+const char* filename = "data.txt";
+std::ifstream inFile(filename);
+
+int n = 0;
+int i =0;
+while(!inFile.eof()) {
+    inFile >> n;
+    ASSERT_EQ(n, myArray[i]);
+    i++;
+}
+
+}
+
+
+}
 

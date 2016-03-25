@@ -37,7 +37,7 @@ file<<array[i]<<delimiter;
 }
 
 
-void FileWriter::readArray(int* inputArray, int inputSize)
+void FileWriter::inputArrayToWrite(int* inputArray, int inputSize)
 {
 
 array = inputArray;
