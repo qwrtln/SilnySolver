@@ -33,6 +33,62 @@ protected:
 
 CrazyCubeSolver CrazyCubeSolverTest:: solver;
 
+#ifdef MEMORY_CHECK
+TEST_F(CrazyCubeSolverTest, findingMemoryLeaks)
+{
+    // Variables for memory check test functions arguments
+	CrazyCube kosteczka;
+    
+    unsigned short int minDepth = 3;
+    unsigned short int maxDepth = 30;
+    unsigned short int numOfSolutions = 300;
+    unsigned long long solvedMask = 0xBEDFEDFEDFCCDFED;
+
+	vector<bool> enabledMoves;
+	for(unsigned short int i = 0; i < 11; i++)
+	{
+		enabledMoves.push_back(i&1);
+	}
+
+	vector<vector<unsigned short int> > testSolutions;
+	vector<unsigned short int> sol1;
+	vector<unsigned short int> sol2;
+	sol1.push_back(1);
+	sol1.push_back(2);
+	sol2.push_back(3);
+	sol2.push_back(4);
+	testSolutions.push_back(sol1);
+	testSolutions.push_back(sol2);
+
+	CrazyCubeSolverParametersD params;	
+	params.maxDepth = maxDepth;
+	params.minDepth = minDepth;
+	params.enabledMoves = enabledMoves;
+	params.numberOfSolutions = numOfSolutions;
+	params.solvedMask = solvedMask;
+
+    solver.getCrazyCube();
+    solver.getEnabledMoves();
+    solver.getMaxDepth();
+    solver.getMinDepth();
+    solver.getNumberOfSolutions();
+    solver.getParameters();
+    solver.getSolutions();
+    solver.getSolvedMask();
+    solver.setCrazyCube(&kosteczka);
+	solver.setEnabledMoves(enabledMoves);;
+    solver.setMaxDepth(maxDepth);
+    solver.setMinDepth(minDepth);
+    solver.setNumberOfSolutions(numOfSolutions);
+    solver.setParameters(params);
+    solver.setSolutions(testSolutions);
+    solver.setSolvedMask(solvedMask);
+    //solver.setup(); /* ~~Protected method~~ */
+    // These below are unnecessary to test from the point of memory check
+    //solver.solve();
+    //solver.solveIteration(unsigned short int depth, unsigned short int prevMove);
+}
+#else
 TEST_F(CrazyCubeSolverTest, SetSolvedMaskTest)
 {
 	unsigned long long int solvedMask = 0xBABC1A6665A7A4FA;
@@ -153,3 +209,4 @@ TEST_F(CrazyCubeSolverTest, CrazyCubeSolveTest)
 	}
 
 }
+#endif
