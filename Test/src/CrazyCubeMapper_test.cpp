@@ -34,6 +34,10 @@ protected:
 
 CrazyCubeMapper CrazyCubeMapperTest::mapper;
 
+// For backward compatibility:
+#define FIVE_MOVES 5
+#define SIX_MOVES 6
+
 TEST_F(CrazyCubeMapperTest, TestConstants)
 {
     int constants = 4;
@@ -207,10 +211,9 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
    
     // 2nd case
     cube.resetCube();
-    int moves = 5;
-    int randomMoves[moves] = {F, Mv, MhRr, L, U2};
+    int randomMoves[FIVE_MOVES] = {F, Mv, MhRr, L, U2};
 
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves[i]);
     
     expectedSum = 2354;
@@ -219,9 +222,9 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
 
     // 3rd case
     cube.resetCube();
-    int randomMoves2[moves] = {U, L, F, L, Mh};
+    int randomMoves2[FIVE_MOVES] = {U, L, F, L, Mh};
 
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves2[i]);
    
     expectedSum = 1567;
@@ -238,12 +241,11 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntSolvedCube)
 
 TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 {
-    int moves = 6;
-    int randomMoves[moves] = {L, MvBr, U2, F, Ui, MhLr};
+    int randomMoves[SIX_MOVES] = {L, MvBr, U2, F, Ui, MhLr};
 
     CrazyCube cube;
 
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < SIX_MOVES; ++i)
         cube.move(randomMoves[i]);
 
     int expectedSum = 3487; // calculated in Octave
@@ -252,10 +254,9 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 
     // 2nd case
     cube.resetCube();
-    moves = 5;
-    int randomMoves2[moves] = {F, Mv, MhRr, L, U2};
+    int randomMoves2[FIVE_MOVES] = {F, Mv, MhRr, L, U2};
 
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves2[i]);
    
     expectedSum = 22888;
@@ -264,9 +265,9 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 
     // 3rd case
     cube.resetCube();
-    int randomMoves3[moves] = {U, L, F, L, Mh};
+    int randomMoves3[FIVE_MOVES] = {U, L, F, L, Mh};
 
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves3[i]);
    
     expectedSum = 36562;
@@ -283,12 +284,11 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntSolvedCube)
 
 TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
 {
-    int moves = 6;
-    int randomMoves[moves] = {MvFr, U2, Mh, MhLr, L, F};
+    int randomMoves[SIX_MOVES] = {MvFr, U2, Mh, MhLr, L, F};
 
     CrazyCube cube;
 
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < SIX_MOVES; ++i)
         cube.move(randomMoves[i]);
 
     int expectedSum = 0b110100; // result of dec2bin operation
@@ -297,9 +297,9 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
 
     // double checking
     cube.resetCube();
-    int randomMoves2[moves] = {F, L, F, Mv, MhLr, Mv};
+    int randomMoves2[SIX_MOVES] = {F, L, F, Mv, MhLr, Mv};
     
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < SIX_MOVES; ++i)
     {
         cube.move(randomMoves2[i]);
     }
@@ -310,9 +310,9 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
     
     // triple check - let's be thorough this time :)
     cube.resetCube();
-    int randomMoves3[moves] = {MhRr, MvFr, U2, MhLr, Ui, F};
+    int randomMoves3[SIX_MOVES] = {MhRr, MvFr, U2, MhLr, Ui, F};
     
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < SIX_MOVES; ++i)
     {
         cube.move(randomMoves3[i]);
     }
@@ -331,12 +331,11 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntSolvedCube)
 
 TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
 {
-    int moves = 5;
-    int randomMoves[moves] = {L, U, F, Ui, Mv};
+    int randomMoves[FIVE_MOVES] = {L, U, F, Ui, Mv};
 
     CrazyCube cube;
 
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves[i]);
 
     int expectedSum = 0b11000011; // still the same magic number
@@ -345,9 +344,9 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
 
     // double check just to be sure
     cube.resetCube();
-    int randomMoves2[moves] = {MhRr, L, Mh, MvBr, F};
+    int randomMoves2[FIVE_MOVES] = {MhRr, L, Mh, MvBr, F};
     
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < FIVE_MOVES; ++i)
     {
         cube.move(randomMoves2[i]);
     }
@@ -398,12 +397,11 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterCornersRandomCube)
 {
     // TODO: 2 more cases
 
-    int moves = 6;
-    int randomMoves[moves] = {L, MvBr, U2, MhRr, F, MhLr};
+    int randomMoves[SIX_MOVES] = {L, MvBr, U2, MhRr, F, MhLr};
 
     CrazyCube cube;
 
-    for (int i = 0; i < moves; ++i)
+    for (int i = 0; i < SIX_MOVES; ++i)
         cube.move(randomMoves[i]);
 
     int intFromConversion = 3776; // calculated in Octave
