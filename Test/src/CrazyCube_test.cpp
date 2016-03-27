@@ -92,7 +92,7 @@ TEST_F(CrazyCubeTest, findingMemoryLeaks)
     cube.isSolved();
     cube.isSolved(cube.getCubeState());
     cube.move(0);
-    cube.printCubeState();
+    // cube.printCubeState(); /* ~~This suppresses unnecessary output~~ */
     cube.resetCube();
     cube.setCentre(true);
     cube.setCorners(corners);

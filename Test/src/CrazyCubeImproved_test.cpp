@@ -24,6 +24,28 @@ protected:
     CrazyCubeImproved cubeToCompare;
 };
 
+#ifdef MEMORY_CHECK
+TEST_F(CrazyCubeImprovedTest, findingMemoryLeaks)
+{
+    cubeImproved.getCentre();
+    cubeImproved.getInnerCorners();
+    cubeImproved.getInnerEdges();
+    cubeImproved.getOuterCorners();
+    cubeImproved.getOuterEdges();
+    cubeImproved.isSolved();
+    cubeImproved.move(0);
+    // cubeImproved.printCubeState(); /* ~~This suppresses unnecessary output~~ */
+    cubeImproved.resetCube();
+    cubeImproved.setCube(1,2,3,4,5);
+    cubeImproved.setCentre(0);
+    cubeImproved.setInnerCorners(1);
+    cubeImproved.setInnerEdges(2);
+    cubeImproved.setOuterCorners(3);
+    cubeImproved.setOuterEdges(4);
+    cubeImproved.undoMove(0);
+}
+#else
+
 // This namespace provides functionality necessary for testing
 // but not necessary for functioning of the cube itself.
 namespace 
@@ -215,4 +237,4 @@ TEST_F(CrazyCubeImprovedTest, MvBr)
 
 	ASSERT_EQ_HEX(getCubeImprovedState(cubeImproved), getCubeImprovedState(cubeToCompare))
 }
-
+#endif
