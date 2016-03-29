@@ -15,7 +15,7 @@ class CrazyCubePruner: public CrazyCubeAbstract
     short int* OuterCornersPruneMap;
 
     public:
-        void generateOuterCornersPruneMapIter();
+        void generateOuterCornersPruneMapIter(int depth, int maxDepth, int& outerCorners, short int* outerCornersPruneMap, int prevMove);
         short int* generateOuterCornersPruneMap(int);
 
 };
