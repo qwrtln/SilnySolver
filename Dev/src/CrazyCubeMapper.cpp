@@ -192,12 +192,12 @@ int** CrazyCubeMapper::generateOuterEdgesMap()
 
 int** CrazyCubeMapper::generateInnerCornersMap()
 {
-    return generatePieceMap(factorials[NUM_OF_CORNERS], &CrazyCubeMapper::convertIntToInnerCorners,&CrazyCubeMapper::convertInnerCornersToInt);
+    return generatePieceMap(pow2toX[NUM_OF_CORNERS], &CrazyCubeMapper::convertIntToInnerCorners,&CrazyCubeMapper::convertInnerCornersToInt);
 }
 
 int** CrazyCubeMapper::generateInnerEdgesMap()
 {
-	return generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToInnerEdges,&CrazyCubeMapper::convertInnerEdgesToInt);
+	return generatePieceMap(pow2toX[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToInnerEdges,&CrazyCubeMapper::convertInnerEdgesToInt);
 }
 
 int** CrazyCubeMapper::generateCentreMap()
