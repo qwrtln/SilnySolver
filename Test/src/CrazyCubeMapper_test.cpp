@@ -34,6 +34,36 @@ protected:
 
 CrazyCubeMapper CrazyCubeMapperTest::mapper;
 
+#ifdef MEMORY_CHECK
+TEST_F(CrazyCubeMapperTest, findingMemoryLeaks)
+{
+	unsigned long long cubeState = 0x102469BD02469BDF;
+
+    mapper.convertCentreToInt(cubeState);
+    mapper.convertInnerCornersToInt(cubeState);
+    mapper.convertInnerEdgesToInt(cubeState);
+    mapper.convertIntArrayToCubeState(1,2,3,4,5);
+    mapper.convertIntToCentre(1);
+    mapper.convertIntToInnerCorners(2);
+    mapper.convertIntToInnerEdges(3);
+    mapper.convertIntToOuterCorners(4);
+    mapper.convertIntToOuterEdges(5);
+    mapper.convertOuterCornersToInt(cubeState);
+    mapper.convertOuterEdgesToInt(cubeState);
+    mapper.extractInnerPiece(1,2,cubeState);
+    mapper.extractOuterPiece(3,4,cubeState);
+    mapper.generateCentreMap();
+    mapper.generateInnerCornersMap();
+    mapper.generateInnerEdgesMap();
+    mapper.generateOuterCornersMap();
+    mapper.generateOuterEdgesMap();
+    mapper.generatePieceMap(factorials[NUM_OF_CORNERS],&CrazyCubeMapper::convertIntToOuterCorners,&CrazyCubeMapper::convertOuterCornersToInt);
+	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToOuterEdges,&CrazyCubeMapper::convertOuterEdgesToInt);
+    mapper.generatePieceMap(factorials[NUM_OF_CORNERS], &CrazyCubeMapper::convertIntToInnerCorners,&CrazyCubeMapper::convertInnerCornersToInt);
+	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToInnerEdges,&CrazyCubeMapper::convertInnerEdgesToInt);
+	mapper.generatePieceMap(factorials[2],&CrazyCubeMapper::convertIntToCentre,&CrazyCubeMapper::convertCentreToInt);
+}
+#else
 TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceGeneralSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
@@ -478,3 +508,4 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToCentreRandomCube)
 	unsigned long long int centreExpected = 0x0000000000000000;
 	ASSERT_EQ_HEX(centreExpected, mapper.convertIntToCentre(centre));
 }
+#endif
