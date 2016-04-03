@@ -69,6 +69,40 @@ protected:
 
 CrazyCube CrazyCubeTest::cube;
 
+#ifdef MEMORY_CHECK
+TEST_F(CrazyCubeTest, findingMemoryLeaks)
+{
+    edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
+	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+    cube.F();
+    cube.L();
+    cube.Mh();
+    cube.MhLr();
+    cube.MhRr();
+    cube.Mv();
+    cube.MvBr();
+    cube.MvFr();
+    cube.U();
+    cube.U2();
+    cube.Ui();
+    cube.checkCorners();
+    cube.checkEdges();
+    cube.checkInnerCircle();
+    cube.getCubeState();
+    cube.isSolved();
+    cube.isSolved(cube.getCubeState());
+    cube.move(0);
+    // cube.printCubeState(); /* ~~This suppresses unnecessary output~~ */
+    cube.resetCube();
+    cube.setCentre(true);
+    cube.setCorners(corners);
+    cube.setCubeState(0);
+    cube.setEdges(edges);
+    cube.setWholeCube(true, edges, corners);
+    cube.toggleCentre();
+    cube.undoMove(0);
+}
+#else
 TEST_F(CrazyCubeTest, setCentreTest)
 {
 	cube.setCentre(true);
@@ -320,6 +354,5 @@ TEST_F(CrazyCubeTest, isSolvedMasksTest)
 	ASSERT_NE(genericCube.isSolved(solvedInnerCorners), true );
 
 	cube.resetCube();
-
-
 }
+#endif

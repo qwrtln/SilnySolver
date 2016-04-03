@@ -241,14 +241,3 @@ unsigned long long CrazyCubeMapper::convertIntArrayToCubeState(int CP, int cp, i
 
 }
 
-
-int* CrazyCubeMapper::getConstants()
-{
-   int* constants = new int[4];
-   constants[0] = NumberOfkindsOfPieces;
-   constants[1] = edgeArrayLimit;
-   constants[2] = cornerArrayLimit;
-   constants[3] = centreArrayLimit;
-   return constants;
-}
-

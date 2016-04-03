@@ -1,16 +1,27 @@
 CODE_DIR = Dev/build/
 TEST_DIR = Test/build/
 
+# Compiler
+CXX = g++
+# Compiler flags
+FLAGS = -Wall -O3 -std=c++11
+export FLAGS
+
 dev: project_code
 test: testing_code
+memcheck: checking_against_memory_leaks
 
-project_code:
+project_code: 
 	$(MAKE) -C $(CODE_DIR) SilnySolver
-	cp $(CODE_DIR)SilnySolver .
+	mv $(CODE_DIR)SilnySolver .
 
-testing_code:
-	$(MAKE) -C $(TEST_DIR)
-	cp $(TEST_DIR)SilneTesty .
+testing_code: 
+	$(MAKE) -C $(TEST_DIR) SilneTesty
+	mv $(TEST_DIR)SilneTesty .
+
+checking_against_memory_leaks:
+	$(MAKE) -C $(TEST_DIR) MemoryCheck
+	mv $(TEST_DIR)SilneTesty .
 
 .PHONY: clean
 

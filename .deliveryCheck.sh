@@ -16,6 +16,7 @@ NORMAL=$(tput sgr0)
 CAN_DELIVER=false
 RUN_CHECK=false
 POSSIBLE_SQUASH=true
+MEMORY_CHECK=true
 
 # Firstly, check if proper number of arguments was given: repo and branch
 if [ "$#" -ne 2 ]
@@ -23,7 +24,7 @@ if [ "$#" -ne 2 ]
 # Secondly, check if the name of repo is correct
 elif [ ! "$1" = "origin" ]
 then
-    echo -e "${RED}$1${NORMAL} doesn't appear to be a repository. Try again."
+    echo -e "${RED}$1${NORMAL} doesn't seem to be a repository. Try again."
 # Lastly, make sure the branch exists
 else
     # Checking current branch
@@ -42,9 +43,9 @@ else
             n|N ) echo "Alright, must have been a typo. Try again then."
                   RUN_CHECK=false
                   ;;
-            * ) echo "Invalid input. Skipping delivery."
-                RUN_CHECK=false 
-                ;;
+              * ) echo "Invalid input. Skipping delivery."
+                  RUN_CHECK=false 
+                  ;;
         esac
     fi
 fi
@@ -59,7 +60,7 @@ then
         (( N= $(git log $1/$2..$2| grep -c 'commit [0-9a-f]\{40\}') ))
         if [ $N -gt 1 ]
         then    
-            echo -e "You are trying to push ${YELLOW}$N commits${NC}. Would you like to ${GREEN}rebase${NC} them instead? [y/n] " 
+            echo -e "You are trying to push ${YELLOW}$N commits${NC}. Would you like to ${GREEN}squash${NC} them instead? [y/n] " 
             read rebase 
             case "$rebase" in
                 y|Y ) git stash >/dev/null # Safety check. Rebasing with unstaged changes is impossible.
@@ -82,7 +83,8 @@ then
     mv Test/build/*.o Test/build/*.d SilneTesty .temp/Test/ 2>/dev/null
 
 # Let's gather some build logs
-    make test 2> build.log  
+# This rule builds short tests only for memory leaks finding
+    make memcheck 2> build.log  
 
     if [ -s build.log ]
     then
@@ -95,7 +97,8 @@ then
                 echo -e "\n" 
                 grep --color -i error build.log
                 rm -rf .buildErr.log # remove in case of aborting
-                echo -e "\nDelivery check finished with ${RED}compilation errors${NC} listed above. See build.log file for details. Please ${BOLD}correct them${NORMAL} before you continue."
+                echo -e "\nDelivery check finished with ${RED}compilation errors${NC} listed above. See ${BOLD}build.log${NORMAL} file for details. Please ${BOLD}correct them${NORMAL} before you continue."
+                MEMORY_CHECK=false
                 else 
                     # Check for warnings only if there are no errors
                     grep -i warning build.log > .buildWar.log
@@ -110,28 +113,74 @@ then
                             y|Y ) echo "Forcing push..."
                                   CAN_DELIVER=true;;
                             n|N ) echo "Aborting push." 
+                                  MEMORY_CHECK=false
                                   ;;
-                            * ) echo "Invalid input. Aborting push." 
-                                ;;
+                              * ) echo "Invalid input. Aborting push." 
+                                  MEMORY_CHECK=false
+                                  ;;
                         esac
                         
                     fi
             fi
-else
-    rm -rf build.log .buildErr.log 2>/dev/null # in this case those files are no longer needed
-    echo -e "\nThe code is ${CYAN}pristine${NC}!"
-    CAN_DELIVER=true
-fi
+    else
+        rm -rf build.log .buildErr.log 2>/dev/null # in this case those files are no longer needed
+        echo -e "\nThe code is ${CYAN}pristine${NC}!"
+        CAN_DELIVER=true
+    fi
 
-# Clean up after delivery check build
-    make clean > /dev/null
-# Put previous build files back where they belong 
-    mv .temp/Dev/* Dev/build/ 2>/dev/null
-    mv .temp/Test/* Test/build/ 2>/dev/null
-    rm -rf .temp 2>/dev/null
+    if [ "$MEMORY_CHECK" = true ]
+    then
+        # The following is an array for "busy spinner"
+        spin[0]="-"
+        spin[1]="\\"
+        spin[2]="|"
+        spin[3]="/"
+
+        echo -n "Checking for memory leaks ${spin[0]}"
+        valgrind ./SilneTesty CrazyCube --leak-check=full &> .memLeaks &
+        pidValgrind=$!
+        # Valgrind takes a long time to run, so we want to see if it hasn't hung up
+        while kill -0 $pidValgrind 2>/dev/null
+        do
+            for i in "${spin[@]}"
+            do
+                echo -ne "\b$i"
+                sleep 0.1
+            done
+        done
+        echo -e "\n"
+
+        # Parse only through relevant part of the output
+        grep "HEAP SUMMARY" .memLeaks -A2 | cut -c 11- | tee .4perl
+        grep "LEAK SUMMARY" .memLeaks -A5 | cut -c 11- | tee -a .4perl
+        grep "ERROR SUMMARY" .memLeaks | cut -c 11- | tee -a .4perl
+        rm .memLeaks
+
+        # Using external script to parse Valgrind output
+        MEM_CHECK_PASSED=false 
+        DEF_LOST_BYTES=0
+        ERRORS=0
+        read DEF_LOST_BYTES ERRORS MEM_CHECK_PASSED < <(perl .valgrindParser.pl)
+        if [ "$MEM_CHECK_PASSED" = true ]
+        then
+            echo -e "\n${GREEN}Everything fine.${NORMAL}\n"
+        else
+            CAN_DELIVER=false
+            echo -e "\nYour change introduced ${RED}$DEF_LOST_BYTES${NORMAL} bytes of memory leaks (with ${RED}$ERRORS${NORMAL} errors)! Please correct them before you deliver."
+        fi
+
+        rm .4perl
+    fi
+
+    # Clean up after delivery check build
+        make clean > /dev/null
+    # Put previous build files back where they belong 
+        mv .temp/Dev/* Dev/build/ 2>/dev/null
+        mv .temp/Test/* Test/build/ 2>/dev/null
+        rm -rf .temp 2>/dev/null
 fi
 
 if [ "$CAN_DELIVER" = true ]
-    then
-        git push $REPO $BRANCH
-    fi
+then
+    git push $REPO $BRANCH
+fi

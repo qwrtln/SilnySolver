@@ -38,21 +38,36 @@ CrazyCubeMapper CrazyCubeMapperTest::mapper;
 #define FIVE_MOVES 5
 #define SIX_MOVES 6
 
-TEST_F(CrazyCubeMapperTest, TestConstants)
+#ifdef MEMORY_CHECK
+TEST_F(CrazyCubeMapperTest, findingMemoryLeaks)
 {
-    int constants = 4;
-    int* mapperConstants = mapper.getConstants();
-    int* constantsToCheck = new int[constants];
-    constantsToCheck[0] = 5;
-    constantsToCheck[1] = 40320;
-    constantsToCheck[2] = 5040;
-    constantsToCheck[3] = 1;
-    for (int i = 0; i < constants; ++i)
-    {
-        ASSERT_EQ(constantsToCheck[i],mapperConstants[i]);
-    }
-}
+	unsigned long long cubeState = 0x102469BD02469BDF;
 
+    mapper.convertCentreToInt(cubeState);
+    mapper.convertInnerCornersToInt(cubeState);
+    mapper.convertInnerEdgesToInt(cubeState);
+    mapper.convertIntArrayToCubeState(1,2,3,4,5);
+    mapper.convertIntToCentre(1);
+    mapper.convertIntToInnerCorners(2);
+    mapper.convertIntToInnerEdges(3);
+    mapper.convertIntToOuterCorners(4);
+    mapper.convertIntToOuterEdges(5);
+    mapper.convertOuterCornersToInt(cubeState);
+    mapper.convertOuterEdgesToInt(cubeState);
+    mapper.extractInnerPiece(1,2,cubeState);
+    mapper.extractOuterPiece(3,4,cubeState);
+    mapper.generateCentreMap();
+    mapper.generateInnerCornersMap();
+    mapper.generateInnerEdgesMap();
+    mapper.generateOuterCornersMap();
+    mapper.generateOuterEdgesMap();
+    mapper.generatePieceMap(factorials[NUM_OF_CORNERS],&CrazyCubeMapper::convertIntToOuterCorners,&CrazyCubeMapper::convertOuterCornersToInt);
+	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToOuterEdges,&CrazyCubeMapper::convertOuterEdgesToInt);
+    mapper.generatePieceMap(factorials[NUM_OF_CORNERS], &CrazyCubeMapper::convertIntToInnerCorners,&CrazyCubeMapper::convertInnerCornersToInt);
+	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToInnerEdges,&CrazyCubeMapper::convertInnerEdgesToInt);
+	mapper.generatePieceMap(factorials[2],&CrazyCubeMapper::convertIntToCentre,&CrazyCubeMapper::convertCentreToInt);
+}
+#else
 TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceGeneralSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
@@ -331,11 +346,12 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntSolvedCube)
 
 TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
 {
-    int randomMoves[FIVE_MOVES] = {L, U, F, Ui, Mv};
+    int moves = 5;
+    int randomMoves[moves] = {L, U, F, Ui, Mv};
 
     CrazyCube cube;
 
-    for (int i = 0; i < FIVE_MOVES; ++i)
+    for (int i = 0; i < moves; ++i)
         cube.move(randomMoves[i]);
 
     int expectedSum = 0b11000011; // still the same magic number
@@ -491,3 +507,4 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToCentreRandomCube)
 	unsigned long long int centreExpected = 0x0000000000000000;
 	ASSERT_EQ_HEX(centreExpected, mapper.convertIntToCentre(centre));
 }
+#endif

@@ -18,6 +18,7 @@ Test/build/*.log
 Test/build/SilneTesty
 
 .temp
+build.log
 
 *.exe
 tags

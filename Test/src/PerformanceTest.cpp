@@ -1,3 +1,4 @@
+#ifndef MEMORY_CHECK
 /*
  * PerformanceTest.cpp
  *
@@ -119,3 +120,4 @@ TEST_F(PerformanceTest, CrazyCubeImprovedAvgTest)
 	}
 	#endif
 }
+#endif
