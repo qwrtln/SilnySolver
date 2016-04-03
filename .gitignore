@@ -22,3 +22,4 @@ Test/build/SilneTesty
 *.exe
 tags
 Dev/build/SilnySolver.exe
+types_c.taghl
