@@ -19,17 +19,17 @@ void translateMove(unsigned short move)
 {
     switch(move)
     {
-        case 0: cout << "L "; return;
-        case 1: cout << "F "; return;
-        case 2: cout << "U "; return;
-        case 3: cout << "Ui "; return;
-        case 4: cout << "U2 "; return;
-        case 5: cout << "Mv "; return;
-        case 6: cout << "Mh "; return;
-        case 7: cout << "MhRr "; return;
-        case 8: cout << "MhLr "; return;
-        case 9: cout << "MvFr "; return;
-        case 10: cout << "MvBr "; return;
+        case 0: cout << "rotation::L "; return;
+        case 1: cout << "rotation::F "; return;
+        case 2: cout << "rotation::U "; return;
+        case 3: cout << "rotation::UI "; return;
+        case 4: cout << "rotation::U2 "; return;
+        case 5: cout << "rotation::MV "; return;
+        case 6: cout << "rotation::MH "; return;
+        case 7: cout << "rotation::MHRR "; return;
+        case 8: cout << "rotation::MHLR "; return;
+        case 9: cout << "rotation::MVFR "; return;
+        case 10: cout << "rotation::MVBR "; return;
     }
 
 }
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	solver.setCrazyCube(&impCube);
 
     const int movesToDo = 12;
-    int movesMap[movesToDo] = {impCube.MvBr, impCube.L, impCube.F, impCube.MhRr, impCube.Mv, impCube.Mv, impCube.U2, impCube.MhLr, impCube.Mv, impCube.Ui, impCube.MvFr, impCube.L};//, impCube.MhRr, impCube.MvBr, impCube.F};
+    int movesMap[movesToDo] = {(int)CrazyCubeImproved::rotation::MVBR, (int)CrazyCubeImproved::rotation::L, (int)CrazyCubeImproved::rotation::F, (int)CrazyCubeImproved::rotation::MHRR, (int)CrazyCubeImproved::rotation::MV, (int)CrazyCubeImproved::rotation::MV, (int)CrazyCubeImproved::rotation::U2, (int)CrazyCubeImproved::rotation::MHLR, (int)CrazyCubeImproved::rotation::MV, (int)CrazyCubeImproved::rotation::UI, (int)CrazyCubeImproved::rotation::MVFR, (int)CrazyCubeImproved::rotation::L};//, (int)CrazyCubeImproved::rotation::MHRR, (int)CrazyCubeImproved::rotation::MVBR, (int)CrazyCubeImproved::rotation::F};
 
     for (int i = 0; i < movesToDo; ++i)
     {

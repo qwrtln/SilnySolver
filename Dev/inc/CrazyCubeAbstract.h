@@ -39,14 +39,14 @@ public:
 		L,		// Left 0
 		F,		// Front
 		U,		// Up
-		Ui,		// Up inverted
+		UI,		// Up inverted
 		U2, 	// U^2
-		Mv,		// Middle vertical
-		Mh, 	// Middle horizontal
-		MhRr,	// Middle horizontal Right rotation
-		MhLr,	// ...
-		MvFr,	// Middle vertical Front rotation
-		MvBr	// ... 10
+		MV,		// Middle vertical
+		MH, 	// Middle horizontal
+		MHRR,	// Middle horizontal Right rotation
+		MHLR,	// ...
+		MVFR,	// Middle vertical Front rotation
+		MVBR	// ... 10
 	};
 
 	// Nazwy rogow

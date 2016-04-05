@@ -159,7 +159,7 @@ TEST_F(CrazyCubeTest, setWholeCubeTest)
 	ASSERT_EQ_HEX(cube.isSolved(), 1)
 }
 
-TEST_F(CrazyCubeTest, rotation::L)
+TEST_F(CrazyCubeTest, L)
 {
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::WBW, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::YBY, edgeNames::WOW, edgeNames::WGW};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::WOBW, cornerNames::WBRW, cornerNames::YOGY, cornerNames::WRGW, cornerNames::YBOY, cornerNames::YRBY};
@@ -169,7 +169,7 @@ TEST_F(CrazyCubeTest, rotation::L)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::U)
+TEST_F(CrazyCubeTest, U)
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YGY, edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
@@ -181,7 +181,7 @@ TEST_F(CrazyCubeTest, rotation::U)
 	ASSERT_EQ_HEX(cubeToCompare.getCubeState(), cube.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::F)
+TEST_F(CrazyCubeTest, F)
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WRW, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
@@ -192,7 +192,7 @@ TEST_F(CrazyCubeTest, rotation::F)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::UI) 
+TEST_F(CrazyCubeTest, UI) 
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
@@ -203,7 +203,7 @@ TEST_F(CrazyCubeTest, rotation::UI)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::U2) 
+TEST_F(CrazyCubeTest, U2) 
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::YBY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
@@ -214,7 +214,7 @@ TEST_F(CrazyCubeTest, rotation::U2)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::MV) 
+TEST_F(CrazyCubeTest, MV) 
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WOW, edgeNames::YBY, edgeNames::WRW, edgeNames::YGY, edgeNames::YOY, edgeNames::WBW, edgeNames::YRY, edgeNames::WGW};
@@ -226,7 +226,7 @@ TEST_F(CrazyCubeTest, rotation::MV)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::MH)
+TEST_F(CrazyCubeTest, MH)
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::WGW, edgeNames::YOY, edgeNames::WBW, edgeNames::WRW, edgeNames::YGY, edgeNames::WOW, edgeNames::YBY};
@@ -238,7 +238,7 @@ TEST_F(CrazyCubeTest, rotation::MH)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::MHRR) 
+TEST_F(CrazyCubeTest, MHRR) 
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::YBY, edgeNames::YRY, edgeNames::WGW, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::YGY};
@@ -249,7 +249,7 @@ TEST_F(CrazyCubeTest, rotation::MHRR)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::MHLR)
+TEST_F(CrazyCubeTest, MHLR)
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::WBW, edgeNames::YRY, edgeNames::YGY, edgeNames::WRW, edgeNames::YBY, edgeNames::WOW, edgeNames::WGW};
@@ -260,7 +260,7 @@ TEST_F(CrazyCubeTest, rotation::MHLR)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::MVFR) 
+TEST_F(CrazyCubeTest, MVFR) 
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WRW, edgeNames::YGY, edgeNames::YOY, edgeNames::YBY, edgeNames::YRY, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
@@ -271,7 +271,7 @@ TEST_F(CrazyCubeTest, rotation::MVFR)
 	ASSERT_EQ_HEX(cube.getCubeState(), cubeToCompare.getCubeState())
 }
 
-TEST_F(CrazyCubeTest, rotation::MVBR)
+TEST_F(CrazyCubeTest, MVBR)
 {
 	cube.resetCube();
 	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YGY, edgeNames::WOW, edgeNames::YBY, edgeNames::WRW, edgeNames::WBW, edgeNames::YOY, edgeNames::WGW};
