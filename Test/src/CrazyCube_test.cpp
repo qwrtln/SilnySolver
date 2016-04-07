@@ -72,8 +72,8 @@ CrazyCube CrazyCubeTest::cube;
 #ifdef MEMORY_CHECK
 TEST_F(CrazyCubeTest, findingMemoryLeaks)
 {
-    edgeNames edges[NUM_OF_EDGES] = {yry, yby, yoy, ygy, wrw, wbw, wow, wgw};
-	cornerNames corners[NUM_OF_CORNERS] = {ygry, yrby, yboy, yogy, wrgw, wbrw, wobw};
+    edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
     cube.F();
     cube.L();
     cube.Mh();
