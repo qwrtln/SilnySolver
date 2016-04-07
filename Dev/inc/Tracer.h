@@ -1,9 +1,8 @@
-#include <iostream>
 
-using std::cout;
-using std::endl;
+
+#include <stdio.h>
 
 #define TRACE(OBJECT, LEVEL, TEXT, ...) \
-	cout<<OBJECT<<LEVEL<<":"<<TEXT<<endl;
+	printf(#OBJECT " " #LEVEL ":" TEXT "\n")
 
 #define TRACE_ALL "TRACE_ALL"
