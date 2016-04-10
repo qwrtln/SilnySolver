@@ -138,13 +138,13 @@ public:
      *
      * @param m index of move to be done
      */
-	void move(unsigned short int m);
+	void move(rotation m);
 		/**
      * Inversion of a provided move
      *
      * @param m index of move to be undone
      */
-	void undoMove(unsigned short int m);
+	void undoMove(rotation m);
 		/**
      * Toggles the cube centre orientation
      */

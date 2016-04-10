@@ -44,7 +44,7 @@ protected:
 		{
 			for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
 			{			
-				cube.move(j);
+				cube.move(static_cast<rotation>(j));
 			}		
 		}
 		if(showTime)
@@ -91,7 +91,7 @@ TEST_F(CrazyCubeTest, findingMemoryLeaks)
     cube.getCubeState();
     cube.isSolved();
     cube.isSolved(cube.getCubeState());
-    cube.move(0);
+    cube.move(rotation::L);
     // cube.printCubeState(); /* ~~This suppresses unnecessary output~~ */
     cube.resetCube();
     cube.setCentre(true);
@@ -100,7 +100,7 @@ TEST_F(CrazyCubeTest, findingMemoryLeaks)
     cube.setEdges(edges);
     cube.setWholeCube(true, edges, corners);
     cube.toggleCentre();
-    cube.undoMove(0);
+    cube.undoMove(rotation::L);
 }
 #else
 TEST_F(CrazyCubeTest, setCentreTest)
@@ -287,10 +287,10 @@ TEST_F(CrazyCubeTest, Move_undoMoveTest_onebyone)
 	cube.resetCube();
 	for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
 	{
-		cube.move(j);
+		cube.move(static_cast<rotation>(j));
 		//cout << "cube.move    (" << j << ")\t" << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
 		//cout << endl;
-		cube.undoMove(j);
+		cube.undoMove(static_cast<rotation>(j));
 		//cout << "cube.undoMove(" << j << ")\t" << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
 		ASSERT_EQ(cube.isSolved(), true);
 	}
@@ -304,12 +304,12 @@ TEST_F(CrazyCubeTest, Move_undoMoveTest)
 	cube.resetCube();
 	for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
 	{
-		cube.move(j);
+		cube.move(static_cast<rotation>(j));
 	}
 	for(short int j = NUM_OF_MOVES - 1; j >= 0; --j)
 	{
 		//cout << j << endl;
-		cube.undoMove(j);
+		cube.undoMove(static_cast<rotation>(j));
 	}
 	//cout << hex << showbase << cube.getCubeState() << noshowbase << dec << endl;
 	ASSERT_EQ(cube.isSolved(), true);

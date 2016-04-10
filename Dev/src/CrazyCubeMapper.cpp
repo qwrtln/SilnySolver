@@ -220,10 +220,10 @@ int** CrazyCubeMapper::generatePieceMap(const int arrayLength,unsigned long long
 		pieceMap[i] = new int[NUM_OF_MOVES];
         for (int j = 0; j < NUM_OF_MOVES; ++j)
         {
-            cube.move(j);
+            cube.move(static_cast<rotation>(j));
             // Here's where we remember cube state in the array:
             pieceMap[i][j] = (this->*convertingToIntFunction)(cube.getCubeState());
-            cube.undoMove(j);
+            cube.undoMove(static_cast<rotation>(j));
         }
 
     }

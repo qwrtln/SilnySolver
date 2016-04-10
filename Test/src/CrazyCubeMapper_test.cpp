@@ -218,7 +218,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
 {
     CrazyCube cube;
 
-    cube.move((int)rotation::L);
+    cube.move(rotation::L);
 
     int expectedSum = 4142; // calculated in Octave
     int actualOutput = mapper.convertOuterCornersToInt(cube.getCubeState()); 
@@ -226,7 +226,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
    
     // 2nd case
     cube.resetCube();
-    int randomMoves[FIVE_MOVES] = {(int)rotation::F, (int)rotation::MV, (int)rotation::MHRR, (int)rotation::L, (int)rotation::U2};
+   rotation randomMoves[FIVE_MOVES] = {rotation::F, rotation::MV, rotation::MHRR, rotation::L, rotation::U2};
 
     for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves[i]);
@@ -237,7 +237,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
 
     // 3rd case
     cube.resetCube();
-    int randomMoves2[FIVE_MOVES] = {(int)rotation::U, (int)rotation::L, (int)rotation::F, (int)rotation::L, (int)rotation::MH};
+    rotation randomMoves2[FIVE_MOVES] = {rotation::U, rotation::L, rotation::F, rotation::L, rotation::MH};
 
     for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves2[i]);
@@ -256,7 +256,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntSolvedCube)
 
 TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 {
-    int randomMoves[SIX_MOVES] = {(int)rotation::L, (int)rotation::MVBR, (int)rotation::U2, (int)rotation::F, (int)rotation::UI, (int)rotation::MHLR};
+    rotation randomMoves[SIX_MOVES] = {rotation::L, rotation::MVBR, rotation::U2, rotation::F, rotation::UI, rotation::MHLR};
 
     CrazyCube cube;
 
@@ -269,7 +269,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 
     // 2nd case
     cube.resetCube();
-    int randomMoves2[FIVE_MOVES] = {(int)rotation::F, (int)rotation::MV, (int)rotation::MHRR, (int)rotation::L, (int)rotation::U2};
+    rotation randomMoves2[FIVE_MOVES] = {rotation::F, rotation::MV, rotation::MHRR, rotation::L, rotation::U2};
 
     for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves2[i]);
@@ -280,7 +280,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 
     // 3rd case
     cube.resetCube();
-    int randomMoves3[FIVE_MOVES] = {(int)rotation::U, (int)rotation::L, (int)rotation::F, (int)rotation::L, (int)rotation::MH};
+    rotation randomMoves3[FIVE_MOVES] = {rotation::U, rotation::L, rotation::F, rotation::L, rotation::MH};
 
     for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves3[i]);
@@ -299,7 +299,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntSolvedCube)
 
 TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
 {
-    int randomMoves[SIX_MOVES] = {(int)rotation::MVFR, (int)rotation::U2, (int)rotation::MH, (int)rotation::MHLR, (int)rotation::L, (int)rotation::F};
+    rotation randomMoves[SIX_MOVES] = {rotation::MVFR, rotation::U2, rotation::MH, rotation::MHLR, rotation::L, rotation::F};
 
     CrazyCube cube;
 
@@ -312,7 +312,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
 
     // double checking
     cube.resetCube();
-    int randomMoves2[SIX_MOVES] = {(int)rotation::F, (int)rotation::L, (int)rotation::F, (int)rotation::MV, (int)rotation::MHLR, (int)rotation::MV};
+    rotation randomMoves2[SIX_MOVES] = {rotation::F, rotation::L, rotation::F, rotation::MV, rotation::MHLR, rotation::MV};
     
     for (int i = 0; i < SIX_MOVES; ++i)
     {
@@ -325,7 +325,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
     
     // triple check - let's be thorough this time :)
     cube.resetCube();
-    int randomMoves3[SIX_MOVES] = {(int)rotation::MHRR, (int)rotation::MVFR, (int)rotation::U2, (int)rotation::MHLR, (int)rotation::UI, (int)rotation::F};
+    rotation randomMoves3[SIX_MOVES] = {rotation::MHRR, rotation::MVFR, rotation::U2, rotation::MHLR, rotation::UI, rotation::F};
     
     for (int i = 0; i < SIX_MOVES; ++i)
     {
@@ -347,7 +347,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntSolvedCube)
 TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
 {
     const int moves = 5;
-    int randomMoves[moves] = {(int)rotation::L, (int)rotation::U, (int)rotation::F, (int)rotation::UI, (int)rotation::MV};
+    rotation randomMoves[moves] = {rotation::L, rotation::U, rotation::F, rotation::UI, rotation::MV};
 
     CrazyCube cube;
 
@@ -360,7 +360,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
 
     // double check just to be sure
     cube.resetCube();
-    int randomMoves2[FIVE_MOVES] = {(int)rotation::MHRR, (int)rotation::L, (int)rotation::MH, (int)rotation::MVBR, (int)rotation::F};
+    rotation randomMoves2[FIVE_MOVES] = {rotation::MHRR, rotation::L, rotation::MH, rotation::MVBR, rotation::F};
     
     for (int i = 0; i < FIVE_MOVES; ++i)
     {
@@ -413,7 +413,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterCornersRandomCube)
 {
     // TODO: 2 more cases
 
-    int randomMoves[SIX_MOVES] = {(int)rotation::L, (int)rotation::MVBR, (int)rotation::U2, (int)rotation::MHRR, (int)rotation::F, (int)rotation::MHLR};
+    rotation randomMoves[SIX_MOVES] = {rotation::L, rotation::MVBR, rotation::U2, rotation::MHRR, rotation::F, rotation::MHLR};
 
     CrazyCube cube;
 
@@ -438,7 +438,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterEdgesRandomCube)
 {
     // TODO: 2 more cases
 
-	//int randomMoves[moves] = {(int)rotation::L, (int)rotation::MVBR, (int)rotation::U2, (int)rotation::F, (int)rotation::UI, (int)rotation::MHLR};
+	//rotation randomMoves[moves] = {rotation::L, rotation::MVBR, rotation::U2, rotation::F, rotation::UI, rotation::MHLR};
 
     int outerEdgesInt = 3487;
     unsigned long long int expectedOutput = 0x0000000062A8C04E;

@@ -24,8 +24,8 @@
 class CrazyCubeBase: public CrazyCubeAbstract
 {
     public:
-	virtual void move(unsigned short int) = 0;
-	virtual void undoMove(unsigned short int) = 0;
+	virtual void move(rotation) = 0;
+	virtual void undoMove(rotation) = 0;
     virtual void resetCube() = 0;
     virtual bool isSolved() = 0;
 };

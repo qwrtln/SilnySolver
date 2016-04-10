@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	solver.setCrazyCube(&impCube);
 
     const int movesToDo = 12;
-    int movesMap[movesToDo] = {(int)CrazyCubeImproved::rotation::MVBR, (int)CrazyCubeImproved::rotation::L, (int)CrazyCubeImproved::rotation::F, (int)CrazyCubeImproved::rotation::MHRR, (int)CrazyCubeImproved::rotation::MV, (int)CrazyCubeImproved::rotation::MV, (int)CrazyCubeImproved::rotation::U2, (int)CrazyCubeImproved::rotation::MHLR, (int)CrazyCubeImproved::rotation::MV, (int)CrazyCubeImproved::rotation::UI, (int)CrazyCubeImproved::rotation::MVFR, (int)CrazyCubeImproved::rotation::L};//, (int)CrazyCubeImproved::rotation::MHRR, (int)CrazyCubeImproved::rotation::MVBR, (int)CrazyCubeImproved::rotation::F};
+    CrazyCubeImproved::rotation movesMap[movesToDo] = {CrazyCubeImproved::rotation::MVBR, CrazyCubeImproved::rotation::L, CrazyCubeImproved::rotation::F, CrazyCubeImproved::rotation::MHRR, CrazyCubeImproved::rotation::MV, CrazyCubeImproved::rotation::MV, CrazyCubeImproved::rotation::U2, CrazyCubeImproved::rotation::MHLR, CrazyCubeImproved::rotation::MV, CrazyCubeImproved::rotation::UI, CrazyCubeImproved::rotation::MVFR, CrazyCubeImproved::rotation::L};//, CrazyCubeImproved::rotation::MHRR, CrazyCubeImproved::rotation::MVBR, CrazyCubeImproved::rotation::F};
 
     for (int i = 0; i < movesToDo; ++i)
     {
