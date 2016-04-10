@@ -19,17 +19,17 @@ void translateMove(unsigned short move)
 {
     switch(move)
     {
-        case 0: cout << "rotation::L "; return;
-        case 1: cout << "rotation::F "; return;
-        case 2: cout << "rotation::U "; return;
-        case 3: cout << "rotation::UI "; return;
-        case 4: cout << "rotation::U2 "; return;
-        case 5: cout << "rotation::MV "; return;
-        case 6: cout << "rotation::MH "; return;
-        case 7: cout << "rotation::MHRR "; return;
-        case 8: cout << "rotation::MHLR "; return;
-        case 9: cout << "rotation::MVFR "; return;
-        case 10: cout << "rotation::MVBR "; return;
+        case 0: cout << "LEFT "; return;
+        case 1: cout << "FRONT "; return;
+        case 2: cout << "UP "; return;
+        case 3: cout << "UP_INVERTED "; return;
+        case 4: cout << "UP_2 "; return;
+        case 5: cout << "MIDDLE_VERTICAL "; return;
+        case 6: cout << "MIDDLE_HORIZONTAL "; return;
+        case 7: cout << "MIDDLE_HORIZONTAL_RIGHT_ROTATION "; return;
+        case 8: cout << "MIDDLE_HORIZONTAL_LEFT_ROTATION "; return;
+        case 9: cout << "MIDDLE_VERTICAL_FRONT_ROTATION "; return;
+        case 10: cout << "MIDDLE_VERTICAL_BACK_ROTATION "; return;
     }
 
 }
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	solver.setCrazyCube(&impCube);
 
     const int movesToDo = 12;
-    CrazyCubeImproved::rotation movesMap[movesToDo] = {CrazyCubeImproved::rotation::MVBR, CrazyCubeImproved::rotation::L, CrazyCubeImproved::rotation::F, CrazyCubeImproved::rotation::MHRR, CrazyCubeImproved::rotation::MV, CrazyCubeImproved::rotation::MV, CrazyCubeImproved::rotation::U2, CrazyCubeImproved::rotation::MHLR, CrazyCubeImproved::rotation::MV, CrazyCubeImproved::rotation::UI, CrazyCubeImproved::rotation::MVFR, CrazyCubeImproved::rotation::L};//, CrazyCubeImproved::rotation::MHRR, CrazyCubeImproved::rotation::MVBR, CrazyCubeImproved::rotation::F};
+    CrazyCubeImproved::rotation movesMap[movesToDo] = {CrazyCubeImproved::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCubeImproved::rotation::LEFT, CrazyCubeImproved::rotation::FRONT, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::UP_2, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::UP_INVERTED, CrazyCubeImproved::rotation::MIDDLE_VERTICAL_FRONT_ROTATION, CrazyCubeImproved::rotation::LEFT};//, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCubeImproved::rotation::FRONT};
 
     for (int i = 0; i < movesToDo; ++i)
     {

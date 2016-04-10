@@ -218,7 +218,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
 {
     CrazyCube cube;
 
-    cube.move(rotation::L);
+    cube.move(rotation::LEFT);
 
     int expectedSum = 4142; // calculated in Octave
     int actualOutput = mapper.convertOuterCornersToInt(cube.getCubeState()); 
@@ -226,7 +226,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
    
     // 2nd case
     cube.resetCube();
-   rotation randomMoves[FIVE_MOVES] = {rotation::F, rotation::MV, rotation::MHRR, rotation::L, rotation::U2};
+   rotation randomMoves[FIVE_MOVES] = {rotation::FRONT, rotation::MIDDLE_VERTICAL, rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, rotation::LEFT, rotation::UP_2};
 
     for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves[i]);
@@ -237,7 +237,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
 
     // 3rd case
     cube.resetCube();
-    rotation randomMoves2[FIVE_MOVES] = {rotation::U, rotation::L, rotation::F, rotation::L, rotation::MH};
+    rotation randomMoves2[FIVE_MOVES] = {rotation::UP, rotation::LEFT, rotation::FRONT, rotation::LEFT, rotation::MIDDLE_HORIZONTAL};
 
     for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves2[i]);
@@ -256,7 +256,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntSolvedCube)
 
 TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 {
-    rotation randomMoves[SIX_MOVES] = {rotation::L, rotation::MVBR, rotation::U2, rotation::F, rotation::UI, rotation::MHLR};
+    rotation randomMoves[SIX_MOVES] = {rotation::LEFT, rotation::MIDDLE_VERTICAL_BACK_ROTATION, rotation::UP_2, rotation::FRONT, rotation::UP_INVERTED, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION};
 
     CrazyCube cube;
 
@@ -269,7 +269,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 
     // 2nd case
     cube.resetCube();
-    rotation randomMoves2[FIVE_MOVES] = {rotation::F, rotation::MV, rotation::MHRR, rotation::L, rotation::U2};
+    rotation randomMoves2[FIVE_MOVES] = {rotation::FRONT, rotation::MIDDLE_VERTICAL, rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, rotation::LEFT, rotation::UP_2};
 
     for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves2[i]);
@@ -280,7 +280,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 
     // 3rd case
     cube.resetCube();
-    rotation randomMoves3[FIVE_MOVES] = {rotation::U, rotation::L, rotation::F, rotation::L, rotation::MH};
+    rotation randomMoves3[FIVE_MOVES] = {rotation::UP, rotation::LEFT, rotation::FRONT, rotation::LEFT, rotation::MIDDLE_HORIZONTAL};
 
     for (int i = 0; i < FIVE_MOVES; ++i)
         cube.move(randomMoves3[i]);
@@ -299,7 +299,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntSolvedCube)
 
 TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
 {
-    rotation randomMoves[SIX_MOVES] = {rotation::MVFR, rotation::U2, rotation::MH, rotation::MHLR, rotation::L, rotation::F};
+    rotation randomMoves[SIX_MOVES] = {rotation::MIDDLE_VERTICAL_FRONT_ROTATION, rotation::UP_2, rotation::MIDDLE_HORIZONTAL, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, rotation::LEFT, rotation::FRONT};
 
     CrazyCube cube;
 
@@ -312,7 +312,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
 
     // double checking
     cube.resetCube();
-    rotation randomMoves2[SIX_MOVES] = {rotation::F, rotation::L, rotation::F, rotation::MV, rotation::MHLR, rotation::MV};
+    rotation randomMoves2[SIX_MOVES] = {rotation::FRONT, rotation::LEFT, rotation::FRONT, rotation::MIDDLE_VERTICAL, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, rotation::MIDDLE_VERTICAL};
     
     for (int i = 0; i < SIX_MOVES; ++i)
     {
@@ -325,7 +325,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
     
     // triple check - let's be thorough this time :)
     cube.resetCube();
-    rotation randomMoves3[SIX_MOVES] = {rotation::MHRR, rotation::MVFR, rotation::U2, rotation::MHLR, rotation::UI, rotation::F};
+    rotation randomMoves3[SIX_MOVES] = {rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, rotation::MIDDLE_VERTICAL_FRONT_ROTATION, rotation::UP_2, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, rotation::UP_INVERTED, rotation::FRONT};
     
     for (int i = 0; i < SIX_MOVES; ++i)
     {
@@ -347,7 +347,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntSolvedCube)
 TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
 {
     const int moves = 5;
-    rotation randomMoves[moves] = {rotation::L, rotation::U, rotation::F, rotation::UI, rotation::MV};
+    rotation randomMoves[moves] = {rotation::LEFT, rotation::UP, rotation::FRONT, rotation::UP_INVERTED, rotation::MIDDLE_VERTICAL};
 
     CrazyCube cube;
 
@@ -360,7 +360,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
 
     // double check just to be sure
     cube.resetCube();
-    rotation randomMoves2[FIVE_MOVES] = {rotation::MHRR, rotation::L, rotation::MH, rotation::MVBR, rotation::F};
+    rotation randomMoves2[FIVE_MOVES] = {rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, rotation::LEFT, rotation::MIDDLE_HORIZONTAL, rotation::MIDDLE_VERTICAL_BACK_ROTATION, rotation::FRONT};
     
     for (int i = 0; i < FIVE_MOVES; ++i)
     {
@@ -413,7 +413,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterCornersRandomCube)
 {
     // TODO: 2 more cases
 
-    rotation randomMoves[SIX_MOVES] = {rotation::L, rotation::MVBR, rotation::U2, rotation::MHRR, rotation::F, rotation::MHLR};
+    rotation randomMoves[SIX_MOVES] = {rotation::LEFT, rotation::MIDDLE_VERTICAL_BACK_ROTATION, rotation::UP_2, rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, rotation::FRONT, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION};
 
     CrazyCube cube;
 
@@ -438,7 +438,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterEdgesRandomCube)
 {
     // TODO: 2 more cases
 
-	//rotation randomMoves[moves] = {rotation::L, rotation::MVBR, rotation::U2, rotation::F, rotation::UI, rotation::MHLR};
+	//rotation randomMoves[moves] = {rotation::LEFT, rotation::MIDDLE_VERTICAL_BACK_ROTATION, rotation::UP_2, rotation::FRONT, rotation::UP_INVERTED, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION};
 
     int outerEdgesInt = 3487;
     unsigned long long int expectedOutput = 0x0000000062A8C04E;

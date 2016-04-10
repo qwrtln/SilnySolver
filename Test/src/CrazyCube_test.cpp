@@ -91,7 +91,7 @@ TEST_F(CrazyCubeTest, findingMemoryLeaks)
     cube.getCubeState();
     cube.isSolved();
     cube.isSolved(cube.getCubeState());
-    cube.move(rotation::L);
+    cube.move(rotation::LEFT);
     // cube.printCubeState(); /* ~~This suppresses unnecessary output~~ */
     cube.resetCube();
     cube.setCentre(true);
@@ -100,7 +100,7 @@ TEST_F(CrazyCubeTest, findingMemoryLeaks)
     cube.setEdges(edges);
     cube.setWholeCube(true, edges, corners);
     cube.toggleCentre();
-    cube.undoMove(rotation::L);
+    cube.undoMove(rotation::LEFT);
 }
 #else
 TEST_F(CrazyCubeTest, setCentreTest)

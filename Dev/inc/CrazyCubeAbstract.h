@@ -36,17 +36,17 @@ public:
 
 	// Legalne ruchy < 11
     enum class rotation {
-		L,		// Left 0
-		F,		// Front
-		U,		// Up
-		UI,		// Up inverted
-		U2, 	// U^2
-		MV,		// Middle vertical
-		MH, 	// Middle horizontal
-		MHRR,	// Middle horizontal Right rotation
-		MHLR,	// ...
-		MVFR,	// Middle vertical Front rotation
-		MVBR	// ... 10
+		LEFT,		// Left 0
+		FRONT,		// Front
+		UP,		// Up
+		UP_INVERTED,		// Up inverted
+		UP_2, 	// U^2
+		MIDDLE_VERTICAL,		// Middle vertical
+		MIDDLE_HORIZONTAL, 	// Middle horizontal
+		MIDDLE_HORIZONTAL_RIGHT_ROTATION,	// Middle horizontal Right rotation
+		MIDDLE_HORIZONTAL_LEFT_ROTATION,	// ...
+		MIDDLE_VERTICAL_FRONT_ROTATION,	// Middle vertical Front rotation
+		MIDDLE_VERTICAL_BACK_ROTATION	// ... 10
 	};
 
 	// Nazwy rogow
