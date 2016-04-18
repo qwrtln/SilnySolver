@@ -143,7 +143,7 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 			}
 
 			// Do the move
-			crazyCube->move(move);
+			crazyCube->move(static_cast<rotation>(move));
 
 			// Remember it in the array
 			currentPath[iDepth - depth] = move;
@@ -162,7 +162,7 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 			}
 
 			// Move done? Go back in order to check every possibility of this depth
-			crazyCube->undoMove(move);
+			crazyCube->undoMove(static_cast<rotation>(move));
 		}
 	}
 
