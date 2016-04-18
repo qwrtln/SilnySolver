@@ -105,23 +105,25 @@ int CrazyCubeImproved:: getCentre()
 }
 
 
-void CrazyCubeImproved:: move(unsigned short int m)
+void CrazyCubeImproved:: move(rotation m)
 {
-	outerCorners = cache->getOuterCornersMap()[outerCorners][m];
-	innerCorners = cache->getInnerCornersMap()[innerCorners][m];
-	outerEdges = cache->getOuterEdgesMap()[outerEdges][m];
-	innerEdges = cache->getInnerEdgesMap()[innerEdges][m];
-	centre = cache->getCentreMap()[centre][m];
+  unsigned short mInt = static_cast<unsigned short>(m);
+	outerCorners = cache->getOuterCornersMap()[outerCorners][mInt];
+	innerCorners = cache->getInnerCornersMap()[innerCorners][mInt];
+	outerEdges = cache->getOuterEdgesMap()[outerEdges][mInt];
+	innerEdges = cache->getInnerEdgesMap()[innerEdges][mInt];
+	centre = cache->getCentreMap()[centre][mInt];
 }
 
 
-void CrazyCubeImproved:: undoMove(unsigned short int m)
+void CrazyCubeImproved:: undoMove(rotation m)
 {
-	outerCorners = cache->getOuterCornersMap()[outerCorners][movesInversions[m]];
-	innerCorners = cache->getInnerCornersMap()[innerCorners][movesInversions[m]];
-	outerEdges = cache->getOuterEdgesMap()[outerEdges][movesInversions[m]];
-	innerEdges = cache->getInnerEdgesMap()[innerEdges][movesInversions[m]];
-	centre = cache->getCentreMap()[centre][movesInversions[m]];
+  unsigned short mInt = static_cast<unsigned short>(m);
+	outerCorners = cache->getOuterCornersMap()[outerCorners][movesInversions[mInt]];
+	innerCorners = cache->getInnerCornersMap()[innerCorners][movesInversions[mInt]];
+	outerEdges = cache->getOuterEdgesMap()[outerEdges][movesInversions[mInt]];
+	innerEdges = cache->getInnerEdgesMap()[innerEdges][movesInversions[mInt]];
+	centre = cache->getCentreMap()[centre][movesInversions[mInt]];
 }
 
 

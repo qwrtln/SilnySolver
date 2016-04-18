@@ -304,14 +304,14 @@ void CrazyCube::MvBr()
 			   ( (cubeState & 0x00000000000000F0) << 16 ));
 }
 
-void CrazyCube::move(unsigned short int move)
+void CrazyCube::move(rotation move)
 {
-	(*this.*moveTab[move])(); // Wow! So advanced.
+	(*this.*moveTab[static_cast<int>(move)])(); // Wow! So advanced.
 }
 
-void CrazyCube::undoMove(unsigned short int move)
+void CrazyCube::undoMove(rotation move)
 {
-	(this->*undoMoveTab[move])(); // Two options possible. So readable.
+	(this->*undoMoveTab[static_cast<int>(move)])(); // Two options possible. So readable.
 }
 
 void CrazyCube::toggleCentre()

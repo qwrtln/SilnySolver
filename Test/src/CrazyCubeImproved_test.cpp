@@ -33,7 +33,7 @@ TEST_F(CrazyCubeImprovedTest, findingMemoryLeaks)
     cubeImproved.getOuterCorners();
     cubeImproved.getOuterEdges();
     cubeImproved.isSolved();
-    cubeImproved.move(0);
+    cubeImproved.move(rotation::LEFT);
     // cubeImproved.printCubeState(); /* ~~This suppresses unnecessary output~~ */
     cubeImproved.resetCube();
     cubeImproved.setCube(1,2,3,4,5);
@@ -42,7 +42,7 @@ TEST_F(CrazyCubeImprovedTest, findingMemoryLeaks)
     cubeImproved.setInnerEdges(2);
     cubeImproved.setOuterCorners(3);
     cubeImproved.setOuterEdges(4);
-    cubeImproved.undoMove(0);
+    cubeImproved.undoMove(rotation::LEFT);
 }
 #else
 
@@ -80,7 +80,7 @@ TEST_F(CrazyCubeImprovedTest, L)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(0); // Zero translates as L
+    cubeToCompare.move(rotation::LEFT); // Zero translates as L
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -95,7 +95,7 @@ TEST_F(CrazyCubeImprovedTest, F)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(1); // One translates as F
+    cubeToCompare.move(rotation::FRONT); // One translates as F
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -110,7 +110,7 @@ TEST_F(CrazyCubeImprovedTest, U)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(2); // Two translates as U
+    cubeToCompare.move(rotation::UP); // Two translates as U
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -125,7 +125,7 @@ TEST_F(CrazyCubeImprovedTest, Ui)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(3); // Three translates as Ui
+    cubeToCompare.move(rotation::UP_INVERTED); // Three translates as Ui
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -140,7 +140,7 @@ TEST_F(CrazyCubeImprovedTest, U2)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(4); // Four translates as U2
+    cubeToCompare.move(rotation::UP_2); // Four translates as U2
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -155,7 +155,7 @@ TEST_F(CrazyCubeImprovedTest, Mv)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(5); // Five translates as Mv
+    cubeToCompare.move(rotation::MIDDLE_VERTICAL); // Five translates as Mv
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -170,7 +170,7 @@ TEST_F(CrazyCubeImprovedTest, Mh)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(6); // Six translates as Mh
+    cubeToCompare.move(rotation::MIDDLE_HORIZONTAL); // Six translates as Mh
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -185,7 +185,7 @@ TEST_F(CrazyCubeImprovedTest, MhRr)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(7); // Six translates as MhRr
+    cubeToCompare.move(rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION); // Six translates as MhRr
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -200,7 +200,7 @@ TEST_F(CrazyCubeImprovedTest, MhLr)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(8); // Eight translates as MhLr
+    cubeToCompare.move(rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION); // Eight translates as MhLr
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -216,7 +216,7 @@ TEST_F(CrazyCubeImprovedTest, MvFr)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(9); // Nine translates as MvFr
+    cubeToCompare.move(rotation::MIDDLE_VERTICAL_FRONT_ROTATION); // Nine translates as MvFr
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 
@@ -231,7 +231,7 @@ TEST_F(CrazyCubeImprovedTest, MvBr)
     cubeImproved.resetCube();
 
     cubeToCompare.resetCube();
-    cubeToCompare.move(0xa); // Ten translates as MvBr
+    cubeToCompare.move(rotation::MIDDLE_VERTICAL_BACK_ROTATION); // Ten translates as MvBr
 
     setCubeImprovedFromCrazyCube(cubeImproved,cube);
 

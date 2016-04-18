@@ -36,55 +36,55 @@ public:
 
 	// Legalne ruchy < 11
     enum class rotation {
-		L,		// Left 0
-		F,		// Front
-		U,		// Up
-		Ui,		// Up inverted
-		U2, 	// U^2
-		Mv,		// Middle vertical
-		Mh, 	// Middle horizontal
-		MhRr,	// Middle horizontal Right rotation
-		MhLr,	// ...
-		MvFr,	// Middle vertical Front rotation
-		MvBr	// ... 10
+		LEFT,		// Left 0
+		FRONT,		// Front
+		UP,		// Up
+		UP_INVERTED,		// Up inverted
+		UP_2, 	// U^2
+		MIDDLE_VERTICAL,		// Middle vertical
+		MIDDLE_HORIZONTAL, 	// Middle horizontal
+		MIDDLE_HORIZONTAL_RIGHT_ROTATION,	// Middle horizontal Right rotation
+		MIDDLE_HORIZONTAL_LEFT_ROTATION,	// ...
+		MIDDLE_VERTICAL_FRONT_ROTATION,	// Middle vertical Front rotation
+		MIDDLE_VERTICAL_BACK_ROTATION	// ... 10
 	};
 
 	// Nazwy rogow
 	enum class cornerNames {
-		YGRY = 0x0,	// yellow green red (inner yellow)
-		YGRW = 0x1,	// yellow green red (inner white)
-		YRBY = 0x2,	// etc
-		YRBW = 0x3,	//...
-		YBOY = 0x4,
-		YBOW = 0x5,
-		YOGY = 0x6,
-		YOGW = 0x7,
-		WRGY = 0x8,	// white red green (inner yellow)
-		WRGW = 0x9,	// white red green (inner white)
-		WBRY = 0xA,	// etc
-		WBRW = 0xB,	// ...
-		WOBY = 0xC,
-		WOBW = 0xD
+		YELLOW_GREEN_RED_YELLOW = 0x0,	// yellow green red (inner yellow)
+		YELLOW_GREEN_RED_WHITE = 0x1,	// yellow green red (inner white)
+		YELLOW_RED_BLUE_YELLOW = 0x2,	// etc
+		YELLOW_RED_BLUE_WHITE = 0x3,	//...
+		YELLOW_BLUE_ORANGE_YELLOW = 0x4,
+		YELLOW_BLUE_ORANGE_WHITE = 0x5,
+		YELLOW_ORANGE_GREEN_YELLOW = 0x6,
+		YELLOW_ORANGE_GREEN_WHITE = 0x7,
+		WHITE_RED_GREEN_YELLOW = 0x8,	// white red green (inner yellow)
+		WHITE_RED_GREEN_WHITE = 0x9,	// white red green (inner white)
+		WHITE_BLUE_RED_YELLOW = 0xA,	// etc
+		WHITE_BLUE_RED_WHITE = 0xB,	// ...
+		WHITE_ORANGE_BLUE_YELLOW = 0xC,
+		WHITE_ORANGE_BLUE_WHITE = 0xD
 	};
 
 	// Nazwy krawedzi
 	enum class edgeNames {
-		YRY = 0x0,	// yellow red (inner yellow)
-		YRW = 0x1,	// yellow red (inner white) 
-    YBY = 0x2,	// etc
-		YBW = 0x3,
-		YOY = 0x4,
-		YOW = 0x5,
-		YGY = 0x6,
-		YGW = 0x7,
-		WRY = 0x8,	// white red (inner yellow)
-		WRW = 0x9,	// white red (inner white)
-		WBY = 0xA,	// etc
-		WBW = 0xB,
-		WOY = 0xC,
-		WOW = 0xD,
-		WGY = 0xE,
-		WGW = 0xF
+		YELLOW_RED_YELLOW = 0x0,	// yellow red (inner yellow)
+		YELLOW_RED_WHITE = 0x1,	// yellow red (inner white) 
+    YELLOW_BLUE_YELLOW = 0x2,	// etc
+		YELLOW_BLUE_WHITE = 0x3,
+		YELLOW_ORANGE_YELLOW = 0x4,
+		YELLOW_ORANGE_WHITE = 0x5,
+		YELLOW_GREEN_YELLOW = 0x6,
+		YELLOW_GREEN_WHITE = 0x7,
+		WHITE_RED_YELLOW = 0x8,	// white red (inner yellow)
+		WHITE_RED_WHITE = 0x9,	// white red (inner white)
+		WHITE_BLUE_YELLOW = 0xA,	// etc
+		WHITE_BLUE_WHITE = 0xB,
+		WHITE_ORANGE_YELLOW = 0xC,
+		WHITE_ORANGE_WHITE = 0xD,
+		WHITE_GREEN_YELLOW = 0xE,
+		WHITE_GREEN_WHITE = 0xF
 	};
 };
 

@@ -52,7 +52,7 @@ protected:
 		{
 			for(unsigned short int j = 0; j < NUM_OF_MOVES; j++)
 			{			
-				cubeToTest->move(j);
+				cubeToTest->move(static_cast<rotation>(j));
 			}		
 		}
 		if(showTime)

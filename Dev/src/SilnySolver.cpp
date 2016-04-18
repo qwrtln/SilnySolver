@@ -19,17 +19,17 @@ void translateMove(unsigned short move)
 {
     switch(move)
     {
-        case 0: cout << "L "; return;
-        case 1: cout << "F "; return;
-        case 2: cout << "U "; return;
-        case 3: cout << "Ui "; return;
-        case 4: cout << "U2 "; return;
-        case 5: cout << "Mv "; return;
-        case 6: cout << "Mh "; return;
-        case 7: cout << "MhRr "; return;
-        case 8: cout << "MhLr "; return;
-        case 9: cout << "MvFr "; return;
-        case 10: cout << "MvBr "; return;
+        case 0: cout << "LEFT "; return;
+        case 1: cout << "FRONT "; return;
+        case 2: cout << "UP "; return;
+        case 3: cout << "UP_INVERTED "; return;
+        case 4: cout << "UP_2 "; return;
+        case 5: cout << "MIDDLE_VERTICAL "; return;
+        case 6: cout << "MIDDLE_HORIZONTAL "; return;
+        case 7: cout << "MIDDLE_HORIZONTAL_RIGHT_ROTATION "; return;
+        case 8: cout << "MIDDLE_HORIZONTAL_LEFT_ROTATION "; return;
+        case 9: cout << "MIDDLE_VERTICAL_FRONT_ROTATION "; return;
+        case 10: cout << "MIDDLE_VERTICAL_BACK_ROTATION "; return;
     }
 
 }
@@ -44,7 +44,7 @@ int main(int argc, char* argv[])
 	solver.setCrazyCube(&impCube);
 
     const int movesToDo = 12;
-    int movesMap[movesToDo] = {impCube.MvBr, impCube.L, impCube.F, impCube.MhRr, impCube.Mv, impCube.Mv, impCube.U2, impCube.MhLr, impCube.Mv, impCube.Ui, impCube.MvFr, impCube.L};//, impCube.MhRr, impCube.MvBr, impCube.F};
+    CrazyCubeImproved::rotation movesMap[movesToDo] = {CrazyCubeImproved::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCubeImproved::rotation::LEFT, CrazyCubeImproved::rotation::FRONT, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::UP_2, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::UP_INVERTED, CrazyCubeImproved::rotation::MIDDLE_VERTICAL_FRONT_ROTATION, CrazyCubeImproved::rotation::LEFT};//, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCubeImproved::rotation::FRONT};
 
     for (int i = 0; i < movesToDo; ++i)
     {
