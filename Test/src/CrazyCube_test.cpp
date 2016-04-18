@@ -72,7 +72,7 @@ CrazyCube CrazyCubeTest::cube;
 #ifdef MEMORY_CHECK
 TEST_F(CrazyCubeTest, findingMemoryLeaks)
 {
-    edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+    edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
     cube.F();
     cube.L();
@@ -121,7 +121,7 @@ TEST_F(CrazyCubeTest, setCornersTest)
 TEST_F(CrazyCubeTest, setEdgesTest)
 {
 	CrazyCube genericCube(1);
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	genericCube.setEdges(edges);
 	ASSERT_EQ((genericCube.checkEdges()), true )
 }
@@ -130,7 +130,7 @@ TEST_F(CrazyCubeTest, innerCircleTest)
 {
 	CrazyCube genericCube(1);
 	genericCube.setCentre(true);
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YRY, edgeNames::YRY, edgeNames::YRY, edgeNames::YRW, edgeNames::YRW, edgeNames::YRW, edgeNames::YRW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_RED_WHITE, edgeNames::YELLOW_RED_WHITE, edgeNames::YELLOW_RED_WHITE, edgeNames::YELLOW_RED_WHITE};
 	genericCube.setEdges(edges);
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YGRY, cornerNames::YGRY, cornerNames::YGRY, cornerNames::YGRW, cornerNames::YGRW, cornerNames::YGRW};
 	genericCube.setCorners(corners);
@@ -145,7 +145,7 @@ TEST_F(CrazyCubeTest, setCubeTest)
 
 TEST_F(CrazyCubeTest, setNEGATIVEcubeTest)
 {
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WGW, edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW}; // Wrong sequence
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WHITE_GREEN_WHITE, edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE}; // Wrong sequence
 	cube.setEdges(edges);
 	ASSERT_NE(cube.isSolved(), 1)
 }
@@ -153,7 +153,7 @@ TEST_F(CrazyCubeTest, setNEGATIVEcubeTest)
 TEST_F(CrazyCubeTest, setWholeCubeTest)
 {
 	cube.setCubeState(0xf);
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	ASSERT_EQ_HEX(cube.isSolved(), 1)
@@ -161,7 +161,7 @@ TEST_F(CrazyCubeTest, setWholeCubeTest)
 
 TEST_F(CrazyCubeTest, L)
 {
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::WBW, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::YBY, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::WHITE_BLUE_WHITE, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::WOBW, cornerNames::WBRW, cornerNames::YOGY, cornerNames::WRGW, cornerNames::YBOY, cornerNames::YRBY};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -172,7 +172,7 @@ TEST_F(CrazyCubeTest, L)
 TEST_F(CrazyCubeTest, U)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YGY, edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_GREEN_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -184,7 +184,7 @@ TEST_F(CrazyCubeTest, U)
 TEST_F(CrazyCubeTest, F)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WRW, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WHITE_RED_WHITE, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::WBRW, cornerNames::WRGW, cornerNames::YBOY, cornerNames::YOGY, cornerNames::YRBY, cornerNames::YGRY, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -195,7 +195,7 @@ TEST_F(CrazyCubeTest, F)
 TEST_F(CrazyCubeTest, UI) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -206,7 +206,7 @@ TEST_F(CrazyCubeTest, UI)
 TEST_F(CrazyCubeTest, U2) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::YGY, edgeNames::YRY, edgeNames::YBY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -217,7 +217,7 @@ TEST_F(CrazyCubeTest, U2)
 TEST_F(CrazyCubeTest, MV) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WOW, edgeNames::YBY, edgeNames::WRW, edgeNames::YGY, edgeNames::YOY, edgeNames::WBW, edgeNames::YRY, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WHITE_ORANGE_WHITE, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::WHITE_BLUE_WHITE, edgeNames::YELLOW_RED_YELLOW, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	cube.toggleCentre();
@@ -229,7 +229,7 @@ TEST_F(CrazyCubeTest, MV)
 TEST_F(CrazyCubeTest, MH)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::WGW, edgeNames::YOY, edgeNames::WBW, edgeNames::WRW, edgeNames::YGY, edgeNames::WOW, edgeNames::YBY};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::WHITE_GREEN_WHITE, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_RED_WHITE, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_ORANGE_WHITE, edgeNames::YELLOW_BLUE_YELLOW};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YGRY, cornerNames::YRBY, cornerNames::YBOY, cornerNames::YOGY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	cube.toggleCentre();
@@ -241,7 +241,7 @@ TEST_F(CrazyCubeTest, MH)
 TEST_F(CrazyCubeTest, MHRR) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::YBY, edgeNames::YRY, edgeNames::WGW, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::YGY};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::WHITE_GREEN_WHITE, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::YELLOW_GREEN_YELLOW};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -252,7 +252,7 @@ TEST_F(CrazyCubeTest, MHRR)
 TEST_F(CrazyCubeTest, MHLR)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YOY, edgeNames::WBW, edgeNames::YRY, edgeNames::YGY, edgeNames::WRW, edgeNames::YBY, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::WHITE_BLUE_WHITE, edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -263,7 +263,7 @@ TEST_F(CrazyCubeTest, MHLR)
 TEST_F(CrazyCubeTest, MVFR) 
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WRW, edgeNames::YGY, edgeNames::YOY, edgeNames::YBY, edgeNames::YRY, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::WHITE_RED_WHITE, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_RED_YELLOW, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -274,7 +274,7 @@ TEST_F(CrazyCubeTest, MVFR)
 TEST_F(CrazyCubeTest, MVBR)
 {
 	cube.resetCube();
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YGY, edgeNames::WOW, edgeNames::YBY, edgeNames::WRW, edgeNames::WBW, edgeNames::YOY, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_ORANGE_WHITE, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::WHITE_GREEN_WHITE};
 	cornerNames corners[NUM_OF_CORNERS] = {cornerNames::YBOY, cornerNames::YOGY, cornerNames::YGRY, cornerNames::YRBY, cornerNames::WRGW, cornerNames::WBRW, cornerNames::WOBW};
 	cube.setWholeCube(true,edges,corners);
 	CrazyCube cubeToCompare;
@@ -320,7 +320,7 @@ TEST_F(CrazyCubeTest, isSolvedMasksTest)
 	CrazyCube genericCube(1);
 
 	// ------------------- outer
-	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	genericCube.setEdges(edges);
 	ASSERT_EQ(genericCube.isSolved(solvedEdges), true );
 
@@ -335,7 +335,7 @@ TEST_F(CrazyCubeTest, isSolvedMasksTest)
 
 	// ------------------- inner
 	genericCube.resetCube();
-	edgeNames edges2[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::YBY, edgeNames::YOY, edgeNames::YGY, edgeNames::WRW, edgeNames::WBW, edgeNames::WOW, edgeNames::WGW};
+	edgeNames edges2[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::YELLOW_BLUE_YELLOW, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::YELLOW_GREEN_YELLOW, edgeNames::WHITE_RED_WHITE, edgeNames::WHITE_BLUE_WHITE, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_GREEN_WHITE};
 	genericCube.setEdges(edges2);
 	ASSERT_EQ(genericCube.isSolved(solvedInnerEdges), true );
 
@@ -346,7 +346,7 @@ TEST_F(CrazyCubeTest, isSolvedMasksTest)
 
 	// ------------------- random masks
 	genericCube.resetCube();
-	edgeNames edges3[NUM_OF_EDGES] = {edgeNames::YRY, edgeNames::WOW, edgeNames::WBY, edgeNames::YRW, edgeNames::WGY, edgeNames::YBW, edgeNames::YOY, edgeNames::WGW};
+	edgeNames edges3[NUM_OF_EDGES] = {edgeNames::YELLOW_RED_YELLOW, edgeNames::WHITE_ORANGE_WHITE, edgeNames::WHITE_BLUE_YELLOW, edgeNames::YELLOW_RED_WHITE, edgeNames::WHITE_GREEN_YELLOW, edgeNames::YELLOW_BLUE_WHITE, edgeNames::YELLOW_ORANGE_YELLOW, edgeNames::WHITE_GREEN_WHITE};
 	genericCube.setEdges(edges3);
 	cornerNames corners3[NUM_OF_CORNERS] = {cornerNames::YGRW, cornerNames::YRBW, cornerNames::YOGY, cornerNames::YBOY, cornerNames::WOBY, cornerNames::WBRY, cornerNames::WRGW};
 	genericCube.setCorners(corners3);

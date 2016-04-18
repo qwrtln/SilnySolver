@@ -69,22 +69,22 @@ public:
 
 	// Nazwy krawedzi
 	enum class edgeNames {
-		YRY = 0x0,	// yellow red (inner yellow)
-		YRW = 0x1,	// yellow red (inner white) 
-    YBY = 0x2,	// etc
-		YBW = 0x3,
-		YOY = 0x4,
-		YOW = 0x5,
-		YGY = 0x6,
-		YGW = 0x7,
-		WRY = 0x8,	// white red (inner yellow)
-		WRW = 0x9,	// white red (inner white)
-		WBY = 0xA,	// etc
-		WBW = 0xB,
-		WOY = 0xC,
-		WOW = 0xD,
-		WGY = 0xE,
-		WGW = 0xF
+		YELLOW_RED_YELLOW = 0x0,	// yellow red (inner yellow)
+		YELLOW_RED_WHITE = 0x1,	// yellow red (inner white) 
+    YELLOW_BLUE_YELLOW = 0x2,	// etc
+		YELLOW_BLUE_WHITE = 0x3,
+		YELLOW_ORANGE_YELLOW = 0x4,
+		YELLOW_ORANGE_WHITE = 0x5,
+		YELLOW_GREEN_YELLOW = 0x6,
+		YELLOW_GREEN_WHITE = 0x7,
+		WHITE_RED_YELLOW = 0x8,	// white red (inner yellow)
+		WHITE_RED_WHITE = 0x9,	// white red (inner white)
+		WHITE_BLUE_YELLOW = 0xA,	// etc
+		WHITE_BLUE_WHITE = 0xB,
+		WHITE_ORANGE_YELLOW = 0xC,
+		WHITE_ORANGE_WHITE = 0xD,
+		WHITE_GREEN_YELLOW = 0xE,
+		WHITE_GREEN_WHITE = 0xF
 	};
 };
 
