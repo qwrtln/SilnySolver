@@ -151,9 +151,9 @@ then
         echo -e "\n"
 
         # Parse only through relevant part of the output
-        grep "HEAP SUMMARY" .memLeaks -A2 | cut -c 11- | tee .4perl
-        grep "LEAK SUMMARY" .memLeaks -A5 | cut -c 11- | tee -a .4perl
-        grep "ERROR SUMMARY" .memLeaks | cut -c 11- | tee -a .4perl
+        grep "HEAP SUMMARY" .memLeaks -A2 | cut -c 10- | tee .4perl
+        grep "LEAK SUMMARY" .memLeaks -A5 | cut -c 10- | tee -a .4perl
+        grep "ERROR SUMMARY" .memLeaks | cut -c 10- | tee -a .4perl
         rm .memLeaks
 
         # Using external script to parse Valgrind output
