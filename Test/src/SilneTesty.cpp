@@ -1,4 +1,5 @@
 #include "CrazyCubeAbstract.h"
+#include "CrazyCubeCache.h"
 #include "TestExecuter.h"
 #include "TestMacros.h"
 #include <iostream>
@@ -64,5 +65,6 @@ int main(int argc, char* argv[])
           RUN_ALL_TESTS(1);
     }
 
+    CrazyCubeCache:: getInstance()->cleanup();
     return 0;
 }
