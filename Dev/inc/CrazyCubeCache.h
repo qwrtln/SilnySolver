@@ -9,7 +9,6 @@
 
 class CrazyCubeCache: public CrazyCubeAbstract
 {
-	
 private:
 
   CrazyCubeCache();
