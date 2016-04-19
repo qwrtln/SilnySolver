@@ -8,16 +8,17 @@ class CrazyCubeCache: public CrazyCubeAbstract
 	
 private:
 	
-    int** outerCornersMap;
+  CrazyCubeCache();
+  int** outerCornersMap;
 	int** innerCornersMap;
 	int** outerEdgesMap;
 	int** innerEdgesMap;
 	int** centreMap;
+  static CrazyCubeCache* instance;
 	
 public:
-
-    CrazyCubeCache();
-	~CrazyCubeCache();
+  static CrazyCubeCache* getInstance();
+  ~CrazyCubeCache();
 
 	void setOuterCornersMap(int** outerCornersMap);
 	void setInnerCornersMap(int** innerCornersMap);

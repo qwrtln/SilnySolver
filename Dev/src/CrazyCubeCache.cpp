@@ -1,5 +1,15 @@
 #include "CrazyCubeCache.h"
 
+CrazyCubeCache* CrazyCubeCache::instance = nullptr;
+
+CrazyCubeCache* CrazyCubeCache::getInstance()
+{
+  if(!instance) {
+    instance = new CrazyCubeCache();
+  } 
+  return instance;
+}
+
 CrazyCubeCache:: CrazyCubeCache()
 {
 }
