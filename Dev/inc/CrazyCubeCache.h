@@ -8,8 +8,6 @@ class CrazyCubeCache: public CrazyCubeAbstract
 {
 private:
 
-    static CrazyCubeCache* instance;
-	
   CrazyCubeCache();
   int** outerCornersMap;
   int** innerCornersMap;
@@ -28,8 +26,6 @@ public:
 	int** getOuterEdgesMap();
 	int** getInnerEdgesMap();
 	int** getCentreMap();
-
-    static CrazyCubeCache* getInstance();
 };
 
 #endif /* CRAZYCUBECACHE_H_ */

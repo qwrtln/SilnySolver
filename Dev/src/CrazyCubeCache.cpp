@@ -84,28 +84,3 @@ int** CrazyCubeCache:: getCentreMap()
 {
 	return this->centreMap;
 }
-
-void CrazyCubeCache::  setOuterCornersMap(int** outerCornersMap)
-{
-	this->outerCornersMap = outerCornersMap;
-}
-
-void CrazyCubeCache::  setInnerCornersMap(int** innerCornersMap)
-{
-	this->innerCornersMap = innerCornersMap;
-}
-
-void CrazyCubeCache::  setOuterEdgesMap(int** outerEdgesMap)
-{
-	this->outerEdgesMap = outerEdgesMap;
-}
-
-void CrazyCubeCache::  setInnerEdgesMap(int** innerEdgesMap)
-{
-	this->innerEdgesMap = innerEdgesMap;
-}
-
-void CrazyCubeCache::  setCentreMap(int** centreMap)
-{
-	this->centreMap = centreMap;
-}

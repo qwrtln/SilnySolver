@@ -507,3 +507,4 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToCentreRandomCube)
 	unsigned long long int centreExpected = 0x0000000000000000;
 	ASSERT_EQ_HEX(centreExpected, mapper.convertIntToCentre(centre));
 }
+#endif
