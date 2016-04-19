@@ -2,7 +2,6 @@
 #define CRAZYCUBEIMPROVED_H_
 
 #include "CrazyCubeBase.h"
-#include "CrazyCubeMapper.h"
 #include "CrazyCubeCache.h"
 #include <iostream>
 using namespace std;
@@ -11,7 +10,6 @@ class CrazyCubeImproved: public CrazyCubeBase
 {
 private:
 	CrazyCubeCache* cache;
-    CrazyCubeMapper* mapper;
 	int outerCorners;
 	int innerCorners;
 	int outerEdges;

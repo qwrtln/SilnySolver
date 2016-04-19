@@ -1,7 +1,25 @@
 #include "CrazyCubeCache.h"
 
+CrazyCubeCache* CrazyCubeCache::instance = nullptr;
+
+CrazyCubeCache* CrazyCubeCache::getInstance()
+{
+  if(!instance) 
+  {
+    instance = new CrazyCubeCache();
+  } 
+  return instance;
+}
+
 CrazyCubeCache:: CrazyCubeCache()
 {
+    CrazyCubeMapper mapper;
+
+    outerCornersMap = mapper.generateOuterCornersMap();
+    innerCornersMap = mapper.generateInnerCornersMap();
+    outerEdgesMap = mapper.generateOuterEdgesMap();
+    innerEdgesMap = mapper.generateInnerEdgesMap();
+    centreMap = mapper.generateCentreMap();
 }
 
 CrazyCubeCache:: ~CrazyCubeCache()
@@ -30,6 +48,12 @@ CrazyCubeCache:: ~CrazyCubeCache()
 	delete[] centreMap;
 }
 
+void CrazyCubeCache:: cleanup()
+{
+    delete instance;
+    instance = nullptr;
+}
+
 int** CrazyCubeCache:: getOuterCornersMap()
 {
 	return this->outerCornersMap;
@@ -55,27 +79,3 @@ int** CrazyCubeCache:: getCentreMap()
 	return this->centreMap;
 }
 
-void CrazyCubeCache::  setOuterCornersMap(int** outerCornersMap)
-{
-	this->outerCornersMap = outerCornersMap;
-}
-
-void CrazyCubeCache::  setInnerCornersMap(int** innerCornersMap)
-{
-	this->innerCornersMap = innerCornersMap;
-}
-
-void CrazyCubeCache::  setOuterEdgesMap(int** outerEdgesMap)
-{
-	this->outerEdgesMap = outerEdgesMap;
-}
-
-void CrazyCubeCache::  setInnerEdgesMap(int** innerEdgesMap)
-{
-	this->innerEdgesMap = innerEdgesMap;
-}
-
-void CrazyCubeCache::  setCentreMap(int** centreMap)
-{
-	this->centreMap = centreMap;
-}

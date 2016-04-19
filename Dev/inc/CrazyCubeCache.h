@@ -2,28 +2,25 @@
 #define CRAZYCUBECACHE_H_
 
 #include "CrazyCubeAbstract.h"
+#include "CrazyCubeMapper.h"
 
 class CrazyCubeCache: public CrazyCubeAbstract
 {
 	
 private:
 	
-    int** outerCornersMap;
-	int** innerCornersMap;
-	int** outerEdgesMap;
-	int** innerEdgesMap;
-	int** centreMap;
+  CrazyCubeCache();
+  int** outerCornersMap;
+  int** innerCornersMap;
+  int** outerEdgesMap;
+  int** innerEdgesMap;
+  int** centreMap;
+  static CrazyCubeCache* instance;
 	
 public:
-
-    CrazyCubeCache();
-	~CrazyCubeCache();
-
-	void setOuterCornersMap(int** outerCornersMap);
-	void setInnerCornersMap(int** innerCornersMap);
-	void setOuterEdgesMap(int** outerEdgesMap);
-	void setInnerEdgesMap(int** innerEdgesMap);
-	void setCentreMap(int** centreMap);
+    static CrazyCubeCache* getInstance();
+    static void cleanup();
+    ~CrazyCubeCache();
 	
 	int** getOuterCornersMap();
 	int** getInnerCornersMap();
@@ -31,6 +28,5 @@ public:
 	int** getInnerEdgesMap();
 	int** getCentreMap();
 };
-
 
 #endif /* CRAZYCUBECACHE_H_ */
