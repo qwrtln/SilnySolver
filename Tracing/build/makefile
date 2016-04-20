@@ -30,7 +30,7 @@ build: $(OBJ_FILES)
 # Clean the shit out
 .PHONY: clean
 clean:
-	rm -rf *.o *.d SilnySolver 
+	rm -rf *.o *.d
 
 -include $(DEP_FILES)
 
