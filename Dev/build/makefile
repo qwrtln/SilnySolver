@@ -2,7 +2,7 @@
 # Compiler
 CXX = g++
 # Path to .h files		
-INC = -I ../inc/ -I ../../Tracing/inc/Tracer.h
+INC = -I ../inc/ -I ../../Tracing/inc/
 # Path to .cpp files
 SRC = ../src/
 
