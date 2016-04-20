@@ -1,45 +1,36 @@
 # Some variables declarations
-# Path to .h files	
+# Compiler
+CXX = g++
+# Path to .h files		
 INC = -I ../inc/
 # Path to .cpp files
 SRC = ../src/
-# Paths to dev files (to delete)
-DEVSRC = .
-# Path to dev binaries
-BUILT = $(subst src,build,$(DEVSRC))
 
-# List of built dev files is generated on .cpp files, not .o files
-# This is due to lack of certainty, whether they are actually built
-BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(DEVSRC)*.cpp)))
-BUILT_FILES := $(filter-out ../../Dev/build/SilnySolver.o, $(BUILT_FILES))
+# Compiler flags
+FLAGS = -Wall -O3 -std=c++11
 
-
-# List of all source files
-SRC_FILES := $(wildcard $(SRC)*.cpp)
-# List of all binaries
+# variable containing list of all .cpp files in ../src/ folder
+SRC_FILES := $(wildcard $(SRC)*.cpp) 
+# variable containing list of all .o files produced during above .cpp files compilation
 OBJ_FILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRC_FILES)))
-# List of all data blocks
+# variable containing list of all .d files
 DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
 
-# A separate rule for delivery checking purposes 
-#MemoryCheck: FLAGS += -D MEMORY_CHECK
-#MemoryCheck: productionCode $(OBJ_FILES) 
-#	$(CXX) $(FLAGS) $(BUILT_FILES) $(OBJ_FILES) $(INC) -o SilneTesty
+# Compilation rules
+SilnySolver: build 
+	echo "Nothing to build for Tracing at the moment"
 
-#SilneTesty: productionCode $(OBJ_FILES) 
-#	$(CXX) $(FLAGS) $(BUILT_FILES) $(OBJ_FILES) $(INC) -o $@
+# Rule for separating executable from build files
+build: $(OBJ_FILES)
 
-productionCode: 
-	#$(MAKE) -C $(BUILT) build
-
-# It's a rule for every single cpp file, this is why we don't use *_FILES var
-%.o: $(SRC)%.cpp
+%.o: $(SRC)%.cpp 
 	$(CXX) $(FLAGS) -c $< $(INC) -o $@
 	$(CXX) -MM $< $(INC) > $(@:.o=.d)
-
-.PHONY: clean	
+	
+# Clean the shit out
+.PHONY: clean
 clean:
-	rm -rf *.o *.d SilneTesty 
+	rm -rf *.o *.d SilnySolver 
 
 -include $(DEP_FILES)
 
