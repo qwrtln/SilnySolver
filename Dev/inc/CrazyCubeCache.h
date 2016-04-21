@@ -6,9 +6,8 @@
 
 class CrazyCubeCache: public CrazyCubeAbstract
 {
-	
 private:
-	
+
   CrazyCubeCache();
   int** outerCornersMap;
   int** innerCornersMap;

@@ -57,7 +57,7 @@ class CrazyCubeMapper: public CrazyCubeAbstract
 
         int** generatePieceMap(const int, unsigned long long (CrazyCubeMapper::*convertingToIntFunction)(int), int (CrazyCubeMapper::*convertingToPiecesFunction)(unsigned long long));
 
-        CrazyCube cube;
+		CrazyCube cube;
 
         int** generateOuterCornersMap();
         int** generateOuterEdgesMap();

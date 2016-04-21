@@ -27,16 +27,22 @@ CrazyCubeCache:: ~CrazyCubeCache()
 	// Clean the arrays created using CrazyCubeMapper
 	for(int i = 0; i < factorials[NUM_OF_CORNERS]; i++)
 	{
-		delete[] innerCornersMap[i];
 		delete[] outerCornersMap[i];
+	}
+	for(int i = 0; i < pow2toX[NUM_OF_CORNERS]; i++)
+	{
+		delete[] innerCornersMap[i];
 	}
 	delete[] innerCornersMap;
 	delete[] outerCornersMap;
 	
 	for(int i = 0; i < factorials[NUM_OF_EDGES]; i++)
 	{
-		delete[] innerEdgesMap[i];
 		delete[] outerEdgesMap[i];
+	}
+	for(int i = 0; i < pow2toX[NUM_OF_EDGES]; i++)
+	{
+		delete[] innerEdgesMap[i];
 	}
 	delete[] innerEdgesMap;
 	delete[] outerEdgesMap;
@@ -78,4 +84,3 @@ int** CrazyCubeCache:: getCentreMap()
 {
 	return this->centreMap;
 }
-

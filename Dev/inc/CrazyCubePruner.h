@@ -1,8 +1,8 @@
 #ifndef CRAZYCUBEPRUNER_H_
 #define CRAZYCUBEPRUNER_H_
 
+//#include "CrazyCube.h"
 #include "CrazyCubeAbstract.h"
-#include "CrazyCubeMapper.h"
 
 class CrazyCubePruner: public CrazyCubeAbstract
 {
