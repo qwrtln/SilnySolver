@@ -1,23 +1,24 @@
 #include "CrazyCubePruner.h"
-#include "CrazyCubeCache.h"
 
+CrazyCubePruner* CrazyCubePruner::instance = nullptr;
 
-short int* CrazyCubePruner::generateOuterCornersPruneMap(int maxMoves)
-{
-	CrazyCubeCache::getInstance();
-    short int* OuterCornersPruneMap = new short int[factorials[NUM_OF_EDGES]];
-
-    for (int i = 0; i < factorials[NUM_OF_EDGES]; ++i)
-    {
-        OuterCornersPruneMap[i] = 100; // Safe boundary - this prunes nothing
-    }
-
-	int outerCorners = 0;
-	
-	generateOuterCornersPruneMapIter(1, maxMoves, outerCorners, OuterCornersPruneMap, -1);
-    return OuterCornersPruneMap;
+CrazyCubePruner* CrazyCubePruner::getInstance() {
+  if(!instance) {
+    instance = new CrazyCubePruner();
+  }
+  return instance;
 }
-void CrazyCubePruner::generateOuterCornersPruneMapIter(int depth, int maxDepth, int& outerCorners, short int* outerCornersPruneMap, int prevMove)
-{
+
+CrazyCubePruner::CrazyCubePruner() {
+  CrazyCubeMapper mapper;
+
+  outerCornersMap = mapper.generateOuterCornersMap();
+  innerCornersMap = mapper.generateInnerCornersMap();
+  outerEdgesMap = mapper.generateOuterEdgesMap();
+  innerEdgesMap = mapper.generateInnerEdgesMap();
+  centreMap = mapper.generateCentreMap();
+}
+
+CrazyCubePruner::~CrazyCubePruner() {
 
 }
