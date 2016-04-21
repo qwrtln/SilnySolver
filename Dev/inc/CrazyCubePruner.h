@@ -3,6 +3,7 @@
 
 //#include "CrazyCube.h"
 #include "CrazyCubeAbstract.h"
+#include "CrazyCubeMapper.h"
 
 class CrazyCubePruner: public CrazyCubeAbstract
 {
