@@ -9,6 +9,7 @@ SRC = ../src/
 # Compiler flags
 FLAGS = -Wall -O3 -std=c++11
 
+
 # variable containing list of all .cpp files in ../src/ folder
 SRC_FILES := $(wildcard $(SRC)*.cpp) 
 # variable containing list of all .o files produced during above .cpp files compilation
@@ -18,13 +19,13 @@ DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
 
 # Compilation rules
 SilnySolver: build 
-	$(CXX) $(FLAGS) *.o -o $@
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) *.o -o $@
 
 # Rule for separating executable from build files
 build: $(OBJ_FILES)
 
 %.o: $(SRC)%.cpp 
-	$(CXX) $(FLAGS) -c $< $(INC) -o $@
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) -c $< $(INC) -o $@
 	$(CXX) -MM $< $(INC) > $(@:.o=.d)
 	
 # Clean the shit out
