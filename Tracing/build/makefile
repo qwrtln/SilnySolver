@@ -2,13 +2,12 @@
 # Compiler
 CXX = g++
 # Path to .h files		
-INC = -I ../inc/ -I ../../Tracing/inc/
+INC = -I ../inc/
 # Path to .cpp files
 SRC = ../src/
 
 # Compiler flags
 FLAGS = -Wall -O3 -std=c++11
-
 
 # variable containing list of all .cpp files in ../src/ folder
 SRC_FILES := $(wildcard $(SRC)*.cpp) 
@@ -19,19 +18,19 @@ DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
 
 # Compilation rules
 SilnySolver: build 
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) *.o -o $@
+	echo "Nothing to build for Tracing at the moment"
 
 # Rule for separating executable from build files
 build: $(OBJ_FILES)
 
 %.o: $(SRC)%.cpp 
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) -c $< $(INC) -o $@
+	$(CXX) $(FLAGS) -c $< $(INC) -o $@
 	$(CXX) -MM $< $(INC) > $(@:.o=.d)
 	
 # Clean the shit out
 .PHONY: clean
 clean:
-	rm -rf *.o *.d SilnySolver 
+	rm -rf *.o *.d
 
 -include $(DEP_FILES)
 
