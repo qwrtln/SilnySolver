@@ -19,13 +19,13 @@ DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
 
 # Compilation rules
 SilnySolver: build 
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) *.o -o $@
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o -o $@
 
 # Rule for separating executable from build files
 build: $(OBJ_FILES)
 
 %.o: $(SRC)%.cpp 
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) -c $< $(INC) -o $@
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL)-c $< $(INC) -o $@
 	$(CXX) -MM $< $(INC) > $(@:.o=.d)
 	
 # Clean the shit out
