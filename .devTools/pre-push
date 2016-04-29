@@ -17,11 +17,6 @@ CAN_DELIVER=false
 RUN_CHECK=false
 MEMORY_CHECK=true
 
-# Firstly, check if proper number of arguments was given: repo and branch
-if [ "$#" -ne 2 ]
-    then echo -e "Illegal number of parameters. When doing a delivery, you have to type both the name of the repository and the branch you're delivering to. For instance:\n\ngit push origin development\n"
-    exit 1
-fi
 # Old build.log will only disturb with current check. It should be removed. 
     rm -rf *.log
 
