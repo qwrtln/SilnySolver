@@ -24,28 +24,6 @@ CrazyCubeCache:: CrazyCubeCache()
 
 CrazyCubeCache:: ~CrazyCubeCache()
 {
-	// Clean the arrays created using CrazyCubeMapper
-	for(int i = 0; i < factorials[NUM_OF_CORNERS]; i++)
-	{
-		delete[] innerCornersMap[i];
-		delete[] outerCornersMap[i];
-	}
-	delete[] innerCornersMap;
-	delete[] outerCornersMap;
-	
-	for(int i = 0; i < factorials[NUM_OF_EDGES]; i++)
-	{
-		delete[] innerEdgesMap[i];
-		delete[] outerEdgesMap[i];
-	}
-	delete[] innerEdgesMap;
-	delete[] outerEdgesMap;
-	
-	for(int i = 0; i < factorials[2]; i++) // Magic 2 because 1! = 1 and we need 2 states for centre
-	{
-		delete[] centreMap[i];
-	}
-	delete[] centreMap;
 }
 
 void CrazyCubeCache:: cleanup()
@@ -54,27 +32,27 @@ void CrazyCubeCache:: cleanup()
     instance = nullptr;
 }
 
-int** CrazyCubeCache:: getOuterCornersMap()
+std::vector<std::vector<int>>& CrazyCubeCache:: getOuterCornersMap()
 {
 	return this->outerCornersMap;
 }
 
-int** CrazyCubeCache:: getInnerCornersMap()
+std::vector<std::vector<int>>& CrazyCubeCache:: getInnerCornersMap()
 {
 	return this->innerCornersMap;
 }
 
-int** CrazyCubeCache:: getOuterEdgesMap()
+std::vector<std::vector<int>>& CrazyCubeCache:: getOuterEdgesMap()
 {
 	return this->outerEdgesMap;
 }
 
-int** CrazyCubeCache:: getInnerEdgesMap()
+std::vector<std::vector<int>>& CrazyCubeCache:: getInnerEdgesMap()
 {
 	return this->innerEdgesMap;
 }
 
-int** CrazyCubeCache:: getCentreMap()
+std::vector<std::vector<int>>& CrazyCubeCache:: getCentreMap()
 {
 	return this->centreMap;
 }

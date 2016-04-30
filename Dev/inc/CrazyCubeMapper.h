@@ -4,6 +4,7 @@
 #include "CrazyCube.h"
 #include "CrazyCubeAbstract.h"
 #include <cmath>
+#include <vector>
 
 class CrazyCubeMapper: public CrazyCubeAbstract
 {
@@ -55,15 +56,15 @@ class CrazyCubeMapper: public CrazyCubeAbstract
         unsigned long long convertIntToInnerEdges(int);
         unsigned long long convertIntToCentre(int);
 
-        int** generatePieceMap(const int, unsigned long long (CrazyCubeMapper::*convertingToIntFunction)(int), int (CrazyCubeMapper::*convertingToPiecesFunction)(unsigned long long));
+        std::vector<std::vector<int>> generatePieceMap(const int, unsigned long long (CrazyCubeMapper::*convertingToIntFunction)(int), int (CrazyCubeMapper::*convertingToPiecesFunction)(unsigned long long));
 
         CrazyCube cube;
 
-        int** generateOuterCornersMap();
-        int** generateOuterEdgesMap();
-        int** generateInnerCornersMap();
-        int** generateInnerEdgesMap();
-        int** generateCentreMap();
+        std::vector<std::vector<int>> generateOuterCornersMap();
+        std::vector<std::vector<int>> generateOuterEdgesMap();
+        std::vector<std::vector<int>> generateInnerCornersMap();
+        std::vector<std::vector<int>> generateInnerEdgesMap();
+        std::vector<std::vector<int>> generateCentreMap();
 
         unsigned long long convertIntArrayToCubeState(int,int,int,int,int);
 };
