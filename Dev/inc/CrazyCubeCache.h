@@ -5,6 +5,7 @@
 #include "CrazyCubeMapper.h"
 
 #include <vector>
+#include <memory>
 
 class CrazyCubeCache: public CrazyCubeAbstract
 {
@@ -17,7 +18,7 @@ private:
   std::vector<std::vector<int>> outerEdgesMap;
   std::vector<std::vector<int>> innerEdgesMap;
   std::vector<std::vector<int>> centreMap;
-  static CrazyCubeCache* instance;
+  static std::unique_ptr<CrazyCubeCache> instance;
 	
 public:
     static CrazyCubeCache* getInstance();

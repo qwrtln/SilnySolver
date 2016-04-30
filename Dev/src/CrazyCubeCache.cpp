@@ -1,14 +1,14 @@
 #include "CrazyCubeCache.h"
 
-CrazyCubeCache* CrazyCubeCache::instance = nullptr;
+std::unique_ptr<CrazyCubeCache> CrazyCubeCache::instance;
 
 CrazyCubeCache* CrazyCubeCache::getInstance()
 {
   if(!instance) 
   {
-    instance = new CrazyCubeCache();
+    instance.reset(new CrazyCubeCache());
   } 
-  return instance;
+  return instance.get();
 }
 
 CrazyCubeCache:: CrazyCubeCache()
@@ -28,8 +28,7 @@ CrazyCubeCache:: ~CrazyCubeCache()
 
 void CrazyCubeCache:: cleanup()
 {
-    delete instance;
-    instance = nullptr;
+    instance.release();
 }
 
 std::vector<std::vector<int>>& CrazyCubeCache:: getOuterCornersMap()

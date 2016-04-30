@@ -4,6 +4,7 @@
 #include "CrazyCube.h"
 #include "CrazyCubeSolverParametersD.h"
 #include <vector>
+#include <memory>
 using namespace std;
 
 class CrazyCubeSolver: public CrazyCubeAbstract
@@ -41,8 +42,8 @@ protected:
 	unsigned short int solutionsFound;
 	CrazyCubeBase* crazyCube;
 	unsigned long long int solvedMask;
-	vector<vector<unsigned short int> > solutions;
-	unsigned short int* currentPath;
+	vector<vector<unsigned short int> > solutions;	
+    std::unique_ptr<unsigned short int[]> currentPath;
 	unsigned short int iDepth;
 };
 

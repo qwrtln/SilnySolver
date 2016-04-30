@@ -6,8 +6,7 @@ CrazyCubeSolver:: CrazyCubeSolver():
 				numberOfSolutions(0),
 				solutionsFound(0),
 				crazyCube(0),
-				solvedMask(0xFFFFFFFFFFFFFFFF),
-				currentPath(0),
+                solvedMask(0xFFFFFFFFFFFFFFFF),
 				iDepth(0)
 {
 	// TODO - to jest przyklad z piramidki. Domyslnie ustawiamy wszystkie mozliwe ruchy na dozwolone
@@ -75,9 +74,8 @@ void CrazyCubeSolver:: solve()
 	setup();
 	for(iDepth = minDepth; iDepth <= maxDepth; iDepth++)
 	{
-		currentPath = new unsigned short int[iDepth];
-		solveIteration(iDepth, -1);
-		delete[] currentPath;
+        currentPath.reset(new unsigned short int[iDepth]);
+		solveIteration(iDepth, -1);		
 	}
 }
 void CrazyCubeSolver:: setCrazyCube(CrazyCubeBase* crazyCube)
@@ -155,7 +153,7 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 
 				// Create a vector with our solutions
 				// iDepth - current depth of the iteration in "solve" method
-				vector<unsigned short int>solubleVector(currentPath,currentPath + iDepth);
+                vector<unsigned short int>solubleVector(currentPath.get(),currentPath.get() + iDepth);
 
 				// Place found solution in the vector
 				solutions.push_back(solubleVector);
