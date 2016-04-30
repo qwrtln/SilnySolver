@@ -180,44 +180,43 @@ unsigned long long CrazyCubeMapper::convertIntToCentre(int centre)
 //
 //////////////////////////////////////////
 
-int** CrazyCubeMapper::generateOuterCornersMap()
+std::vector<std::vector<int>> CrazyCubeMapper::generateOuterCornersMap()
 {
     return generatePieceMap(factorials[NUM_OF_CORNERS],&CrazyCubeMapper::convertIntToOuterCorners,&CrazyCubeMapper::convertOuterCornersToInt);
 }
 
-int** CrazyCubeMapper::generateOuterEdgesMap()
+std::vector<std::vector<int>> CrazyCubeMapper::generateOuterEdgesMap()
 {
 	return generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToOuterEdges,&CrazyCubeMapper::convertOuterEdgesToInt);
 }
 
-int** CrazyCubeMapper::generateInnerCornersMap()
+std::vector<std::vector<int>> CrazyCubeMapper::generateInnerCornersMap()
 {
     return generatePieceMap(factorials[NUM_OF_CORNERS], &CrazyCubeMapper::convertIntToInnerCorners,&CrazyCubeMapper::convertInnerCornersToInt);
 }
 
-int** CrazyCubeMapper::generateInnerEdgesMap()
+std::vector<std::vector<int>> CrazyCubeMapper::generateInnerEdgesMap()
 {
 	return generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToInnerEdges,&CrazyCubeMapper::convertInnerEdgesToInt);
 }
 
-int** CrazyCubeMapper::generateCentreMap()
+std::vector<std::vector<int>> CrazyCubeMapper::generateCentreMap()
 {
 	return generatePieceMap(factorials[2],&CrazyCubeMapper::convertIntToCentre,&CrazyCubeMapper::convertCentreToInt);
 }
 
 // This is a generic map function called by the public ones
-int** CrazyCubeMapper::generatePieceMap(const int arrayLength,unsigned long long (CrazyCubeMapper::*convertingToPiecesFunction)(int), int (CrazyCubeMapper::*convertingToIntFunction)(unsigned long long) )
+std::vector<std::vector<int>> CrazyCubeMapper::generatePieceMap(const int arrayLength,unsigned long long (CrazyCubeMapper::*convertingToPiecesFunction)(int), int (CrazyCubeMapper::*convertingToIntFunction)(unsigned long long) )
 {
     cube.resetCube();
 
-    int** pieceMap;
-    pieceMap = new int*[arrayLength];
+    std::vector<std::vector<int>> pieceMap = std::vector<std::vector<int>>(arrayLength);
 
     // Each itration generates one row of movements
     for (int i = 0; i < arrayLength; ++i)
     {
         cube.setCubeState( (this->*convertingToPiecesFunction)(i));
-		pieceMap[i] = new int[NUM_OF_MOVES];
+        pieceMap[i] =  std::vector<int>(NUM_OF_MOVES);
         for (int j = 0; j < NUM_OF_MOVES; ++j)
         {
             cube.move(static_cast<rotation>(j));
