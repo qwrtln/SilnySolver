@@ -17,11 +17,6 @@ CAN_DELIVER=false
 RUN_CHECK=false
 MEMORY_CHECK=true
 
-# Firstly, check if proper number of arguments was given: repo and branch
-if [ "$#" -ne 2 ]
-    then echo -e "Illegal number of parameters. When doing a delivery, you have to type both the name of the repository and the branch you're delivering to. For instance:\n\ngit push origin development\n"
-    exit 1
-fi
 # Old build.log will only disturb with current check. It should be removed. 
     rm -rf *.log
 
@@ -46,7 +41,7 @@ fi
                 grep --color -i error build.log
                 rm -rf .buildErr.log # remove in case of aborting
                 echo -e "\nDelivery check finished with ${RED}compilation errors${NC} listed above. See ${BOLD}build.log${NORMAL} file for details. Please ${BOLD}correct them${NORMAL} before you continue."
-                MEMORY_CHECK=false
+                exit 1
                 else 
                     # Check for warnings only if there are no errors
                     grep -i warning build.log > .buildWar.log
@@ -56,18 +51,7 @@ fi
                         grep --color -i warning build.log
                         rm -rf .buildWar.log # remove in case of aborting
                         echo -e "\nDelivery check finished with ${YELLOW}WARNINGS${NC} listed above. See build.log file for details."
-                        read -p "Are you sure you want to continue pushing? [y/n] " choice
-                        case "$choice" in
-                            y|Y ) echo "Forcing push..."
-                                  CAN_DELIVER=true;;
-                            n|N ) echo "Aborting push." 
-                                  MEMORY_CHECK=false
-                                  ;;
-                              * ) echo "Invalid input. Aborting push." 
-                                  MEMORY_CHECK=false
-                                  ;;
-                        esac
-                        
+                        exit 1 
                     fi
             fi
     else
