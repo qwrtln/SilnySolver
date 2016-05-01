@@ -4,3 +4,5 @@
 
 git config --global --unset alias.deliver # Legacy alias - deprecated
 cp .devTools/pre-push .git/hooks/ # Set delivery check script
+
+git config alias.set '!bash .devTools/set.sh'
