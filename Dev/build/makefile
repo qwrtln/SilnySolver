@@ -25,7 +25,7 @@ SilnySolver: build
 build: $(OBJ_FILES)
 
 %.o: $(SRC)%.cpp 
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL)-c $< $(INC) -o $@
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) -c $< $(INC) -o $@
 	$(CXX) -MM $< $(INC) > $(@:.o=.d)
 	
 # Clean the shit out
