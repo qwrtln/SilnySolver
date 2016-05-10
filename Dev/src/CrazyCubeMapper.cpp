@@ -241,3 +241,64 @@ unsigned long long CrazyCubeMapper::convertIntArrayToCubeState(int CP, int cp, i
 
 }
 
+void swapMapElementValue(int width, short int* map, short int oldValue, short int newValue)
+{
+	for(int i = 0; i < width; i++)
+	{
+		if(map[i] == oldValue)
+		{
+			map[i] = newValue;
+		}
+	}
+}
+
+vector<int> generateOuterCornersPruneMap(int length, int maxMoves)
+{
+	vector<int> outerCornersPruneMap = vector<int>(length); 
+	for(int i = 0; i < length; i++)
+	{
+		outerCornersPruneMap[i] = 100;
+	}
+	int outerCourners = 0;
+	computeCornersPruneMapIter(1, maxMoves, outerCorners, 25, outerCornersPruneMap, -1, -1);
+	swapMapElementValue(length, outerCornersPruneMap, 100, -1);
+	return outerCornersPruneMap;
+}
+
+vector<int> generateOuterEdgesPruneMap(int length, int maxMoves)
+{
+}
+
+vector<int> generateInnerCornersPruneMap(int length, int maxMoves)
+{
+}
+
+vector<int> generateInnerEdgesPruneMap(int length, int maxMoves)
+{
+}
+
+vector<int> generateCentrePruneMap(int length, int maxMoves)
+{
+}
+
+
+int generateOuterCornersPruneMapIter(int depth, int maxDepth, int& outerCorners, vector<int>& outerCornersPruneMap, short int prevMove)
+{
+}
+
+int generateOuterEdgesPruneMapIter(int depth, int maxDepth, int& outerEdges, vector<int>& outerEdgesPruneMap, short int prevMove)
+{
+}
+
+int generateInnerCornersPruneMapIter(int depth, int maxDepth, int& innerCorners, vector<int>& innerCornersPruneMap, short int prevMove)
+{
+}
+
+int generateInnerEdgesPruneMapIter(int depth, int maxDepth, int& innerEdges, vector<int>& innerEdgesPruneMap, short int prevMove)
+{
+}
+
+int generateCentrePruneMapIter(int depth, int maxDepth, int& centre, vector<int>& centrePruneMap, short int prevMove)
+{
+}
+

@@ -4,7 +4,9 @@
 #include "CrazyCube.h"
 #include "CrazyCubeAbstract.h"
 #include <cmath>
+#include <vector>
 
+using namespace std;
 class CrazyCubeMapper: public CrazyCubeAbstract
 {
     private:
@@ -55,6 +57,7 @@ class CrazyCubeMapper: public CrazyCubeAbstract
         unsigned long long convertIntToInnerEdges(int);
         unsigned long long convertIntToCentre(int);
 
+		// piece maps
         int** generatePieceMap(const int, unsigned long long (CrazyCubeMapper::*convertingToIntFunction)(int), int (CrazyCubeMapper::*convertingToPiecesFunction)(unsigned long long));
 
 		CrazyCube cube;
@@ -65,7 +68,24 @@ class CrazyCubeMapper: public CrazyCubeAbstract
         int** generateInnerEdgesMap();
         int** generateCentreMap();
 
+		// helpful methods
+		
+		void swapMapElementValue(int width, short int* map, short int oldValue, short int newValue);
+		// pruning maps
+		vector<int> generateOuterCornersPruneMap(int length, int maxMoves);
+		vector<int> generateOuterEdgesPruneMap(int length, int maxMoves);
+		vector<int> generateInnerCornersPruneMap(int length, int maxMoves);
+		vector<int> generateInnerEdgesPruneMap(int length, int maxMoves);
+		vector<int> generateCentrePruneMap(int length, int maxMoves);
+
+		int generateOuterCornersPruneMapIter(int depth, int maxDepth, int& outerCorners, vector<int>& outerCornersPruneMap, short int prevMove);
+		int generateOuterEdgesPruneMapIter(int depth, int maxDepth, int& outerEdges, vector<int>& outerEdgesPruneMap, short int prevMove);
+		int generateInnerCornersPruneMapIter(int depth, int maxDepth, int& innerCorners, vector<int>& innerCornersPruneMap, short int prevMove);
+		int generateInnerEdgesPruneMapIter(int depth, int maxDepth, int& innerEdges, vector<int>& innerEdgesPruneMap, short int prevMove);
+		int generateCentrePruneMapIter(int depth, int maxDepth, int& centre, vector<int>& centrePruneMap, short int prevMove);
+		
         unsigned long long convertIntArrayToCubeState(int,int,int,int,int);
+
 };
 
 #endif /* CRAZYCUBEMAPPER_H_ */
