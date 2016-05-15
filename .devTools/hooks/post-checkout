@@ -1,9 +1,4 @@
 #!/bin/sh
-<<<<<<< HEAD
-=======
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-echo -e "$DIR"
->>>>>>> 48b661e... Post-checkout jest gadatliwy.
 make clean > /dev/null   
 echo "Deleted all the built files after checkout."
 
