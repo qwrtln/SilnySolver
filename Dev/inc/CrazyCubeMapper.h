@@ -3,10 +3,12 @@
 
 #include "CrazyCube.h"
 #include "CrazyCubeAbstract.h"
+#include "CrazyCubeCache.h"
 #include <cmath>
 #include <vector>
 
 using namespace std;
+class CrazyCubeCache;
 class CrazyCubeMapper: public CrazyCubeAbstract
 {
     private:
@@ -22,6 +24,7 @@ class CrazyCubeMapper: public CrazyCubeAbstract
         // Useful tmp array
         static int tmp[NUM_OF_EDGES];
         
+		CrazyCubeCache* crazyCubeCachePtr;
     /* If we want the methods defined below to be private, but want to be able to test them we can use the following:
      * 
      * #ifdef TEST
@@ -34,6 +37,7 @@ class CrazyCubeMapper: public CrazyCubeAbstract
      */
 	public:
 		
+		CrazyCubeMapper();
 		// Single outer pieces extractor
 		// base = 28 for edges
 		// base = 56 for corners
@@ -70,7 +74,7 @@ class CrazyCubeMapper: public CrazyCubeAbstract
 
 		// helpful methods
 		
-		void swapMapElementValue(int width, short int* map, short int oldValue, short int newValue);
+		void swapMapElementValue(int width, vector<int>& vect, short int oldValue, short int newValue);
 		// pruning maps
 		vector<int> generateOuterCornersPruneMap(int length, int maxMoves);
 		vector<int> generateOuterEdgesPruneMap(int length, int maxMoves);
