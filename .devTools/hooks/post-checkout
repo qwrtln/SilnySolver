@@ -1,0 +1,4 @@
+#!/bin/sh
+@-make clean 2> /dev/null   # The prefix suppresses output
+echo "Deleted all the built files after checkout."
+

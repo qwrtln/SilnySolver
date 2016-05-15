@@ -1,0 +1,10 @@
+#!/bin/sh
+# Since default Change-Id-generating hook works only for commits without
+# conflicts, this hook calls explicitly Change-Id hook also for 
+# merging commits.
+
+if [ "$2" = "merge" -a -f .git/MERGE_MSG ]; then
+    # Explicitly call Gerrit's commit-msg hook for merge commits.
+    .git/hooks/commit-msg "$1"
+fi
+
