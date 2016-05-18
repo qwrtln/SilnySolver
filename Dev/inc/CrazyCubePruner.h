@@ -8,11 +8,11 @@ class CrazyCubePruner: public CrazyCubeAbstract
 {
  private:
    CrazyCubePruner();
-   int** outerCornersMap;
-   int** innerCornersMap;
-   int** outerEdgesMap;
-   int** innerEdgesMap;
-   int** centreMap;
+   std::vector<std::vector<int>> outerCornersMap;
+   std::vector<std::vector<int>> innerCornersMap;
+   std::vector<std::vector<int>> outerEdgesMap;
+   std::vector<std::vector<int>> innerEdgesMap;
+   std::vector<std::vector<int>> centreMap;
    static CrazyCubePruner* instance;
   
   public:
@@ -20,11 +20,11 @@ class CrazyCubePruner: public CrazyCubeAbstract
    static void cleanup();
    ~CrazyCubePruner();
 
-   int** getOuterCornersMap() { return outerCornersMap; }
-   int** getInnerCornersMap() { return innerCornersMap; }
-   int** getOuterEdgesMap() { return outerEdgesMap; }
-   int** getInnerEdgesMap() { return innerEdgesMap; }
-   int** getCentreMap() { return centreMap; }
+   std::vector<std::vector<int>>& getOuterCornersMap() { return outerCornersMap; }
+   std::vector<std::vector<int>>& getInnerCornersMap() { return innerCornersMap; }
+   std::vector<std::vector<int>>& getOuterEdgesMap() { return outerEdgesMap; }
+   std::vector<std::vector<int>>& getInnerEdgesMap() { return innerEdgesMap; }
+   std::vector<std::vector<int>>& getCentreMap() { return centreMap; }
 };
 
 #endif // CRAZYCUBEPRUNER_H_
