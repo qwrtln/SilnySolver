@@ -2,7 +2,7 @@
 # The purpose of this script is to set up Git hooks, which facilitate
 # the development process.
 
-hooks=(commit-msg  post-checkout  prepare-commit-msg  pre-push)
+hooks=(commit-msg  post-checkout  prepare-commit-msg  pre-push add-change-id)
 
 UPDATED=true
 
