@@ -1,4 +1,22 @@
-#!/bin/sh
+#!/bin/bash
 make clean > /dev/null   
 echo "Deleted all the built files after checkout."
+
+hooks=(commit-msg  post-checkout  prepare-commit-msg  pre-push add-change-id)
+
+UPDATED=true
+
+for i in "${hooks[@]}"  # Iterate over hooks to see if they are up-to-date
+do
+    if ! diff ".devTools/hooks/$i" ".git/hooks/$i" >/dev/null
+    then
+        UPDATED=false
+    fi
+done
+
+if [ ! "$UPDATED" = true ]
+then
+    cp -r .devTools/hooks .git/                  # Copy all the scripts
+    echo -e "Some of the hooks were outdated. They were updated automatically."
+fi
 
