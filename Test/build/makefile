@@ -30,7 +30,7 @@ SilneTesty: productionCode $(OBJ_FILES)
 	$(CXX) $(FLAGS) $(BUILT_FILES) $(OBJ_FILES) $(INC) -o $@
 
 productionCode: 
-	$(MAKE) -C $(BUILT) build
+	$(MAKE) -C $(BUILT) binaries
 
 # It's a rule for every single cpp file, this is why we don't use *_FILES var
 %.o: $(SRC)%.cpp

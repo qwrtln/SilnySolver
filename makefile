@@ -15,6 +15,7 @@ project_code:
 	$(MAKE) -C $(CODE_DIR) SilnySolver
 	mv $(CODE_DIR)SilnySolver .
 
+testing_code: FLAGS += -D TESTING
 testing_code: 
 	$(MAKE) -C $(TEST_DIR) SilneTesty
 	mv $(TEST_DIR)SilneTesty .

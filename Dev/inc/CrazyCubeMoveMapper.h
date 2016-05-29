@@ -10,6 +10,7 @@
 #include "CrazyCubeAbstract.h"
 #include "CrazyCube.h"
 #include <vector>
+#include <iostream>
 
 ////////////////////////////////
 // 
@@ -21,8 +22,11 @@
 
 class CrazyCubeMoveMapper: public CrazyCubeAbstract
 {
-
-    public: // Tempirarily public for testing purposes!!! To be corrected.
+#if defined(TESTING) || defined(MEMORY_CHECK) // This enables unit test classes to access
+    public:                                   // private members of MoveMapper
+#else
+    private:
+#endif
         // Cube to operate on
 		CrazyCube cube;
 
