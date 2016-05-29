@@ -21,9 +21,6 @@ class CrazyCubeMapper: public CrazyCubeAbstract
         // Array in turn: Corners, Edges, corners, edges, Centre
         int* piecesState;
         
-        // Useful tmp array
-        static int tmp[NUM_OF_EDGES];
-        
 		CrazyCubeCache* crazyCubeCachePtr;
     /* If we want the methods defined below to be private, but want to be able to test them we can use the following:
      * 
@@ -38,39 +35,6 @@ class CrazyCubeMapper: public CrazyCubeAbstract
 	public:
 		
 		CrazyCubeMapper();
-		// Single outer pieces extractor
-		// base = 28 for edges
-		// base = 56 for corners
-		int extractOuterPiece(int base, int index, unsigned long long cubeState);
-		// Single inner pieces extractor
-		// base = 28 for edges
-		// base = 56 for corners
-		int extractInnerPiece(int base, int index, unsigned long long cubeState);
-		
-        // Cube -> Int converters
-        int convertOuterCornersToInt(unsigned long long);
-        int convertOuterEdgesToInt(unsigned long long);
-        int convertInnerCornersToInt(unsigned long long);
-        int convertInnerEdgesToInt(unsigned long long);
-        int convertCentreToInt(unsigned long long);
-
-        // Int -> Cube converters
-        unsigned long long convertIntToOuterCorners(int);
-        unsigned long long convertIntToOuterEdges(int);
-        unsigned long long convertIntToInnerCorners(int);
-        unsigned long long convertIntToInnerEdges(int);
-        unsigned long long convertIntToCentre(int);
-
-        std::vector<std::vector<int>> generatePieceMap(const int, unsigned long long (CrazyCubeMapper::*convertingToIntFunction)(int), int (CrazyCubeMapper::*convertingToPiecesFunction)(unsigned long long));
-
-		CrazyCube cube;
-
-        std::vector<std::vector<int>> generateOuterCornersMap();
-        std::vector<std::vector<int>> generateOuterEdgesMap();
-        std::vector<std::vector<int>> generateInnerCornersMap();
-        std::vector<std::vector<int>> generateInnerEdgesMap();
-        std::vector<std::vector<int>> generateCentreMap();
-
 		// helpful methods
 		
 		void swapMapElementValue(int width, vector<int>& vect, short int oldValue, short int newValue);

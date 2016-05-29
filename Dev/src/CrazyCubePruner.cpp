@@ -10,7 +10,7 @@ CrazyCubePruner* CrazyCubePruner::getInstance() {
 }
 
 CrazyCubePruner::CrazyCubePruner() {
-  CrazyCubeMapper mapper;
+  CrazyCubeMoveMapper mapper;
 
   outerCornersMap = mapper.generateOuterCornersMap();
   innerCornersMap = mapper.generateInnerCornersMap();

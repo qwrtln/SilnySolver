@@ -4,12 +4,35 @@
 
 class CrazyCubeImprovedTest: public BaseTest
 {
+    friend class CrazyCubeMoveMapper;
 public:
 	CrazyCubeImprovedTest(string testCase, string testName)
 		:BaseTest(testCase, testName)
 	{
 		SetUp();
 	}
+    // friendship usage: accessing private converting functions
+    CrazyCubeMoveMapper mapper;
+
+    void setCubeImprovedFromCrazyCube(CrazyCubeImproved &cubeImproved, CrazyCube &cube)
+    {
+        cubeImproved.setCube( mapper.convertOuterCornersToInt(cube.getCubeState()),
+                              mapper.convertInnerCornersToInt(cube.getCubeState()),
+                              mapper.convertOuterEdgesToInt(cube.getCubeState()),
+                              mapper.convertInnerEdgesToInt(cube.getCubeState()),
+                              mapper.convertCentreToInt(cube.getCubeState())
+                              );
+    }
+
+    unsigned long long getCubeImprovedState(CrazyCubeImproved &cubeImproved) 
+    {
+        return mapper.convertIntToOuterCorners(cubeImproved.getOuterCorners()) | 
+               mapper.convertIntToOuterEdges(cubeImproved.getOuterEdges()) | 
+               mapper.convertIntToInnerCorners(cubeImproved.getInnerCorners()) | 
+               mapper.convertIntToInnerEdges(cubeImproved.getInnerEdges()) | 
+               mapper.convertIntToCentre(cubeImproved.getCentre());
+    }
+    // end of friendship
 protected:
 	void SetUp()
 	{
@@ -50,26 +73,6 @@ TEST_F(CrazyCubeImprovedTest, findingMemoryLeaks)
 // but not necessary for functioning of the cube itself.
 namespace 
 {
-    CrazyCubeMapper mapper;
-
-    void setCubeImprovedFromCrazyCube(CrazyCubeImproved &cubeImproved, CrazyCube &cube)
-    {
-        cubeImproved.setCube( mapper.convertOuterCornersToInt(cube.getCubeState()),
-                              mapper.convertInnerCornersToInt(cube.getCubeState()),
-                              mapper.convertOuterEdgesToInt(cube.getCubeState()),
-                              mapper.convertInnerEdgesToInt(cube.getCubeState()),
-                              mapper.convertCentreToInt(cube.getCubeState())
-                              );
-    }
-
-    unsigned long long getCubeImprovedState(CrazyCubeImproved &cubeImproved) 
-    {
-        return mapper.convertIntToOuterCorners(cubeImproved.getOuterCorners()) | 
-               mapper.convertIntToOuterEdges(cubeImproved.getOuterEdges()) | 
-               mapper.convertIntToInnerCorners(cubeImproved.getInnerCorners()) | 
-               mapper.convertIntToInnerEdges(cubeImproved.getInnerEdges()) | 
-               mapper.convertIntToCentre(cubeImproved.getCentre());
-    }
 }
 
 TEST_F(CrazyCubeImprovedTest, L)

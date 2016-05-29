@@ -13,7 +13,7 @@ CrazyCubeCache* CrazyCubeCache::getInstance()
 
 CrazyCubeCache:: CrazyCubeCache()
 {
-    CrazyCubeMapper mapper;
+    CrazyCubeMoveMapper mapper;
 
     outerCornersMap = mapper.generateOuterCornersMap();
     innerCornersMap = mapper.generateInnerCornersMap();
