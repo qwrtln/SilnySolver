@@ -1,6 +1,7 @@
 #include "inc/mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "../Dev/inc/CrazyCube.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
