@@ -8,6 +8,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+CONFIG += c++11
+
 TARGET = SilnySolverGUI
 TEMPLATE = app
 
@@ -19,10 +21,12 @@ SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
     ../Dev/src/CrazyCube.cpp \
-    ../Dev/src/CrazyCubeAbstract.cpp
+    ../Dev/src/CrazyCubeAbstract.cpp \
+    ../Dev/src/CrazyCubeMapper.cpp
 
 HEADERS  += \
-    inc/mainwindow.h
+    inc/mainwindow.h \
+    ../Dev/inc/CrazyCubeMapper.h
 
 
 FORMS    += \
