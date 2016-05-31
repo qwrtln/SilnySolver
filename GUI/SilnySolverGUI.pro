@@ -17,17 +17,7 @@ SOURCES += \
     src/mainwindow.cpp
 
 HEADERS  += \
-    inc/mainwindow.h \
-    ../Dev/inc/CrazyCube.h \
-    ../Dev/inc/CrazyCubeAbstract.h \
-    ../Dev/inc/CrazyCubeBase.h \
-    ../Dev/inc/CrazyCubeCache.h \
-    ../Dev/inc/CrazyCubeImproved.h \
-    ../Dev/inc/CrazyCubeMapper.h \
-    ../Dev/inc/CrazyCubeSolver.h \
-    ../Dev/inc/CrazyCubeSolverParametersD.h \
-    ../Dev/inc/FileReader.h \
-    ../Dev/inc/FileWriter.h
+    inc/mainwindow.h
 
 FORMS    += \
     design/mainwindow.ui

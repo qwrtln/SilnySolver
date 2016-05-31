@@ -166,16 +166,6 @@
      <string>Depth</string>
     </property>
    </widget>
-   <widget class="QOpenGLWidget" name="VizualizationWidget">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>30</y>
-      <width>300</width>
-      <height>200</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="DReverseButton">
     <property name="geometry">
      <rect>
