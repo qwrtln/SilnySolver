@@ -14,19 +14,19 @@ TARGET = SilnySolverGUI
 TEMPLATE = app
 
 INCLUDEPATH += \
-    ../Dev/inc/ \
-    ../Dev/src/
+    ../Dev/inc/
 
 SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
     ../Dev/src/CrazyCube.cpp \
     ../Dev/src/CrazyCubeAbstract.cpp \
-    ../Dev/src/CrazyCubeMapper.cpp
+    ../Dev/src/CrazyCubeCache.cpp \
+    ../Dev/src/CrazyCubeImproved.cpp \
+    ../Dev/src/CrazyCubeSolver.cpp
 
 HEADERS  += \
-    inc/mainwindow.h \
-    ../Dev/inc/CrazyCubeMapper.h
+    inc/mainwindow.h
 
 
 FORMS    += \
