@@ -12,3 +12,26 @@ int MoveMapsGeneratorI:: extractInnerPiece(int base, int index, unsigned long lo
 	return (    (cubeState & (0x1ULL << (base-index*4))) >> (base-index*4)    );
 }
 
+std::vector<std::vector<int>> MoveMapsGeneratorI::generateMoveMap()
+{
+    cube.resetCube();
+
+    std::vector<std::vector<int>> pieceMap = std::vector<std::vector<int>>(this->setMapLength());
+
+    // Each itration generates one row of movements
+    for (int i = 0; i < this->setMapLength(); ++i)
+    {
+        cube.setCubeState(this->convertPiecesToInt(i));
+        pieceMap[i] =  std::vector<int>(NUM_OF_MOVES);
+        for (int j = 0; j < NUM_OF_MOVES; ++j)
+        {
+            cube.move(static_cast<rotation>(j));
+            // Here's where we remember cube state in the array:
+            pieceMap[i][j] = this->convertPiecesToInt(cube.getCubeState());
+            cube.undoMove(static_cast<rotation>(j));
+        }
+
+    }
+
+    return pieceMap;
+}
