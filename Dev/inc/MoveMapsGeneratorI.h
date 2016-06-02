@@ -15,7 +15,7 @@ class MoveMapsGeneratorI: public CrazyCubeAbstract
 {
         virtual int convertPiecesToInt(unsigned long long) = 0;
         virtual unsigned long long convertIntToPieces(int) = 0;
-        virtual int setMapLength() = 0;
+        virtual int getMapLength() = 0;
 
         CrazyCube cube;
 

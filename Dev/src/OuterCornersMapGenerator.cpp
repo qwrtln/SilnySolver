@@ -1,6 +1,6 @@
 #include "OuterCornersMapGenerator.h"
 
-int OuterCornersMapGenerator::setMapLength()
+int OuterCornersMapGenerator::getMapLength()
 {
     return factorials[NUM_OF_EDGES]; 
 }

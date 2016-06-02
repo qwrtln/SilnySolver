@@ -4,6 +4,7 @@
 #include "CrazyCubeAbstract.h"
 #include "CrazyCubeMapper.h"
 #include "CrazyCubeMoveMapper.h"
+#include "OuterCornersMapGenerator.h"
 
 #include <vector>
 #include <memory>

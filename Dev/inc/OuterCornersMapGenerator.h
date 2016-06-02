@@ -12,7 +12,7 @@ class OuterCornersMapGenerator: public MoveMapsGeneratorI
 {
     int convertPiecesToInt(unsigned long long);
     unsigned long long convertIntToPieces(int);
-    int setMapLength();
+    int getMapLength();
 };
 
 #endif /* OUTER_CORNERS_MOVE_MAP_GENERATOR_H */

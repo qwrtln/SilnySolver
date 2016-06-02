@@ -16,12 +16,12 @@ std::vector<std::vector<int>> MoveMapsGeneratorI::generateMoveMap()
 {
     cube.resetCube();
 
-    std::vector<std::vector<int>> pieceMap = std::vector<std::vector<int>>(this->setMapLength());
+    std::vector<std::vector<int>> pieceMap = std::vector<std::vector<int>>(this->getMapLength());
 
     // Each itration generates one row of movements
-    for (int i = 0; i < this->setMapLength(); ++i)
+    for (int i = 0; i < this->getMapLength(); ++i)
     {
-        cube.setCubeState(this->convertPiecesToInt(i));
+        cube.setCubeState(this->convertIntToPieces(i));
         pieceMap[i] =  std::vector<int>(NUM_OF_MOVES);
         for (int j = 0; j < NUM_OF_MOVES; ++j)
         {
