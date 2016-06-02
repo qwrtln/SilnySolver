@@ -50,26 +50,18 @@ QString translateMove(unsigned short move)
 void MainWindow::on_solveButton_clicked()
 {
 
-
-
-    //myCube.move(CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION);
-    //myCube.move(CrazyCube::rotation::LEFT);
-
-
     mySolver.solve();
 
-    vector<vector<unsigned short int> > rozwiazania;
-    rozwiazania = mySolver.getSolutions();
+    vector<vector<unsigned short int> > solutions;
+    solutions = mySolver.getSolutions();
 
-    QString solutionText;
+    QString solutionText = "Number of solutions: " + QString::number(solutions.size());
 
-    solutionText = "Number of solutions: " + QString::number(rozwiazania.size());
-
-    for (unsigned short int i = 0; i < rozwiazania.size(); ++i)
+    for (unsigned short int i = 0; i < solutions.size(); ++i)
          {
-             for (unsigned short int j = 0; j < rozwiazania[i].size(); ++j)
+             for (unsigned short int j = 0; j < solutions[i].size(); ++j)
              {
-                 solutionText = solutionText + "\n" + translateMove(rozwiazania[i][j]);
+                 solutionText = solutionText + "\n" + translateMove(solutions[i][j]);
              }
 
          }
