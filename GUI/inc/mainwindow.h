@@ -21,7 +21,6 @@ private slots:
 
     void on_solveButton_clicked();
 
-    void on_depthInputBox_valueChanged(int arg1);
 
     void on_depthMinInputBox_valueChanged(int val);
 

@@ -84,11 +84,7 @@ void MainWindow::on_playButton_clicked()
 }
 
 
-//TODO: remove
-void MainWindow::on_depthInputBox_valueChanged(int arg1)
-{
-    mySolver.setMinDepth(1);
-}
+
 
 void MainWindow::on_depthMinInputBox_valueChanged(int val)
 {
