@@ -23,7 +23,11 @@ SOURCES += \
     ../Dev/src/CrazyCubeAbstract.cpp \
     ../Dev/src/CrazyCubeCache.cpp \
     ../Dev/src/CrazyCubeImproved.cpp \
-    ../Dev/src/CrazyCubeSolver.cpp
+    ../Dev/src/CrazyCubeSolver.cpp \
+    ../Dev/src/FileReader.cpp \
+    ../Dev/src/FileWriter.cpp \
+    ../Dev/src/CrazyCubePruner.cpp \
+    ../Dev/src/CrazyCubeMapper.cpp
 
 HEADERS  += \
     inc/mainwindow.h
