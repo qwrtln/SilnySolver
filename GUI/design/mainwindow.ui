@@ -66,33 +66,33 @@
      <string>Move Forward</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="UMoveButton">
+   <widget class="QPushButton" name="LMoveButton">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>500</x>
       <y>150</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>U</string>
+     <string>Left</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="DButton">
+   <widget class="QPushButton" name="UMoveButton">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>500</x>
       <y>180</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>D</string>
+     <string>Up</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="UReverseMoveButton">
+   <widget class="QPushButton" name="FMoveButton">
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -102,7 +102,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>U'</string>
+     <string>Front</string>
     </property>
    </widget>
    <widget class="QTextEdit" name="solutionField">
@@ -140,10 +140,10 @@
      </property>
     </item>
    </widget>
-   <widget class="QSpinBox" name="depthInputBox">
+   <widget class="QSpinBox" name="depthMinInputBox">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>270</x>
       <y>320</y>
       <width>42</width>
       <height>22</height>
@@ -153,20 +153,20 @@
      <number>50</number>
     </property>
    </widget>
-   <widget class="QLabel" name="depthInputLabel">
+   <widget class="QLabel" name="depthMinInputLabel">
     <property name="geometry">
      <rect>
       <x>220</x>
-      <y>330</y>
+      <y>320</y>
       <width>47</width>
       <height>13</height>
      </rect>
     </property>
     <property name="text">
-     <string>Depth</string>
+     <string>Min Depth</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="DReverseButton">
+   <widget class="QPushButton" name="UReverseMoveButton">
     <property name="geometry">
      <rect>
       <x>640</x>
@@ -176,40 +176,40 @@
      </rect>
     </property>
     <property name="text">
-     <string>D'</string>
+     <string>Up'</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FButton">
+   <widget class="QPushButton" name="U2MoveButton">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>500</x>
       <y>210</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>F</string>
+     <string>Up2</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="FReverseButton">
+   <widget class="QPushButton" name="MVMoveButton">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>614</x>
       <y>210</y>
-      <width>75</width>
+      <width>101</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>F'</string>
+     <string>Middle Vertical</string>
     </property>
    </widget>
    <widget class="QPushButton" name="RandomizeButton">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>280</y>
+      <x>570</x>
+      <y>360</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -229,6 +229,117 @@
     </property>
     <property name="text">
      <string>Pause</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="depthMaxInputBox">
+    <property name="geometry">
+     <rect>
+      <x>430</x>
+      <y>320</y>
+      <width>42</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="depthMaxLabel">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>320</y>
+      <width>51</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Max Depth</string>
+    </property>
+   </widget>
+   <widget class="QSpinBox" name="numberOfSolutionsSpinBox">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>280</y>
+      <width>42</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="numberOfSolutionsLabel">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>280</y>
+      <width>101</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Number of solutions</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="MHMoveButton">
+    <property name="geometry">
+     <rect>
+      <x>614</x>
+      <y>240</y>
+      <width>101</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Middle horizontal</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="MHRMoveButton">
+    <property name="geometry">
+     <rect>
+      <x>464</x>
+      <y>240</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Middle horizontal right</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="MHLMoveButton">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>270</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Middle horizontal left</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="MVFMoveButton">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>270</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Middle vertical front</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="MVBMoveButton">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>300</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Middle vertical back</string>
     </property>
    </widget>
   </widget>
