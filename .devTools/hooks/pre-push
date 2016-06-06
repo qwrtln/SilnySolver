@@ -13,114 +13,110 @@ BOLD=$(tput bold)
 NORMAL=$(tput sgr0)
 
 # Boolean semaphores for decision making
+CLEAN_BUILD=true
 CAN_DELIVER=false
-RUN_CHECK=false
-MEMORY_CHECK=true
 
 # Old build.log will only disturb with current check. It should be removed. 
-    rm -rf *.log
+rm -rf *.log
 
 # Put current build files in separate folder - move them back later
-    mkdir -p .temp .temp/Dev .temp/Test
-    mv Dev/build/*.o Dev/build/*.d SilnySolver .temp/Dev/ 2>/dev/null
-    mv Test/build/*.o Test/build/*.d SilneTesty .temp/Test/ 2>/dev/null
+mkdir -p .temp .temp/Dev .temp/Test
+mv Dev/build/*.o Dev/build/*.d SilnySolver .temp/Dev/ 2>/dev/null
+mv Test/build/*.o Test/build/*.d SilneTesty .temp/Test/ 2>/dev/null
 
 # Let's gather some build logs
 # This rule builds short tests only for memory leaks finding
-    make memcheck 2> build.log  
+make memcheck 2> build.log  
 
-    if [ -s build.log ]
-    then
+if [ -s build.log ]
+then
 
-        # Check for errors
-        grep -i error build.log > .buildErr.log
+    # Check for errors
+    grep -i error build.log > .buildErr.log
 
-            if [ -s .buildErr.log ]
-            then
-                echo -e "\n" 
-                grep --color -i error build.log
-                rm -rf .buildErr.log # remove in case of aborting
-                echo -e "\nDelivery check finished with ${RED}compilation errors${NC} listed above. See ${BOLD}build.log${NORMAL} file for details. Please ${BOLD}correct them${NORMAL} before you continue."
-                exit 1
-                else 
-                    # Check for warnings only if there are no errors
-                    grep -i warning build.log > .buildWar.log
-                    if [ -s .buildWar.log ]
-                    then 
-                        echo -e "\n" 
-                        grep --color -i warning build.log
-                        rm -rf .buildWar.log # remove in case of aborting
-                        echo -e "\nDelivery check finished with ${YELLOW}WARNINGS${NC} listed above. See build.log file for details."
-                        exit 1 
-                    fi
-            fi
-    else
-        rm -rf build.log .buildErr.log 2>/dev/null # in this case those files are no longer needed
-        echo -e "\nThe code is ${CYAN}pristine${NC}!"
-        CAN_DELIVER=true
-    fi
-
-    if [ "$MEMORY_CHECK" = true ]
-    then
-# The following is an array for "busy spinner"
-        spin[0]="-"
-        spin[1]="\\"
-        spin[2]="|"
-        spin[3]="/"
-
-        echo -n "Checking for memory leaks ${spin[0]}"
-        valgrind ./SilneTesty CrazyCube --leak-check=full &> .memLeaks &
-        pidValgrind=$!
-# Valgrind takes a long time to run, so we want to see if it hasn't hung up
-        while kill -0 $pidValgrind 2>/dev/null
-        do
-            for i in "${spin[@]}"
-            do
-                echo -ne "\b$i"
-                sleep 0.1
-            done
-        done
-        echo -e "\n"
-
-        SEG_FAULTS=$( grep -c "Invalid write" .memLeaks )
-        if [ $SEG_FAULTS -ne 0 ]
+        if [ -s .buildErr.log ]
         then
-            MEM_CHECK_PASSED=false
-            echo -e "${RED}Segmentation faults${NORMAL} found:"
-            grep "Invalid write" .memLeaks -A6 | cut -c 10-
-            ERRORS=$SEG_FAULTS
-            CAN_DELIVER=false
-            
-            echo -e "Your change introduced segmentation faults. Please correct them before you continue. Run your build with ${YELLOW}Gdb${NORMAL} or ${YELLOW}Valgrind${NORMAL} if confused."
-            exit 1
-        else
-
-# Parse only through relevant part of the output
-            grep "HEAP SUMMARY" .memLeaks -A2 | cut -c 10- | tee .4perl
-            grep "LEAK SUMMARY" .memLeaks -A5 | cut -c 10- | tee -a .4perl
-            grep "ERROR SUMMARY" .memLeaks | cut -c 10- | tee -a .4perl
-            rm .memLeaks
-
-# Using external script to parse Valgrind output
-            MEM_CHECK_PASSED=false 
-            DEF_LOST_BYTES=0
-            ERRORS=0
-            read DEF_LOST_BYTES ERRORS MEM_CHECK_PASSED < <(perl .devTools/valgrindParser.pl)
-            rm .4perl
-
-            if [ "$MEM_CHECK_PASSED" = true ]
-            then
-                echo -e "\n${GREEN}Everything fine.${NORMAL}\n"
-            else
-                CAN_DELIVER=false
-                echo -e "\nYour change introduced ${RED}$DEF_LOST_BYTES${NORMAL} bytes of memory leaks (with ${RED}$ERRORS${NORMAL} errors)! Please correct them before you deliver."
-                exit 1
-            fi
+            echo -e "\n" 
+            grep --color -i error build.log
+            rm -rf .buildErr.log # remove in case of aborting
+            echo -e "\nDelivery check finished with ${RED}compilation errors${NC} listed above. See ${BOLD}build.log${NORMAL} file for details. Please ${BOLD}correct them${NORMAL} before you continue."
+            CLEAN_BUILD=false
+            else 
+                # Check for warnings only if there are no errors
+                grep -i warning build.log > .buildWar.log
+                if [ -s .buildWar.log ]
+                then 
+                    echo -e "\n" 
+                    grep --color -i warning build.log
+                    rm -rf .buildWar.log # remove in case of aborting
+                    echo -e "\nDelivery check finished with ${YELLOW}WARNINGS${NC} listed above. See build.log file for details."
+                    CLEAN_BUILD=false
+                fi
         fi
+else
+    rm -rf build.log .buildErr.log 2>/dev/null # in this case those files are no longer needed
+    echo -e "\nThe code is ${CYAN}pristine${NC}!"
+fi
+
+if [ "$CLEAN_BUILD" = true ]
+then
+    # The following is an array for "busy spinner"
+    spin[0]="-"
+    spin[1]="\\"
+    spin[2]="|"
+    spin[3]="/"
+
+    echo -n "Checking for memory leaks ${spin[0]}"
+    valgrind ./SilneTesty CrazyCube --leak-check=full &> .memLeaks &
+    pidValgrind=$!
+    # Valgrind takes a long time to run, so we want to see if it hasn't hung up
+    while kill -0 $pidValgrind 2>/dev/null
+    do
+        for i in "${spin[@]}"
+        do
+            echo -ne "\b$i"
+            sleep 0.1
+        done
+    done
+    echo -e "\n"
+
+    SEG_FAULTS=$( grep -c "Invalid write" .memLeaks )
+    if [ $SEG_FAULTS -ne 0 ]
+    then
+        MEM_CHECK_PASSED=false
+        echo -e "${RED}Segmentation faults${NORMAL} found:"
+        grep "Invalid write" .memLeaks -A6 | cut -c 10-
+        ERRORS=$SEG_FAULTS
+        
+        echo -e "Your change introduced segmentation faults. Please correct them before you continue. Run your build with ${YELLOW}Gdb${NORMAL} or ${YELLOW}Valgrind${NORMAL} if confused."
+    else
+
+        # Parse only through relevant part of the output
+        grep "HEAP SUMMARY" .memLeaks -A2 | cut -c 10- | tee .4perl
+        grep "LEAK SUMMARY" .memLeaks -A5 | cut -c 10- | tee -a .4perl
+        grep "ERROR SUMMARY" .memLeaks | cut -c 10- | tee -a .4perl
+        rm .memLeaks
+
+        # Using external script to parse Valgrind output
+        MEM_CHECK_PASSED=false 
+        DEF_LOST_BYTES=0
+        ERRORS=0
+        read DEF_LOST_BYTES ERRORS MEM_CHECK_PASSED < <(perl .devTools/valgrindParser.pl)
+        rm .4perl
+
+        if [ "$MEM_CHECK_PASSED" = true ]
+        then
+            echo -e "\n${GREEN}Everything fine.${NORMAL}\n"
+            CAN_DELIVER=true
+        else
+            echo -e "\nYour change introduced ${RED}$DEF_LOST_BYTES${NORMAL} bytes of memory leaks (with ${RED}$ERRORS${NORMAL} errors)! Please correct them before you deliver."
+        fi
+    fi
 fi
 # Clean up after delivery check build
 make clean > /dev/null
 # Put previous build files back where they belong 
+rm .memLeaks 2>/dev/null
 mv .temp/Dev/* Dev/build/ 2>/dev/null
 mv .temp/Test/* Test/build/ 2>/dev/null
 rm -rf .temp 2>/dev/null
