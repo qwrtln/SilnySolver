@@ -62,7 +62,7 @@ MEMORY_CHECK=true
 
     if [ "$MEMORY_CHECK" = true ]
     then
-        # The following is an array for "busy spinner"
+# The following is an array for "busy spinner"
         spin[0]="-"
         spin[1]="\\"
         spin[2]="|"
@@ -71,7 +71,7 @@ MEMORY_CHECK=true
         echo -n "Checking for memory leaks ${spin[0]}"
         valgrind ./SilneTesty CrazyCube --leak-check=full &> .memLeaks &
         pidValgrind=$!
-        # Valgrind takes a long time to run, so we want to see if it hasn't hung up
+# Valgrind takes a long time to run, so we want to see if it hasn't hung up
         while kill -0 $pidValgrind 2>/dev/null
         do
             for i in "${spin[@]}"
@@ -82,35 +82,48 @@ MEMORY_CHECK=true
         done
         echo -e "\n"
 
-        # Parse only through relevant part of the output
-        grep "HEAP SUMMARY" .memLeaks -A2 | cut -c 10- | tee .4perl
-        grep "LEAK SUMMARY" .memLeaks -A5 | cut -c 10- | tee -a .4perl
-        grep "ERROR SUMMARY" .memLeaks | cut -c 10- | tee -a .4perl
-        rm .memLeaks
-
-        # Using external script to parse Valgrind output
-        MEM_CHECK_PASSED=false 
-        DEF_LOST_BYTES=0
-        ERRORS=0
-        read DEF_LOST_BYTES ERRORS MEM_CHECK_PASSED < <(perl .valgrindParser.pl)
-        rm .4perl
-        if [ "$MEM_CHECK_PASSED" = true ]
+        SEG_FAULTS=$( grep -c "Invalid write" .memLeaks )
+        if [ $SEG_FAULTS -ne 0 ]
         then
-            echo -e "\n${GREEN}Everything fine.${NORMAL}\n"
-        else
+            MEM_CHECK_PASSED=false
+            echo -e "${RED}Segmentation faults${NORMAL} found:"
+            grep "Invalid write" .memLeaks -A6 | cut -c 10-
+            ERRORS=$SEG_FAULTS
             CAN_DELIVER=false
-            echo -e "\nYour change introduced ${RED}$DEF_LOST_BYTES${NORMAL} bytes of memory leaks (with ${RED}$ERRORS${NORMAL} errors)! Please correct them before you deliver."
+            
+            echo -e "Your change introduced segmentation faults. Please correct them before you continue. Run your build with ${YELLOW}Gdb${NORMAL} or ${YELLOW}Valgrind${NORMAL} if confused."
             exit 1
+        else
+
+# Parse only through relevant part of the output
+            grep "HEAP SUMMARY" .memLeaks -A2 | cut -c 10- | tee .4perl
+            grep "LEAK SUMMARY" .memLeaks -A5 | cut -c 10- | tee -a .4perl
+            grep "ERROR SUMMARY" .memLeaks | cut -c 10- | tee -a .4perl
+            rm .memLeaks
+
+# Using external script to parse Valgrind output
+            MEM_CHECK_PASSED=false 
+            DEF_LOST_BYTES=0
+            ERRORS=0
+            read DEF_LOST_BYTES ERRORS MEM_CHECK_PASSED < <(perl .devTools/valgrindParser.pl)
+            rm .4perl
+
+            if [ "$MEM_CHECK_PASSED" = true ]
+            then
+                echo -e "\n${GREEN}Everything fine.${NORMAL}\n"
+            else
+                CAN_DELIVER=false
+                echo -e "\nYour change introduced ${RED}$DEF_LOST_BYTES${NORMAL} bytes of memory leaks (with ${RED}$ERRORS${NORMAL} errors)! Please correct them before you deliver."
+                exit 1
+            fi
         fi
-
-    fi
-
-    # Clean up after delivery check build
-        make clean > /dev/null
-    # Put previous build files back where they belong 
-        mv .temp/Dev/* Dev/build/ 2>/dev/null
-        mv .temp/Test/* Test/build/ 2>/dev/null
-        rm -rf .temp 2>/dev/null
+fi
+# Clean up after delivery check build
+make clean > /dev/null
+# Put previous build files back where they belong 
+mv .temp/Dev/* Dev/build/ 2>/dev/null
+mv .temp/Test/* Test/build/ 2>/dev/null
+rm -rf .temp 2>/dev/null
 
 if [ "$CAN_DELIVER" = true ]
 then
@@ -118,3 +131,4 @@ then
 else
     exit 1 # A non-zero exit aborts push
 fi
+
