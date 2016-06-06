@@ -13,13 +13,20 @@
 
 class MoveMapsGeneratorI: public CrazyCubeAbstract
 {
+#if defined(TESTING) || defined(MEMORY_CHECK)
+  public:
+#endif
         virtual int convertPiecesToInt(unsigned long long) = 0;
         virtual unsigned long long convertIntToPieces(int) = 0;
         virtual int getMapLength() = 0;
 
         CrazyCube cube;
 
-    protected:
+#if defined(TESTING) || defined(MEMORY_CHECK)
+  public:
+#else
+  protected:
+#endif
         int extractOuterPiece(int,int,unsigned long long);
         int extractInnerPiece(int,int,unsigned long long);
 

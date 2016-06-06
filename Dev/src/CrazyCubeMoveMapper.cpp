@@ -20,21 +20,6 @@ int CrazyCubeMoveMapper:: extractInnerPiece(int base, int index, unsigned long l
 }
 
 // Cube -> int CrazyCubeMoveMapper::converters
-int CrazyCubeMoveMapper::convertOuterCornersToInt(unsigned long long cubeState)
-{
-	int sum = 0;
-	for(int i = NUM_OF_CORNERS - 1; i > 0; i--)
-	{
-		int cornersLeft = 0; // ile rogow na lewo od aktualnego ma od niego wieksza wartosc
-		for(int j = i - 1; j >= 0; j--)
-		{
-			 if(extractOuterPiece(CORNERS_MOST_SIGNIFICANT, j, cubeState) > extractOuterPiece(CORNERS_MOST_SIGNIFICANT, i, cubeState))
-				 cornersLeft++;
-		}
-		sum+= cornersLeft * factorials[i];
-	}
-	return sum;
-}
 int CrazyCubeMoveMapper::convertOuterEdgesToInt(unsigned long long cubeState)
 {
 	int sum = 0;
@@ -76,37 +61,6 @@ int CrazyCubeMoveMapper::convertCentreToInt(unsigned long long cubeState)
 
 
 // int CrazyCubeMoveMapper::-> Cube converters
-unsigned long long CrazyCubeMoveMapper::convertIntToOuterCorners(int corners)
-{
-	unsigned long long crazyCubeState = 0;
-	for(int i = 0; i < NUM_OF_CORNERS; i++)
-	{
-		temporaryPieceContainer[i] = i;
-	}
-	int rem = 0;
-	int quot = 0;
-	for(int i = NUM_OF_CORNERS - 1; i >= 0; i--)
-	{
-		rem = corners % factorials[i];
-		quot = corners / factorials[i];
-		int k = 0;
-		for(int j = NUM_OF_CORNERS - 1; j >= 0; j--)
-		{
-			if(temporaryPieceContainer[j] < 0)
-				continue;
-			k++;
-			if(k > quot)
-			{
-				crazyCubeState |= ((unsigned long long)(temporaryPieceContainer[j])    <<    (CORNERS_MOST_SIGNIFICANT + 1 - i*4));
-				temporaryPieceContainer[j] = -1;
-				break;
-			}
-		}
-		corners = rem;
-	}
-
-	return crazyCubeState;
-}
 unsigned long long CrazyCubeMoveMapper::convertIntToOuterEdges(int edges)
 {
 	unsigned long long crazyCubeState = 0;
@@ -195,10 +149,6 @@ std::vector<std::vector<int>> CrazyCubeMoveMapper::generatePieceMap(const int ar
 //
 //////////////////////////////////////////
 
-std::vector<std::vector<int>> CrazyCubeMoveMapper::generateOuterCornersMap()
-{
-    return generatePieceMap(factorials[NUM_OF_CORNERS],&CrazyCubeMoveMapper::convertIntToOuterCorners,&CrazyCubeMoveMapper::convertOuterCornersToInt);
-}
 
 std::vector<std::vector<int>> CrazyCubeMoveMapper::generateOuterEdgesMap()
 {

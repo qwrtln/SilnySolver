@@ -3,6 +3,7 @@
 
 #include "CrazyCubeAbstract.h"
 #include "CrazyCubeMoveMapper.h"
+#include "OuterCornersMapGenerator.h"
 
 class CrazyCubePruner: public CrazyCubeAbstract
 {
