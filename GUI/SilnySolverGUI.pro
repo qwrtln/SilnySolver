@@ -27,7 +27,10 @@ SOURCES += \
     ../Dev/src/FileReader.cpp \
     ../Dev/src/FileWriter.cpp \
     ../Dev/src/CrazyCubePruner.cpp \
-    ../Dev/src/CrazyCubeMapper.cpp
+    ../Dev/src/CrazyCubeMapper.cpp \
+    ../Dev/src/OuterCornersMapGenerator.cpp \
+    ../Dev/src/MoveMapsGeneratorI.cpp \
+    ../Dev/src/CrazyCubeMoveMapper.cpp
 
 HEADERS  += \
     inc/mainwindow.h
