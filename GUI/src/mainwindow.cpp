@@ -147,3 +147,8 @@ void MainWindow::on_MVBMoveButton_clicked()
 {
     myCube.move(CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION);
 }
+
+void MainWindow::on_resetButton_clicked()
+{
+    myCube.resetCube();
+}

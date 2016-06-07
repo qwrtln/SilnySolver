@@ -50,6 +50,8 @@ private slots:
 
     void on_MVBMoveButton_clicked();
 
+    void on_resetButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 
