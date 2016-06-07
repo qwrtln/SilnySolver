@@ -19,8 +19,7 @@ protected:
 	{
 
 	}
-protected:
-	CrazyCubeImproved cubeImproved;
+    CrazyCubeImproved cubeImproved;
     CrazyCubeImproved cubeToCompare;
 };
 
@@ -52,10 +51,11 @@ TEST_F(CrazyCubeImprovedTest, findingMemoryLeaks)
 namespace 
 {
     CrazyCubeMoveMapper mapper;
+    OuterCornersMapGenerator OCmapper;
 
     void setCubeImprovedFromCrazyCube(CrazyCubeImproved &cubeImproved, CrazyCube &cube)
     {
-        cubeImproved.setCube( mapper.convertOuterCornersToInt(cube.getCubeState()),
+        cubeImproved.setCube( OCmapper.convertPiecesToInt(cube.getCubeState()),
                               mapper.convertInnerCornersToInt(cube.getCubeState()),
                               mapper.convertOuterEdgesToInt(cube.getCubeState()),
                               mapper.convertInnerEdgesToInt(cube.getCubeState()),
@@ -65,7 +65,7 @@ namespace
 
     unsigned long long getCubeImprovedState(CrazyCubeImproved &cubeImproved) 
     {
-        return mapper.convertIntToOuterCorners(cubeImproved.getOuterCorners()) | 
+        return OCmapper.convertIntToPieces(cubeImproved.getOuterCorners()) | 
                mapper.convertIntToOuterEdges(cubeImproved.getOuterEdges()) | 
                mapper.convertIntToInnerCorners(cubeImproved.getInnerCorners()) | 
                mapper.convertIntToInnerEdges(cubeImproved.getInnerEdges()) | 

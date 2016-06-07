@@ -3,6 +3,7 @@
 
 #include "CrazyCubeBase.h"
 #include "CrazyCubeCache.h"
+#include "OuterCornersMapGenerator.h"
 #include <iostream>
 using namespace std;
 

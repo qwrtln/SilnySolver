@@ -49,18 +49,14 @@ TEST_F(CrazyCubeMoveMapperTest, findingMemoryLeaks)
     mapper.convertIntToCentre(1);
     mapper.convertIntToInnerCorners(2);
     mapper.convertIntToInnerEdges(3);
-    mapper.convertIntToOuterCorners(4);
     mapper.convertIntToOuterEdges(5);
-    mapper.convertOuterCornersToInt(cubeState);
     mapper.convertOuterEdgesToInt(cubeState);
     mapper.extractInnerPiece(1,2,cubeState);
     mapper.extractOuterPiece(3,4,cubeState);
     mapper.generateCentreMap();
     mapper.generateInnerCornersMap();
     mapper.generateInnerEdgesMap();
-    mapper.generateOuterCornersMap();
     mapper.generateOuterEdgesMap();
-    mapper.generatePieceMap(factorials[NUM_OF_CORNERS],&CrazyCubeMoveMapper::convertIntToOuterCorners,&CrazyCubeMoveMapper::convertOuterCornersToInt);
 	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToOuterEdges,&CrazyCubeMoveMapper::convertOuterEdgesToInt);
     mapper.generatePieceMap(factorials[NUM_OF_CORNERS], &CrazyCubeMoveMapper::convertIntToInnerCorners,&CrazyCubeMoveMapper::convertInnerCornersToInt);
 	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToInnerEdges,&CrazyCubeMoveMapper::convertInnerEdgesToInt);
@@ -185,65 +181,6 @@ TEST_F(CrazyCubeMoveMapperTest, TestExtractInnerPieceEdgesRandomCube)
 	{	
 		ASSERT_EQ(innerPiecesExpected[i], mapper.extractInnerPiece(EDGES_MOST_SIGNIFICANT, i, cubeState));
 	}
-}
-
-TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterCornersToIntSolvedCube)
-{
-    // Actual output
-    int output = mapper.convertOuterCornersToInt(mapper.solvedCorners);
-   
-    // Hardcoded Pkoz algorithm
-    int sum = 0;
-    for (int i = NUM_OF_CORNERS - 1; i > 0; --i)
-    {
-        int cornersLeft = 0;
-
-        for (int j = i - 1; j >=0; --j)
-        {
-            if (mapper.extractOuterPiece(CORNERS_MOST_SIGNIFICANT, j, mapper.solvedCorners) > mapper.extractOuterPiece(CORNERS_MOST_SIGNIFICANT, i, mapper.solvedCorners) )
-            {
-               ++cornersLeft; 
-        }
-        
-        sum += cornersLeft * mapper.factorials[i];
-
-        }
-
-        ASSERT_EQ(sum, output);
-    }
-}
-
-TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterCornersToIntRandomCube)
-{
-    CrazyCube cube;
-
-    cube.move(rotation::LEFT);
-
-    int expectedSum = 4142; // calculated in Octave
-    int actualOutput = mapper.convertOuterCornersToInt(cube.getCubeState()); 
-	ASSERT_EQ(actualOutput, expectedSum);
-   
-    // 2nd case
-    cube.resetCube();
-   rotation randomMoves[FIVE_MOVES] = {rotation::FRONT, rotation::MIDDLE_VERTICAL, rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, rotation::LEFT, rotation::UP_2};
-
-    for (int i = 0; i < FIVE_MOVES; ++i)
-        cube.move(randomMoves[i]);
-    
-    expectedSum = 2354;
-    actualOutput = mapper.convertOuterCornersToInt(cube.getCubeState()); 
-	ASSERT_EQ(actualOutput, expectedSum);
-
-    // 3rd case
-    cube.resetCube();
-    rotation randomMoves2[FIVE_MOVES] = {rotation::UP, rotation::LEFT, rotation::FRONT, rotation::LEFT, rotation::MIDDLE_HORIZONTAL};
-
-    for (int i = 0; i < FIVE_MOVES; ++i)
-        cube.move(randomMoves2[i]);
-   
-    expectedSum = 1567;
-    actualOutput = mapper.convertOuterCornersToInt(cube.getCubeState()); 
-	ASSERT_EQ(actualOutput, expectedSum);
 }
 
 TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterEdgesToIntSolvedCube)
@@ -398,32 +335,6 @@ TEST_F(CrazyCubeMoveMapperTest, TestConvertCentreToIntRandomCube)
 	unsigned long long cubeState = 0x0DB204962964BFD0;
 	int intCentreExpected = 0;
 	ASSERT_EQ(intCentreExpected, mapper.convertCentreToInt(cubeState));
-}
-
-TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterCornersSolvedCube)
-{
-	unsigned long long cubeState = 0x002468AC00000000;
-	int outerCornersInt = 0;
-
-	ASSERT_EQ_HEX(cubeState, mapper.convertIntToOuterCorners(outerCornersInt));
-}
-
-TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterCornersRandomCube)
-{
-    // TODO: 2 more cases
-
-    rotation randomMoves[SIX_MOVES] = {rotation::LEFT, rotation::MIDDLE_VERTICAL_BACK_ROTATION, rotation::UP_2, rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, rotation::FRONT, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION};
-
-    CrazyCube cube;
-
-    for (int i = 0; i < SIX_MOVES; ++i)
-        cube.move(randomMoves[i]);
-
-    int intFromConversion = 3776; // calculated in Octave
-
-    unsigned long long expectedCubeState = cube.getCubeState() & 0x0eeeeeee00000000ULL; // Murphy's law - stupid but working
-    unsigned long long actualCube = mapper.convertIntToOuterCorners(intFromConversion);
-	ASSERT_EQ_HEX(expectedCubeState, actualCube);
 }
 
 TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterEdgesSolvedCube)
