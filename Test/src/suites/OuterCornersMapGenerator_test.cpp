@@ -1,12 +1,11 @@
 /*
- * MoveMapsGenerator_test.cpp
+ * OuterCornersMapGenerator_test.cpp
  *
  *  Created on: Jun 6, 2016
  *      Author: qwrtln
  */
 
 #include "TestExecuter.h"
-#include "CrazyCubeAbstract.h"
 #include "CrazyCube.h"
 #include "OuterCornersMapGenerator.h"
 #include <cmath>

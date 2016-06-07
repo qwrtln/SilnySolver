@@ -15,9 +15,10 @@ CrazyCubeCache:: CrazyCubeCache()
 {
     CrazyCubeMoveMapper mapper;
     OuterCornersMapGenerator OCmapper;
+    InnerCornersMapGenerator ICmapper;
 
     outerCornersMap = OCmapper.generateMoveMap();
-    innerCornersMap = mapper.generateInnerCornersMap();
+    innerCornersMap = ICmapper.generateMoveMap();
     outerEdgesMap = mapper.generateOuterEdgesMap();
     innerEdgesMap = mapper.generateInnerEdgesMap();
     centreMap = mapper.generateCentreMap();

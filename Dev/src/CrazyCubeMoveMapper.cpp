@@ -35,16 +35,7 @@ int CrazyCubeMoveMapper::convertOuterEdgesToInt(unsigned long long cubeState)
 	}
 	return sum;
 }
-int CrazyCubeMoveMapper::convertInnerCornersToInt(unsigned long long cubeState)
-{
-	int sum = 0;
-	for(int i = 0; i < NUM_OF_CORNERS; i++)
-	{
-		sum+= extractInnerPiece(CORNERS_MOST_SIGNIFICANT, i, cubeState) * pow2toX[NUM_OF_CORNERS - 1 - i];
-		
-	}
-	return sum;
-}
+
 int CrazyCubeMoveMapper::convertInnerEdgesToInt(unsigned long long cubeState)
 {
 	int sum = 0;
@@ -92,16 +83,6 @@ unsigned long long CrazyCubeMoveMapper::convertIntToOuterEdges(int edges)
 	return crazyCubeState;
 }
  
-unsigned long long CrazyCubeMoveMapper::convertIntToInnerCorners(int innerCorners)
-{
-	unsigned long long result = 0;
-	for(int i = 0; i < NUM_OF_CORNERS; i++)
-	{
-		result |= ((unsigned long long)(innerCorners & 1)  <<  (i*4 + CORNERS_LEAST_SIGNIFICANT));
-		innerCorners /= 2;
-	}
-	return result;
-}
 unsigned long long CrazyCubeMoveMapper::convertIntToInnerEdges(int innerEdges)
 {
 	unsigned long long result = 0;
@@ -153,11 +134,6 @@ std::vector<std::vector<int>> CrazyCubeMoveMapper::generatePieceMap(const int ar
 std::vector<std::vector<int>> CrazyCubeMoveMapper::generateOuterEdgesMap()
 {
 	return generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToOuterEdges,&CrazyCubeMoveMapper::convertOuterEdgesToInt);
-}
-
-std::vector<std::vector<int>> CrazyCubeMoveMapper::generateInnerCornersMap()
-{
-    return generatePieceMap(pow2toX[NUM_OF_CORNERS], &CrazyCubeMoveMapper::convertIntToInnerCorners,&CrazyCubeMoveMapper::convertInnerCornersToInt);
 }
 
 std::vector<std::vector<int>> CrazyCubeMoveMapper::generateInnerEdgesMap()
