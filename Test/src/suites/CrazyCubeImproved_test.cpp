@@ -24,6 +24,7 @@ protected:
     CrazyCubeImproved cubeToCompare;
 };
 
+
 #ifdef MEMORY_CHECK
 TEST_F(CrazyCubeImprovedTest, findingMemoryLeaks)
 {
@@ -50,7 +51,7 @@ TEST_F(CrazyCubeImprovedTest, findingMemoryLeaks)
 // but not necessary for functioning of the cube itself.
 namespace 
 {
-    CrazyCubeMapper mapper;
+    CrazyCubeMoveMapper mapper;
 
     void setCubeImprovedFromCrazyCube(CrazyCubeImproved &cubeImproved, CrazyCube &cube)
     {
@@ -70,7 +71,7 @@ namespace
                mapper.convertIntToInnerEdges(cubeImproved.getInnerEdges()) | 
                mapper.convertIntToCentre(cubeImproved.getCentre());
     }
-}
+};
 
 TEST_F(CrazyCubeImprovedTest, L)
 {

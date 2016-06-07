@@ -2,11 +2,12 @@
 #define CRAZYCUBEPRUNER_H_
 
 #include "CrazyCubeAbstract.h"
-#include "CrazyCubeMapper.h"
+#include "CrazyCubeMoveMapper.h"
 
 class CrazyCubePruner: public CrazyCubeAbstract
 {
  private:
+
    CrazyCubePruner();
    std::vector<std::vector<int>> outerCornersMap;
    std::vector<std::vector<int>> innerCornersMap;

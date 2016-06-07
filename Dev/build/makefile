@@ -18,11 +18,11 @@ OBJ_FILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRC_FILES)))
 DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
 
 # Compilation rules
-SilnySolver: build 
+SilnySolver: $(OBJ_FILES) 
 	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o -o $@
 
 # Rule for separating executable from build files
-build: $(OBJ_FILES)
+binaries: $(OBJ_FILES)
 
 %.o: $(SRC)%.cpp 
 	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) -c $< $(INC) -o $@

@@ -1,20 +1,20 @@
 /*
- * CrazyCubeMapper_test.cpp
+ * CrazyCubeMoveMapper_test.cpp
  *
- *  Created on: Dec 16, 2015
+ *  Created on: May 29, 2016
  *      Author: qwrtln
  */
-#include "CrazyCubeMapper.h"
+
+#include "CrazyCubeMoveMapper.h"
 #include "TestExecuter.h"
 #include "CrazyCubeAbstract.h"
 #include "CrazyCube.h"
 #include <cmath>
 
-
-class CrazyCubeMapperTest: public BaseTest
+class CrazyCubeMoveMapperTest: public BaseTest
 {
 public:
-	CrazyCubeMapperTest(string testCase, string testName)
+	CrazyCubeMoveMapperTest(string testCase, string testName)
 		:BaseTest(testCase, testName)
 	{
 		SetUp();
@@ -29,24 +29,23 @@ protected:
 
 	}
 protected:
-	static CrazyCubeMapper mapper;
+	static CrazyCubeMoveMapper mapper;
 };
 
-CrazyCubeMapper CrazyCubeMapperTest::mapper;
+CrazyCubeMoveMapper CrazyCubeMoveMapperTest::mapper;
 
 // For backward compatibility:
 #define FIVE_MOVES 5
 #define SIX_MOVES 6
 
 #ifdef MEMORY_CHECK
-TEST_F(CrazyCubeMapperTest, findingMemoryLeaks)
+TEST_F(CrazyCubeMoveMapperTest, findingMemoryLeaks)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 
     mapper.convertCentreToInt(cubeState);
     mapper.convertInnerCornersToInt(cubeState);
     mapper.convertInnerEdgesToInt(cubeState);
-    mapper.convertIntArrayToCubeState(1,2,3,4,5);
     mapper.convertIntToCentre(1);
     mapper.convertIntToInnerCorners(2);
     mapper.convertIntToInnerEdges(3);
@@ -61,14 +60,14 @@ TEST_F(CrazyCubeMapperTest, findingMemoryLeaks)
     mapper.generateInnerEdgesMap();
     mapper.generateOuterCornersMap();
     mapper.generateOuterEdgesMap();
-    mapper.generatePieceMap(factorials[NUM_OF_CORNERS],&CrazyCubeMapper::convertIntToOuterCorners,&CrazyCubeMapper::convertOuterCornersToInt);
-	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToOuterEdges,&CrazyCubeMapper::convertOuterEdgesToInt);
-    mapper.generatePieceMap(factorials[NUM_OF_CORNERS], &CrazyCubeMapper::convertIntToInnerCorners,&CrazyCubeMapper::convertInnerCornersToInt);
-	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMapper::convertIntToInnerEdges,&CrazyCubeMapper::convertInnerEdgesToInt);
-	mapper.generatePieceMap(factorials[2],&CrazyCubeMapper::convertIntToCentre,&CrazyCubeMapper::convertCentreToInt);
+    mapper.generatePieceMap(factorials[NUM_OF_CORNERS],&CrazyCubeMoveMapper::convertIntToOuterCorners,&CrazyCubeMoveMapper::convertOuterCornersToInt);
+	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToOuterEdges,&CrazyCubeMoveMapper::convertOuterEdgesToInt);
+    mapper.generatePieceMap(factorials[NUM_OF_CORNERS], &CrazyCubeMoveMapper::convertIntToInnerCorners,&CrazyCubeMoveMapper::convertInnerCornersToInt);
+	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToInnerEdges,&CrazyCubeMoveMapper::convertInnerEdgesToInt);
+	mapper.generatePieceMap(factorials[2],&CrazyCubeMoveMapper::convertIntToCentre,&CrazyCubeMoveMapper::convertCentreToInt);
 }
 #else
-TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceGeneralSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractOuterPieceGeneralSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 	int outerPiecesExpected[16] = {0, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 7};
@@ -78,7 +77,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceGeneralSolvedCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceGeneralRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractOuterPieceGeneralRandomCube)
 {
 	unsigned long long cubeState = 0x0DB2046920964BFD;
 	int outerPiecesExpected[16] = {0,    6, 5, 1, 0, 2, 3, 4,    1, 0, 4, 3, 2, 5, 7, 6};
@@ -88,7 +87,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceGeneralRandomCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceCornersSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractOuterPieceCornersSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 	int outerPiecesExpected[NUM_OF_CORNERS] = {0, 1, 2, 3, 4, 5, 6};
@@ -98,7 +97,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceCornersSolvedCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceCornersRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractOuterPieceCornersRandomCube)
 {
 	unsigned long long cubeState = 0x0DB204962964BFD0;
 	int outerPiecesExpected[NUM_OF_CORNERS] = {6, 5, 1, 0, 2, 4, 3};
@@ -108,7 +107,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceCornersRandomCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceEdgesSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractOuterPieceEdgesSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 	int outerPiecesExpected[NUM_OF_EDGES] = {0, 1, 2, 3, 4, 5, 6, 7};
@@ -118,7 +117,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceEdgesSolvedCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceEdgesRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractOuterPieceEdgesRandomCube)
 {
 	unsigned long long cubeState = 0x0DB20469964BFD20;
 	int outerPiecesExpected[NUM_OF_EDGES] = {4, 3, 2, 5, 7, 6, 1, 0};
@@ -128,7 +127,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractOuterPieceEdgesRandomCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceGeneralSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractInnerPieceGeneralSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 	int innerPiecesExpected[16] = {1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 1};
@@ -138,7 +137,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceGeneralSolvedCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceGeneralRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractInnerPieceGeneralRandomCube)
 {
 	unsigned long long cubeState = 0x0DB2046920964BFD;
 	int innerPiecesExpected[16] = {0,    1, 1, 0, 0, 0, 0, 1,    0, 0, 1, 0, 0, 1, 1, 1};
@@ -148,7 +147,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceGeneralRandomCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceCornersSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractInnerPieceCornersSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 	int innerPiecesExpected[NUM_OF_CORNERS] = {0, 0, 0, 0, 1, 1, 1};
@@ -158,7 +157,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceCornersSolvedCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceCornersRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractInnerPieceCornersRandomCube)
 {
 	unsigned long long cubeState = 0x0DB204962964BFD0;
 	int innerPiecesExpected[NUM_OF_CORNERS] = {1, 1, 0, 0, 0, 1, 0};
@@ -168,7 +167,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceCornersRandomCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceEdgesSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractInnerPieceEdgesSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 	int innerPiecesExpected[NUM_OF_EDGES] = {0, 0, 0, 0, 1, 1, 1, 1};
@@ -178,7 +177,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceEdgesSolvedCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceEdgesRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestExtractInnerPieceEdgesRandomCube)
 {
 	unsigned long long cubeState = 0x0DB20469964BFD20;
 	int innerPiecesExpected[NUM_OF_EDGES] = {1, 0, 0, 1, 1, 1, 0, 0};
@@ -188,7 +187,7 @@ TEST_F(CrazyCubeMapperTest, TestExtractInnerPieceEdgesRandomCube)
 	}
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterCornersToIntSolvedCube)
 {
     // Actual output
     int output = mapper.convertOuterCornersToInt(mapper.solvedCorners);
@@ -214,7 +213,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntSolvedCube)
     }
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterCornersToIntRandomCube)
 {
     CrazyCube cube;
 
@@ -247,14 +246,14 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterCornersToIntRandomCube)
 	ASSERT_EQ(actualOutput, expectedSum);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterEdgesToIntSolvedCube)
 {
     int expectedSum = 0; 
     int actualOutput = mapper.convertOuterEdgesToInt(mapper.solvedCube); 
 	ASSERT_EQ(actualOutput, expectedSum);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterEdgesToIntRandomCube)
 {
     rotation randomMoves[SIX_MOVES] = {rotation::LEFT, rotation::MIDDLE_VERTICAL_BACK_ROTATION, rotation::UP_2, rotation::FRONT, rotation::UP_INVERTED, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION};
 
@@ -290,14 +289,14 @@ TEST_F(CrazyCubeMapperTest, TestConvertOuterEdgesToIntRandomCube)
 	ASSERT_EQ(actualOutput, expectedSum);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertInnerCornersToIntSolvedCube)
 {
     int expectedSum = 7; // result after bin2dec operation
     int actualOutput = mapper.convertInnerCornersToInt(mapper.solvedCube); 
 	ASSERT_EQ(actualOutput, expectedSum);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertInnerCornersToIntRandomCube)
 {
     rotation randomMoves[SIX_MOVES] = {rotation::MIDDLE_VERTICAL_FRONT_ROTATION, rotation::UP_2, rotation::MIDDLE_HORIZONTAL, rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, rotation::LEFT, rotation::FRONT};
 
@@ -337,14 +336,14 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerCornersToIntRandomCube)
 	ASSERT_EQ_BIN(expectedSum, actualOutput);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertInnerEdgesToIntSolvedCube)
 {
     int expectedSum = 15; // just as above
     int actualOutput = mapper.convertInnerEdgesToInt(mapper.solvedCube); 
 	ASSERT_EQ(actualOutput, expectedSum);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertInnerEdgesToIntRandomCube)
 {
     const int moves = 5;
     rotation randomMoves[moves] = {rotation::LEFT, rotation::UP, rotation::FRONT, rotation::UP_INVERTED, rotation::MIDDLE_VERTICAL};
@@ -385,14 +384,14 @@ TEST_F(CrazyCubeMapperTest, TestConvertInnerEdgesToIntRandomCube)
 	ASSERT_EQ_BIN(actualOutput, expectedEdgesInt);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertCentreToIntSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertCentreToIntSolvedCube)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 	int intCentreExpected = 1;
 	ASSERT_EQ(intCentreExpected, mapper.convertCentreToInt(cubeState));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertCentreToIntRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertCentreToIntRandomCube)
 {
     // TODO: 2 more cases
 
@@ -401,7 +400,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertCentreToIntRandomCube)
 	ASSERT_EQ(intCentreExpected, mapper.convertCentreToInt(cubeState));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterCornersSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterCornersSolvedCube)
 {
 	unsigned long long cubeState = 0x002468AC00000000;
 	int outerCornersInt = 0;
@@ -409,7 +408,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterCornersSolvedCube)
 	ASSERT_EQ_HEX(cubeState, mapper.convertIntToOuterCorners(outerCornersInt));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterCornersRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterCornersRandomCube)
 {
     // TODO: 2 more cases
 
@@ -427,14 +426,14 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterCornersRandomCube)
 	ASSERT_EQ_HEX(expectedCubeState, actualCube);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterEdgesSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterEdgesSolvedCube)
 {	
 	unsigned long long cubeState = solvedCube & 0xEEEEEEEE;
 	int outerEdgesInt = 0;
 	ASSERT_EQ_HEX(cubeState, mapper.convertIntToOuterEdges(outerEdgesInt));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterEdgesRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterEdgesRandomCube)
 {
     // TODO: 2 more cases
 
@@ -446,7 +445,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToOuterEdgesRandomCube)
 	ASSERT_EQ_HEX(actualOutput, expectedOutput);
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToInnerCornersSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToInnerCornersSolvedCube)
 {
 	//unsigned long long int cubeState = 0x1 02469BD 02469BDF;
 	int innerCornersInt = 0x7;
@@ -454,7 +453,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToInnerCornersSolvedCube)
 	ASSERT_EQ_HEX(innerCornersExpected, mapper.convertIntToInnerCorners(innerCornersInt));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToInnerCornersRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToInnerCornersRandomCube)
 {
 	//unsigned long long int cubeState = 0x1 DB96420 02469BDF;
 	int innerCornersInt = 0x70;
@@ -470,7 +469,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToInnerCornersRandomCube)
 	ASSERT_EQ_HEX(innerCornersExpected, mapper.convertIntToInnerCorners(innerCornersInt));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToInnerEdgesSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToInnerEdgesSolvedCube)
 {
 	//unsigned long long int cubeState = 0x1 02469BD 02469BDF;
 	// innerEdgesInt = 2^0 + 2^1 + 2^2 + 2^3 = 0xF
@@ -479,7 +478,7 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToInnerEdgesSolvedCube)
 	ASSERT_EQ_HEX(innerEdgesExpected, mapper.convertIntToInnerEdges(innerEdgesInt));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToInnerEdgesRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToInnerEdgesRandomCube)
 {
 	int innerEdgesInt = 0xF0;
 	unsigned long long int innerEdgesExpected = 0x0000000011110000;
@@ -494,14 +493,14 @@ TEST_F(CrazyCubeMapperTest, TestConvertIntToInnerEdgesRandomCube)
 	ASSERT_EQ_HEX(innerEdgesExpected, mapper.convertIntToInnerEdges(innerEdgesInt));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToCentreSolvedCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToCentreSolvedCube)
 {
 	int centre = 1;
 	unsigned long long int centreExpected = 0x1000000000000000;
 	ASSERT_EQ_HEX(centreExpected, mapper.convertIntToCentre(centre));
 }
 
-TEST_F(CrazyCubeMapperTest, TestConvertIntToCentreRandomCube)
+TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToCentreRandomCube)
 {
 	int centre = 0;
 	unsigned long long int centreExpected = 0x0000000000000000;
