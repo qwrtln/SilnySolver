@@ -80,8 +80,8 @@
      <rect>
       <x>210</x>
       <y>310</y>
-      <width>111</width>
-      <height>22</height>
+      <width>129</width>
+      <height>33</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -106,8 +106,8 @@
      <rect>
       <x>350</x>
       <y>310</y>
-      <width>111</width>
-      <height>22</height>
+      <width>134</width>
+      <height>33</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -128,8 +128,8 @@
      <rect>
       <x>210</x>
       <y>270</y>
-      <width>151</width>
-      <height>22</height>
+      <width>193</width>
+      <height>33</height>
      </rect>
     </property>
     <layout class="QHBoxLayout" name="horizontalLayout_4">
@@ -150,8 +150,8 @@
      <rect>
       <x>490</x>
       <y>130</y>
-      <width>224</width>
-      <height>211</height>
+      <width>328</width>
+      <height>218</height>
      </rect>
     </property>
     <layout class="QGridLayout" name="gridLayout">
@@ -239,7 +239,7 @@
      <rect>
       <x>550</x>
       <y>20</y>
-      <width>160</width>
+      <width>214</width>
       <height>80</height>
      </rect>
     </property>
@@ -287,6 +287,16 @@
      <string>Reset</string>
     </property>
    </widget>
+   <widget class="CrazyCubeGL" name="OpenGLwidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>220</x>
+      <y>0</y>
+      <width>251</width>
+      <height>221</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -294,7 +304,7 @@
      <x>0</x>
      <y>0</y>
      <width>724</width>
-     <height>21</height>
+     <height>27</height>
     </rect>
    </property>
   </widget>
@@ -309,6 +319,14 @@
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>CrazyCubeGL</class>
+   <extends>QWidget</extends>
+   <header>crazycubegl.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

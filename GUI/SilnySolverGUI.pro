@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui opengl
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -30,10 +30,12 @@ SOURCES += \
     ../Dev/src/CrazyCubeMapper.cpp \
     ../Dev/src/OuterCornersMapGenerator.cpp \
     ../Dev/src/MoveMapsGeneratorI.cpp \
-    ../Dev/src/CrazyCubeMoveMapper.cpp
+    ../Dev/src/CrazyCubeMoveMapper.cpp \
+    crazycubegl.cpp
 
 HEADERS  += \
-    inc/mainwindow.h
+    inc/mainwindow.h \
+    crazycubegl.h
 
 
 FORMS    += \

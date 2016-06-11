@@ -52,6 +52,8 @@ private slots:
 
     void on_resetButton_clicked();
 
+protected:
+
 private:
     Ui::MainWindow *ui;
 
