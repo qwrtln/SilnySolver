@@ -1,8 +1,10 @@
 #include "PruneMapGenerator.h"
 
+using namespace std;
+
 const int PruneMapGenerator::NumberOfkindsOfPieces = 5;
 const int PruneMapGenerator::edgeArrayLimit = 40320; // Facotiral of NUM_OF_EDGES
-const int PruneMapGenerator::cornerArrayLimit = 5040; // Factorial of NUM_OF_CORNERS 
+const int PruneMapGenerator::cornerArrayLimit = 5040; // Factorial of NUM_OF_CORNERS
 const int PruneMapGenerator::centreArrayLimit = 1; // Factorial of 1 :-)))
 
 PruneMapGenerator:: PruneMapGenerator()
@@ -11,7 +13,7 @@ PruneMapGenerator:: PruneMapGenerator()
 }
 /*	  C	CCCCCCC EEEEEEEE
  *  0x1 02469BD 02469BDF;
- * 	
+ *
  * 	000 0  000 0  000 0  000 0  000 0  000 0  000 0
  * 	Gets the value of n-th outer corner piece
  * 	CORNERS_BASE = 56
@@ -30,14 +32,21 @@ void PruneMapGenerator::swapMapElementValue(int width, vector<int>& vect, short 
 	}
 }
 
+vector<int> PruneMapGenerator::generateInitialVector(int length)
+{
+    vector<int> pruneMap(length);
+    int safeBound = 100;    // This is the depth, which we'll definitely not cross, sine we do not know the exact number (for standard cube it's 20)
+    std::fill(pruneMap.begin()+1,pruneMap.end(),safeBound);
+
+    return pruneMap;
+
+}
+
 vector<int> PruneMapGenerator::generateOuterCornersPruneMap(int length, int maxMoves)
 {
-	vector<int> outerCornersPruneMap = vector<int>(length); 
-	for(int i = 0; i < length; i++)
-	{
-		outerCornersPruneMap[i] = 100;
-	}
-	int outerCorners = 0;
+    vector<int> outerCornersPruneMap = generateInitialVector(length);
+    int outerCorners = 0;
+
 	generateOuterCornersPruneMapIter(1, maxMoves, outerCorners, outerCornersPruneMap, -1);
 	swapMapElementValue(length, outerCornersPruneMap, 100, -1);
 	return outerCornersPruneMap;
@@ -45,12 +54,9 @@ vector<int> PruneMapGenerator::generateOuterCornersPruneMap(int length, int maxM
 
 vector<int> PruneMapGenerator::generateOuterEdgesPruneMap(int length, int maxMoves)
 {
-	vector<int> outerEdgesPruneMap = vector<int>(length); 
-	for(int i = 0; i < length; i++)
-	{
-		outerEdgesPruneMap[i] = 100;
-	}
+	vector<int> outerEdgesPruneMap = generateInitialVector(length);
 	int outerEdges = 0;
+
 	generateOuterEdgesPruneMapIter(1, maxMoves, outerEdges, outerEdgesPruneMap, -1);
 	swapMapElementValue(length, outerEdgesPruneMap, 100, -1);
 	return outerEdgesPruneMap;
@@ -58,12 +64,9 @@ vector<int> PruneMapGenerator::generateOuterEdgesPruneMap(int length, int maxMov
 
 vector<int> PruneMapGenerator::generateInnerCornersPruneMap(int length, int maxMoves)
 {
-	vector<int> innerCornersPruneMap = vector<int>(length); 
-	for(int i = 0; i < length; i++)
-	{
-		innerCornersPruneMap[i] = 100;
-	}
+	vector<int> innerCornersPruneMap = generateInitialVector(length);
 	int innerCorners = 0;
+
 	generateInnerCornersPruneMapIter(1, maxMoves, innerCorners, innerCornersPruneMap, -1);
 	swapMapElementValue(length, innerCornersPruneMap, 100, -1);
 	return innerCornersPruneMap;
@@ -71,12 +74,9 @@ vector<int> PruneMapGenerator::generateInnerCornersPruneMap(int length, int maxM
 
 vector<int> PruneMapGenerator::generateInnerEdgesPruneMap(int length, int maxMoves)
 {
-	vector<int> innerEdgesPruneMap = vector<int>(length); 
-	for(int i = 0; i < length; i++)
-	{
-		innerEdgesPruneMap[i] = 100;
-	}
+	vector<int> innerEdgesPruneMap = generateInitialVector(length);
 	int innerEdges = 0;
+
 	generateInnerEdgesPruneMapIter(1, maxMoves, innerEdges, innerEdgesPruneMap, -1);
 	swapMapElementValue(length, innerEdgesPruneMap, 100, -1);
 	return innerEdgesPruneMap;
@@ -84,11 +84,9 @@ vector<int> PruneMapGenerator::generateInnerEdgesPruneMap(int length, int maxMov
 
 vector<int> PruneMapGenerator::generateCentrePruneMap(int length, int maxMoves)
 {
-	vector<int> centrePruneMap = vector<int>(length); 
-	for(int i = 0; i < length; i++)
-	{
-		centrePruneMap[i] = 100;
-	}
+	vector<int> centrePruneMap = vector<int>(length); // No DRY because map length == 2
+    centrePruneMap[0] = 0;
+    centrePruneMap[1] = 100;
 	int centre = 0;
 	generateCentrePruneMapIter(1, maxMoves, centre, centrePruneMap, -1);
 	swapMapElementValue(length, centrePruneMap, 100, -1);
@@ -106,9 +104,11 @@ int PruneMapGenerator::generateOuterCornersPruneMapIter(int depth, int maxDepth,
 			{
 				continue;
 			}
-			
+
 			if(depth < outerCornersPruneMap[crazyCubeCachePtr->getOuterCornersMap()[outerCorners][i]])
+			{
 				outerCornersPruneMap[crazyCubeCachePtr->getOuterCornersMap()[outerCorners][i]] = depth;
+			}
 			generateOuterCornersPruneMapIter(depth + 1, maxDepth, crazyCubeCachePtr->getOuterCornersMap()[outerCorners][i], outerCornersPruneMap, prevMove);
 		}
 	}
@@ -125,9 +125,11 @@ int PruneMapGenerator::generateOuterEdgesPruneMapIter(int depth, int maxDepth, i
 			{
 				continue;
 			}
-			
+
 			if(depth < outerEdgesPruneMap[crazyCubeCachePtr->getOuterEdgesMap()[outerEdges][i]])
+			{
 				outerEdgesPruneMap[crazyCubeCachePtr->getOuterEdgesMap()[outerEdges][i]] = depth;
+			}
 			generateOuterEdgesPruneMapIter(depth + 1, maxDepth, crazyCubeCachePtr->getOuterEdgesMap()[outerEdges][i], outerEdgesPruneMap, prevMove);
 		}
 	}
@@ -144,9 +146,11 @@ int PruneMapGenerator::generateInnerCornersPruneMapIter(int depth, int maxDepth,
 			{
 				continue;
 			}
-			
+
 			if(depth < innerCornersPruneMap[crazyCubeCachePtr->getInnerCornersMap()[innerCorners][i]])
+			{
 				innerCornersPruneMap[crazyCubeCachePtr->getInnerCornersMap()[innerCorners][i]] = depth;
+			}
 			generateInnerCornersPruneMapIter(depth + 1, maxDepth, crazyCubeCachePtr->getInnerCornersMap()[innerCorners][i], innerCornersPruneMap, prevMove);
 		}
 	}
@@ -163,9 +167,11 @@ int PruneMapGenerator::generateInnerEdgesPruneMapIter(int depth, int maxDepth, i
 			{
 				continue;
 			}
-			
+
 			if(depth < innerEdgesPruneMap[crazyCubeCachePtr->getInnerEdgesMap()[innerEdges][i]])
+			{
 				innerEdgesPruneMap[crazyCubeCachePtr->getInnerEdgesMap()[innerEdges][i]] = depth;
+			}
 			generateInnerEdgesPruneMapIter(depth + 1, maxDepth, crazyCubeCachePtr->getInnerEdgesMap()[innerEdges][i], innerEdgesPruneMap, prevMove);
 		}
 	}
@@ -182,9 +188,11 @@ int PruneMapGenerator::generateCentrePruneMapIter(int depth, int maxDepth, int& 
 			{
 				continue;
 			}
-			
+
 			if(depth < centrePruneMap[crazyCubeCachePtr->getCentreMap()[centre][i]])
+			{
 				centrePruneMap[crazyCubeCachePtr->getCentreMap()[centre][i]] = depth;
+			}
 			generateCentrePruneMapIter(depth + 1, maxDepth, crazyCubeCachePtr->getCentreMap()[centre][i], centrePruneMap, prevMove);
 		}
 	}
