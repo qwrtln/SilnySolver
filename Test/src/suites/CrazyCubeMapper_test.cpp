@@ -9,6 +9,8 @@
 #include "CrazyCubeAbstract.h"
 #include "CrazyCube.h"
 #include <cmath>
+#include <iostream>
+using namespace std;
 
 
 class CrazyCubeMapperTest: public BaseTest
@@ -38,24 +40,17 @@ CrazyCubeMapper CrazyCubeMapperTest::mapper;
 TEST_F(CrazyCubeMapperTest, findingMemoryLeaks)
 {
     std::vector<int> testingVector;
-    for (int i = 0; i < 40321; ++i)
+    for (int i = 0; i < 100; ++i)
     {
-        testingVector[i] = i;
+        testingVector.push_back(69);
     }
 
-    // int testingRef = 0;
-    
-    //mapper.generateCentrePruneMap(6,7);
-    //mapper.generateCentrePruneMapIter(8, 9, testingRef, testingVector, 1);
-    //mapper.generateInnerCornersPruneMap(3,4);
-    //mapper.generateInnerCornersPruneMapIter(5, 6, testingRef, testingVector, 8);
-    //mapper.generateInnerEdgesPruneMap(9, 2);
-    //mapper.generateInnerEdgesPruneMapIter(1, 2, testingRef, testingVector, 4);
-    //mapper.generateOuterCornersPruneMap(5, 6);
-    //mapper.generateOuterCornersPruneMapIter(7, 8, testingRef, testingVector, 8);
-    //mapper.generateOuterEdgesPruneMap(7, 6);
-    //mapper.generateOuterEdgesPruneMapIter(5, 4, testingRef, testingVector, 2);
-    //mapper.swapMapElementValue(1, testingVector, 0, 1);
+    mapper.generateCentrePruneMap(2,7);
+    mapper.generateInnerCornersPruneMap(pow2toX[NUM_OF_CORNERS],4);
+    mapper.generateInnerEdgesPruneMap(pow2toX[NUM_OF_EDGES], 2);
+    mapper.generateOuterCornersPruneMap(factorials[NUM_OF_CORNERS], 6);
+    mapper.generateOuterEdgesPruneMap(factorials[NUM_OF_EDGES], 6);
+    mapper.swapMapElementValue(100, testingVector, 69, 96);
 }
 #else
 TEST_F(CrazyCubeMapperTest, GenericVisibilityTest)
