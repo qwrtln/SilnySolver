@@ -32,12 +32,10 @@ class CrazyCubeMoveMapper: public CrazyCubeAbstract
 
         // Cube -> Int converters
         int convertOuterEdgesToInt(unsigned long long);
-        int convertInnerEdgesToInt(unsigned long long);
         int convertCentreToInt(unsigned long long);
 
         // Int -> Cube converters
         unsigned long long convertIntToOuterEdges(int);
-        unsigned long long convertIntToInnerEdges(int);
         unsigned long long convertIntToCentre(int);
 
         ///////////////////////////////
@@ -62,7 +60,6 @@ class CrazyCubeMoveMapper: public CrazyCubeAbstract
 
     public:
         std::vector<std::vector<int>> generateOuterEdgesMap();
-        std::vector<std::vector<int>> generateInnerEdgesMap();
         std::vector<std::vector<int>> generateCentreMap();
 };
 

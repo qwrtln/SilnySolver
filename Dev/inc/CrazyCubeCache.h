@@ -6,6 +6,8 @@
 #include "CrazyCubeMoveMapper.h"
 #include "OuterCornersMapGenerator.h"
 #include "InnerCornersMapGenerator.h"
+//#include "OuterEdgesMapGenerator.h"
+#include "InnerEdgesMapGenerator.h"
 
 #include <vector>
 #include <memory>

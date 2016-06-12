@@ -13,11 +13,13 @@ CrazyCubePruner::CrazyCubePruner() {
   CrazyCubeMoveMapper mapper;
   OuterCornersMapGenerator OCmapper;
   InnerCornersMapGenerator ICmapper;
+  //OuterEdgesMapGenerator OEmapper;
+  InnerEdgesMapGenerator IEmapper;
 
   outerCornersMap = OCmapper.generateMoveMap();
   innerCornersMap = ICmapper.generateMoveMap();
   outerEdgesMap = mapper.generateOuterEdgesMap();
-  innerEdgesMap = mapper.generateInnerEdgesMap();
+  innerEdgesMap = IEmapper.generateMoveMap();
   centreMap = mapper.generateCentreMap();
 }
 

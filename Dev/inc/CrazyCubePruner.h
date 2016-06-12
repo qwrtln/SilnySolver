@@ -5,6 +5,8 @@
 #include "CrazyCubeMoveMapper.h"
 #include "OuterCornersMapGenerator.h"
 #include "InnerCornersMapGenerator.h"
+//#include "OuterEdgesMapGenerator.h"
+#include "InnerEdgesMapGenerator.h"
 
 class CrazyCubePruner: public CrazyCubeAbstract
 {

@@ -44,18 +44,14 @@ TEST_F(CrazyCubeMoveMapperTest, findingMemoryLeaks)
 	unsigned long long cubeState = 0x102469BD02469BDF;
 
     mapper.convertCentreToInt(cubeState);
-    mapper.convertInnerEdgesToInt(cubeState);
     mapper.convertIntToCentre(1);
-    mapper.convertIntToInnerEdges(3);
     mapper.convertIntToOuterEdges(5);
     mapper.convertOuterEdgesToInt(cubeState);
     mapper.extractInnerPiece(1,2,cubeState);
     mapper.extractOuterPiece(3,4,cubeState);
     mapper.generateCentreMap();
-    mapper.generateInnerEdgesMap();
     mapper.generateOuterEdgesMap();
 	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToOuterEdges,&CrazyCubeMoveMapper::convertOuterEdgesToInt);
-	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToInnerEdges,&CrazyCubeMoveMapper::convertInnerEdgesToInt);
 	mapper.generatePieceMap(factorials[2],&CrazyCubeMoveMapper::convertIntToCentre,&CrazyCubeMoveMapper::convertCentreToInt);
 }
 #else
@@ -222,53 +218,6 @@ TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterEdgesToIntRandomCube)
 	ASSERT_EQ(actualOutput, expectedSum);
 }
 
-TEST_F(CrazyCubeMoveMapperTest, TestConvertInnerEdgesToIntSolvedCube)
-{
-    int expectedSum = 15; // just as above
-    int actualOutput = mapper.convertInnerEdgesToInt(mapper.solvedCube); 
-	ASSERT_EQ(actualOutput, expectedSum);
-}
-
-TEST_F(CrazyCubeMoveMapperTest, TestConvertInnerEdgesToIntRandomCube)
-{
-    const int moves = 5;
-    rotation randomMoves[moves] = {rotation::LEFT, rotation::UP, rotation::FRONT, rotation::UP_INVERTED, rotation::MIDDLE_VERTICAL};
-
-    CrazyCube cube;
-
-    for (int i = 0; i < moves; ++i)
-        cube.move(randomMoves[i]);
-
-    int expectedSum = 0b11000011; // still the same magic number
-    int actualOutput = mapper.convertInnerEdgesToInt(cube.getCubeState()); 
-	ASSERT_EQ_BIN(actualOutput, expectedSum);
-
-    // double check just to be sure
-    cube.resetCube();
-    rotation randomMoves2[FIVE_MOVES] = {rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, rotation::LEFT, rotation::MIDDLE_HORIZONTAL, rotation::MIDDLE_VERTICAL_BACK_ROTATION, rotation::FRONT};
-    
-    for (int i = 0; i < FIVE_MOVES; ++i)
-    {
-        cube.move(randomMoves2[i]);
-    }
-
-    expectedSum = 0b10100101; 
-    actualOutput = mapper.convertInnerEdgesToInt(cube.getCubeState()); 
-	ASSERT_EQ_BIN(actualOutput, expectedSum);
-	//-------------------------------------------------------------------------
-	
-	unsigned long long cubeState = 0x102469BD12479BCE;
-	int expectedEdgesInt = 0b10011100;
-	actualOutput = mapper.convertInnerEdgesToInt(cubeState);
-	ASSERT_EQ_BIN(actualOutput, expectedEdgesInt);
-	
-	//-------------------------------------------------------------------------
-	
-	cubeState = 0x102469BD13578ACE;
-	expectedEdgesInt = 0b11110000;
-	actualOutput = mapper.convertInnerEdgesToInt(cubeState);
-	ASSERT_EQ_BIN(actualOutput, expectedEdgesInt);
-}
 
 TEST_F(CrazyCubeMoveMapperTest, TestConvertCentreToIntSolvedCube)
 {
@@ -305,29 +254,6 @@ TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterEdgesRandomCube)
 	ASSERT_EQ_HEX(actualOutput, expectedOutput);
 }
 
-TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToInnerEdgesSolvedCube)
-{
-	//unsigned long long int cubeState = 0x1 02469BD 02469BDF;
-	// innerEdgesInt = 2^0 + 2^1 + 2^2 + 2^3 = 0xF
-	int innerEdgesInt = 0xF;
-	unsigned long long int innerEdgesExpected = 0x0000000000001111;
-	ASSERT_EQ_HEX(innerEdgesExpected, mapper.convertIntToInnerEdges(innerEdgesInt));
-}
-
-TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToInnerEdgesRandomCube)
-{
-	int innerEdgesInt = 0xF0;
-	unsigned long long int innerEdgesExpected = 0x0000000011110000;
-	ASSERT_EQ_HEX(innerEdgesExpected, mapper.convertIntToInnerEdges(innerEdgesInt));
-	
-	innerEdgesInt = 0xC3;
-	innerEdgesExpected = 0x0000000011000011;
-	ASSERT_EQ_HEX(innerEdgesExpected, mapper.convertIntToInnerEdges(innerEdgesInt));
-	
-	innerEdgesInt = 0xAA;
-	innerEdgesExpected = 0x0000000010101010;
-	ASSERT_EQ_HEX(innerEdgesExpected, mapper.convertIntToInnerEdges(innerEdgesInt));
-}
 
 TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToCentreSolvedCube)
 {
