@@ -55,6 +55,7 @@ namespace
     InnerCornersMapGenerator ICmapper;
     //OuterEdgesMapGenerator OEmapper;
     InnerEdgesMapGenerator IEmapper;
+    CentreMapGenerator Cmapper;
 
     void setCubeImprovedFromCrazyCube(CrazyCubeImproved &cubeImproved, CrazyCube &cube)
     {
@@ -62,7 +63,7 @@ namespace
                               ICmapper.convertPiecesToInt(cube.getCubeState()),
                               mapper.convertOuterEdgesToInt(cube.getCubeState()),
                               IEmapper.convertPiecesToInt(cube.getCubeState()),
-                              mapper.convertCentreToInt(cube.getCubeState())
+                              Cmapper.convertPiecesToInt(cube.getCubeState())
                               );
     }
 
@@ -72,7 +73,7 @@ namespace
                mapper.convertIntToOuterEdges(cubeImproved.getOuterEdges()) | 
                ICmapper.convertIntToPieces(cubeImproved.getInnerCorners()) | 
                IEmapper.convertIntToPieces(cubeImproved.getInnerEdges()) | 
-               mapper.convertIntToCentre(cubeImproved.getCentre());
+               Cmapper.convertIntToPieces(cubeImproved.getCentre());
     }
 };
 

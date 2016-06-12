@@ -43,16 +43,12 @@ TEST_F(CrazyCubeMoveMapperTest, findingMemoryLeaks)
 {
 	unsigned long long cubeState = 0x102469BD02469BDF;
 
-    mapper.convertCentreToInt(cubeState);
-    mapper.convertIntToCentre(1);
     mapper.convertIntToOuterEdges(5);
     mapper.convertOuterEdgesToInt(cubeState);
     mapper.extractInnerPiece(1,2,cubeState);
     mapper.extractOuterPiece(3,4,cubeState);
-    mapper.generateCentreMap();
     mapper.generateOuterEdgesMap();
 	mapper.generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToOuterEdges,&CrazyCubeMoveMapper::convertOuterEdgesToInt);
-	mapper.generatePieceMap(factorials[2],&CrazyCubeMoveMapper::convertIntToCentre,&CrazyCubeMoveMapper::convertCentreToInt);
 }
 #else
 TEST_F(CrazyCubeMoveMapperTest, TestExtractOuterPieceGeneralSolvedCube)
@@ -219,21 +215,6 @@ TEST_F(CrazyCubeMoveMapperTest, TestConvertOuterEdgesToIntRandomCube)
 }
 
 
-TEST_F(CrazyCubeMoveMapperTest, TestConvertCentreToIntSolvedCube)
-{
-	unsigned long long cubeState = 0x102469BD02469BDF;
-	int intCentreExpected = 1;
-	ASSERT_EQ(intCentreExpected, mapper.convertCentreToInt(cubeState));
-}
-
-TEST_F(CrazyCubeMoveMapperTest, TestConvertCentreToIntRandomCube)
-{
-    // TODO: 2 more cases
-
-	unsigned long long cubeState = 0x0DB204962964BFD0;
-	int intCentreExpected = 0;
-	ASSERT_EQ(intCentreExpected, mapper.convertCentreToInt(cubeState));
-}
 
 TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterEdgesSolvedCube)
 {	
@@ -255,17 +236,4 @@ TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToOuterEdgesRandomCube)
 }
 
 
-TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToCentreSolvedCube)
-{
-	int centre = 1;
-	unsigned long long int centreExpected = 0x1000000000000000;
-	ASSERT_EQ_HEX(centreExpected, mapper.convertIntToCentre(centre));
-}
-
-TEST_F(CrazyCubeMoveMapperTest, TestConvertIntToCentreRandomCube)
-{
-	int centre = 0;
-	unsigned long long int centreExpected = 0x0000000000000000;
-	ASSERT_EQ_HEX(centreExpected, mapper.convertIntToCentre(centre));
-}
 #endif

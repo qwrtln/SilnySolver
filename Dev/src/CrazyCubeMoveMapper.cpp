@@ -36,12 +36,6 @@ int CrazyCubeMoveMapper::convertOuterEdgesToInt(unsigned long long cubeState)
 	return sum;
 }
 
-int CrazyCubeMoveMapper::convertCentreToInt(unsigned long long cubeState)
-{
-	return extractInnerPiece(CENTRE_MOST_SIGNIFICANT, 0, cubeState);
-}
-
-
 // int CrazyCubeMoveMapper::-> Cube converters
 unsigned long long CrazyCubeMoveMapper::convertIntToOuterEdges(int edges)
 {
@@ -75,10 +69,6 @@ unsigned long long CrazyCubeMoveMapper::convertIntToOuterEdges(int edges)
 }
  
 
-unsigned long long CrazyCubeMoveMapper::convertIntToCentre(int centre)
-{
-	return ((unsigned long long)centre << CENTRE_MOST_SIGNIFICANT);
-}
 
 // This is the generic map function called by the public ones
 std::vector<std::vector<int>> CrazyCubeMoveMapper::generatePieceMap(const int arrayLength,unsigned long long (CrazyCubeMoveMapper::*convertingToPiecesFunction)(int), int (CrazyCubeMoveMapper::*convertingToIntFunction)(unsigned long long) )
@@ -115,10 +105,5 @@ std::vector<std::vector<int>> CrazyCubeMoveMapper::generatePieceMap(const int ar
 std::vector<std::vector<int>> CrazyCubeMoveMapper::generateOuterEdgesMap()
 {
 	return generatePieceMap(factorials[NUM_OF_EDGES],&CrazyCubeMoveMapper::convertIntToOuterEdges,&CrazyCubeMoveMapper::convertOuterEdgesToInt);
-}
-
-std::vector<std::vector<int>> CrazyCubeMoveMapper::generateCentreMap()
-{
-	return generatePieceMap(factorials[2],&CrazyCubeMoveMapper::convertIntToCentre,&CrazyCubeMoveMapper::convertCentreToInt);
 }
 

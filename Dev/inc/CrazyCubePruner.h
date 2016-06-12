@@ -7,6 +7,7 @@
 #include "InnerCornersMapGenerator.h"
 //#include "OuterEdgesMapGenerator.h"
 #include "InnerEdgesMapGenerator.h"
+#include "CentreMapGenerator.h"
 
 class CrazyCubePruner: public CrazyCubeAbstract
 {
