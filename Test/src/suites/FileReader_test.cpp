@@ -46,6 +46,25 @@ protected:
 
 FileReader FileReaderTest::fileReader;
 
+#ifdef MEMORY_CHECK
+TEST_F(FileReaderTest, findingMemoryLeaks)
+{
+    ofstream testFile;
+	testFile.open("./testFileReader.txt");		
+	testFile<<"1 2 6";
+	testFile.close();
+
+	fileReader.open("./testFileReader.txt");
+    fileReader.getArray();
+    fileReader.getArraySize();
+    fileReader.readArrayFromFile();
+    fileReader.readArrayFromFileX();
+
+	remove("./testFileReader.txt");
+}
+#else
+
+
 TEST_F(FileReaderTest, basicRead)
 {
 
@@ -351,11 +370,8 @@ TEST_F(FileReaderTest, readArrayAfterRemovingFile)
 	int myArraySize = fileReader.getArraySize();
 
 	ASSERT_EQ(myArraySize, 3);
-
 	ASSERT_EQ(myArray[0], 50);
-	
 	ASSERT_EQ(myArray[1], 20);
-
 	ASSERT_EQ(myArray[2], 40);
 
 
@@ -363,3 +379,4 @@ TEST_F(FileReaderTest, readArrayAfterRemovingFile)
 
 }
 
+#endif
