@@ -1,11 +1,11 @@
-#include "CrazyCubeMapper.h"
+#include "PruneMapGenerator.h"
 
-const int CrazyCubeMapper::NumberOfkindsOfPieces = 5;
-const int CrazyCubeMapper::edgeArrayLimit = 40320; // Facotiral of NUM_OF_EDGES
-const int CrazyCubeMapper::cornerArrayLimit = 5040; // Factorial of NUM_OF_CORNERS 
-const int CrazyCubeMapper::centreArrayLimit = 1; // Factorial of 1 :-)))
+const int PruneMapGenerator::NumberOfkindsOfPieces = 5;
+const int PruneMapGenerator::edgeArrayLimit = 40320; // Facotiral of NUM_OF_EDGES
+const int PruneMapGenerator::cornerArrayLimit = 5040; // Factorial of NUM_OF_CORNERS 
+const int PruneMapGenerator::centreArrayLimit = 1; // Factorial of 1 :-)))
 
-CrazyCubeMapper:: CrazyCubeMapper()
+PruneMapGenerator:: PruneMapGenerator()
 {
 	crazyCubeCachePtr = CrazyCubeCache::getInstance();
 }
@@ -19,7 +19,7 @@ CrazyCubeMapper:: CrazyCubeMapper()
  *	(cubeState & (0xE << (56-n*4))) >> ((56-n*4))
  */
 
-void CrazyCubeMapper::swapMapElementValue(int width, vector<int>& vect, short int oldValue, short int newValue)
+void PruneMapGenerator::swapMapElementValue(int width, vector<int>& vect, short int oldValue, short int newValue)
 {
 	for(int i = 0; i < width; i++)
 	{
@@ -30,7 +30,7 @@ void CrazyCubeMapper::swapMapElementValue(int width, vector<int>& vect, short in
 	}
 }
 
-vector<int> CrazyCubeMapper::generateOuterCornersPruneMap(int length, int maxMoves)
+vector<int> PruneMapGenerator::generateOuterCornersPruneMap(int length, int maxMoves)
 {
 	vector<int> outerCornersPruneMap = vector<int>(length); 
 	for(int i = 0; i < length; i++)
@@ -43,7 +43,7 @@ vector<int> CrazyCubeMapper::generateOuterCornersPruneMap(int length, int maxMov
 	return outerCornersPruneMap;
 }
 
-vector<int> CrazyCubeMapper::generateOuterEdgesPruneMap(int length, int maxMoves)
+vector<int> PruneMapGenerator::generateOuterEdgesPruneMap(int length, int maxMoves)
 {
 	vector<int> outerEdgesPruneMap = vector<int>(length); 
 	for(int i = 0; i < length; i++)
@@ -56,7 +56,7 @@ vector<int> CrazyCubeMapper::generateOuterEdgesPruneMap(int length, int maxMoves
 	return outerEdgesPruneMap;
 }
 
-vector<int> CrazyCubeMapper::generateInnerCornersPruneMap(int length, int maxMoves)
+vector<int> PruneMapGenerator::generateInnerCornersPruneMap(int length, int maxMoves)
 {
 	vector<int> innerCornersPruneMap = vector<int>(length); 
 	for(int i = 0; i < length; i++)
@@ -69,7 +69,7 @@ vector<int> CrazyCubeMapper::generateInnerCornersPruneMap(int length, int maxMov
 	return innerCornersPruneMap;
 }
 
-vector<int> CrazyCubeMapper::generateInnerEdgesPruneMap(int length, int maxMoves)
+vector<int> PruneMapGenerator::generateInnerEdgesPruneMap(int length, int maxMoves)
 {
 	vector<int> innerEdgesPruneMap = vector<int>(length); 
 	for(int i = 0; i < length; i++)
@@ -82,7 +82,7 @@ vector<int> CrazyCubeMapper::generateInnerEdgesPruneMap(int length, int maxMoves
 	return innerEdgesPruneMap;
 }
 
-vector<int> CrazyCubeMapper::generateCentrePruneMap(int length, int maxMoves)
+vector<int> PruneMapGenerator::generateCentrePruneMap(int length, int maxMoves)
 {
 	vector<int> centrePruneMap = vector<int>(length); 
 	for(int i = 0; i < length; i++)
@@ -96,7 +96,7 @@ vector<int> CrazyCubeMapper::generateCentrePruneMap(int length, int maxMoves)
 }
 
 
-int CrazyCubeMapper::generateOuterCornersPruneMapIter(int depth, int maxDepth, int& outerCorners, vector<int>& outerCornersPruneMap, short int prevMove)
+int PruneMapGenerator::generateOuterCornersPruneMapIter(int depth, int maxDepth, int& outerCorners, vector<int>& outerCornersPruneMap, short int prevMove)
 {
 	if(depth <= maxDepth)
 	{
@@ -115,7 +115,7 @@ int CrazyCubeMapper::generateOuterCornersPruneMapIter(int depth, int maxDepth, i
 	return 0;
 }
 
-int CrazyCubeMapper::generateOuterEdgesPruneMapIter(int depth, int maxDepth, int& outerEdges, vector<int>& outerEdgesPruneMap, short int prevMove)
+int PruneMapGenerator::generateOuterEdgesPruneMapIter(int depth, int maxDepth, int& outerEdges, vector<int>& outerEdgesPruneMap, short int prevMove)
 {
 	if(depth <= maxDepth)
 	{
@@ -134,7 +134,7 @@ int CrazyCubeMapper::generateOuterEdgesPruneMapIter(int depth, int maxDepth, int
 	return 0;
 }
 
-int CrazyCubeMapper::generateInnerCornersPruneMapIter(int depth, int maxDepth, int& innerCorners, vector<int>& innerCornersPruneMap, short int prevMove)
+int PruneMapGenerator::generateInnerCornersPruneMapIter(int depth, int maxDepth, int& innerCorners, vector<int>& innerCornersPruneMap, short int prevMove)
 {
 	if(depth <= maxDepth)
 	{
@@ -153,7 +153,7 @@ int CrazyCubeMapper::generateInnerCornersPruneMapIter(int depth, int maxDepth, i
 	return 0;
 }
 
-int CrazyCubeMapper::generateInnerEdgesPruneMapIter(int depth, int maxDepth, int& innerEdges, vector<int>& innerEdgesPruneMap, short int prevMove)
+int PruneMapGenerator::generateInnerEdgesPruneMapIter(int depth, int maxDepth, int& innerEdges, vector<int>& innerEdgesPruneMap, short int prevMove)
 {
 	if(depth <= maxDepth)
 	{
@@ -172,7 +172,7 @@ int CrazyCubeMapper::generateInnerEdgesPruneMapIter(int depth, int maxDepth, int
 	return 0;
 }
 
-int CrazyCubeMapper::generateCentrePruneMapIter(int depth, int maxDepth, int& centre, vector<int>& centrePruneMap, short int prevMove)
+int PruneMapGenerator::generateCentrePruneMapIter(int depth, int maxDepth, int& centre, vector<int>& centrePruneMap, short int prevMove)
 {
 	if(depth <= maxDepth)
 	{

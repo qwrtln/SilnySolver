@@ -2,6 +2,7 @@
 #define CRAZYCUBEPRUNER_H_
 
 #include "CrazyCubeAbstract.h"
+#include "PruneMapGenerator.h"
 #include "CrazyCubeMoveMapper.h"
 #include "OuterCornersMapGenerator.h"
 #include "InnerCornersMapGenerator.h"

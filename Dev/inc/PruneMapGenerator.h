@@ -1,5 +1,5 @@
-#ifndef CRAZYCUBEMAPPER_H_
-#define CRAZYCUBEMAPPER_H_
+#ifndef PRUNEMAPGENERATOR_H_
+#define PRUNEMAPGENERATOR_H_
 
 #include "CrazyCube.h"
 #include "CrazyCubeAbstract.h"
@@ -9,7 +9,7 @@
 
 using namespace std;
 class CrazyCubeCache;
-class CrazyCubeMapper: public CrazyCubeAbstract
+class PruneMapGenerator: public CrazyCubeAbstract
 {
     private:
         const static int NumberOfkindsOfPieces;
@@ -34,7 +34,7 @@ class CrazyCubeMapper: public CrazyCubeAbstract
      */
 	public:
 		
-		CrazyCubeMapper();
+		PruneMapGenerator();
 		// helpful methods
 		
 		void swapMapElementValue(int width, vector<int>& vect, short int oldValue, short int newValue);
@@ -54,4 +54,4 @@ class CrazyCubeMapper: public CrazyCubeAbstract
         unsigned long long convertIntArrayToCubeState(int,int,int,int,int);
 };
 
-#endif /* CRAZYCUBEMAPPER_H_ */
+#endif /* PRUNEMAPGENERATOR_H_ */

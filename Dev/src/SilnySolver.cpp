@@ -9,7 +9,6 @@
 #include "CrazyCubeAbstract.h"
 #include "CrazyCube.h"
 #include "CrazyCubeSolver.h"
-#include "CrazyCubeMapper.h"
 #include "CrazyCubeImproved.h"
 #include <iostream>
 #include <cstdio>
