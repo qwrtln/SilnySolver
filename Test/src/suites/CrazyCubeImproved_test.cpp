@@ -50,10 +50,9 @@ TEST_F(CrazyCubeImprovedTest, findingMemoryLeaks)
 // but not necessary for functioning of the cube itself.
 namespace 
 {
-    CrazyCubeMoveMapper mapper;
     OuterCornersMapGenerator OCmapper;
     InnerCornersMapGenerator ICmapper;
-    //OuterEdgesMapGenerator OEmapper;
+    OuterEdgesMapGenerator OEmapper;
     InnerEdgesMapGenerator IEmapper;
     CentreMapGenerator Cmapper;
 
@@ -61,7 +60,7 @@ namespace
     {
         cubeImproved.setCube( OCmapper.convertPiecesToInt(cube.getCubeState()),
                               ICmapper.convertPiecesToInt(cube.getCubeState()),
-                              mapper.convertOuterEdgesToInt(cube.getCubeState()),
+                              OEmapper.convertPiecesToInt(cube.getCubeState()),
                               IEmapper.convertPiecesToInt(cube.getCubeState()),
                               Cmapper.convertPiecesToInt(cube.getCubeState())
                               );
@@ -70,7 +69,7 @@ namespace
     unsigned long long getCubeImprovedState(CrazyCubeImproved &cubeImproved) 
     {
         return OCmapper.convertIntToPieces(cubeImproved.getOuterCorners()) | 
-               mapper.convertIntToOuterEdges(cubeImproved.getOuterEdges()) | 
+               OEmapper.convertIntToPieces(cubeImproved.getOuterEdges()) | 
                ICmapper.convertIntToPieces(cubeImproved.getInnerCorners()) | 
                IEmapper.convertIntToPieces(cubeImproved.getInnerEdges()) | 
                Cmapper.convertIntToPieces(cubeImproved.getCentre());

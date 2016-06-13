@@ -3,10 +3,9 @@
 
 #include "CrazyCubeAbstract.h"
 #include "CrazyCubeMapper.h"
-#include "CrazyCubeMoveMapper.h"
 #include "OuterCornersMapGenerator.h"
 #include "InnerCornersMapGenerator.h"
-//#include "OuterEdgesMapGenerator.h"
+#include "OuterEdgesMapGenerator.h"
 #include "InnerEdgesMapGenerator.h"
 #include "CentreMapGenerator.h"
 
