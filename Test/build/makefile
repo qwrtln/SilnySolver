@@ -1,12 +1,12 @@
-# Some variables declarations
-# Path to .h files - both Test and Dev	
-INC = -I ../inc/ -I ../../Dev/inc/
+# GENERAL TEST MAKEFILE
+# Path to .h files - both Test and Dev
+INC = -I ../inc/ -I ../../Dev/inc/ -I ../../Dev/Generators/inc
 # Path to .cpp files
 SRC_SUITE = ../src/suites/
 # Paths to dev files
-DEVSRC = ../../Dev/src/
+DEV_LIB = ../../Dev/build/
 # Path to dev binaries
-BUILT = $(subst src,build,$(DEVSRC))
+#BUILT = $(subst src,build,$(DEVSRC))
 #Path to lib source files
 LIB = ../lib/
 # Path to lib.cpp files
@@ -14,8 +14,8 @@ SRC = ../src/
 
 # List of built dev files is generated on .cpp files, not .o files
 # This is due to lack of certainty, whether they are actually built
-BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(DEVSRC)*.cpp)))
-BUILT_FILES := $(filter-out ../../Dev/build/SilnySolver.o, $(BUILT_FILES))
+#BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(DEVSRC)*.cpp)))
+#BUILT_FILES := $(filter-out ../../Dev/build/SilnySolver.o, $(BUILT_FILES))
 
 #List of all lib .o files
 SLIB_FILES := $(SRC)BaseTest.cpp $(SRC)SilneTesty.cpp $(SRC)TestExecuter.cpp
@@ -29,22 +29,22 @@ OLIB_FILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SLIB_FILES)))
 DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC_SUITE),,$(SRC_FILES)))
 DEP_FILES += $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SLIB_FILES)))
 
-# A separate rule for delivery checking purposes 
+# A separate rule for delivery checking purposes
 MemoryCheck: FLAGS += -D MEMORY_CHECK
 MemoryCheck: productionCode $(OBJ_FILES) testLib
-	$(CXX) $(FLAGS) $(BUILT_FILES) $(OBJ_FILES) testLib.a $(INC) -o SilneTesty
+	$(CXX) $(FLAGS) $(OBJ_FILES) $(DEV_LIB)dev.a testLib.a $(INC) -o SilneTesty
 
-SilneTesty: productionCode  $(OBJ_FILES) testLib 
-	$(CXX) $(FLAGS) $(BUILT_FILES) $(OBJ_FILES) testLib.a $(INC) -o $@
+SilneTesty: productionCode $(OBJ_FILES) testLib
+	$(CXX) $(FLAGS) *.o $(DEV_LIB)dev.a testLib.a $(INC) -o $@
 
-productionCode: 
-	$(MAKE) -C $(BUILT) binaries
+productionCode:
+	$(MAKE) -C $(DEV_LIB) dev_archive
 
 testLib: $(OLIB_FILES)
 	ar rcs testLib.a $(OLIB_FILES)
-	
+
 # It's a rule for every single cpp file, this is why we don't use *_FILES var
-%.o: $(SRC_SUITE)%.cpp 
+%.o: $(SRC_SUITE)%.cpp
 	$(CXX) $(FLAGS) -c $< $(INC) -o $@
 	$(CXX) -MM $< $(INC) > $(@:.o=.d)
 
@@ -52,9 +52,9 @@ testLib: $(OLIB_FILES)
 	$(CXX) $(FLAGS) -c $< $(INC) -o $@
 	$(CXX) -MM $< $(INC) > $(@:.o=.d)
 
-.PHONY: clean	
+.PHONY: clean
 clean:
-	rm -rf *.o *.d SilneTesty 
+	rm -rf *.o *.d SilneTesty
 
 -include $(DEP_FILES)
 

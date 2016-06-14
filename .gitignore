@@ -1,12 +1,11 @@
 SilnySolver
 SilneTesty
 
-Dev/*.cpp~
-Dev/*.h~
-Dev/build/*.o
-Dev/build/*.d
 Dev/build/*.log
 Dev/build/SilnySolver
+*.o
+*.d
+*.a
 
 Test/*.cpp~
 Test/*.h~
