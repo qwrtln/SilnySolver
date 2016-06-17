@@ -1,11 +1,14 @@
 # GENERAL DEV MAKEFILE
 # Compiler
 CXX = g++
-# Path to .h files
-INC = -I ../inc/ -I ../../Tracing/inc/ -I ../Generators/inc
+# Path to includes
+INC = -I ../inc/ -I ../../Tracing/inc/ -I ../Generators/inc/ -I ../FileIO/inc/
 # Path to .cpp files
 SRC = ../src/
+
+# Software Units paths
 GENERATORS_DIR = ../Generators/build/
+FILE_IO_DIR = ../FileIO/build/
 
 # Compiler flags
 FLAGS = -Wall -O3 -std=c++11
@@ -22,16 +25,20 @@ BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(SRC)*.cpp)))
 BUILT_FILES := $(filter-out ../build/SilnySolver.o, $(BUILT_FILES))
 
 # Compilation rules
-SilnySolver: $(OBJ_FILES) Generators
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o $(GENERATORS_DIR)generators.a -o $@
+SilnySolver: $(OBJ_FILES) Generators FileIO
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o $(GENERATORS_DIR)generators.a $(FILE_IO_DIR)fileio.a -o $@
 
 # Rule for separating executable from build files
-dev_archive: $(OBJ_FILES) Generators
-	cp $(GENERATORS_DIR)generators.a dev.a
-	ar q dev.a $(BUILT_FILES)
+dev_archive: $(OBJ_FILES) Generators FileIO
+	cp $(GENERATORS_DIR)generators.a .
+	cp $(FILE_IO_DIR)fileio.a .
+	ar rcT dev.a generators.a fileio.a $(BUILT_FILES)
 
 Generators:
 	$(MAKE) -C $(GENERATORS_DIR)
+
+FileIO:
+	$(MAKE) -C $(FILE_IO_DIR)
 
 %.o: $(SRC)%.cpp
 	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) -c $< $(INC) -o $@
@@ -41,7 +48,8 @@ Generators:
 .PHONY: clean
 clean:
 	$(MAKE) -C $(GENERATORS_DIR) clean
-	rm -rf *.o *.d SilnySolver dev.a generators.a
+	$(MAKE) -C $(FILE_IO_DIR) clean
+	rm -rf *.o *.d SilnySolver dev.a generators.a fileio.a
 
 -include $(DEP_FILES)
 

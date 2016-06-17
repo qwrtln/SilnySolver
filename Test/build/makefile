@@ -1,6 +1,6 @@
 # GENERAL TEST MAKEFILE
 # Path to .h files - both Test and Dev
-INC = -I ../inc/ -I ../../Dev/inc/ -I ../../Dev/Generators/inc
+INC = -I ../inc/ -I ../../Dev/inc/ -I ../../Dev/Generators/inc -I ../../Dev/FileIO/inc
 # Path to .cpp files
 SRC_SUITE = ../src/suites/
 # Paths to dev files
