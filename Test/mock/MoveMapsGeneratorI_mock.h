@@ -9,17 +9,17 @@
 // abstract class MoveMapsGeneratorI.
 class MoveMapsGeneratorI_mock: public MoveMapsGeneratorI
 {
-    int convertPiecesToInt(unsigned long long)
+    int convertPiecesToInt(unsigned long long) override
     {
         return 0;
     }
 
-    unsigned long long convertIntToPieces(int)
+    unsigned long long convertIntToPieces(int) override
     {
         return 0;
     }
 
-    int getMapLength()
+    int getMapLength() override
     {
         return 0;
     }
