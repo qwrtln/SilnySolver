@@ -1,6 +1,6 @@
 # Some variables declarations
-# Path to .h files - both Test and Dev	
-INC = -I ../inc/ -I ../../Dev/inc/
+# Path to .h files - both Test and Dev
+INC = -I ../inc/ -I ../../Dev/inc/ -I ../mock/
 # Path to .cpp files
 SRC_SUITE = ../src/suites/
 # Paths to dev files
