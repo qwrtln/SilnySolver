@@ -1,6 +1,7 @@
 SilnySolver
 SilneTesty
 
+.gitmodules
 Dev/*.cpp~
 Dev/*.h~
 Dev/build/*.o
