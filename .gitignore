@@ -2,12 +2,12 @@ SilnySolver
 SilneTesty
 
 .gitmodules
-Dev/*.cpp~
-Dev/*.h~
-Dev/build/*.o
-Dev/build/*.d
-Dev/build/*.log
-Dev/build/SilnySolver
+Backend/*.cpp~
+Backend/*.h~
+Backend/build/*.o
+Backend/build/*.d
+Backend/build/*.log
+Backend/build/SilnySolver
 
 Test/*.cpp~
 Test/*.h~
@@ -22,7 +22,7 @@ build.log
 
 *.exe
 tags
-Dev/build/SilnySolver.exe
+Backend/build/SilnySolver.exe
 types_c.taghl
 
 Test/build/testLib.a
