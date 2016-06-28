@@ -1,0 +1,3 @@
+[submodule "SilnySolverUI"]
+	path = SilnySolverUI
+	url = ssh://qwrtln@gerrit.megacinol.duckdns.org:29418/SilnySolverUI

@@ -15,11 +15,6 @@ Test/build/*.d
 Test/build/*.log
 Test/build/SilneTesty
 
-GUI/SilnySolverGUI.pro.user
-GUI/build/Release
-GUI/build/Debug
-GUI/design/*\.autosave
-build-SilnySolverGUI*
 
 .temp
 build.log
