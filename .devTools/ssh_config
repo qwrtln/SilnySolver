@@ -1,0 +1,4 @@
+Host megacinol.duckdns.org
+    hostname megacinol.duckdns.org
+    user GERRIT_USERNAME
+
