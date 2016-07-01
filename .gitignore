@@ -1,7 +1,6 @@
 SilnySolver
 SilneTesty
 
-.gitmodules
 Backend/*.cpp~
 Backend/*.h~
 Backend/build/*.o
