@@ -2,13 +2,14 @@
 # Compiler
 CXX = g++
 # Path to includes
-INC = -I ../inc/ -I ../../Tracing/inc/ -I ../Generators/inc/ -I ../FileIO/inc/
+INC = -I ../inc/ -I ../../Tracing/inc/ -I ../Generators/inc/ -I ../FileIO/inc/ -I ../Cubes/inc/
 # Path to .cpp files
 SRC = ../src/
 
 # Software Units paths
 GENERATORS_DIR = ../Generators/build/
 FILE_IO_DIR = ../FileIO/build/
+CUBES_DIR = ../Cubes/build/
 
 # Compiler flags
 FLAGS = -Wall -O3 -std=c++11
@@ -25,20 +26,24 @@ BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(SRC)*.cpp)))
 BUILT_FILES := $(filter-out ../build/SilnySolver.o, $(BUILT_FILES))
 
 # Compilation rules
-SilnySolver: $(OBJ_FILES) Generators FileIO
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o $(GENERATORS_DIR)generators.a $(FILE_IO_DIR)fileio.a -o $@
+SilnySolver: $(OBJ_FILES) Generators FileIO Cubes
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o $(GENERATORS_DIR)generators.a $(FILE_IO_DIR)fileio.a $(CUBES_DIR)cubes.a -o $@
 
 # Rule for separating executable from build files
-dev_archive: $(OBJ_FILES) Generators FileIO
+dev_archive: $(OBJ_FILES) Generators FileIO Cubes
 	cp $(GENERATORS_DIR)generators.a .
 	cp $(FILE_IO_DIR)fileio.a .
-	ar rcT dev.a generators.a fileio.a $(BUILT_FILES)
+	cp $(CUBES_DIR)cubes.a .
+	ar rcT dev.a generators.a fileio.a cubes.a $(BUILT_FILES)
 
 Generators:
 	$(MAKE) -C $(GENERATORS_DIR)
 
 FileIO:
 	$(MAKE) -C $(FILE_IO_DIR)
+
+Cubes:
+	$(MAKE) -C $(CUBES_DIR)
 
 %.o: $(SRC)%.cpp
 	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) -c $< $(INC) -o $@
@@ -49,7 +54,8 @@ FileIO:
 clean:
 	$(MAKE) -C $(GENERATORS_DIR) clean
 	$(MAKE) -C $(FILE_IO_DIR) clean
-	rm -rf *.o *.d SilnySolver dev.a generators.a fileio.a
+	$(MAKE) -C $(CUBES_DIR) clean
+	rm -rf *.o *.d SilnySolver dev.a generators.a fileio.a cubes.a
 
 -include $(DEP_FILES)
 

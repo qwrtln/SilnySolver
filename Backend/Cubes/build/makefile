@@ -1,8 +1,8 @@
-# MAKEFILE FOR GENERATORS SOFTWARE UNIT
+# MAKEFILE FOR CUBES SOFTWARE UNIT
 # Compiler
 CXX = g++
 # Path to .h files
-INC = -I ../inc/ -I ../../inc -I ../../Cubes/inc/
+INC = -I ../inc/ -I ../../inc -I ../../Generators/inc
 # Path to .cpp files
 SRC = ../src/
 
@@ -16,7 +16,7 @@ OBJ_FILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRC_FILES)))
 # variable containing list of all .d files
 DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
 
-generators.a: $(OBJ_FILES)
+cubes.a: $(OBJ_FILES)
 	ar rcs $@ $(OBJ_FILES)
 
 %.o: $(SRC)%.cpp
@@ -25,7 +25,7 @@ generators.a: $(OBJ_FILES)
 
 .PHONY: clean
 clean:
-	rm -rf *.o *.d generators.a
+	rm -rf *.o *.d cubes.a
 
 -include $(DEP_FILES)
 
