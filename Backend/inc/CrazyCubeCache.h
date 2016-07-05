@@ -2,7 +2,6 @@
 #define CRAZYCUBECACHE_H_
 
 #include "CrazyCubeAbstract.h"
-#include "CrazyCubeMapper.h"
 #include "OuterCornersMapGenerator.h"
 #include "InnerCornersMapGenerator.h"
 #include "OuterEdgesMapGenerator.h"
