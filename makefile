@@ -1,4 +1,4 @@
-CODE_DIR = Backend/build/
+CODE_DIR = Dev/build/
 TEST_DIR = Test/build/
 
 # Compiler
@@ -7,7 +7,7 @@ CXX = g++
 FLAGS = -Wall -O3 -std=c++11
 export FLAGS
 
-backend: project_code
+dev: project_code
 test: testing_code
 memcheck: checking_against_memory_leaks
 

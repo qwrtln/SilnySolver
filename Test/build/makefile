@@ -1,10 +1,10 @@
 # Some variables declarations
-# Path to .h files - both Test and Backend
-INC = -I ../inc/ -I ../../Backend/inc/ -I ../mock/
+# Path to .h files - both Test and Dev
+INC = -I ../inc/ -I ../../Dev/inc/ -I ../mock/
 # Path to .cpp files
 SRC_SUITE = ../src/suites/
 # Paths to dev files
-DEVSRC = ../../Backend/src/
+DEVSRC = ../../Dev/src/
 # Path to dev binaries
 BUILT = $(subst src,build,$(DEVSRC))
 #Path to lib source files
@@ -15,7 +15,7 @@ SRC = ../src/
 # List of built dev files is generated on .cpp files, not .o files
 # This is due to lack of certainty, whether they are actually built
 BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(DEVSRC)*.cpp)))
-BUILT_FILES := $(filter-out ../../Backend/build/SilnySolver.o, $(BUILT_FILES))
+BUILT_FILES := $(filter-out ../../Dev/build/SilnySolver.o, $(BUILT_FILES))
 
 #List of all lib .o files
 SLIB_FILES := $(SRC)BaseTest.cpp $(SRC)SilneTesty.cpp $(SRC)TestExecuter.cpp
