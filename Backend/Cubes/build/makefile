@@ -1,13 +1,8 @@
 # MAKEFILE FOR CUBES SOFTWARE UNIT
-# Compiler
-CXX = g++
-# Path to .h files
-INC = -I ../inc/ -I ../../inc -I ../../Generators/inc
-# Path to .cpp files
-SRC = ../src/
+include ../../build/makefile.defs
 
-# Compiler flags
-FLAGS = -Wall -O3 -std=c++11
+INC := $(subst ../,../../,$(INC))
+INC += -I ../inc/
 
 # variable containing list of all .cpp files in ../src/ folder
 SRC_FILES := $(wildcard $(SRC)*.cpp)

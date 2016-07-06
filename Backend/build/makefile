@@ -1,18 +1,10 @@
-# GENERAL DEV MAKEFILE
-# Compiler
-CXX = g++
-# Path to includes
-INC = -I ../inc/ -I ../../Tracing/inc/ -I ../Generators/inc/ -I ../FileIO/inc/ -I ../Cubes/inc/
-# Path to .cpp files
-SRC = ../src/
+# GENERAL BACKEND MAKEFILE
+include makefile.defs
 
 # Software Units paths
 GENERATORS_DIR = ../Generators/build/
 FILE_IO_DIR = ../FileIO/build/
 CUBES_DIR = ../Cubes/build/
-
-# Compiler flags
-FLAGS = -Wall -O3 -std=c++11
 
 # variable containing list of all .cpp files in ../src/ folder
 SRC_FILES := $(wildcard $(SRC)*.cpp)
@@ -26,24 +18,24 @@ BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(SRC)*.cpp)))
 BUILT_FILES := $(filter-out ../build/SilnySolver.o, $(BUILT_FILES))
 
 # Compilation rules
-SilnySolver: $(OBJ_FILES) Generators FileIO Cubes
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o $(GENERATORS_DIR)generators.a $(FILE_IO_DIR)fileio.a $(CUBES_DIR)cubes.a -o $@
+SilnySolver: $(OBJ_FILES) Cubes Generators FileIO
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o $(CUBES_DIR)cubes.a $(GENERATORS_DIR)generators.a $(FILE_IO_DIR)fileio.a -o $@
 
 # Rule for separating executable from build files
-dev_archive: $(OBJ_FILES) Generators FileIO Cubes
+dev_archive: $(OBJ_FILES) Cubes Generators FileIO
+	cp $(CUBES_DIR)cubes.a .
 	cp $(GENERATORS_DIR)generators.a .
 	cp $(FILE_IO_DIR)fileio.a .
-	cp $(CUBES_DIR)cubes.a .
 	ar rcT dev.a generators.a fileio.a cubes.a $(BUILT_FILES)
+
+Cubes:
+	$(MAKE) -C $(CUBES_DIR)
 
 Generators:
 	$(MAKE) -C $(GENERATORS_DIR)
 
 FileIO:
 	$(MAKE) -C $(FILE_IO_DIR)
-
-Cubes:
-	$(MAKE) -C $(CUBES_DIR)
 
 %.o: $(SRC)%.cpp
 	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) -c $< $(INC) -o $@

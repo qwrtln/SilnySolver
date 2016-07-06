@@ -7,11 +7,6 @@
 
 int main(int argc, char* argv[])
 {
-
-#ifdef MEMORY_CHECK
-    cout << "Macro from g++ works!" << endl;
-#endif
-
     using namespace std;
 
     bool help = false;

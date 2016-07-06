@@ -1,0 +1,14 @@
+# BASIC DEFINITIONS FOR COMPILING THE BACKEND
+
+# Compiler
+CXX = g++
+
+# Compiler flags
+FLAGS = -Wall -O3 -std=c++11
+
+# List of software unit inclusions
+INC = -I ../inc/ -I ../../Tracing/inc/ -I ../Generators/inc/ -I ../FileIO/inc/ -I ../Cubes/inc/
+
+# General path to .cpp files
+SRC = ../src/
+
