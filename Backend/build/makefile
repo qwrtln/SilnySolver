@@ -5,6 +5,7 @@ include makefile.defs
 GENERATORS_DIR = ../Generators/build/
 FILE_IO_DIR = ../FileIO/build/
 CUBES_DIR = ../Cubes/build/
+CONTAINERS_DIR = ../Containers/build/
 
 # variable containing list of all .cpp files in ../src/ folder
 SRC_FILES := $(wildcard $(SRC)*.cpp)
@@ -20,17 +21,21 @@ BUILT_FILES := $(filter-out ../build/SilnySolver.o, $(BUILT_FILES))
 # Compilation rules
 SilnySolver: dev_archive
 	$(CXX) $(FLAGS) $(INC) -c $(SRC)SilnySolver.cpp $(INC) -o SilnySolver.o
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) $(INC) SilnySolver.o dev.a -o $@
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) $(INC) SilnySolver.o dev.a containers.a cubes.a generators.a -o $@ # multiple inclusions due to circular dependencies
 
 # Rule for separating executable from build files
-dev_archive: $(OBJ_FILES) Cubes Generators FileIO
+dev_archive: $(OBJ_FILES) Cubes Containers Generators FileIO
 	cp $(CUBES_DIR)cubes.a .
+	cp $(CONTAINERS_DIR)containers.a .
 	cp $(GENERATORS_DIR)generators.a .
 	cp $(FILE_IO_DIR)fileio.a .
 	ar rcT dev.a generators.a fileio.a cubes.a $(BUILT_FILES)
 
 Cubes:
 	$(MAKE) -C $(CUBES_DIR)
+
+Containers:
+	$(MAKE) -C $(CONTAINERS_DIR)
 
 Generators:
 	$(MAKE) -C $(GENERATORS_DIR)
@@ -48,7 +53,8 @@ clean:
 	$(MAKE) -C $(GENERATORS_DIR) clean
 	$(MAKE) -C $(FILE_IO_DIR) clean
 	$(MAKE) -C $(CUBES_DIR) clean
-	rm -rf *.o *.d SilnySolver dev.a generators.a fileio.a cubes.a
+	$(MAKE) -C $(CONTAINERS_DIR) clean
+	rm -rf *.o *.d SilnySolver dev.a generators.a fileio.a cubes.a containers.a
 
 -include $(DEP_FILES)
 

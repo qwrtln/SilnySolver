@@ -1,6 +1,6 @@
 # Some variables declarations
 # Path to .h files - both Test and Backend
-INC = -I ../inc/ -I ../../Backend/inc/ -I ../mock/ -I ../../Backend/Generators/inc/ -I ../../Backend/FileIO/inc/ -I ../../Backend/Cubes/inc/
+INC = -I ../inc/ -I ../../Backend/inc/ -I ../mock/ -I ../../Backend/Generators/inc/ -I ../../Backend/FileIO/inc/ -I ../../Backend/Cubes/inc/ -I ../../Backend/Containers/inc/
 # Path to .cpp files
 SRC_SUITE = ../src/suites/
 # Paths to dev files
@@ -11,6 +11,9 @@ DEV_LIB = ../../Backend/build/
 LIB = ../lib/
 # Path to lib.cpp files
 SRC = ../src/
+
+BACKEND_CIRCULAR_DEPS = $(DEV_LIB)containers.a $(DEV_LIB)cubes.a $(DEV_LIB)generators.a
+
 
 # List of built dev files is generated on .cpp files, not .o files
 # This is due to lack of certainty, whether they are actually built
@@ -32,10 +35,10 @@ DEP_FILES += $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SLIB_FILES)))
 # A separate rule for delivery checking purposes
 MemoryCheck: FLAGS += -D MEMORY_CHECK
 MemoryCheck: productionCode $(OBJ_FILES) testLib
-	$(CXX) $(FLAGS) $(OBJ_FILES) $(DEV_LIB)dev.a testLib.a $(INC) -o SilneTesty
+	$(CXX) $(FLAGS) $(OBJ_FILES) $(DEV_LIB)dev.a testLib.a $(BACKEND_CIRCULAR_DEPS) $(INC) -o SilneTesty
 
 SilneTesty: productionCode $(OBJ_FILES) testLib
-	$(CXX) $(FLAGS) *.o $(DEV_LIB)dev.a testLib.a $(INC) -o $@
+	$(CXX) $(FLAGS) *.o $(DEV_LIB)dev.a testLib.a $(BACKEND_CIRCULAR_DEPS) $(INC) -o $@
 
 productionCode:
 	$(MAKE) -C $(DEV_LIB) dev_archive
