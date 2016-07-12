@@ -1,4 +1,4 @@
-# MAKEFILE FOR CONTAINERS SOFTWARE UNIT
+# MAKEFILE FOR SOLVERS SOFTWARE UNIT
 include ../../build/makefile.defs
 
 INC := $(subst ../,../../,$(INC))
@@ -11,7 +11,7 @@ OBJ_FILES := $(patsubst %.cpp,%.o,$(subst $(SRC),,$(SRC_FILES)))
 # variable containing list of all .d files
 DEP_FILES := $(patsubst %.cpp,%.d,$(subst $(SRC),,$(SRC_FILES)))
 
-containers.a: $(OBJ_FILES)
+solvers.a: $(OBJ_FILES)
 	ar rcs $@ $(OBJ_FILES)
 
 %.o: $(SRC)%.cpp
@@ -20,7 +20,7 @@ containers.a: $(OBJ_FILES)
 
 .PHONY: clean
 clean:
-	rm -rf *.o *.d containers.a
+	rm -rf *.o *.d solvers.a
 
 -include $(DEP_FILES)
 
