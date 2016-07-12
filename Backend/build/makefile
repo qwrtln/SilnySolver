@@ -18,8 +18,9 @@ BUILT_FILES := $(subst src,build,$(patsubst %.cpp,%.o,$(wildcard $(SRC)*.cpp)))
 BUILT_FILES := $(filter-out ../build/SilnySolver.o, $(BUILT_FILES))
 
 # Compilation rules
-SilnySolver: $(OBJ_FILES) Cubes Generators FileIO
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) *.o $(CUBES_DIR)cubes.a $(GENERATORS_DIR)generators.a $(FILE_IO_DIR)fileio.a -o $@
+SilnySolver: dev_archive
+	$(CXX) $(FLAGS) $(INC) -c $(SRC)SilnySolver.cpp $(INC) -o SilnySolver.o
+	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) $(INC) SilnySolver.o dev.a -o $@
 
 # Rule for separating executable from build files
 dev_archive: $(OBJ_FILES) Cubes Generators FileIO
