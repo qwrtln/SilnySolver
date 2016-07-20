@@ -9,7 +9,6 @@
 #include "CrazyCubeAbstract.h"
 #include "CrazyCube.h"
 #include "CrazyCubeSolver.h"
-#include "CrazyCubeImproved.h"
 #include <iostream>
 #include <cstdio>
 
@@ -37,17 +36,17 @@ int main(int argc, char* argv[])
 {
     using namespace std;
 
-    CrazyCubeImproved impCube;
+    CrazyCube cube;
 
     CrazyCubeSolver solver;
-	solver.setCrazyCube(&impCube);
+	solver.setCrazyCube(&cube);
 
     const int movesToDo = 12;
-    CrazyCubeImproved::rotation movesMap[movesToDo] = {CrazyCubeImproved::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCubeImproved::rotation::LEFT, CrazyCubeImproved::rotation::FRONT, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::UP_2, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL, CrazyCubeImproved::rotation::UP_INVERTED, CrazyCubeImproved::rotation::MIDDLE_VERTICAL_FRONT_ROTATION, CrazyCubeImproved::rotation::LEFT};//, CrazyCubeImproved::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCubeImproved::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCubeImproved::rotation::FRONT};
+    CrazyCube::rotation movesMap[movesToDo] = {CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCube::rotation::LEFT, CrazyCube::rotation::FRONT, CrazyCube::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::UP_2, CrazyCube::rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::UP_INVERTED, CrazyCube::rotation::MIDDLE_VERTICAL_FRONT_ROTATION, CrazyCube::rotation::LEFT};//, CrazyCube::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCube::rotation::FRONT};
 
     for (int i = 0; i < movesToDo; ++i)
     {
-        impCube.move(movesMap[i]);
+        cube.move(movesMap[i]);
     }
 
 	solver.setMinDepth(movesToDo-1);

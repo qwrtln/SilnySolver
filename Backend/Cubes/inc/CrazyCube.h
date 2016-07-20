@@ -7,12 +7,11 @@
   
 #ifndef CRAZYCUBE_H_
 #define CRAZYCUBE_H_
-#include "CrazyCubeBase.h"
-
+#include "CubeInterface.h"
 /**
  *  3x3x2 CrazyCube representation. Behold.
  */
-class CrazyCube: public CrazyCubeBase
+class CrazyCube: public CubeInterface
 {
 private:
 	unsigned long long cubeState;

@@ -78,11 +78,11 @@ void CrazyCubeSolver:: solve()
 		solveIteration(iDepth, -1);		
 	}
 }
-void CrazyCubeSolver:: setCrazyCube(CrazyCubeBase* crazyCube)
+void CrazyCubeSolver:: setCrazyCube(CubeInterface* crazyCube)
 {
 	this->crazyCube = crazyCube;
 }
-CrazyCubeBase* CrazyCubeSolver:: getCrazyCube()
+CubeInterface* CrazyCubeSolver:: getCrazyCube()
 {
 	return this->crazyCube;
 }

@@ -3,11 +3,12 @@
 
 #include "CrazyCube.h"
 #include "CrazyCubeSolverParametersD.h"
+#include "CubeInterface.h"
+#include "SolverInterface.h"
 #include <vector>
 #include <memory>
-using namespace std;
 
-class CrazyCubeSolver: public CrazyCubeAbstract
+class CrazyCubeSolver: public CrazyCubeAbstract, public virtual SolverInterface
 {
 public:
 	CrazyCubeSolver();
@@ -18,15 +19,15 @@ public:
 	unsigned short int getMinDepth();
 	void setMaxDepth(unsigned short int maxDepth);
 	unsigned short int getMaxDepth();
-	void setEnabledMoves(vector<bool> enabledMoves);
-	vector<bool> getEnabledMoves();
+	void setEnabledMoves(std::vector<bool> enabledMoves);
+	std::vector<bool> getEnabledMoves();
 	void setNumberOfSolutions(unsigned short int numberOfSolutions);
 	unsigned short int getNumberOfSolutions();
-	void setSolutions(vector<vector<unsigned short int> > solutions);	// For testing purpose
-	vector<vector<unsigned short int> > getSolutions();
+	void setSolutions(std::vector<std::vector<unsigned short int> > solutions);	// For testing purpose
+	std::vector<std::vector<unsigned short int> > getSolutions();
 	void solve();
-	void setCrazyCube(CrazyCubeBase* crazyCube);
-	CrazyCubeBase* getCrazyCube();
+	void setCrazyCube(CubeInterface* crazyCube);
+	CubeInterface* getCrazyCube();
 	void setParameters(CrazyCubeSolverParametersD& parameters);
 	CrazyCubeSolverParametersD getParameters();
 
@@ -37,12 +38,12 @@ protected:
 
 	unsigned short int maxDepth;
 	unsigned short int minDepth;
-	vector<bool> enabledMoves;
+	std::vector<bool> enabledMoves;
 	unsigned short int numberOfSolutions;
 	unsigned short int solutionsFound;
-	CrazyCubeBase* crazyCube;
+	CubeInterface* crazyCube;
 	unsigned long long int solvedMask;
-	vector<vector<unsigned short int> > solutions;	
+	std::vector<std::vector<unsigned short int> > solutions;	
     std::unique_ptr<unsigned short int[]> currentPath;
 	unsigned short int iDepth;
 };

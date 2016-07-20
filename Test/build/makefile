@@ -1,6 +1,6 @@
 # Some variables declarations
 # Path to .h files - both Test and Backend
-INC = -I ../inc/ -I ../../Backend/inc/ -I ../mock/ -I ../../Backend/Generators/inc/ -I ../../Backend/FileIO/inc/ -I ../../Backend/Cubes/inc/ -I ../../Backend/Containers/inc/ -I ../../Backend/Solvers/inc/ -I ../../Backend/Base/inc/
+INC = -I ../inc/ -I ../../Backend/inc/ -I ../mock/ -I ../../Backend/Generators/inc/ -I ../../Backend/FileIO/inc/ -I ../../Backend/Cubes/inc/ -I ../../Backend/Containers/inc/ -I ../../Backend/Solvers/inc/ -I ../../Backend/Base/inc/ -I ../../Backend/Interfaces/
 # Path to .cpp files
 SRC_SUITE = ../src/suites/
 # Paths to dev files
