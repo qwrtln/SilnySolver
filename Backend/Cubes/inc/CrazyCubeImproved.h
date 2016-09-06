@@ -50,6 +50,8 @@ public:
      * 
      * @return particular part of the cube
      */
+    unsigned long long getCubeState();
+
 	int getOuterCorners();
 	int getInnerCorners();
 	int getOuterEdges();

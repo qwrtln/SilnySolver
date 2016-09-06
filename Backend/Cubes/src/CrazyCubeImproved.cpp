@@ -66,6 +66,21 @@ void CrazyCubeImproved:: setCube(int outerCorners, int innerCorners, int outerEd
 	setCentre(centre);
 }
 
+unsigned long long CrazyCubeImproved::getCubeState()
+{
+    OuterCornersMapGenerator OCmapper;
+    InnerCornersMapGenerator ICmapper;
+    OuterEdgesMapGenerator OEmapper;
+    InnerEdgesMapGenerator IEmapper;
+    CentreMapGenerator Cmapper;
+
+    return OCmapper.convertIntToPieces(this->getOuterCorners()) | 
+           OEmapper.convertIntToPieces(this->getOuterEdges()) | 
+           ICmapper.convertIntToPieces(this->getInnerCorners()) | 
+           IEmapper.convertIntToPieces(this->getInnerEdges()) | 
+           Cmapper.convertIntToPieces(this->getCentre());
+}
+
 int CrazyCubeImproved:: getOuterCorners()
 {
 	return outerCorners;

@@ -10,9 +10,7 @@
 
 class CentreMapGenerator: public MoveMapsGeneratorI
 {
-#if defined(TESTING) || defined(MEMORY_CHECK)
   public:
-#endif
     int convertPiecesToInt(unsigned long long);
     unsigned long long convertIntToPieces(int);
     int getMapLength();
