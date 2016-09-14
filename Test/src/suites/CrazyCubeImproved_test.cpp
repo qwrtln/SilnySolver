@@ -241,4 +241,102 @@ TEST_F(CrazyCubeImprovedTest, MvBr)
 
 	ASSERT_EQ_HEX(getCubeImprovedState(cubeImproved), getCubeImprovedState(cubeToCompare))
 }
+
+TEST_F(CrazyCubeImprovedTest, improvedToCrazyConversionSolvedCube)
+{
+    CrazyCube cube;
+
+    cubeImproved.resetCube();
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState())
+}
+
+TEST_F(CrazyCubeImprovedTest, improvedToCrazyConversionScrambledCube)
+{
+    CrazyCube cube;
+
+	cube.move(rotation::LEFT);
+	cube.move(rotation::MIDDLE_VERTICAL_BACK_ROTATION);
+	cube.move(rotation::FRONT);
+
+    cubeImproved.resetCube();
+
+	cubeImproved.move(rotation::LEFT);
+	cubeImproved.move(rotation::MIDDLE_VERTICAL_BACK_ROTATION);
+	cubeImproved.move(rotation::FRONT);
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState());
+//---------------------------------------------------------------------
+	cube.move(rotation::MIDDLE_HORIZONTAL);
+	cube.move(rotation::MIDDLE_VERTICAL_BACK_ROTATION);
+	cube.move(rotation::UP);
+
+	cubeImproved.move(rotation::MIDDLE_HORIZONTAL);
+	cubeImproved.move(rotation::MIDDLE_VERTICAL_BACK_ROTATION);
+	cubeImproved.move(rotation::UP);
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState());
+//---------------------------------------------------------------------
+	cube.move(rotation::UP_2);
+	cube.move(rotation::MIDDLE_VERTICAL);
+	cube.move(rotation::UP);
+
+	cubeImproved.move(rotation::UP_2);
+	cubeImproved.move(rotation::MIDDLE_VERTICAL);
+	cubeImproved.move(rotation::UP);
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState());
+//---------------------------------------------------------------------
+	cube.move(rotation::LEFT);
+	cube.move(rotation::MIDDLE_HORIZONTAL);
+	cube.move(rotation::UP);
+
+	cubeImproved.move(rotation::LEFT);
+	cubeImproved.move(rotation::MIDDLE_HORIZONTAL);
+	cubeImproved.move(rotation::UP);
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState());
+//---------------------------------------------------------------------
+	cube.move(rotation::LEFT);
+	cube.move(rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION);
+	cube.move(rotation::UP);
+
+	cubeImproved.move(rotation::LEFT);
+	cubeImproved.move(rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION);
+	cubeImproved.move(rotation::UP);
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState());
+//---------------------------------------------------------------------
+	cube.move(rotation::LEFT);
+	cube.move(rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION);
+	cube.move(rotation::UP);
+
+	cubeImproved.move(rotation::LEFT);
+	cubeImproved.move(rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION);
+	cubeImproved.move(rotation::UP);
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState());
+//---------------------------------------------------------------------
+	cube.move(rotation::LEFT);
+	cube.move(rotation::MIDDLE_VERTICAL_FRONT_ROTATION);
+	cube.move(rotation::UP_INVERTED);
+
+	cubeImproved.move(rotation::LEFT);
+	cubeImproved.move(rotation::MIDDLE_VERTICAL_FRONT_ROTATION);
+	cubeImproved.move(rotation::UP_INVERTED);
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState());
+//---------------------------------------------------------------------
+	cube.move(rotation::UP_2);
+	cube.move(rotation::MIDDLE_VERTICAL_BACK_ROTATION);
+	cube.move(rotation::LEFT);
+
+	cubeImproved.move(rotation::UP_2);
+	cubeImproved.move(rotation::MIDDLE_VERTICAL_BACK_ROTATION);
+	cubeImproved.move(rotation::LEFT);
+
+	ASSERT_EQ_HEX(cube.getCubeState(), cubeImproved.getCubeState());
+
+}
+
 #endif
