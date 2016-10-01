@@ -7,7 +7,6 @@
 #include <cmath>
 #include <vector>
 
-class CrazyCubeCache;
 class PruneMapGenerator: public CrazyCubeAbstract
 {
     private:
