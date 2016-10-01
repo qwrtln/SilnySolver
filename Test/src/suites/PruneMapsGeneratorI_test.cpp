@@ -44,12 +44,7 @@ TEST_F(PruneMapsGeneratorITest, findingMemoryLeaks)
     generator.generatePruneMap(4);
 }
 #else
-TEST_F(PruneMapsGeneratorITest, GenericVisibilityTest)
-{
-    ASSERT_EQ(1,0);
-}
 
-#endif
 TEST_F(PruneMapsGeneratorITest, SwapElementValueTest)
 {
 	std::vector<int> testVect {0, 1, 2, 3, 4, 5, 6, 7}; 
@@ -58,5 +53,19 @@ TEST_F(PruneMapsGeneratorITest, SwapElementValueTest)
 	generator.swapMapElementValue(testVect.size(), testVect, 4, 9);
 	bool areVectsEq = (testVect == testVect2);
 	ASSERT_EQ(areVectsEq, 1);
-							
 }
+
+TEST_F(PruneMapsGeneratorITest, GenerateInitialVectorTest)
+{
+    int length = 15;
+
+    std::vector<int> testVect(length);
+    int safeBound = 100;
+    std::fill(testVect.begin()+1,testVect.end(),safeBound);
+
+    std::vector<int> pruneVect = generator.generateInitialVector(length);
+
+	bool areVectsEq = (testVect == pruneVect);
+	ASSERT_EQ(areVectsEq, true);
+}
+#endif
