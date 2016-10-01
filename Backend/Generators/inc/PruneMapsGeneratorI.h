@@ -26,7 +26,6 @@ class PruneMapsGeneratorI: public CrazyCubeAbstract
         std::vector<int> pruneMap;
         int maxDepth; // How deep do you want the Pruner to delve?
 
-		CrazyCubeCache* crazyCubeCachePtr;
 
 		void swapMapElementValue(int width, std::vector<int>& vect, short int oldValue, short int newValue);
         std::vector<int> generateInitialVector(int length);
@@ -35,6 +34,8 @@ class PruneMapsGeneratorI: public CrazyCubeAbstract
 
         // Wrapper for getting specific maps for specific pieces
         virtual std::vector<std::vector<int>> getPieceMap() = 0;
+	protected:
+		CrazyCubeCache* crazyCubeCachePtr;
 
     public:
 		PruneMapsGeneratorI();
