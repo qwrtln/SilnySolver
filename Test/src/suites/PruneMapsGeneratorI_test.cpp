@@ -50,3 +50,13 @@ TEST_F(PruneMapsGeneratorITest, GenericVisibilityTest)
 }
 
 #endif
+TEST_F(PruneMapsGeneratorITest, SwapElementValueTest)
+{
+	std::vector<int> testVect {0, 1, 2, 3, 4, 5, 6, 7}; 
+	std::vector<int> testVect2 = testVect;
+	testVect2[4] = 9;
+	generator.swapMapElementValue(testVect.size(), testVect, 4, 9);
+	bool areVectsEq = (testVect == testVect2);
+	ASSERT_EQ(areVectsEq, 1);
+							
+}
