@@ -19,18 +19,23 @@ class PruneMapsGeneratorI: public CrazyCubeAbstract
         const static int cornerArrayLimit;
         const static int centreArrayLimit;
 
+        std::vector<int> pruneMap;
+        int maxDepth; // How deep do you want the Pruner to delve?
+
 		CrazyCubeCache* crazyCubeCachePtr;
 
-		PruneMapGenerator();
+		PruneMapsGeneratorI();
 
 		void swapMapElementValue(int width, std::vector<int>& vect, short int oldValue, short int newValue);
         std::vector<int> generateInitialVector(int length);
 
-		virtual int generatePruneMapIter(int depth, int maxDepth, int& pieces, std::vector<int>& piecesPruneMap, short int prevMove) = 0;
+        int generatePruneMapIter(int depth, int& pieces, short int prevMove);
 
+        // Wrapper for getting specific maps for specific pieces
+        virtual std::vector<std::vector<int>> getPieceMap() = 0;
 
     public:
-		virtual std::vector<int> generatePruneMap(int length, int maxMoves);
+		std::vector<int> generatePruneMap(int length, int maxMoves);
 };
 
 #endif /* PRUNEMAPSGENERATORI_H_ */
