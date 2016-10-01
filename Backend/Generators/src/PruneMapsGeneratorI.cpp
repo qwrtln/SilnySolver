@@ -33,10 +33,9 @@ std::vector<int> PruneMapsGeneratorI::generateInitialVector(int length)
     std::fill(pruneMap.begin()+1,pruneMap.end(),safeBound);
 
     return pruneMap;
-
 }
 
-std::vector<int> PruneMapsGeneratorI::generatePruneMap(int length, int maxMoves)
+std::vector<int> PruneMapsGeneratorI::generatePruneMap(int length)
 {
     std::vector<int> pruneMap = generateInitialVector(length);
     int pieces = 0;
