@@ -1,28 +1,62 @@
 #include "CrazyCubePruner.h"
 
-CrazyCubePruner* CrazyCubePruner::instance = nullptr;
+std::unique_ptr<CrazyCubePruner> CrazyCubePruner::instance;
 
-CrazyCubePruner* CrazyCubePruner::getInstance() {
-  if(!instance) {
-    instance = new CrazyCubePruner();
-  }
-  return instance;
+CrazyCubePruner* CrazyCubePruner::getInstance()
+{
+  if(!instance) 
+  {
+    instance.reset(new CrazyCubePruner());
+  } 
+  return instance.get();
 }
 
 CrazyCubePruner::CrazyCubePruner() {
-  OuterCornersMapGenerator OCmapper;
-  InnerCornersMapGenerator ICmapper;
-  OuterEdgesMapGenerator OEmapper;
-  InnerEdgesMapGenerator IEmapper;
-  CentreMapGenerator Cmapper;
+  OuterCornersPruneMapGenerator OCmapper;
+  InnerCornersPruneMapGenerator ICmapper;
+  OuterEdgesPruneMapGenerator OEmapper;
+  InnerEdgesPruneMapGenerator IEmapper;
+  CentrePruneMapGenerator Cmapper;
+  
+  int length = 8; // just a temporary setting
 
-  outerCornersMap = OCmapper.generateMoveMap();
-  innerCornersMap = ICmapper.generateMoveMap();
-  outerEdgesMap = OEmapper.generateMoveMap();
-  innerEdgesMap = IEmapper.generateMoveMap();
-  centreMap = Cmapper.generateMoveMap();
+  outerCornersPruneMap = OCmapper.generatePruneMap(length);
+  innerCornersPruneMap = ICmapper.generatePruneMap(length);
+  outerEdgesPruneMap = OEmapper.generatePruneMap(length);
+  innerEdgesPruneMap = IEmapper.generatePruneMap(length);
+  centrePruneMap = Cmapper.generatePruneMap(length);
 }
 
 CrazyCubePruner::~CrazyCubePruner() {
 
+}
+
+void CrazyCubePruner:: cleanup()
+{
+    instance.release();
+}
+
+std::vector<int>& CrazyCubePruner:: getOuterCornersPruneMap()
+{
+	return this->outerCornersPruneMap;
+}
+
+std::vector<int>& CrazyCubePruner:: getInnerCornersPruneMap()
+{
+	return this->innerCornersPruneMap;
+}
+
+std::vector<int>& CrazyCubePruner:: getOuterEdgesPruneMap()
+{
+	return this->outerEdgesPruneMap;
+}
+
+std::vector<int>& CrazyCubePruner:: getInnerEdgesPruneMap()
+{
+	return this->innerEdgesPruneMap;
+}
+
+std::vector<int>& CrazyCubePruner:: getCentrePruneMap()
+{
+	return this->centrePruneMap;
 }

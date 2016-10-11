@@ -2,34 +2,37 @@
 #define CRAZYCUBEPRUNER_H_
 
 #include "CrazyCubeAbstract.h"
-#include "OuterCornersMapGenerator.h"
-#include "InnerCornersMapGenerator.h"
-#include "OuterEdgesMapGenerator.h"
-#include "InnerEdgesMapGenerator.h"
-#include "CentreMapGenerator.h"
+#include "OuterCornersPruneMapGenerator.h"
+#include "InnerCornersPruneMapGenerator.h"
+#include "OuterEdgesPruneMapGenerator.h"
+#include "InnerEdgesPruneMapGenerator.h"
+#include "CentrePruneMapGenerator.h"
+
+#include <vector>
+#include <memory>
 
 class CrazyCubePruner: public CrazyCubeAbstract
 {
  private:
 
    CrazyCubePruner();
-   std::vector<std::vector<int>> outerCornersMap;
-   std::vector<std::vector<int>> innerCornersMap;
-   std::vector<std::vector<int>> outerEdgesMap;
-   std::vector<std::vector<int>> innerEdgesMap;
-   std::vector<std::vector<int>> centreMap;
-   static CrazyCubePruner* instance;
+   std::vector<int> outerCornersPruneMap;
+   std::vector<int> innerCornersPruneMap;
+   std::vector<int> outerEdgesPruneMap;
+   std::vector<int> innerEdgesPruneMap;
+   std::vector<int> centrePruneMap;
+   static std::unique_ptr<CrazyCubePruner> instance;
   
-  public:
+public:
    static CrazyCubePruner* getInstance();
    static void cleanup();
    ~CrazyCubePruner();
 
-   std::vector<std::vector<int>>& getOuterCornersMap() { return outerCornersMap; }
-   std::vector<std::vector<int>>& getInnerCornersMap() { return innerCornersMap; }
-   std::vector<std::vector<int>>& getOuterEdgesMap() { return outerEdgesMap; }
-   std::vector<std::vector<int>>& getInnerEdgesMap() { return innerEdgesMap; }
-   std::vector<std::vector<int>>& getCentreMap() { return centreMap; }
-};
+   std::vector<int>& getOuterCornersPruneMap();
+   std::vector<int>& getInnerCornersPruneMap();
+   std::vector<int>& getOuterEdgesPruneMap();
+   std::vector<int>& getInnerEdgesPruneMap();
+   std::vector<int>& getCentrePruneMap();
 
+};
 #endif // CRAZYCUBEPRUNER_H_

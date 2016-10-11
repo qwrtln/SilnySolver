@@ -1,4 +1,5 @@
 #include "CrazyCubeSolver.h"
+#define NO_WE_FUCKING_DONT false
 
 CrazyCubeSolver:: CrazyCubeSolver():
 				maxDepth(0),
@@ -72,7 +73,7 @@ vector<vector<unsigned short int> > CrazyCubeSolver:: getSolutions()
 void CrazyCubeSolver:: solve()
 {
 	setup();
-	for(iDepth = minDepth; iDepth <= maxDepth; iDepth++)
+	for (iDepth = minDepth; iDepth <= maxDepth; iDepth++)
 	{
         currentPath.reset(new unsigned short int[iDepth]);
 		solveIteration(iDepth, -1);		
@@ -139,6 +140,10 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 			{
 				continue;
 			}
+            else if (doWeFuckingHaveToPrune(depth))
+            {
+                continue;
+            }
 
 			// Do the move
 			crazyCube->move(static_cast<rotation>(move));
@@ -166,4 +171,9 @@ bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short i
 
 	// Nothing found here, go deeper (or terminate if it's the last iteration)
 	return false;
+}
+
+bool CrazyCubeSolver:: doWeFuckingHaveToPrune(int useless)
+{
+    return NO_WE_FUCKING_DONT; 
 }

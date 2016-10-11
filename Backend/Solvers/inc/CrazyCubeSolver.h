@@ -12,7 +12,7 @@ class CrazyCubeSolver: public CrazyCubeAbstract, public virtual SolverInterface
 {
 public:
 	CrazyCubeSolver();
-	~CrazyCubeSolver();
+	virtual ~CrazyCubeSolver();
 	void setSolvedMask(unsigned long long int solvedMask);
 	unsigned long long int getSolvedMask();
 	void setMinDepth(unsigned short int minDepth);
@@ -35,6 +35,9 @@ protected:
 	void setup();
 	void cleanup();
 	bool solveIteration(unsigned short int depth, unsigned short int prevMove);
+
+    // Virtual methods
+    virtual bool doWeFuckingHaveToPrune(int);
 
 	unsigned short int maxDepth;
 	unsigned short int minDepth;
