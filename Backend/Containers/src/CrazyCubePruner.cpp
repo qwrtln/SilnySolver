@@ -18,7 +18,7 @@ CrazyCubePruner::CrazyCubePruner() {
   InnerEdgesPruneMapGenerator IEmapper;
   CentrePruneMapGenerator Cmapper;
   
-  int length = 8; // just a temporary setting
+  int length = 12; // just a temporary setting
 
   outerCornersPruneMap = OCmapper.generatePruneMap(length);
   innerCornersPruneMap = ICmapper.generatePruneMap(length);

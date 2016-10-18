@@ -26,7 +26,7 @@ public:
 	void setSolutions(std::vector<std::vector<unsigned short int> > solutions);	// For testing purpose
 	std::vector<std::vector<unsigned short int> > getSolutions();
 	void solve();
-	void setCrazyCube(CubeInterface* crazyCube);
+	virtual void setCrazyCube(CubeInterface* crazyCube);
 	CubeInterface* getCrazyCube();
 	void setParameters(CrazyCubeSolverParametersD& parameters);
 	CrazyCubeSolverParametersD getParameters();

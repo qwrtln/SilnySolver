@@ -4,10 +4,11 @@
 #include "CrazyCubeBase.h"
 #include "CrazyCubeCache.h"
 #include "OuterCornersMapGenerator.h"
+#include "CubeInterface.h"
 #include <iostream>
 using namespace std;
 
-class CrazyCubeImproved: public CrazyCubeBase
+class CrazyCubeImproved: public CubeInterface 
 {
 private:
 	CrazyCubeCache* cache;

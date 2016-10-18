@@ -10,11 +10,13 @@ class PruningSolver: public CrazyCubeSolver
 public:
 
     PruningSolver();
-    // void setCrazyCube(CrazyCubeImproved*);
+    void setCrazyCube(CubeInterface*) override;
 
 protected:
 
     bool doWeFuckingHaveToPrune(int);
+    CrazyCubeImproved* crazyCubeImproved;    
+    CrazyCubePruner* pruner;
 };
 
 
