@@ -22,7 +22,6 @@ class PruneMapsGeneratorI: public CrazyCubeAbstract
         const static int edgeArrayLimit;
         const static int cornerArrayLimit;
         const static int centreArrayLimit;
-
         std::vector<int> pruneMap;
         int maxDepth; // How deep do you want the Pruner to delve?
 
@@ -37,6 +36,7 @@ class PruneMapsGeneratorI: public CrazyCubeAbstract
 	protected:
 		CrazyCubeCache* crazyCubeCachePtr;
 
+		unsigned int mapSize;
     public:
 		PruneMapsGeneratorI();
 		std::vector<int> generatePruneMap(int length);

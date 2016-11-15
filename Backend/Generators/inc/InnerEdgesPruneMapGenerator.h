@@ -4,7 +4,7 @@
 class InnerEdgesPruneMapGenerator: public PruneMapsGeneratorI
 {
 public:
-
+	InnerEdgesPruneMapGenerator();
 private:
 	std::vector<std::vector<int>> getPieceMap();
 }; 

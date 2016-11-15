@@ -37,7 +37,7 @@ std::vector<int> PruneMapsGeneratorI::generateInitialVector(int length)
 
 std::vector<int> PruneMapsGeneratorI::generatePruneMap(int length)
 {
-    std::vector<int> pruneMap = generateInitialVector(length);
+    pruneMap = generateInitialVector(mapSize);
     int pieces = 0;
 
 	generatePruneMapIter(1, pieces, -1);
