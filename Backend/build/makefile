@@ -9,10 +9,18 @@ CONTAINERS_DIR = ../Containers/build/
 SOLVERS_DIR = ../Solvers/build/
 BASE_DIR = ../Base/build/
 
+INC := $(subst ../../,../,$(INC)) #This makefile is on a different level than other makefiles that include makefile.defs
+
+
+
+ifndef TRACE_FLAGS
+TRACE_FLAGS := NOTRACE
+endif
+
 # Compilation rules
 SilnySolver: dev_archive
 	$(CXX) $(FLAGS) $(INC) -c main/SilnySolver.cpp $(INC) -o SilnySolver.o
-	$(CXX) $(FLAGS) $(TRACE_FLAGS) $(TRACE_LEVEL) $(INC) SilnySolver.o dev.a containers.a cubes.a base.a generators.a -o $@ # multiple inclusions due to circular references
+	$(CXX) $(FLAGS) -D$(TRACE_FLAGS) $(TRACE_LEVEL) $(INC) SilnySolver.o dev.a containers.a cubes.a base.a generators.a -o $@ # multiple inclusions due to circular references
 
 # Rule for separating executable from build files
 dev_archive: Base Cubes Containers Generators FileIO Solvers
@@ -25,22 +33,18 @@ dev_archive: Base Cubes Containers Generators FileIO Solvers
 	ar rcT dev.a generators.a fileio.a cubes.a solvers.a $(BUILT_FILES)
 
 Base:
-	$(MAKE) -C $(BASE_DIR)
-
+	$(MAKE) -C $(BASE_DIR) 
 Cubes:
-	$(MAKE) -C $(CUBES_DIR)
-
+	$(MAKE) -C $(CUBES_DIR) 
 Containers:
-	$(MAKE) -C $(CONTAINERS_DIR)
-
+	$(MAKE) -C $(CONTAINERS_DIR) 
 Generators:
-	$(MAKE) -C $(GENERATORS_DIR)
-
+	$(MAKE) -C $(GENERATORS_DIR) 
 FileIO:
-	$(MAKE) -C $(FILE_IO_DIR)
-
+	$(MAKE) -C $(FILE_IO_DIR) 
 Solvers:
-	$(MAKE) -C $(SOLVERS_DIR)
+	$(MAKE) -C $(SOLVERS_DIR) 
+
 
 # Clean the shit out
 .PHONY: clean

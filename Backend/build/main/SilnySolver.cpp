@@ -11,7 +11,7 @@
 #include "CrazyCubeSolver.h"
 #include <iostream>
 #include <cstdio>
-
+#include "Tracer.h"
 
 void translateMove(unsigned short move)
 {
@@ -40,6 +40,8 @@ int main(int argc, char* argv[])
 
     CrazyCubeSolver solver;
 	solver.setCrazyCube(&cube);
+
+    TRACE( TRACE_ALL, 0, "Silny Solver start");
 
     const int movesToDo = 12;
     CrazyCube::rotation movesMap[movesToDo] = {CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCube::rotation::LEFT, CrazyCube::rotation::FRONT, CrazyCube::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::UP_2, CrazyCube::rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::UP_INVERTED, CrazyCube::rotation::MIDDLE_VERTICAL_FRONT_ROTATION, CrazyCube::rotation::LEFT};//, CrazyCube::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCube::rotation::FRONT};

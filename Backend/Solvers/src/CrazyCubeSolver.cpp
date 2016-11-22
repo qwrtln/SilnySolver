@@ -1,4 +1,5 @@
 #include "CrazyCubeSolver.h"
+#include "Tracer.h"
 
 CrazyCubeSolver:: CrazyCubeSolver():
 				maxDepth(0),
@@ -9,6 +10,8 @@ CrazyCubeSolver:: CrazyCubeSolver():
                 solvedMask(0xFFFFFFFFFFFFFFFF),
 				iDepth(0)
 {
+    TRACE( TRACE_ALL, 0, "Constructor CrazyCubeSolver" );
+
 	// TODO - to jest przyklad z piramidki. Domyslnie ustawiamy wszystkie mozliwe ruchy na dozwolone
 	/*		
 	for(int i = 0; i < NUMBER_OF_MOVES * NUMBER_OF_FACES; i++)
@@ -20,6 +23,7 @@ CrazyCubeSolver:: CrazyCubeSolver():
 }
 CrazyCubeSolver:: ~CrazyCubeSolver()
 {
+    TRACE( TRACE_ALL, 0, "Destructor CrazyCubeSolver");
 }
 void CrazyCubeSolver:: setSolvedMask(unsigned long long int solvedMask)
 {

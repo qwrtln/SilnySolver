@@ -1,4 +1,5 @@
 #include "CrazyCubeCache.h"
+#include "Tracer.h"
 
 std::unique_ptr<CrazyCubeCache> CrazyCubeCache::instance;
 
@@ -13,6 +14,8 @@ CrazyCubeCache* CrazyCubeCache::getInstance()
 
 CrazyCubeCache:: CrazyCubeCache()
 {
+    TRACE( TRACE_ALL, 0, "Constructor CrazyCubeCache");
+
     OuterCornersMapGenerator OCmapper;
     InnerCornersMapGenerator ICmapper;
     OuterEdgesMapGenerator OEmapper;
@@ -29,6 +32,7 @@ CrazyCubeCache:: CrazyCubeCache()
 CrazyCubeCache:: ~CrazyCubeCache()
 {
 
+    TRACE( TRACE_ALL, 0, "Destructor CrazyCubeCache");
 }
 
 void CrazyCubeCache:: cleanup()

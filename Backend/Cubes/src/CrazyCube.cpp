@@ -6,10 +6,13 @@
  */
 
 #include "CrazyCube.h"
+#include "Tracer.h"
 #include <iostream>
 
 CrazyCube::CrazyCube()
 {
+    TRACE( TRACE_ALL, 0, "Constructor CrazyCube");
+
 	cubeState = solvedCube;
 
 	// Moves tab
@@ -53,7 +56,7 @@ CrazyCube::CrazyCube(int genericCube)
 
 CrazyCube::~CrazyCube()
 {
-	// TODO Auto-generated destructor stub
+    TRACE( TRACE_ALL, 0, "Destructor CrazyCube");
 }
 
 bool CrazyCube::isSolved()

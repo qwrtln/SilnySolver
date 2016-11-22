@@ -1,4 +1,5 @@
 #include "CrazyCubePruner.h"
+#include "Tracer.h"
 
 CrazyCubePruner* CrazyCubePruner::instance = nullptr;
 
@@ -10,6 +11,9 @@ CrazyCubePruner* CrazyCubePruner::getInstance() {
 }
 
 CrazyCubePruner::CrazyCubePruner() {
+
+  TRACE( TRACE_ALL, 0, "Constructor CrazyCubePruner");
+
   OuterCornersMapGenerator OCmapper;
   InnerCornersMapGenerator ICmapper;
   OuterEdgesMapGenerator OEmapper;
@@ -25,4 +29,5 @@ CrazyCubePruner::CrazyCubePruner() {
 
 CrazyCubePruner::~CrazyCubePruner() {
 
+    TRACE( TRACE_ALL, 0, "Destructor CrazyCubePruner");
 }

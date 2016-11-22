@@ -1,7 +1,10 @@
 #include "CrazyCubeImproved.h"
+#include "Tracer.h"
 
 CrazyCubeImproved:: CrazyCubeImproved()
 {
+    TRACE( TRACE_ALL, 0, "Constructor CrazyCubeImproved");
+
     // Set cube as solved
     outerEdges = 0;
     outerCorners = 0;
@@ -21,6 +24,7 @@ CrazyCubeImproved:: CrazyCubeImproved()
 
 CrazyCubeImproved:: ~CrazyCubeImproved()
 {
+    TRACE( TRACE_ALL, 0, "Destructor CrazyCubeImproved");
 }
 
 void CrazyCubeImproved:: resetCube()

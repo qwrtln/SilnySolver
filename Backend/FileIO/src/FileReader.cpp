@@ -11,10 +11,12 @@
 //using std::ifstream;
 #include<iostream>
 
-
+#include "Tracer.h"
 
 FileReader::FileReader()
 {
+TRACE( TRACE_ALL, 0, "Constructor FileReader");
+
 
 array = NULL;
 
@@ -182,6 +184,8 @@ return arraySize;
 
 FileReader::~FileReader()
 {
+TRACE( TRACE_ALL, 0, "Destructor FileReader");
+
 delete[] array;
 file.close();
 

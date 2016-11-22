@@ -1,13 +1,15 @@
 #include <FileWriter.h>
 
 #include <fstream>
+#include "Tracer.h"
 
 using std::ofstream;
 
 
 FileWriter::FileWriter()
 {
-
+TRACE( TRACE_ALL, 0, "Constructor FileWriter");
+	
 file.open("data.txt", std::fstream::in);
 
 }
@@ -56,7 +58,7 @@ return true;
 
 FileWriter::~FileWriter()
 {
-
+TRACE( TRACE_ALL, 0, "Destructor FileWriter");
 }
 
 
