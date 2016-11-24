@@ -6,11 +6,8 @@ CrazyCubeImproved:: CrazyCubeImproved()
     TRACE( TRACE_ALL, 0, "Constructor CrazyCubeImproved");
 
     // Set cube as solved
-    outerEdges = 0;
-    outerCorners = 0;
-    innerEdges = 0xF; // accordingly: 0 0 0 0 in top layer, 1 1 1 1 in bottom layer
-    innerCorners = 0x7; // the same: 0 0 0 0, 1 1 1
-    centre = 1;
+    
+    resetCube();
 
     // Initialise moves array 
     for (int i = 0; i < NUM_OF_MOVES; ++i)
@@ -31,8 +28,8 @@ void CrazyCubeImproved:: resetCube()
 {
     outerEdges = 0;
     outerCorners = 0;
-    innerEdges = 0xF;
-    innerCorners = 0x7;
+    innerEdges = 0xF; // accordingly: 0 0 0 0 in top layer, 1 1 1 1 in bottom layer
+    innerCorners = 0x7; // the same: 0 0 0 0, 1 1 1
     centre = 1;
 }
 
