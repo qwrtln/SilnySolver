@@ -4,7 +4,7 @@ INC = -I ../inc/ -I ../../Backend/inc/ -I ../mock/ -I ../../Backend/Generators/i
 # Path to .cpp files
 SRC_SUITE = ../src/suites/
 # Paths to dev files
-DEV_LIB = ../../Backend/build/
+DEV_LIB = ../../Backend/main/build/
 # Path to dev binaries
 #BUILT = $(subst src,build,$(DEVSRC))
 #Path to lib source files

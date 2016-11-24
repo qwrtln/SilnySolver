@@ -1,5 +1,5 @@
 # MAKEFILE FOR FILE_IO SOFTWARE UNIT
-include ../../build/makefile.defs
+include ../../main/build/makefile.defs
 
 
 INC += -I ../inc/

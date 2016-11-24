@@ -2,14 +2,14 @@
 include makefile.defs
 
 # Software Units paths
-GENERATORS_DIR = ../Generators/build/
-FILE_IO_DIR = ../FileIO/build/
-CUBES_DIR = ../Cubes/build/
-CONTAINERS_DIR = ../Containers/build/
-SOLVERS_DIR = ../Solvers/build/
-BASE_DIR = ../Base/build/
+GENERATORS_DIR = ../../Generators/build/
+FILE_IO_DIR = ../../FileIO/build/
+CUBES_DIR = ../../Cubes/build/
+CONTAINERS_DIR = ../../Containers/build/
+SOLVERS_DIR = ../../Solvers/build/
+BASE_DIR = ../../Base/build/
 
-INC := $(subst ../../,../,$(INC)) #This makefile is on a different level than other makefiles that include makefile.defs
+
 
 
 
@@ -19,7 +19,7 @@ endif
 
 # Compilation rules
 SilnySolver: dev_archive
-	$(CXX) $(FLAGS) $(INC) -c main/SilnySolver.cpp $(INC) -o SilnySolver.o
+	$(CXX) $(FLAGS) $(INC) -c ../src/SilnySolver.cpp $(INC) -o SilnySolver.o
 	$(CXX) $(FLAGS) -D$(TRACE_FLAGS) $(TRACE_LEVEL) $(INC) SilnySolver.o dev.a containers.a cubes.a base.a generators.a -o $@ # multiple inclusions due to circular references
 
 # Rule for separating executable from build files

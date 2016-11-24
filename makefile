@@ -1,4 +1,4 @@
-CODE_DIR = Backend/build/
+CODE_DIR = Backend/main/build/
 TEST_DIR = Test/build/
 
 # Compiler
