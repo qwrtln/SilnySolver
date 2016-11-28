@@ -113,10 +113,6 @@ void CrazyCubeSolver:: setup()
 	solutions.clear();
 	solutionsFound = 0;
 }
-void CrazyCubeSolver:: cleanup()
-{
-	// TODO
-}
 bool CrazyCubeSolver:: solveIteration(unsigned short int depth, unsigned short int prevMove)
 {
 	// Check if you already have as many solutions as you wish

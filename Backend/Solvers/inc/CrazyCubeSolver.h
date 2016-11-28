@@ -33,7 +33,6 @@ public:
 
 protected:
 	void setup();
-	void cleanup();
 	bool solveIteration(unsigned short int depth, unsigned short int prevMove);
 
 	unsigned short int maxDepth;
