@@ -4,7 +4,7 @@ TEST_DIR = Test/build/
 # Compiler
 CXX = g++
 # Compiler flags
-FLAGS = -Wall -O3 -std=c++11
+FLAGS = -Wall -O3 -std=c++11 -g
 export FLAGS
 
 backend: project_code

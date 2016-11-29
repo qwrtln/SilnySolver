@@ -46,15 +46,16 @@ int main(int argc, char* argv[])
 	solver.setCrazyCube(&cube);
     cout << "Zaraz rzuce crashem" << endl;
     pSolver.setCrazyCube(&iCube);
-    const int movesToDo = 12;
-    CrazyCube::rotation movesMap[movesToDo] = {CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCube::rotation::LEFT, CrazyCube::rotation::FRONT, CrazyCube::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::UP_2, CrazyCube::rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::UP_INVERTED, CrazyCube::rotation::MIDDLE_VERTICAL_FRONT_ROTATION, CrazyCube::rotation::LEFT};//, CrazyCube::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCube::rotation::FRONT};
+    const int movesToDo = 5;
+    CrazyCube::rotation movesMap[] = {CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCube::rotation::LEFT, CrazyCube::rotation::FRONT, CrazyCube::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::UP_2, CrazyCube::rotation::MIDDLE_HORIZONTAL_LEFT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL, CrazyCube::rotation::UP_INVERTED, CrazyCube::rotation::MIDDLE_VERTICAL_FRONT_ROTATION, CrazyCube::rotation::LEFT, CrazyCube::rotation::MIDDLE_HORIZONTAL_RIGHT_ROTATION, CrazyCube::rotation::MIDDLE_VERTICAL_BACK_ROTATION, CrazyCube::rotation::FRONT};
     cout << "Jazda z ruchami" << endl;
     for (int i = 0; i < movesToDo; ++i)
     {
+		cout << i << " ";
         cube.move(movesMap[i]);
         iCube.move(movesMap[i]);
     }
-
+	cout << endl;
 	solver.setMinDepth(movesToDo-1);
 	solver.setMaxDepth(movesToDo+1);
 	solver.setNumberOfSolutions(3);
@@ -65,7 +66,9 @@ int main(int argc, char* argv[])
 	pSolver.setNumberOfSolutions(3);
     cout << "Solver przyjal parametry" << endl;
 
+	cout << "Nakurwiaj pospolity solverze!" << endl;
 	solver.solve();
+	cout << "Nakurwiaj prune solverze!" << endl;
     pSolver.solve();
     
     cout << "Solver rozwiazal" << endl;

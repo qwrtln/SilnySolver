@@ -7,7 +7,6 @@
 #include "SolverInterface.h"
 #include <vector>
 #include <memory>
-
 class CrazyCubeSolver: public CrazyCubeAbstract, public virtual SolverInterface
 {
 public:

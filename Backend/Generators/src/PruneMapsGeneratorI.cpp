@@ -39,9 +39,9 @@ std::vector<int> PruneMapsGeneratorI::generatePruneMap(int length)
 {
     pruneMap = generateInitialVector(mapSize);
     int pieces = 0;
-
+	this->maxDepth = length;
 	generatePruneMapIter(1, pieces, -1);
-	swapMapElementValue(length, pruneMap, 100, -1);
+	swapMapElementValue(mapSize, pruneMap, 100, -1);
 	return pruneMap;
 }
 
@@ -60,7 +60,7 @@ int PruneMapsGeneratorI::generatePruneMapIter(int depth, int& pieces, short int 
             {
 				pruneMap[getPieceMap()[pieces][i]] = depth;
             }
-			generatePruneMapIter(depth + 1, getPieceMap()[pieces][i], prevMove);
+			generatePruneMapIter(depth + 1, getPieceMap()[pieces][i], i);
 		}
 	}
 	return 0;

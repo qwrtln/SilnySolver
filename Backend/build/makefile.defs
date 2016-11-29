@@ -4,7 +4,7 @@
 CXX = g++
 
 # Compiler flags
-FLAGS = -Wall -O3 -std=c++11
+FLAGS = -Wall -O3 -std=c++11 -g
 
 # List of software unit inclusions
 INC = -I ../inc/ -I ../../Tracing/inc/ -I ../Generators/inc/ -I ../FileIO/inc/ -I ../Cubes/inc/ -I ../Containers/inc/ -I ../Solvers/inc/ -I ../Base/inc/ -I ../Interfaces/

@@ -15,9 +15,11 @@ void PruningSolver:: setCrazyCube(CubeInterface* crazyCube)
 
 bool PruningSolver:: doWeFuckingHaveToPrune(int depth)
 {
-    return !((pruner->getOuterEdgesPruneMap()[crazyCubeImproved->getOuterEdges()] <= depth) && 
-            (pruner->getOuterCornersPruneMap()[crazyCubeImproved->getOuterCorners()] <= depth) && 
-            (pruner->getInnerCornersPruneMap()[crazyCubeImproved->getInnerCorners()] <= depth) &&
-            (pruner->getInnerEdgesPruneMap()[crazyCubeImproved->getInnerEdges()] <= depth) &&
-            (pruner->getCentrePruneMap()[crazyCubeImproved->getCentre()] <= depth)); 
+	return (
+			(pruner->getOuterEdgesPruneMap()[crazyCubeImproved->getOuterEdges()] > depth) //||	
+           // (pruner->getOuterCornersPruneMap()[crazyCubeImproved->getOuterCorners()] > depth) ||
+           // (pruner->getInnerCornersPruneMap()[crazyCubeImproved->getInnerCorners()] > depth) ||
+           // (pruner->getInnerEdgesPruneMap()[crazyCubeImproved->getInnerEdges()] > depth) ||
+           // (pruner->getCentrePruneMap()[crazyCubeImproved->getCentre()] > depth) 
+			);
 }

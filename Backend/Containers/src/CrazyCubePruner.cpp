@@ -19,7 +19,7 @@ CrazyCubePruner::CrazyCubePruner() {
   InnerEdgesPruneMapGenerator IEmapper;
   CentrePruneMapGenerator Cmapper;
   
-  int length = 12; // just a temporary setting
+  int length = 4; // just a temporary setting
   using namespace std;
 
   cout << "Generuje prune mapy" << endl;
